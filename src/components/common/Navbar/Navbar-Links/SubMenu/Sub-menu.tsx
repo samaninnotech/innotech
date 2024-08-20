@@ -1,15 +1,15 @@
 "use client";
-import Button from "@/components/common/Button";
 import {
   CustomLink,
-  NavbarSubmenuSection,
   customLinkToHref,
   isNavbarSubmenuSection,
+  NavbarSubmenuSection,
 } from "@/sanity/types";
 import { ComponentPropsWithoutRef, FC } from "react";
 import {
   Element,
   SubmenuBlockContainer,
+  SubMenuLink,
   SubmenuParentContainer,
 } from "./Sub-menu.styled";
 import SubmenuSection from "./SubMenuSection";
@@ -36,7 +36,7 @@ const SubMenu: FC<SubMenuProps> = ({ showSubMenu, config }) => {
                 ></SubmenuSection>
               )}
               {!isSection && (
-                <Button href={customLinkToHref(l)} label={l.label}></Button>
+                <SubMenuLink href={customLinkToHref(l)}>{l.label}</SubMenuLink>
               )}
             </SubmenuBlockContainer>
           );
