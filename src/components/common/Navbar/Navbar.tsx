@@ -2,7 +2,7 @@
 
 import { FC, useEffect, useState } from "react";
 import NavbarLinks from "./Navbar-Links/Navbar-Links";
-import { MainNavbarStyled, NavbarWrapper, SecondaryNavbarStyled } from "./Navbar.styled";
+import { MainNavbarStyled, NavbarInnerWrapper, NavbarWrapper, SecondaryNavbarStyled } from "./Navbar.styled";
 import { SlugMapping } from "./types";
 
 export type NavbarProps = { slugMapping: SlugMapping };
@@ -16,18 +16,10 @@ const Navbar: FC<NavbarProps> = ({ slugMapping }) => {
       const scrollY = window.scrollY;
 
       // Hide the main navbar after scrolling 50px
-      if (scrollY > 50) {
-        setHideMainNavbar(true);
-      } else {
-        setHideMainNavbar(false);
-      }
+      setHideMainNavbar(scrollY > 50);
 
       // Show the secondary navbar after scrolling 200px
-      if (scrollY > 200) {
-        setShowSecondaryNavbar(true);
-      } else {
-        setShowSecondaryNavbar(false);
-      }
+      setShowSecondaryNavbar(scrollY > 200);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -39,14 +31,18 @@ const Navbar: FC<NavbarProps> = ({ slugMapping }) => {
       {/* Main Transparent Navbar */}
       <MainNavbarStyled isVisible={!hideMainNavbar}>
         <NavbarWrapper>
-          <NavbarLinks slugMapping={slugMapping} logoSrc="/site-logo.png" />
+          <NavbarInnerWrapper>
+            <NavbarLinks slugMapping={slugMapping} logoSrc="/site-logo.png" />
+          </NavbarInnerWrapper>
         </NavbarWrapper>
       </MainNavbarStyled>
 
       {/* Secondary White Navbar */}
       <SecondaryNavbarStyled isVisible={showSecondaryNavbar}>
         <NavbarWrapper>
-          <NavbarLinks slugMapping={slugMapping} logoSrc="/site-logo-blue.png" />
+          <NavbarInnerWrapper>
+            <NavbarLinks slugMapping={slugMapping} logoSrc="/site-logo-blue.png" />
+          </NavbarInnerWrapper>
         </NavbarWrapper>
       </SecondaryNavbarStyled>
     </>

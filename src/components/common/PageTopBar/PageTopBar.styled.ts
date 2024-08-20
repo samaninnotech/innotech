@@ -38,7 +38,7 @@ export const Container = styled.div`
   }
   ${mediaRules.lg} {
     display: block; 
-    max-width: 1200px;
+    max-width: 1100px;
   }
 `;
 
