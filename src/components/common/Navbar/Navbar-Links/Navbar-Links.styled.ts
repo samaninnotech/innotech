@@ -1,8 +1,8 @@
+// Navbar-Links.styled.ts
 "use client";
 
 import Link from "@/i18n/Link";
 import { mediaRules } from "@/themes/media-breakpoints";
-
 import styled, { css } from "styled-components";
 
 type NavbarLinksProps = { $showMenu: boolean };
@@ -12,19 +12,11 @@ export const NavbarLinksStyled = styled.nav<NavbarLinksProps>`
   padding: 0rem 1rem;
   width: 100%;
   align-items: center;
-
+  
   ${mediaRules.lg} {
     justify-content: flex-start;
     position: relative;
   }
-
-  ${({ $showMenu }) =>
-    $showMenu &&
-    css`
-      > ${MainLinksContainerStyled} {
-        display: flex;
-      }
-    `}
 `;
 
 export const LogoContainerStyled = styled.div`
@@ -59,15 +51,93 @@ export const MainLinksContainerStyled = styled.div`
   }
 `;
 
+export const SidebarStyled = styled.div<{ $showMenu: boolean }>`
+  display: none;
+  position: fixed;
+  top: 0;
+  right: -400px;
+  width: 400px;
+  height: 100vh;
+  background-color: #2d5c7f;
+  color: white;
+  transition: transform 0.3s ease-in-out; /* Shorten transition duration for responsiveness */
+  transform: translateX(100%);
+  z-index: 99999;
+
+  ${({ $showMenu }) =>
+    $showMenu &&
+    css`
+      display: block;
+      transform: translateX(0);
+    `}
+
+  ${mediaRules.lg} {
+    display: none;
+  }
+`;
+
+export const SidebarContentStyled = styled.div`
+  padding: 1rem;
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+`;
+export const SideBarLogoButtonContainer = styled.div`
+  display: flex;
+  align-items: center; /* Align logo and button in a row */
+  background-color: #fff;
+  margin: -1rem;
+  padding: 1rem;
+  
+  /* Ensure logo and close button are in a row and spaced correctly */
+  img {
+    flex: 1;
+    padding-left: 1rem;
+  }
+
+  svg {
+    color: black; /* Set the color of the close button */
+    font-size: 2rem; /* Increase the size of the close button */
+    cursor: pointer; /* Indicate the button is clickable */
+    margin-left: 1rem; /* Space between logo and button */
+  }
+`;
+
+export const BurgerMenuButton = styled.button`
+  display: block;
+  font-size: 1.5rem;
+  padding: 0 0.75rem;
+  place-content: center;
+  color: white;
+  background-color: transparent;
+  z-index: 100001; /* Very high z-index */
+  position: relative; /* Ensure positioning context */
+
+  ${mediaRules.lg} {
+    display: none;
+  }
+`;
+
+export const OverlayStyled = styled.div<{ $showOverlay: boolean }>`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); // Semi-transparent gray
+  z-index: 1000; // Ensure it is above the content but below the sidebar
+  cursor: pointer; // Indicate clickable area
+  overflow: hidden; // Prevent scrolling on the body
+  display: ${({ $showOverlay }) => ($showOverlay ? 'block' : 'none')};
+`;
+
 export const GenericLinksContainerStyled = styled.div`
   align-items: flex-start;
   display: flex;
   flex-direction: column;
-  padding: 0 calc((100vw - 660px) / 2);
-
-  ${mediaRules.md} {
-    padding: 0 calc((100vw - 768px) / 2);
-  }
+  padding-left: 1rem;
+  padding-top: 2rem;
 
   ${mediaRules.lg} {
     align-items: baseline;
@@ -90,54 +160,49 @@ export const PageLinksContainerStyled = styled(GenericLinksContainerStyled)`
   }
 `;
 
-export const SideLinksContainerStyled = styled(GenericLinksContainerStyled)`
-  align-items: center;
-  flex-direction: row;
-  justify-content: space-between;
-  border-top: solid 1px var(--accent-color);
-  width: 100%;
-  padding-top: 1rem;
-
-  ${mediaRules.lg} {
-    padding-top: initial;
-    margin-left: auto;
-    position: relative;
-    width: auto;
-    border: none;
-  }
-`;
-
 export const ComplexNavbarLinkContainer = styled.div<{ $selected?: boolean }>`
-  display: inline-flex;
-  align-items: center;
-  white-space: nowrap;
-
-  
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+   ${mediaRules.lg} {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    padding-left: 1rem;
+  }
 `;
 
 export const NavbarElementStyled = styled(Link)<{ $selected?: boolean }>`
   margin-top: 0.75rem;
   width: 100%;
-  padding: 0.2rem 1rem;
+  padding: 1rem 0rem;
   text-decoration: none;
   position: relative;
   overflow: hidden;
+  
+  /* Apply border-top for screens narrower than 1200px */
+  border-top: 1px solid gray;
+  
+  /* Remove border-top for the first child */
+  &:first-child {
+    border-top: none;
+  }
 
+  /* Media query for screens 1200px and wider */
   ${mediaRules.lg} {
     margin-left: 2rem;
     margin-top: 0;
     width: auto;
+    border-top: none; /* Remove border-top for screens 1200px and wider */
+    
+    /* Apply border-bottom if selected */
+    ${({ $selected }) =>
+      $selected &&
+      css`
+        border-bottom: 3px solid #287ca4;
+      `};
   }
-
-  /* Default state: no border */
-  border-bottom: none;
-
-  /* Selected state: show the border without transition */
-  ${({ $selected }) =>
-    $selected &&
-    css`
-      border-bottom: 2px solid blue;
-    `}
 
   &:hover {
     text-decoration: none;
@@ -153,35 +218,41 @@ export const NavbarElementStyled = styled(Link)<{ $selected?: boolean }>`
         bottom: 0;
         left: 0;
         width: 100%;
-        height: 2px;
-        background-color: blue;
+        height: 3px;
+        background-color: #287ca4;
         transform: scaleX(0);
         transform-origin: left;
-        transition: transform 0.5s ease-in-out;
+
+        /* Apply transition only for screens larger than 1200px */
+        ${mediaRules.lg} {
+          transition: transform 0.5s ease-in-out;
+        }
       }
 
-      &:hover:before {
-        transform: scaleX(1); /* Transition the border in from left to right */
+      /* Show the border only for screens larger than 1200px */
+      ${mediaRules.lg} {
+        &:hover:before {
+          transform: scaleX(1); /* Transition the border in from left to right */
+        }
       }
     `}
 `;
-
-
 
 export const NavbarMenuStyled = styled.span<{ $selected?: boolean }>`
   cursor: pointer;
   margin-top: 0.75rem;
   width: 100%;
-  padding: 0.2rem 0;
+  padding: 1rem 0rem;
   text-decoration: none;
   position: relative;
   overflow: hidden;
-
+  border-top: 1px solid gray;
+  
   ${mediaRules.lg} {
     margin-left: 2rem;
     margin-top: 0;
     width: auto;
-    border-bottom: none;
+    border: none;
   }
 
   /* Default state: no border */
@@ -191,7 +262,7 @@ export const NavbarMenuStyled = styled.span<{ $selected?: boolean }>`
   ${({ $selected }) =>
     $selected &&
     css`
-      border-bottom: 2px solid blue;
+      border-bottom: 3px solid #287ca4;
     `}
 
   &:hover {
@@ -205,18 +276,37 @@ export const NavbarMenuStyled = styled.span<{ $selected?: boolean }>`
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 2px;
-    background-color: blue;
+    height: 3px;
+    background-color: #287ca4;
     transform: scaleX(0);
     transform-origin: left;
-    transition: transform 0.5s ease-in-out;
+
+    /* Apply transition only for screens larger than 1200px */
+    ${mediaRules.lg} {
+      transition: transform 0.5s ease-in-out;
+    }
   }
 
-  &:hover:before {
-    transform: scaleX(1); /* Transition the border in from left to right */
+  /* Show the border only for screens larger than 1200px */
+  ${mediaRules.lg} {
+    &:hover:before {
+      transform: scaleX(1); /* Transition the border in from left to right */
+    }
   }
 `;
 
+export const SVGContainer = styled.div`
+  display: inline-flex; /* Ensure the container takes only the space it needs */
+  align-items: center; /* Center the SVG vertically */
+  justify-content: center; /* Center the SVG horizontally */
+  background-color: #3b6788; /* Gray background */
+  border-radius: 0.25rem; /* Optional: rounded corners for the border */
+  padding: 0.5rem 1rem; /* Space between the SVG and the border */
+  svg {
+    width: 10px;
+    height: 20px;
+  }
+`;
 export const NavbarLinkButtonStyled = styled(Link)`
   padding: 0.5rem 1.5rem;
   border-radius: 0.25rem;
@@ -245,27 +335,9 @@ export const SideLinkStyled = styled(Link)<{ $selected?: boolean }>`
   /* Default state: no border */
   border-bottom: none;
 
-  /* If the item is selected, keep the border-bottom visible */
-  ${({ $selected }) =>
-    $selected &&
-    css`
-      border-bottom: 2px solid blue;
-    `}
 
-  &:hover {
-    border-bottom: 2px solid blue;
-    text-decoration: none;
-  }
-`;
-
-export const BurgerMenuButton = styled.button`
-  display: block;
-  font-size: 1.5rem;
-  padding: 0 0.75rem;
-  place-content: center;
-  color: white;
-  background-color: transparent;
+  /* Hide the border on screens smaller than 1200px */
   ${mediaRules.lg} {
-    display: none;
+    border-bottom: none;
   }
 `;

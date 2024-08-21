@@ -29,7 +29,7 @@ export const RowContainer = styled.div<RowContainerProps>`
   align-items: center;
   justify-content: center;
   z-index: 1;
-  top: -20px;
+  top: -60px;
   font-family: CerebriSans;
   font-size: 15px;
   font-weight: 400;

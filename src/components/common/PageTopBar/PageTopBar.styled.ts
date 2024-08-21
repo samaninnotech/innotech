@@ -2,7 +2,7 @@ import { mediaRules } from '@/themes/media-breakpoints';
 import styled from 'styled-components';
 
 export const PageTopBarContainer = styled.div`
-  background-color: rgba(255, 255, 255, 0); 
+  background-color: transparent;
   color: white;
   top: 0;
   left: 0;
@@ -10,7 +10,7 @@ export const PageTopBarContainer = styled.div`
   font-weight: 400;
   width: 100%;
   z-index: 1000;
-  position: absolute; 
+  position: fixed; /* Change from absolute to fixed */
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   font-size: 14px;
   line-height: 1.78;
@@ -20,7 +20,8 @@ export const PageTopBarContainer = styled.div`
     text-decoration: none;
     color: inherit;
   }
-  `;
+`;
+
 
 export const Container = styled.div`
   margin: 0 auto;

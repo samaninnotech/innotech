@@ -167,7 +167,6 @@ const buildSolutionsSection = (s : SolutionsSection) => {
 
 const buildHeroSection = (s: HeroSection) => {
   const { _key, anchor, left_column, right_column, backgroundColor, backgroundImage } = s;
-  console.log(s, 'maha');
   return (
     <HeroSectionComponent
       key={_key}

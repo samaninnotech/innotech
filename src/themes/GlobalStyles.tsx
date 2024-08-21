@@ -277,6 +277,11 @@ const GlobalStyles = createGlobalStyle`
     line-height: 1.6;
     margin: 0.25em 0 0.5em;
   }
+  .sidebar-open {
+  transform: translateX(-400px); /* Adjust based on sidebar width */
+  transition: transform 0.3s ease;
+}
 `;
+
 
 export default GlobalStyles;

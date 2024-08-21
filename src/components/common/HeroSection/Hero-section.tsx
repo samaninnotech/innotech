@@ -54,7 +54,6 @@ const HeroSectionComponent: FC<HeroSectionProps> = ({
   const leftTextColor = isHeroTextColumn(leftColumn) ? leftColumn.text_color : undefined;
   const rightTextColor = isHeroTextColumn(rightColumn) ? rightColumn.text_color : undefined;
   const leftTextAlign = isHeroTextColumn(leftColumn) ? leftColumn.text_alignment : "left";
-  console.log(rightColumn.text_alignment, "unaha")
   const rightTextAlign = isHeroTextColumn(rightColumn) ? rightColumn.text_alignment : "left";
   if (!rightColumn) {
     return (

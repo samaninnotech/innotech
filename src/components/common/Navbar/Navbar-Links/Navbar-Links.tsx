@@ -1,17 +1,12 @@
+// NavbarLinks.tsx
 "use client";
 
 import Link from "@/i18n/Link";
 import PagesConfigContext from "@/i18n/PagesConfigContext";
-import {
-  CustomLink,
-  DecoratedLinkType,
-  NavbarSubmenuSection,
-  customLinkToHref,
-  isNavbarSubmenu,
-} from "@/sanity/types";
+import { CustomLink, customLinkToHref, DecoratedLinkType, isNavbarSubmenu, NavbarSubmenuSection } from "@/sanity/types";
 import Image from "next/image";
 import { useParams } from "next/navigation";
-import { FC, ReactNode, useContext, useState } from "react";
+import { FC, useContext, useEffect, useState } from "react";
 import { MdClose, MdMenu } from "react-icons/md";
 import { SlArrowDown } from "react-icons/sl";
 import NavbarLanguages from "../Navbar-Languages/NavbarLanguages";
@@ -25,42 +20,77 @@ import {
   NavbarLinkButtonStyled,
   NavbarLinksStyled,
   NavbarMenuStyled,
+  OverlayStyled,
   PageLinksContainerStyled,
+  SidebarContentStyled,
+  SideBarLogoButtonContainer,
+  SidebarStyled,
   SideLinkStyled,
-  SideLinksContainerStyled,
+  SVGContainer
 } from "./Navbar-Links.styled";
 import SubMenu from "./SubMenu";
-export type NavbarProps = { slugMapping: SlugMapping, logoSrc: string };
 
-/*************************/
-/* Componente Principale */
-/*************************/
-const NavbarLinks: FC<NavbarProps> = ({ slugMapping, logoSrc }) => {
-  const [showMenu, setOpen] = useState(false);
-  const handleOpenToggle = () => setOpen(!showMenu);
+export type NavbarLinksProps = { 
+  slugMapping: SlugMapping; 
+  logoSrc: string; 
+  onSidebarToggle: () => void; 
+};
 
-  return (
+const NavbarLinks: FC<NavbarLinksProps> = ({ slugMapping, logoSrc, onSidebarToggle }) => {
+  const [showMenu, setShowMenu] = useState(false);
+const [isOverlayVisible, setIsOverlayVisible] = useState(false);
+
+const handleSidebarToggle = () => {
+  setShowMenu(prev => !prev);
+  setIsOverlayVisible(prev => !prev); // Toggle overlay visibility
+  onSidebarToggle(); // Notify parent component of the sidebar toggle
+};
+
+useEffect(() => {
+  if (showMenu) {
+    document.body.style.overflow = 'hidden'; // Prevent scrolling on body
+  } else {
+    document.body.style.overflow = ''; // Re-enable scrolling
+  }
+  return () => {
+    document.body.style.overflow = ''; // Cleanup on unmount
+  };
+}, [showMenu]);
+
+return (
+  <>
     <NavbarLinksStyled $showMenu={showMenu}>
       <LogoContainerStyled>
-        <Link href={"/"} title={process.env.appName}>
-          <Image src={logoSrc} alt="logo" width={300} height={50} />
+        <Link href="/" aria-label="Home">
+          <Image src={logoSrc} alt="Logo" height={50} width={250} />
         </Link>
       </LogoContainerStyled>
       <MainLinksContainerStyled>
         <PageLinksContainer />
         <NavbarLanguages slugMapping={slugMapping} />
-        <SideLinksContainer />
       </MainLinksContainerStyled>
-      <BurgerMenuButton onClick={handleOpenToggle}>
-        {showMenu ? <MdClose /> : <MdMenu />}
+      <BurgerMenuButton onClick={handleSidebarToggle}>
+        {showMenu ? <MdMenu /> : <MdMenu />}
       </BurgerMenuButton>
     </NavbarLinksStyled>
-  );
+    <SidebarStyled $showMenu={showMenu}>
+      <SidebarContentStyled>
+        <SideBarLogoButtonContainer>
+          <Image src="/site-logo-blue.png" alt="Logo"  height={50} width={250}/>
+          <MdClose onClick={handleSidebarToggle} />    
+        </SideBarLogoButtonContainer>
+        <PageLinksContainer />
+        <NavbarLanguages slugMapping={slugMapping} />
+      </SidebarContentStyled>
+    </SidebarStyled>
+    <OverlayStyled
+      $showOverlay={isOverlayVisible}
+      onClick={handleSidebarToggle} // Close sidebar when overlay is clicked
+    />
+  </>
+);
 };
 
-/***************/
-/* Navbar Menu */
-/***************/
 const PageLinksContainer: FC = () => {
   const { mainConfig } = useContext(PagesConfigContext);
   const { slug } = useParams();
@@ -109,15 +139,12 @@ const PageLinksContainer: FC = () => {
   return <PageLinksContainerStyled>{navbarElements}</PageLinksContainerStyled>;
 };
 
-/* Link Standard Navbar */
 type SimpleNavbarLinkProperties = {
   label: string;
   link: string;
-  children?: ReactNode;
+  children?: React.ReactNode;
   isButton?: boolean;
   selected?: boolean;
-  openSubMenu?: Function;
-  index?: number;
 };
 const SimpleNavbarLink: FC<SimpleNavbarLinkProperties> = ({
   label,
@@ -134,7 +161,6 @@ const SimpleNavbarLink: FC<SimpleNavbarLinkProperties> = ({
   );
 };
 
-/* Elemento con Submenu */
 type ComplexNavbarLinkProperties = {
   label: string;
   selected?: boolean;
@@ -149,7 +175,7 @@ const ComplexNavbarLink: FC<ComplexNavbarLinkProperties> = ({
   index,
   config,
 }) => {
-  const icon: ReactNode = (
+  const icon: React.ReactNode = (
     <SlArrowDown
       style={{
         transform: selected ? "rotate(-180deg)" : "rotate(0deg)",
@@ -163,7 +189,9 @@ const ComplexNavbarLink: FC<ComplexNavbarLinkProperties> = ({
       >
         <ComplexNavbarLinkContainer $selected={!!selected}>
           {label}
-          {icon}
+          <SVGContainer>
+            {icon}
+          </SVGContainer>
         </ComplexNavbarLinkContainer>
       </NavbarMenuStyled>
       {selected && config && <SubMenu showSubMenu={true} config={config} />}
@@ -171,19 +199,16 @@ const ComplexNavbarLink: FC<ComplexNavbarLinkProperties> = ({
   );
 };
 
-/*************************/
-/* Navbar Call to Action */
-/*************************/
 const SideLinksContainer: FC = () => {
   const { sideConfig } = useContext(PagesConfigContext);
   const { slug } = useParams();
 
   if (!sideConfig?.length) {
-    return <SideLinksContainerStyled />;
+    return <MainLinksContainerStyled />;
   }
 
   return (
-    <SideLinksContainerStyled>
+    <MainLinksContainerStyled>
       {sideConfig.map((l) => {
         const { type, link } = l;
         const href = customLinkToHref(link);
@@ -197,7 +222,7 @@ const SideLinksContainer: FC = () => {
           ></SideLink>
         );
       })}
-    </SideLinksContainerStyled>
+    </MainLinksContainerStyled>
   );
 };
 
