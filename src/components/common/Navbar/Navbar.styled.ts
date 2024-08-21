@@ -30,7 +30,7 @@ export const NavbarInnerWrapper = styled.div`
 `;
 
 export const MainNavbarStyled = styled.header<{ isVisible: boolean }>`
-  position: fixed;
+  position: relative;
   top: 60px;
   left: 0;
   width: 100%;
