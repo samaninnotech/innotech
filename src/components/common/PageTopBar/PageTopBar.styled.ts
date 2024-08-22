@@ -10,7 +10,7 @@ export const PageTopBarContainer = styled.div`
   font-weight: 400;
   width: 100%;
   z-index: 1000;
-  position: fixed; /* Change from absolute to fixed */
+  position: absolute; /* Change from absolute to fixed */
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   font-size: 14px;
   line-height: 1.78;
