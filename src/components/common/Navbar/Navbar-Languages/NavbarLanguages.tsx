@@ -2,6 +2,7 @@
 
 import { locales } from "@/i18n/settings";
 import useTranslation from "@/i18n/useTranslation";
+import Image from "next/image";
 import { FC } from "react";
 import { SlugMapping } from "../types";
 import {
@@ -31,7 +32,7 @@ const NavbarLanguages: FC<NavbarLanguagesProps> = ({ slugMapping }) => {
     <NavbarLanguagesStyled>
       <LanguagesListStyled>
         {languages.map((l) => (
-          <LanguageElement language={l} key={l.language}></LanguageElement>
+          <LanguageElement language={l} key={l.language} />
         ))}
       </LanguagesListStyled>
     </NavbarLanguagesStyled>
@@ -47,13 +48,16 @@ const LanguageElement: FC<LanguageElementProps> = ({ language }) => {
     href += `/${slug}`;
   }
 
+  // Choose the correct flag image based on the locale
+  const flagSrc = locale === "it" ? "/italy.png" : "/england.svg"; // Assuming the flag images are in the public/flags directory
+
   return (
     <LanguageElementStyled
       href={href}
       $selected={language.selected}
       locale={language.language}
     >
-      {language.label}
+      <Image src={flagSrc} alt={`${locale} flag`} width={30} height={20} />
     </LanguageElementStyled>
   );
 };

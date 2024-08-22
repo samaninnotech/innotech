@@ -5,7 +5,7 @@ import Link from "@/i18n/Link";
 import PagesConfigContext from "@/i18n/PagesConfigContext";
 import { CustomLink, customLinkToHref, DecoratedLinkType, isNavbarSubmenu, NavbarSubmenuSection } from "@/sanity/types";
 import Image from "next/image";
-import { useParams } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import { FC, useContext, useEffect, useState } from "react";
 import { MdClose, MdMenu } from "react-icons/md";
 import { SlArrowDown } from "react-icons/sl";
@@ -93,7 +93,10 @@ return (
 
 const PageLinksContainer: FC = () => {
   const { mainConfig } = useContext(PagesConfigContext);
-  const { slug } = useParams();
+  const pathname = usePathname();
+  const slug = pathname.split("/").pop(); // Get the last part of the path
+  console.log(slug, "inja");
+
   const [selectedIndex, setSelectedIndex] = useState(-1);
 
   const handleItemClicked = (index: number) => {
@@ -130,7 +133,7 @@ const PageLinksContainer: FC = () => {
           label={l.label}
           link={href}
           isButton={false}
-          selected={href.replace("/", "") === slug} // TODO: TEMP - check if it works with nested pages too
+          selected={href.replace("/", "") === slug} // Compare with slug from pathname
         />
       );
     }
@@ -155,7 +158,7 @@ const SimpleNavbarLink: FC<SimpleNavbarLinkProperties> = ({
   return isButton ? (
     <NavbarLinkButtonStyled href={link}>{label}</NavbarLinkButtonStyled>
   ) : (
-    <NavbarElementStyled href={link} $selected={!!selected}>
+    <NavbarElementStyled href={link} $selected={!selected}>
       {label}
     </NavbarElementStyled>
   );

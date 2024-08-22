@@ -200,7 +200,8 @@ export const NavbarElementStyled = styled(Link)<{ $selected?: boolean }>`
     ${({ $selected }) =>
       $selected &&
       css`
-        border-bottom: 3px solid #287ca4;
+        border-bottom: 4px solid #287ca4;
+        padding-bottom: 0.7rem;
       `};
   }
 
@@ -218,7 +219,7 @@ export const NavbarElementStyled = styled(Link)<{ $selected?: boolean }>`
         bottom: 0;
         left: 0;
         width: 100%;
-        height: 3px;
+        height: 4px;
         background-color: #287ca4;
         transform: scaleX(0);
         transform-origin: left;
@@ -232,7 +233,7 @@ export const NavbarElementStyled = styled(Link)<{ $selected?: boolean }>`
       /* Show the border only for screens larger than 1200px */
       ${mediaRules.lg} {
         &:hover:before {
-          transform: scaleX(1); /* Transition the border in from left to right */
+          transform: scaleX(2); /* Transition the border in from left to right */
         }
       }
     `}
@@ -253,6 +254,7 @@ export const NavbarMenuStyled = styled.span<{ $selected?: boolean }>`
     margin-top: 0;
     width: auto;
     border: none;
+    padding: 0.4rem 0rem;
   }
 
   /* Default state: no border */
@@ -276,7 +278,7 @@ export const NavbarMenuStyled = styled.span<{ $selected?: boolean }>`
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 3px;
+    height: 4px;
     background-color: #287ca4;
     transform: scaleX(0);
     transform-origin: left;
@@ -290,7 +292,7 @@ export const NavbarMenuStyled = styled.span<{ $selected?: boolean }>`
   /* Show the border only for screens larger than 1200px */
   ${mediaRules.lg} {
     &:hover:before {
-      transform: scaleX(1); /* Transition the border in from left to right */
+      transform: scaleX(2); /* Transition the border in from left to right */
     }
   }
 `;
@@ -306,6 +308,8 @@ export const SVGContainer = styled.div`
     width: 10px;
     height: 20px;
   }
+  ${mediaRules.lg} {
+    background-color: transparent; 
 `;
 export const NavbarLinkButtonStyled = styled(Link)`
   padding: 0.5rem 1.5rem;
