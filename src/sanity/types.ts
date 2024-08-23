@@ -151,6 +151,22 @@ export interface ConsultationSwiperSlideType extends SanityElement {
   text: string;
 }
 
+/* PartnerShip Section*/
+export interface PartnerShipSection extends Section {
+  header: string;
+  partnershipCards: PartnerShipCardType[];
+}
+
+export function isPartnerShipSection(section: Section): section is PartnerShipSection {
+  return sectionMatchType(section, "partnership_section");
+}
+
+export interface PartnerShipCardType extends SanityElement {
+  icon: string;
+  title: string;
+  text: string;
+}
+
 /* Solutions Section*/
 export interface SolutionsSection extends Section {
   solutionCards: SolutionCardType[];

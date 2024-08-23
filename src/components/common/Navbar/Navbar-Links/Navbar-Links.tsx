@@ -95,7 +95,6 @@ const PageLinksContainer: FC = () => {
   const { mainConfig } = useContext(PagesConfigContext);
   const pathname = usePathname();
   const slug = pathname.split("/").pop(); // Get the last part of the path
-  console.log(slug, "inja");
 
   const [selectedIndex, setSelectedIndex] = useState(-1);
 
@@ -158,7 +157,7 @@ const SimpleNavbarLink: FC<SimpleNavbarLinkProperties> = ({
   return isButton ? (
     <NavbarLinkButtonStyled href={link}>{label}</NavbarLinkButtonStyled>
   ) : (
-    <NavbarElementStyled href={link} $selected={!selected}>
+    <NavbarElementStyled href={link} $selected={!!selected}>
       {label}
     </NavbarElementStyled>
   );
