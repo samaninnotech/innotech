@@ -1,5 +1,6 @@
 import { HomePageTopPost } from '@/components/common/HomePageTopPost/HomePageTopPost';
 import PageTopBar from '@/components/common/PageTopBar';
+import PartnerShipSection from "@/components/common/PartnerShipSection/PartnerShipSection";
 import { SolutionsSection } from '@/components/common/SolutionsSection/SolutionsSection';
 import Button from "./Button";
 import ConsultationSection from './ConsultationSection';
@@ -10,6 +11,6 @@ import HeroSectionComponent from './HeroSection';
 
 
 export {
-  Button, ConsultationSection, DraftBanner, GenericLink, HeroSectionComponent, HomePageTopPost, PageTopBar, SolutionsSection
+  Button, ConsultationSection, DraftBanner, GenericLink, HeroSectionComponent, HomePageTopPost, PageTopBar, PartnerShipSection, SolutionsSection
 };
 

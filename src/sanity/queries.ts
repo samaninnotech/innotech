@@ -43,6 +43,8 @@ const buildPageDeconstructionQUery = (locale: string) => `{
     _type == 'home_page_top_post' => ${buildHomePageTopPostQuery()},
     _type == 'consultation_section' => ${buildConsultationSectionQuery(locale, fallbackLocale)},
     _type == 'solutions_section' => ${buildSolutionsSectionQuery(locale, fallbackLocale)},
+    _type == 'partnership_section' => ${buildPartnerShipSectionQuery(locale, fallbackLocale)},
+
   }
 }`;
 
@@ -231,6 +233,16 @@ const buildSolutionsSectionQuery = (locale: string, fallbackLocale: string) => `
     'icon': icon
   }
 }`;
+const buildPartnerShipSectionQuery = (locale: string, fallbackLocale: string) => `
+{
+  'header': coalesce(header.${locale}, header.${fallbackLocale}),
+  'partnershipCards': partnershipCards[]{
+    'title': coalesce(title.${locale}, title.${fallbackLocale}),
+    'text': coalesce(text.${locale}, text.${fallbackLocale}),
+    'icon': icon
+  }
+}`;
+
 
 
 

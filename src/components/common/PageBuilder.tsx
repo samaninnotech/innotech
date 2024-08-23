@@ -7,8 +7,10 @@ import {
   isHeroSection,
   isHomePageTopPost,
   isPageTopBar,
+  isPartnerShipSection,
   isSolutionsSection,
   PageTopBar,
+  PartnerShipSection,
   Section,
   SolutionsSection
 } from "@/sanity/types";
@@ -18,6 +20,7 @@ import {
   HeroSectionComponent,
   HomePageTopPost as HomePageTopPostComponent,
   PageTopBar as PageTopBarComponent,
+  PartnerShipSection as PartnerShipSectionComponent,
   SolutionsSection as SolutionsSectionComponent
 } from ".";
 // import {
@@ -60,7 +63,9 @@ const PageBuilder: FC<PageBuilderProps> = async ({ sections, locale }) => {
       renderedSections.push(buildSolutionsSection(s));
     }  else if (isHeroSection(s)) {
         renderedSections.push(buildHeroSection(s));
-    }
+    } else if (isPartnerShipSection(s)) {
+      renderedSections.push(buildPartnershipSection(s));
+  }
     // if (isContactsSection(s)) {
     //   const accountInfo = await getGlobalAccountInfo(locale);
     //   if (accountInfo) {
@@ -127,6 +132,13 @@ const buildSolutionsSection = (s : SolutionsSection) => {
     <SolutionsSectionComponent title={title} text={text} solutionCards={solutionCards}/>
   );
 };
+
+const buildPartnershipSection = (s : PartnerShipSection) => {
+  const {header, partnershipCards} = s;
+  return (
+    <PartnerShipSectionComponent header={header} partnershipCards={partnershipCards}/>
+  )
+}
 // const buildCardLinkSection = (s: CardLinksSection) => {
 //   const { title, card_links, _key, background } = s;
 //   return (
