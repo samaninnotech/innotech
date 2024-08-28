@@ -157,7 +157,7 @@ const SimpleNavbarLink: FC<SimpleNavbarLinkProperties> = ({
   return isButton ? (
     <NavbarLinkButtonStyled href={link}>{label}</NavbarLinkButtonStyled>
   ) : (
-    <NavbarElementStyled href={link} $selected={!!selected}>
+    <NavbarElementStyled href={link} $selected={!selected}>
       {label}
     </NavbarElementStyled>
   );
