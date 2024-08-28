@@ -1,4 +1,5 @@
 // Footer.styled.ts
+import { mediaRules } from '@/themes/media-breakpoints';
 import styled from 'styled-components';
 
 export const FooterWrapper = styled.div`
@@ -6,7 +7,7 @@ export const FooterWrapper = styled.div`
   padding: 40px 0;
   border-top: 1px solid #e9ecef;
   width: 100%;
-    margin-top: 500px;
+  margin-top: 100px;
 
 `;
 
@@ -24,29 +25,51 @@ export const FooterRow = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 20px;
+  max-width: 576px; 
+  flex-direction: column;
+
+  ${mediaRules.sm}{
+    max-width: 720px; 
+  }
+  ${mediaRules.md}{
+    max-width: 940px; 
+    flex-direction: row;
+  }
+  ${mediaRules.lg}{
+    flex-direction: row;
+    max-width: 1200px; 
+  }
 `;
 
 export const FooterColumn = styled.div`
-  flex: 1;
+ &:first-child {
+    flex: 0 0 30%; /* First child takes 40% of the width */
+    max-width: 40%; /* Ensures the first child does not exceed 40% */
+  }
+
+  &:not(:first-child) {
+    flex: 1; /* Remaining children share the remaining 60% equally */
+    max-width: calc(60% / 1.5); /* Adjusts the max-width to divide the remaining space equally */
+  }  
   padding: 0 15px;
 
   &.logo-column {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    // align-items: center;
   }
 
   &.links-column, &.social-column {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    // justify-content: space-between;
   }
 `;
 
 export const FooterLogo = styled.a`
   display: block;
   margin-bottom: 20px;
-  text-align: center;
+  // text-align: center;
 
   img {
     max-width: 100%;
@@ -59,21 +82,21 @@ export const FooterHeading = styled.h2`
   margin-bottom: 10px;
 `;
 
-export const FooterList = styled.ul`
+export const FooterList = styled.div`
   list-style: none;
   padding: 0;
-  margin: 0;
-
+  margin-top: 10px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  
   li {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 
     a {
-      color: #007bff;
+      color: black;
       text-decoration: none;
-
-      &:hover {
-        text-decoration: underline;
-      }
     }
   }
 `;
@@ -81,8 +104,9 @@ export const FooterList = styled.ul`
 export const FooterText = styled.p`
   font-size: 0.9em;
   color: #6c757d;
-  text-align: center;
+  // text-align: center;
   margin: 20px 0;
+  width: 100%;
 `;
 
 export const SocialLinks = styled.div`
