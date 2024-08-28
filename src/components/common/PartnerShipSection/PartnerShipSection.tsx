@@ -5,7 +5,7 @@ import { faChalkboardTeacher, faCheckSquare, faCogs, faEuroSign, IconDefinition 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import PartnerShipCard from '../PartnerShipCard/PartnerShipCard';
-import { CardsContainer, Container, Header, InnerContainer } from './PartnershipSection.styled';
+import { CardsContainer, Container, Header, InnerContainer } from './PartnerShipSection.styled';
 
 // Define icons
 const iconMapping: { [key: string]: IconDefinition } = {
