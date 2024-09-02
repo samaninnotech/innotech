@@ -116,7 +116,43 @@ export function isNavbarSubmenuSection(
     input?._type === "navbar_submenu_section"
   );
 }
+/* BLOG */
 
+export interface BlogHeaderSection extends Section {
+  title: string;
+  subtitle: string;
+  background_image: string;
+}
+
+export function isBlogHeaderSection(
+  section: Section,
+): section is BlogHeaderSection {
+  return sectionMatchType(section, "blog_header_section");
+}
+
+export interface BlogPostsListSection extends Section {}
+
+export function isBlogPostsListSection(
+  section: Section,
+): section is BlogPostsListSection {
+  return sectionMatchType(section, "blog_posts_list_section");
+}
+
+export interface Post extends SanityElement {
+  title: string;
+  slug: string;
+  categories: BlogCategory[];
+  publish_date: string;
+  cover: string;
+  body: any[]; // TODO fix
+  _updatedAt: string;
+}
+
+export interface BlogCategory {
+  title: string;
+  tag: string;
+  _updatedAt: string;
+}
 /* Latest Blog Posts*/ 
 export interface LatestBlogPosts extends Section {
   title: string,
@@ -226,6 +262,80 @@ export interface HomePageTopPost extends Section {
 
 export function isHomePageTopPost(section: Section): section is HomePageTopPost {
   return sectionMatchType(section, "home_page_top_post");
+}
+
+/* Our Company Section */
+export interface OurCompanySection extends Section {
+  accordionItems: AccordionItem[];
+  
+}
+
+export function isOurCompanySection(section: Section): section is OurCompanySection {
+  return sectionMatchType(section, "our_company_section");
+}
+export interface AccordionItem {
+  title: string;
+  content: string;
+};
+
+/* Video Section */
+export interface VideoSection extends Section {
+  centralImage: string;  
+  leftTopImage: string;
+  leftBottomImage: string;
+  rightTopImage: string;
+  rightBottomImage: string;
+  videoLink: string; 
+}
+
+export function isVideoSection(section: Section): section is VideoSection {
+  return sectionMatchType(section, "video_section");
+}
+
+/* Visions Section*/
+export interface VisionsSection extends Section {
+  sectionTitle?: string;
+  topHeading: string;
+  footerText: string;
+  visionCards: VisionCardType[];
+}
+
+export function isVisionsSection(section: Section): section is VisionsSection {
+  return sectionMatchType(section, "visions_section");
+}
+
+export interface VisionCardType extends SanityElement {
+  imgSrc: string;
+  imgAlt: string;
+  title: string;
+  text: string;
+}
+
+/* Team List*/
+export interface TeamList extends Section {
+  header: string;
+  teamMembers: TeamMemberType[];
+}
+
+export function isTeamList(section: Section): section is TeamList {
+  return sectionMatchType(section, "team_list");
+}
+
+export interface TeamMemberType extends SanityElement {
+  image: string;
+  name: string;
+  position: string;
+  linkedIn: CustomLink;
+}
+
+/* Page Top Banner*/
+export interface PageTopBanner extends Section {
+  imageUrl: string;
+  altText?: string;
+}
+
+export function isPageTopBanner(section: Section): section is PageTopBanner {
+  return sectionMatchType(section, "page_top_banner");
 }
 
 
