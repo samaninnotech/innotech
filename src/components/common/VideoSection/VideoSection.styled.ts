@@ -1,6 +1,7 @@
-// VideoSection.styled.ts
+import Image from "next/image";
 import styled from 'styled-components';
 
+// Wrapper for the video section
 export const Wrapper = styled.div`
   position: relative;
   width: 100%;
@@ -18,10 +19,9 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const CentralImage = styled.img`
+// Central image styling
+export const CentralImage = styled(Image)`
   position: absolute;
-  width: 30%;
-  height: auto;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -37,14 +37,14 @@ export const CentralImage = styled.img`
   }
 `;
 
-export const BackgroundImage = styled.img`
+// Background image styling with dynamic positioning and sizing
+export const LeftTopImage = styled(Image)`
   position: absolute;
-  width: 120px;
-  height: 130px;
   border-radius: 5px;
   z-index: 5;
   animation: moveUpDown 4s infinite ease-in-out;
-
+  top: 5%; 
+  left: 25%;
   @keyframes moveUpDown {
     0% {
       transform: translateY(0);
@@ -58,14 +58,95 @@ export const BackgroundImage = styled.img`
   }
 
   @media (min-width: 768px) {
-    width: 20%;
+    width: 20%; // Adjust size based on screen width
   }
 
   @media (min-width: 1024px) {
-    width: 15%;
+    width: 15%; // Adjust size based on screen width
   }
 `;
+export const LeftBottomImage = styled(Image)`
+  position: absolute;
+  border-radius: 5px;
+  z-index: 5;
+  animation: moveUpDown 4s infinite ease-in-out;
+  top: 70%;
+  left: 15%; 
+  @keyframes moveUpDown {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
 
+  @media (min-width: 768px) {
+    width: 20%; // Adjust size based on screen width
+  }
+
+  @media (min-width: 1024px) {
+    width: 15%; // Adjust size based on screen width
+  }
+`;
+export const RightTopImage = styled(Image)`
+  position: absolute;
+  border-radius: 5px;
+  z-index: 5;
+  animation: moveUpDown 4s infinite ease-in-out;
+  top: 5%; 
+  left: 65%;
+  @keyframes moveUpDown {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  @media (min-width: 768px) {
+    width: 20%; // Adjust size based on screen width
+  }
+
+  @media (min-width: 1024px) {
+    width: 15%; // Adjust size based on screen width
+  }
+`;
+export const RightBottomImage = styled(Image)`
+  position: absolute;
+  border-radius: 5px;
+  z-index: 5;
+  animation: moveUpDown 4s infinite ease-in-out;
+  top: 70%;
+  left: 65%;
+  @keyframes moveUpDown {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  @media (min-width: 768px) {
+    width: 20%; // Adjust size based on screen width
+  }
+
+  @media (min-width: 1024px) {
+    width: 15%; // Adjust size based on screen width
+  }
+`;
+// Play button styling
 export const PlayButton = styled.div`
   position: absolute;
   top: 50%;
@@ -114,6 +195,7 @@ export const PlayButton = styled.div`
   }
 `;
 
+// Overlay for the video
 export const VideoOverlay = styled.div`
   position: fixed;
   top: 0;
@@ -127,6 +209,7 @@ export const VideoOverlay = styled.div`
   z-index: 30;
 `;
 
+// Container for the video
 export const VideoContainer = styled.div`
   width: 80%;
   height: 80%;

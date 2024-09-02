@@ -1,4 +1,5 @@
 import { fallbackLocale, isSupportedLocale, locales } from "@/i18n/settings";
+import CustomPageIds from "./custom-page-ids";
 import getSanityClient from "./get-sanity-client";
 import sanityClient from "./sanity-client";
 import {
@@ -44,6 +45,11 @@ const buildPageDeconstructionQUery = (locale: string) => `{
     _type == 'consultation_section' => ${buildConsultationSectionQuery(locale, fallbackLocale)},
     _type == 'solutions_section' => ${buildSolutionsSectionQuery(locale, fallbackLocale)},
     _type == 'partnership_section' => ${buildPartnerShipSectionQuery(locale, fallbackLocale)},
+    _type == 'our_company_section' => ${buildOurCompanySectionQuery(locale, fallbackLocale)},
+    _type == 'video_section' => ${buildVideoSectionQuery()},
+    _type == 'visions_section' => ${buildVisionsSectionQuery(locale, fallbackLocale)},
+    _type == 'team_list' => ${buildTeamListQuery(locale, fallbackLocale)},
+    _type == 'page_top_banner' => ${buildPageTopBannerQuery()},
 
   }
 }`;
@@ -243,9 +249,54 @@ const buildPartnerShipSectionQuery = (locale: string, fallbackLocale: string) =>
   }
 }`;
 
+const buildOurCompanySectionQuery = (locale: string, fallbackLocale: string) => `{
+  'accordionItems': accordionItems[]{
+    'title': coalesce(title.${locale}, title.${fallbackLocale}),
+    'content': coalesce(content.${locale}, content.${fallbackLocale})
+  }
+}`;
 
+// Query to fetch the Video Section data
+export const buildVideoSectionQuery = () => `{
+  "centralImage": centralImage.asset->url,
+  "leftTopImage": leftTopImage.asset->url,
+  "rightTopImage": rightTopImage.asset->url,
+  "leftBottomImage": leftBottomImage.asset->url,
+  "rightBottomImage": rightBottomImage.asset->url,
+  "videoLink": videoLink
+}`;
 
+const buildVisionsSectionQuery = (locale: string, fallbackLocale: string) => `
+{
+  'sectionTitle': coalesce(sectionTitle.${locale}, sectionTitle.${fallbackLocale}),
+  'topHeading': coalesce(topHeading.${locale}, topHeading.${fallbackLocale}),
+  'footerText': coalesce(footerText.${locale}, footerText.${fallbackLocale}),
+  'visionCards': visionCards[]{
+    'imgSrc': imgSrc.asset->url,
+    'img_alt': coalesce(img_alt.${locale}, img_alt.${fallbackLocale}),
+    'title': coalesce(title.${locale}, title.${fallbackLocale}),
+    'text': coalesce(text.${locale}, text.${fallbackLocale})
+  }
+}`;
 
+const buildTeamListQuery = (locale: string, fallbackLocale: string) => `
+{
+  'header': coalesce(header.${locale}, header.${fallbackLocale}),
+  'teamMembers': teamMembers[]{
+    'image': image.asset->url,
+    'alt': coalesce(image.alt, ''),
+    'name': name,
+    'position': coalesce(position.${locale}, position.${fallbackLocale}),
+    'linkedIn': linkedIn${buildCustomLinkQuery(locale)}
+  }
+}`;
+
+const buildPageTopBannerQuery = () => `
+{
+  'imageUrl': image.asset->url,
+  'altText': coalesce(image.alt, 'Default Alt Text')
+}
+`;
 
 /******************************/
 /*   Page By Id and By Slug   */
@@ -500,6 +551,13 @@ export const getHomepageId = async () => {
 
   return result;
 };
+
+/* BLOG */
+export const getBlogMainPage = (locale: string) => {
+  return getPageById(CustomPageIds.BLOG, locale);
+};
+
+
 
 /**
  * Recupera le info necessarie per il metadata di Homepage

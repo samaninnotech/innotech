@@ -28,7 +28,7 @@ export const HeadingLarge = styled.h3`
   max-width: 1170px;
   mark {
     background: none;
-    color: #0073e6;
+    color: #25567a;
     font-weight: bold;
   }
 `;
@@ -51,7 +51,7 @@ export const LeftColumnText = styled.h3`
 
   mark {
     background: none;
-    color: #0073e6;
+    color: #25567a;
     font-weight: bold;
   }
 `;

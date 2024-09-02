@@ -1,7 +1,7 @@
 import React from 'react';
-import { CardWrapper, ContentWrapper, ImageWrapper, Text, Title } from './VisionCard.styled';
+import { CardWrapper, ContentWrapper, ImageWrapper, Text, Title, VisionImage } from './VisionCard.styled';
 
-interface VisionCardProps {
+type VisionCardProps = {
   imgSrc: string;
   imgAlt: string;
   title: string;
@@ -12,7 +12,7 @@ const VisionCard: React.FC<VisionCardProps> = ({ imgSrc, imgAlt, title, text }) 
   return (
     <CardWrapper>
       <ImageWrapper>
-        <img src={imgSrc} alt={imgAlt} />
+        <VisionImage src={imgSrc} alt={imgAlt} width={700} height={500} />
       </ImageWrapper>
       <ContentWrapper>
         <Title>{title}</Title>

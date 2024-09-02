@@ -7,10 +7,16 @@ import ConsultationSection from './ConsultationSection';
 import DraftBanner from './DraftBanner';
 import GenericLink from "./Generic-Link";
 import HeroSectionComponent from './HeroSection';
+import LatestBlogPosts from './LatestBlogPosts';
+import OurCompanySection from './OurCompanySection/OurCompanySection';
+import PageTopBanner from './PageTopBanner';
+import TeamList from './TeamList';
+import VideoSection from './VideoSection';
+import VisionsSection from './VisionsSection';
 
 
 
 export {
-  Button, ConsultationSection, DraftBanner, GenericLink, HeroSectionComponent, HomePageTopPost, PageTopBar, PartnerShipSection, SolutionsSection
+  Button, ConsultationSection, DraftBanner, GenericLink, HeroSectionComponent, HomePageTopPost, LatestBlogPosts, OurCompanySection, PageTopBanner, PageTopBar, PartnerShipSection, SolutionsSection, TeamList, VideoSection, VisionsSection
 };
 

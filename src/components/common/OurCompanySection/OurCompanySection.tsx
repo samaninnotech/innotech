@@ -1,3 +1,5 @@
+"use client";
+import { AccordionItem } from '@/sanity/types';
 import React, { useState } from 'react';
 import {
   AccordionContent,
@@ -18,13 +20,21 @@ import {
   Spacer,
 } from './OurCompanySection.styled';
 
-const OurCompanySection: React.FC = () => {
+
+export type OurCompanySectionProps = {
+  accordionItems: AccordionItem[];
+};
+
+
+const OurCompanySection: React.FC<OurCompanySectionProps> = ({
+  accordionItems,
+}) => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   const toggleAccordion = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index);
   };
-
+  
   return (
     <SectionWrapper>
       <Spacer />
@@ -45,23 +55,7 @@ const OurCompanySection: React.FC = () => {
         </Column>
         <Column md={6}>
           <AccordionWrapper>
-            {[
-              {
-                title: 'Come possiamo aiutare il tuo business?',
-                content:
-                  "Attraverso la nostra esperienza e le nostre soluzioni, collaboriamo con i Partner dell'Ecosistema SAP nel discutere le esigenze dei loro clienti. Siamo in grado di offrire la tecnologia più innovativa e l'esperienza professionale più affidabile. Con la nostra tecnologia costruiamo rapporti di fiducia e trasformiamo il vostro business e quello dei vostri clienti.",
-              },
-              {
-                title: 'Quali sono i vantaggi di lavorare con InnoTech?',
-                content:
-                  "InnoTech prende in considerazione ogni piccolo dettaglio, si assicura che il progetto di implementazione sia compatibile con le esigenze del vostro cliente. InnoTech sviluppa soluzioni completamente integrate a SAP Business One per garantire ai vostri clienti l'univocità del dato e un flusso di lavoro snello e veloce.",
-              },
-              {
-                title: 'Quali sono i prossimi passi?',
-                content:
-                  'Conoscerci! Il nostro team è a disposizione per presentare la nostra realtà aziendale, i nostri progetti e le nostre soluzioni. Crediamo che la sinergia che una buona collaborazione crei sia un vantaggio per il vostro lavoro come per nostro, garantendo così la miglior soddisfazione al cliente.',
-              },
-            ].map((item, index) => (
+            {accordionItems.map((item, index) => (
               <AccordionSection key={index} active={activeIndex === index}>
                 <AccordionTitleWrapper onClick={() => toggleAccordion(index)}>
                   <AccordionTitle active={activeIndex === index}>{item.title}</AccordionTitle>

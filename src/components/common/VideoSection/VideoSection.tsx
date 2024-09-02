@@ -1,32 +1,24 @@
+"use client";
+import { sanityUrlFor } from '@/sanity/sanity-client';
 import React, { useState } from 'react';
-import { BackgroundImage, CentralImage, PlayButton, VideoContainer, VideoOverlay, Wrapper } from './VideoSection.styled';
+import { CentralImage, LeftBottomImage, LeftTopImage, PlayButton, RightBottomImage, RightTopImage, VideoContainer, VideoOverlay, Wrapper } from './VideoSection.styled';
 
-const imageData = {
-  centralImage: {
-    src: "https://mitech.thememove.com/wp-content/uploads/2019/03/home-processing-video-intro-slider-slide-01-image-01.jpg",
-    alt: "Central Image",
-  },
-  backgroundImages: [
-    {
-      src: "https://mitech.thememove.com/wp-content/uploads/2019/03/home-processing-video-intro-slider-slide-01-image-02.jpg",
-      style: { top: '5%', left: '15%' },
-    },
-    {
-      src: "https://mitech.thememove.com/wp-content/uploads/2019/03/home-processing-video-intro-slider-slide-01-image-03.jpg",
-      style: { top: '70%', left: '20%' },
-    },
-    {
-      src: "https://mitech.thememove.com/wp-content/uploads/2019/03/home-processing-video-intro-slider-slide-01-image-04.jpg",
-      style: { top: '60%', left: '70%' },
-    },
-    {
-      src: "https://mitech.thememove.com/wp-content/uploads/2019/03/home-processing-video-intro-slider-slide-01-image-05.jpg",
-      style: { top: '5%', left: '65%' },
-    },
-  ],
-};
-
-const VideoSection: React.FC = () => {
+type VideoSectionProps = {
+  centralImage: string;  
+  leftTopImage: string;
+  leftBottomImage: string;
+  rightTopImage: string;
+  rightBottomImage: string;
+  videoLink: string; // Add this line
+}
+const VideoSection: React.FC<VideoSectionProps> = ({
+  centralImage, 
+  leftTopImage, 
+  leftBottomImage, 
+  rightBottomImage, 
+  rightTopImage,
+  videoLink
+}) => {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
 
   const handlePlayClick = () => {
@@ -40,16 +32,39 @@ const VideoSection: React.FC = () => {
   return (
     <Wrapper>
       <CentralImage
-        src={imageData.centralImage.src}
-        alt={imageData.centralImage.alt}
+        src={sanityUrlFor(centralImage).url()}
+        alt=''
+        width={500}
+        height={250}
       />
-      {imageData.backgroundImages.map((image, index) => (
-        <BackgroundImage
-          key={index}
-          src={image.src}
-          style={image.style}
-        />
-      ))}
+      <LeftTopImage
+        src={sanityUrlFor(leftTopImage).url()}
+        alt=''
+        width={150}
+        height={150}
+
+      />
+      <RightTopImage
+        src={sanityUrlFor(rightTopImage).url()}
+        alt=''
+        width={150}
+        height={150}
+
+      />
+      <LeftBottomImage
+        src={sanityUrlFor(leftBottomImage).url()}
+        alt=''
+        width={150}
+        height={150}
+
+      />
+      <RightBottomImage
+        src={sanityUrlFor(rightBottomImage).url()}
+        alt=''
+        width={150}
+        height={150}
+
+      />
       <PlayButton onClick={handlePlayClick}>
         <div className="pulse"></div>
         <div className="pulse"></div>
@@ -61,7 +76,7 @@ const VideoSection: React.FC = () => {
             <iframe
               width="100%"
               height="100%"
-              src="https://www.youtube.com/embed/9dXFK9ZjY_A"
+              src={videoLink}
               title="YouTube video player"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

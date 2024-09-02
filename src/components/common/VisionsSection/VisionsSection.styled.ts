@@ -34,6 +34,7 @@ export const GridWrapper = styled.div`
   gap: 60px;
   margin: 0 auto;
   align-content: center;
+  justify-content: center;
   ${mediaRules.md} {
     max-width: 910px;
     flex-direction: row;
