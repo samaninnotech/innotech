@@ -3,25 +3,46 @@ import {
   ConsultationSection,
   HeroSection,
   HomePageTopPost,
+  InfoSection,
   isConsultationSection,
   isHeroSection,
   isHomePageTopPost,
+  isInfoSection,
+  isOurCompanySection,
+  isPageTopBanner,
   isPageTopBar,
   isPartnerShipSection,
+  isQuoteSection,
   isSolutionsSection,
+  isTeamList,
+  isVideoSection,
+  isVisionsSection,
+  OurCompanySection,
+  PageTopBanner,
   PageTopBar,
   PartnerShipSection,
+  QuoteSection,
   Section,
-  SolutionsSection
+  SolutionsSection,
+  TeamList,
+  VideoSection,
+  VisionsSection
 } from "@/sanity/types";
 import { FC, ReactNode } from "react";
 import {
   ConsultationSection as ConsultationSectionComponent,
   HeroSectionComponent,
   HomePageTopPost as HomePageTopPostComponent,
+  InfoSection as InfoSectionComponent,
+  OurCompanySection as OurCompanySectionComponent,
+  PageTopBanner as PageTopBannerComponent,
   PageTopBar as PageTopBarComponent,
   PartnerShipSection as PartnerShipSectionComponent,
-  SolutionsSection as SolutionsSectionComponent
+  QuoteSection as QuoteSectionComponent,
+  SolutionsSection as SolutionsSectionComponent,
+  TeamList as TeamListcomponent,
+  VideoSection as VideoSectionComponent,
+  VisionsSection as VisionsSectionComponent
 } from ".";
 // import {
 //   Carousel as CarouselComponent,
@@ -65,7 +86,26 @@ const PageBuilder: FC<PageBuilderProps> = async ({ sections, locale }) => {
         renderedSections.push(buildHeroSection(s));
     } else if (isPartnerShipSection(s)) {
       renderedSections.push(buildPartnershipSection(s));
+  } 
+    else if (isOurCompanySection(s)) {
+      renderedSections.push(buildOurCompanySection(s));
   }
+  else if (isVideoSection(s)) {
+    renderedSections.push(buildVideoSection(s));
+  }else if (isVisionsSection(s)) {
+    renderedSections.push(buildVisionsSection(s));
+  }
+  else if (isTeamList(s)) {
+    renderedSections.push(buildTeamList(s));
+  }
+  else if (isPageTopBanner(s)) {
+      renderedSections.push(buildPageTopBanner(s));
+    }
+    else if (isQuoteSection(s)) {
+      renderedSections.push(buildQuoteSection(s));
+    } else if (isInfoSection(s)) {
+      renderedSections.push(buildInfoSection(s));
+    }
     // if (isContactsSection(s)) {
     //   const accountInfo = await getGlobalAccountInfo(locale);
     //   if (accountInfo) {
@@ -139,6 +179,65 @@ const buildPartnershipSection = (s : PartnerShipSection) => {
     <PartnerShipSectionComponent header={header} partnershipCards={partnershipCards}/>
   )
 }
+
+const buildOurCompanySection = (s : OurCompanySection) => {
+  const {accordionItems} = s;
+  return (
+    <OurCompanySectionComponent accordionItems={accordionItems}/>
+  )
+}
+const buildVideoSection = (s : VideoSection) => {
+const { centralImage, leftTopImage, rightTopImage, leftBottomImage, rightBottomImage, videoLink} = s;
+  return (
+    <VideoSectionComponent 
+      centralImage={centralImage}
+      leftTopImage={leftTopImage}
+      leftBottomImage={leftBottomImage} 
+      rightBottomImage={rightBottomImage}
+      rightTopImage={rightTopImage}
+      videoLink={videoLink}
+    />
+  )
+}
+const buildVisionsSection = (s : VisionsSection) => {
+  const { sectionTitle, topHeading, footerText, visionCards} = s;
+    return (
+      <VisionsSectionComponent sectionTitle={sectionTitle} topHeading={topHeading} footerText={footerText} visionCards={visionCards}        
+      />
+    )
+  }
+
+  const buildTeamList = (s : TeamList) => {
+    const { header, teamMembers} = s;
+      return (
+        <TeamListcomponent header={header} teamMembers={teamMembers}/>
+      )
+    }
+    
+  const buildPageTopBanner = (s : PageTopBanner) => {
+    const {imageUrl, altText } = s;
+      return (
+        <PageTopBannerComponent imageUrl={imageUrl} altText={altText}/>
+      )
+    }
+  const buildQuoteSection = (s : QuoteSection) => {
+    const {header, left_column, right_column, backgroundColor, backgroundImage } = s;
+      return (
+        <QuoteSectionComponent header={header} leftColumn={left_column} rightColumn={right_column} backgroundColor={backgroundColor} backgroundImage={backgroundImage}/>
+      )
+    }
+  const buildInfoSection = (s: InfoSection) => {
+  const { header,numberOfColumns, infoBlocks} = s;
+  console.log(s, "bofo")
+  return (
+    <InfoSectionComponent
+      header={header}
+      numberOfColumns={numberOfColumns}
+      infoBlocks={infoBlocks}
+    />
+  );
+};
+    
 // const buildCardLinkSection = (s: CardLinksSection) => {
 //   const { title, card_links, _key, background } = s;
 //   return (

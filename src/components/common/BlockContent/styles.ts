@@ -10,7 +10,12 @@ export const Title = styled.h2``;
 export const Subtitle = styled.h3`
   font-weight: 600;
 `;
-
+export const Normal = styled.p`
+  margin: 0 !important;
+`;
+export const BlockQuote = styled.h3`
+  margin: 0 !important;
+`;
 export const StyledLink = styled(Link)`
   font-weight: bold;
   text-decoration: underline !important;
