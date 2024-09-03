@@ -50,6 +50,8 @@ const buildPageDeconstructionQUery = (locale: string) => `{
     _type == 'visions_section' => ${buildVisionsSectionQuery(locale, fallbackLocale)},
     _type == 'team_list' => ${buildTeamListQuery(locale, fallbackLocale)},
     _type == 'page_top_banner' => ${buildPageTopBannerQuery()},
+    _type == 'quote_section' => ${buildQuoteSectionQuery(locale, fallbackLocale)},
+
 
   }
 }`;
@@ -297,6 +299,17 @@ const buildPageTopBannerQuery = () => `
   'altText': coalesce(image.alt, 'Default Alt Text')
 }
 `;
+
+const buildQuoteSectionQuery = (locale: string, fallbackLocale: string) => {
+  return `{
+    'header': coalesce(header.${locale}, header.${fallbackLocale}),
+    'backgroundColor': background.color,
+    'backgroundImage': background.image.asset->url,
+    'left_column': coalesce(left_column.${locale}, left_column.${fallbackLocale}),
+    'right_column': coalesce(right_column.${locale}, right_column.${fallbackLocale})
+  }`;
+};
+
 
 /******************************/
 /*   Page By Id and By Slug   */

@@ -392,6 +392,19 @@ export interface ImageLink extends SanityElement {
   image: string;
 }
 
+/* Quote Section */
+export interface QuoteSection extends Section {
+  header: any;
+  left_column: any;
+  right_column: any;
+  backgroundColor?: string;
+  backgroundImage?: string;
+}
+
+export function isQuoteSection(section: Section): section is QuoteSection {
+  return sectionMatchType(section, "quote_section");
+}
+
 /* Hero Section */
 export enum HeroColumnType {
   Text = "Text",
