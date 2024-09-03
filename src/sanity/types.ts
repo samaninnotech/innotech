@@ -341,8 +341,9 @@ export function isPageTopBanner(section: Section): section is PageTopBanner {
 
 /* Info Section */
 export interface InfoSection extends Section {
-  title: string;
-  info_blocks?: InfoBlockType[];
+  header: string;
+  numberOfColumns: number;
+  infoBlocks: InfoBlockType[];
 }
 
 export function isInfoSection(section: Section): section is InfoSection {
@@ -350,9 +351,10 @@ export function isInfoSection(section: Section): section is InfoSection {
 }
 
 export interface InfoBlockType extends SanityElement {
-  title: string;
-  paragraph: string;
-  image: string;
+  imageSrc: string;
+  altText: string;
+  heading: string;
+  description: string;
 }
 
 /* Card Link Section */

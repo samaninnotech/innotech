@@ -35,11 +35,13 @@ export const InnerContainer2 = styled.div`
   flex-wrap: wrap;
   align-items: flex-start;  /* Align items to the top */
   text-align: center;
-
+  flex-direction: column;
   ${mediaRules.lg} {
     text-align: left;
     display: flex;
-    align-items: flex-start;  /* Ensure items are aligned at the top on larger screens */
+    align-items: flex-start;  
+    flex-direction: row;
+
   }
 `;
 
@@ -81,6 +83,6 @@ export const InnerContainerRight = styled.div`
 export const Element = styled(GenericSection)`
   padding: 0rem 1rem;
   background: ${({ $background }) => $background || ""};
-  height: 400px;
-  margin: 3rem 4rem 0rem 4rem;
+  height: auto;
+  margin: 5rem 4rem 0rem 4rem;
 `;

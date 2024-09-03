@@ -8,7 +8,7 @@ import ImageBlock, { ImageBlockProps } from "./ImageBlock";
 import Link from "./Link";
 import TweetBlock from "./TweetBlock";
 import VideoBlock from "./VideoBlock";
-import { Subtitle, Title, UnorderedList } from "./styles";
+import { BlockQuote, Normal, Subtitle, Title, UnorderedList } from "./styles";
 
 type VideoEmbed = {
   videoUrl: string;
@@ -28,7 +28,9 @@ const components: Partial<PortableTextReactComponents> = {
   block: {
     title: ({ children }) => <Title>{children}</Title>,
     subtitle: ({ children }) => <Subtitle>{children}</Subtitle>,
-    normal: ({ children }) => <p>{children}</p>,
+    normal: ({ children }) => <Normal>{children}</Normal>,
+    blockquote: ({ children }) => <BlockQuote >{children}</BlockQuote>
+    ,
   },
   types: {
     blockImage: ({
@@ -50,6 +52,9 @@ const components: Partial<PortableTextReactComponents> = {
   marks: {
     em: ({ children }: PortableTextMarkComponentProps) => (
       <em style={{ fontStyle: "italic" }}>{children}</em>
+    ),
+    color: ({ children, value }) => (
+      <span style={{ color: value.color }}>{children}</span>
     ),
     link: ({
       value,

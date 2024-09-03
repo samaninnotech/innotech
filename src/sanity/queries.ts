@@ -30,7 +30,7 @@ const buildPageDeconstructionQUery = (locale: string) => `{
     _key,
     'background': bg_color,
     _type == 'hero_section' => ${buildHeroSectionQuery(locale)},
-    _type == 'info_section' => ${buildInfoSectionQuery(locale)},
+    _type == 'info_section' => ${buildInfoSectionQuery(locale, fallbackLocale)},
     _type == 'faq_section' => ${buildFaqSectionQuery(locale)},
     _type == 'image_links_section' => ${buildImageLinksSectionQuery(locale)},
     _type == 'carousel' => ${buildCarouselQuery(locale)},
@@ -87,16 +87,19 @@ const buildHeroSectionQuery = (locale: string) => {
 };
 
 
-const buildInfoSectionQuery = (locale: string) =>
-  `{
-  'title': select(defined(title.${locale}) => title.${locale}, title.${fallbackLocale}),
-  'info_blocks': info_blocks[]{
-    _key,
-    'title': select(defined(title.${locale}) => title.${locale}, title.${fallbackLocale}),
-    'paragraph': select(defined(paragraph.${locale}) => paragraph.${locale}, paragraph.${fallbackLocale}),
-    image
+const buildInfoSectionQuery = (locale: string, fallbackLocale: string) => `
+{
+  'header': select(defined(header.${locale}) => header.${locale}, header.${fallbackLocale}),
+  'bg_color': bg_color,
+  'numberOfColumns': numberOfColumns,
+  'infoBlocks': info_blocks[]{
+    'header': select(defined(header.${locale}) => header.${locale}, header.${fallbackLocale}),
+    'description': select(defined(description.${locale}) => description.${locale}, description.${fallbackLocale}),
+    'imageSrc' :image.asset->url,
+    'altText': altText
   }
 }`;
+
 const buildCardLinkSectionQuery = (locale: string) =>
   `{
  'title' : coalesce(title.${locale}, title.${fallbackLocale}),
@@ -507,7 +510,7 @@ export const getAssistanceInfo = async () => {
 };
 
 const navbarConfigQuery = (locale: string) => `
-*[ _type == "website_settings"][0]{
+*[ _type == "website_settings" && _id == "websiteSettings"][0]{
   'navbar_config': navbar_config[]{
     _type,
     _key,
@@ -531,7 +534,6 @@ const navbarConfigQuery = (locale: string) => `
   }
 }
 `;
-
 export const getNavbarConfig = async (locale: string) => {
   const query = navbarConfigQuery(locale);
   const sanityClient = getSanityClient();
