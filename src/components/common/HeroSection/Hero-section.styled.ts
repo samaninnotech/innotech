@@ -27,11 +27,12 @@ export const HeroParagraph = styled.p`
 `;
 
 export const InnerContainer1 = styled.div<{ $bgImg?: string }>`
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding: 2rem 0rem;
   background-image: url(${({ $bgImg }) => $bgImg || "none"});
-  background-size: cover;
-  background-position: center;
+  background-size: auto;
+  background-position: center right;
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+
   height: 100%;
   display: flex;
   justify-content: center;
@@ -82,9 +83,10 @@ export const InnerContainerLeft = styled.div<{ $textColor?: string; $textAlign?:
   overflow-wrap: break-word;
   word-break: break-word;
 `;
-export const InnerContainerRight = styled.div`
+export const InnerContainerRight = styled(GenericSection)`
     padding-left: 0.5rem;
     padding-right: 0.5rem;
+    background: ${({ $background }) => $background || ""};
 
     img {
       margin: auto;
@@ -108,7 +110,9 @@ export const HeroLinksContainer = styled.div<{ $textAlign?: string }>`
 `;
 
 export const Element = styled(GenericSection)`
-  padding: 0rem 1rem;
+  padding: 0rem 3rem;
   background: ${({ $background }) => $background || ""};
-  height: 400px;
+  height: auto;
+  margin: auto;
+  width: 100%;
 `;

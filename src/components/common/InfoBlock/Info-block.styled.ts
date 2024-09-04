@@ -11,11 +11,6 @@ export const InfoBlockContainer = styled.article`
   }
 `;
 
-export const LinkSecret = styled.a`
-  text-decoration: none;
-  color: inherit;
-`;
-
 export const ContentWrap = styled.section`
   display: flex;
   align-items: left;

@@ -27,7 +27,7 @@ const InfoSection: React.FC<InfoSectionProps> = ({header, numberOfColumns, infoB
             key={index}
             imageSrc={block.imageSrc}
             altText={block.altText}
-            heading={block.heading}
+            header={block.header}
             description={block.description}
           />
         ))}

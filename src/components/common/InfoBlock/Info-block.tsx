@@ -6,22 +6,16 @@ import {
   Image,
   ImageContainer,
   InfoBlockContainer,
-  LinkSecret,
   Text,
 } from './Info-block.styled';
 
 // Function to convert description into a list
 const formatDescription = (description: string) => {
   const lines = description.split('\n').filter(line => line.trim().length > 0);
-
-  if (lines[0].startsWith('Consente')) {
-    lines.shift();
-  }
-
   return (
     <ul>
       {lines.map((line, index) => (
-        <li key={index}>{line.replace(/^-\s*/, '')}</li>
+        <li key={index}>{line.trim()}</li>
       ))}
     </ul>
   );
@@ -30,21 +24,19 @@ const formatDescription = (description: string) => {
 interface InfoBlockProps {
   imageSrc: string;
   altText: string;
-  heading: string;
+  header: string;
   description: string;
 }
 
-const InfoBlock: React.FC<InfoBlockProps> = ({ imageSrc, altText, heading, description }) => (
+const InfoBlock: React.FC<InfoBlockProps> = ({ imageSrc, altText, header, description }) => (
   <InfoBlockContainer>
-    <LinkSecret href="#">
       <ContentWrap>
         <ImageContainer>
           <Image src={sanityUrlFor(imageSrc).url()} alt={altText} />
         </ImageContainer>
-        <Heading>{heading}</Heading>
+        <Heading>{header}</Heading>
         <Text>{formatDescription(description)}</Text>
       </ContentWrap>
-    </LinkSecret>
   </InfoBlockContainer>
 );
 

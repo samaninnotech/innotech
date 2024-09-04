@@ -135,7 +135,7 @@ type HeroImageColumnProps = Omit<HeroImageColumn, "_key" | "column_type">;
 const HeroImageColumnComponent: FC<HeroImageColumnProps> = ({ image }) => {
   return (
     <InnerContainerRight>
-      <Image src={image} alt="image" width={600} height={600} />
+      <Image src={image} alt="image" width={600} height={500} />
     </InnerContainerRight>
   );
 };

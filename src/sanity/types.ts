@@ -353,7 +353,7 @@ export function isInfoSection(section: Section): section is InfoSection {
 export interface InfoBlockType extends SanityElement {
   imageSrc: string;
   altText: string;
-  heading: string;
+  header: string;
   description: string;
 }
 
