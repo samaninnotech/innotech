@@ -1,12 +1,13 @@
+import { sanityUrlFor } from '@/sanity/sanity-client';
 import React from 'react';
 import {
   BoxImage,
   Content,
   ContentWrap,
   Heading,
-  Image,
   Slide,
   SlideInner,
+  SwiperImage,
   TextContent
 } from './ConsultationSwiperSlide.styled';
 
@@ -23,7 +24,7 @@ const ConsultationSwiperSlide: React.FC<SwiperSlideProps> = ({ imageSrc, heading
         <BoxImage>
           <ContentWrap>
             <Content>
-              <Image src={imageSrc} alt={heading} />
+              <SwiperImage src={sanityUrlFor(imageSrc).url()} alt={heading} width={100} height={100}/>
               <Heading>{heading}</Heading>
               <TextContent>{text}</TextContent>
             </Content>

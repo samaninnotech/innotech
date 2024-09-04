@@ -1,3 +1,4 @@
+import Image from "next/image";
 import styled from 'styled-components';
 
 // Define styles for the hover state and movement
@@ -55,7 +56,7 @@ export const ImageWrapper = styled.div`
   position: relative;
 `;
 
-export const Image = styled.img`
+export const SwiperImage = styled(Image)`
   width: 100px;
   height: 100px;
   object-fit: cover;
