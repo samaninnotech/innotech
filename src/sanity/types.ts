@@ -357,6 +357,26 @@ export interface InfoBlockType extends SanityElement {
   description: string;
 }
 
+/* Tab Items Section */
+export interface TabItemsSection extends Section {
+  header: string;
+  tabItems: TabItemType[];
+}
+
+export function isTabItemsSection(section: Section): section is TabItemsSection {
+  return sectionMatchType(section, "tab_items_section");
+}
+
+export interface TabItemType extends SanityElement {
+  title: string;
+  content: ContentItem[];
+}
+
+interface ContentItem {
+  heading: string;
+  text: string | string[];
+};
+
 /* Card Link Section */
 export interface CardLinksSection extends Section {
   title: string;

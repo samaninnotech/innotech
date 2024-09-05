@@ -14,6 +14,7 @@ import {
   isPartnerShipSection,
   isQuoteSection,
   isSolutionsSection,
+  isTabItemsSection,
   isTeamList,
   isVideoSection,
   isVisionsSection,
@@ -24,6 +25,7 @@ import {
   QuoteSection,
   Section,
   SolutionsSection,
+  TabItemsSection,
   TeamList,
   VideoSection,
   VisionsSection
@@ -40,9 +42,10 @@ import {
   PartnerShipSection as PartnerShipSectionComponent,
   QuoteSection as QuoteSectionComponent,
   SolutionsSection as SolutionsSectionComponent,
+  TabItemsSection as TabItemsSectionComponent,
   TeamList as TeamListcomponent,
   VideoSection as VideoSectionComponent,
-  VisionsSection as VisionsSectionComponent
+  VisionsSection as VisionsSectionComponent,
 } from ".";
 // import {
 //   Carousel as CarouselComponent,
@@ -105,6 +108,9 @@ const PageBuilder: FC<PageBuilderProps> = async ({ sections, locale }) => {
       renderedSections.push(buildQuoteSection(s));
     } else if (isInfoSection(s)) {
       renderedSections.push(buildInfoSection(s));
+    }
+    else if (isTabItemsSection(s)) {
+      renderedSections.push(buildTabItemsSection(s));
     }
     // if (isContactsSection(s)) {
     //   const accountInfo = await getGlobalAccountInfo(locale);
@@ -228,7 +234,6 @@ const buildVisionsSection = (s : VisionsSection) => {
     }
   const buildInfoSection = (s: InfoSection) => {
   const { header,numberOfColumns, infoBlocks} = s;
-  console.log(s, "bofo")
   return (
     <InfoSectionComponent
       header={header}
@@ -237,7 +242,17 @@ const buildVisionsSection = (s : VisionsSection) => {
     />
   );
 };
-    
+const buildTabItemsSection = (s: TabItemsSection) => {
+  const { header, tabItems} = s;
+  return (
+    <TabItemsSectionComponent
+      header={header}
+      tabItems={tabItems}
+    />
+  );
+};
+
+
 // const buildCardLinkSection = (s: CardLinksSection) => {
 //   const { title, card_links, _key, background } = s;
 //   return (

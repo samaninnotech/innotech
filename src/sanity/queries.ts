@@ -51,6 +51,7 @@ const buildPageDeconstructionQUery = (locale: string) => `{
     _type == 'team_list' => ${buildTeamListQuery(locale, fallbackLocale)},
     _type == 'page_top_banner' => ${buildPageTopBannerQuery()},
     _type == 'quote_section' => ${buildQuoteSectionQuery(locale, fallbackLocale)},
+    _type == 'tab_items_section' => ${buildTabItemsSectionQuery(locale, fallbackLocale)},
 
 
   }
@@ -312,6 +313,18 @@ const buildQuoteSectionQuery = (locale: string, fallbackLocale: string) => {
     'right_column': coalesce(right_column.${locale}, right_column.${fallbackLocale})
   }`;
 };
+
+const buildTabItemsSectionQuery = (locale: string, fallbackLocale: string) => `
+{
+  'header': coalesce(header.${locale}, header.${fallbackLocale}),
+  'tabItems': tabItems[]{
+    'title': coalesce(title.${locale}, title.${fallbackLocale}),
+    'content': content[]{
+      'heading': coalesce(heading.${locale}, heading.${fallbackLocale}),
+      'text': coalesce(text.${locale}, text.${fallbackLocale}),
+    }
+  }
+}`;
 
 
 /******************************/

@@ -1,3 +1,4 @@
+import { mediaRules } from '@/themes/media-breakpoints';
 import styled from 'styled-components';
 
 type GridProps = {
@@ -15,8 +16,17 @@ export const HeadingContainer = styled.header`
 `;
 
 export const SectionHeading = styled.h3`
-  font-size: 24px;
-  font-weight: bold;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  text-align: center;
+  margin: auto;
+  margin-bottom: 4rem;
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--black-color);
+  ${mediaRules.lg} {
+    max-width: 768px;
+  }
 `;
 
 export const GridWrapper = styled.div<GridProps>`

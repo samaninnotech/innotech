@@ -12,6 +12,7 @@ import LatestBlogPosts from './LatestBlogPosts';
 import OurCompanySection from './OurCompanySection/OurCompanySection';
 import PageTopBanner from './PageTopBanner';
 import QuoteSection from './QuoteSection';
+import TabItemsSection from './TabItemsSection';
 import TeamList from './TeamList';
 import VideoSection from './VideoSection';
 import VisionsSection from './VisionsSection';
@@ -19,6 +20,6 @@ import VisionsSection from './VisionsSection';
 
 
 export {
-  Button, ConsultationSection, DraftBanner, GenericLink, HeroSectionComponent, HomePageTopPost, InfoSection, LatestBlogPosts, OurCompanySection, PageTopBanner, PageTopBar, PartnerShipSection, QuoteSection, SolutionsSection, TeamList, VideoSection, VisionsSection
+  Button, ConsultationSection, DraftBanner, GenericLink, HeroSectionComponent, HomePageTopPost, InfoSection, LatestBlogPosts, OurCompanySection, PageTopBanner, PageTopBar, PartnerShipSection, QuoteSection, SolutionsSection, TabItemsSection, TeamList, VideoSection, VisionsSection
 };
 
