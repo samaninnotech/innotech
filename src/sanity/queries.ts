@@ -52,6 +52,7 @@ const buildPageDeconstructionQUery = (locale: string) => `{
     _type == 'page_top_banner' => ${buildPageTopBannerQuery()},
     _type == 'quote_section' => ${buildQuoteSectionQuery(locale, fallbackLocale)},
     _type == 'tab_items_section' => ${buildTabItemsSectionQuery(locale, fallbackLocale)},
+    _type == 'only_text_section' => ${buildOnlyTextSectionQuery(locale, fallbackLocale)},
 
 
   }
@@ -77,15 +78,16 @@ const buildHeroSectionQuery = (locale: string) => {
   }
 `;
 
-
   return `{
     'anchor': coalesce(anchor->slug.${locale}.current, anchor->slug.${fallbackLocale}.current),
     'backgroundColor': background.color,
     'backgroundImage': background.image.asset->url,
     'left_column': left_column${buildHeroColumnQuery(locale)},
-    'right_column': right_column${buildHeroColumnQuery(locale)}
+    'right_column': right_column${buildHeroColumnQuery(locale)},
+    'height': coalesce(height, 'auto') // Add height field
   }`;
 };
+
 
 
 const buildInfoSectionQuery = (locale: string, fallbackLocale: string) => `
@@ -326,6 +328,9 @@ const buildTabItemsSectionQuery = (locale: string, fallbackLocale: string) => `
   }
 }`;
 
+const buildOnlyTextSectionQuery = (locale: string, fallbackLocale: string) => `{
+  'text': select(defined(text.${locale}) => text.${locale}, text.${fallbackLocale})
+}`;
 
 /******************************/
 /*   Page By Id and By Slug   */

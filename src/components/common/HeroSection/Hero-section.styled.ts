@@ -108,11 +108,12 @@ export const HeroLinksContainer = styled.div<{ $textAlign?: string }>`
     display: inline-block;
   }
 `;
+type ElementProps = { $height?: string };
 
-export const Element = styled(GenericSection)`
+export const Element = styled(GenericSection)<ElementProps>`
   padding: 0rem 3rem;
   background: ${({ $background }) => $background || ""};
-  height: auto;
   margin: auto;
   width: 100%;
+  height: ${({ $height }) => $height || "auto"} !important;
 `;

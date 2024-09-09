@@ -377,6 +377,15 @@ interface ContentItem {
   text: string | string[];
 };
 
+/* Tab Items Section */
+export interface OnlyTextSection extends Section {
+  text: string;
+}
+
+export function isOnlyTextSection(section: Section): section is OnlyTextSection {
+  return sectionMatchType(section, "only_text_section");
+}
+
 /* Card Link Section */
 export interface CardLinksSection extends Section {
   title: string;
@@ -478,6 +487,7 @@ export interface HeroSection extends Section {
   right_column: HeroColumn;
   backgroundColor?: string;
   backgroundImage?: string;
+  height: string;
 }
 
 export function isHeroSection(section: Section): section is HeroSection {
