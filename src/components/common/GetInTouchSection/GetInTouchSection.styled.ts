@@ -1,28 +1,27 @@
-import styled from 'styled-components';
+import { mediaRules } from "@/themes/media-breakpoints";
+import styled from "styled-components";
 
+type SectionWrapperProps = {
+  backgroundImage?: string;
+};
 // Define custom props for Column and Heading
 type ColumnProps = {
-    offset?: boolean;
-}
-
-// Define custom props for Heading
-type HeadingProps = {
-    small?: boolean;
-}
+  marginLeft?: string;
+};
 
 type FormItemProps = {
   padding?: string;
-}
+};
 
-
-export const SectionWrapper = styled.div`
+export const SectionWrapper = styled.div<SectionWrapperProps>`
   background-color: #fff;
   position: relative;
   box-sizing: border-box;
   width: 100%;
   padding-top: 110px; /* Align with the background image's top padding */
   padding-bottom: 120px; /* Align with the background image's bottom padding */
-  background-image: url('https://innotech.software/wp-content/uploads/2019/03/home-appointment-contact-bg-image.png');
+  background-image: url(${(props) =>
+    props.backgroundImage || "default-image-url"});
   background-repeat: no-repeat;
   background-position: center right;
   background-size: auto; /* Ensures that the background is displayed in its original size */
@@ -32,9 +31,20 @@ export const SectionWrapper = styled.div`
 `;
 
 export const Container = styled.div`
-  max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
+  ${mediaRules.sm} {
+    display: block;
+    max-width: 720px;
+  }
+  ${mediaRules.md} {
+    display: block;
+    max-width: 940px;
+  }
+  ${mediaRules.lg} {
+    display: block;
+    max-width: 1200px;
+  }
 `;
 
 export const Row = styled.div`
@@ -48,28 +58,39 @@ export const Row = styled.div`
 `;
 
 export const Column = styled.div<ColumnProps>`
-  flex: ${({ offset }) => (offset ? '0 0 41.66667%' : '0 0 50%')};
-  max-width: ${({ offset }) => (offset ? '41.66667%' : '50%')};
+  width: 100%;
   padding-right: 15px;
-
-  @media (max-width: 768px) {
-    flex: 0 0 100%;
-    max-width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 20px;
+  ${mediaRules.sm} {
+    width: 100%;
+  }
+  ${mediaRules.md} {
+    max-width: 45%;
+  }
+  ${mediaRules.lg} {
+    margin-left: 50px;
+    max-width: 45%;
   }
 `;
+
 export const FirstRow = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-between;
 `;
 // Styled component with custom props
-export const Heading = styled.h3.attrs<HeadingProps>(({ small }) => ({
-    style: {
-      fontSize: small ? '18px' : '24px',
-      fontWeight: small ? 'normal' : 'bold',
-    },
-}))<HeadingProps>`
-    color: #333;
+export const Header = styled.h1`
+  color: #333;
+  margin: 1rem 0;
+`;
+
+export const Subtitle = styled.h4`
+  display: block;
+  margin: 1rem 0;
 `;
 
 export const Spacer = styled.div`
@@ -88,7 +109,7 @@ export const Form = styled.form`
 export const FormItem = styled.div<FormItemProps>`
   margin-bottom: 20px;
   width: 100%;
-  padding-right: ${(props) => props.padding || "0"}
+  padding-right: ${(props) => props.padding || "0"};
 `;
 
 export const Input = styled.input`
@@ -96,7 +117,7 @@ export const Input = styled.input`
   padding: 15px;
   border-radius: 4px;
   font-size: 16px;
-  background-color: #f5f5f5
+  background-color: #f5f5f5;
 `;
 
 export const TextArea = styled.textarea`
@@ -104,8 +125,7 @@ export const TextArea = styled.textarea`
   padding: 15px;
   border-radius: 4px;
   font-size: 16px;
-  background-color: #f5f5f5
-
+  background-color: #f5f5f5;
 `;
 
 export const Select = styled.select`
@@ -113,20 +133,23 @@ export const Select = styled.select`
   padding: 15px;
   border-radius: 4px;
   font-size: 16px;
-  background-color: #f5f5f5
+  background-color: #f5f5f5;
 `;
 
-export const SubmitButton = styled.button`
+export const ButtonContainer = styled.div`
+  width: 100%;
+`;
+export const SubmitButton = styled.button<{ isEnabled: boolean }>`
   padding: 15px 30px;
-  background-color: #007cba;
+  background-color: ${(props) => (props.isEnabled ? "#007cba" : "#ccc")};
   color: #fff;
   border: none;
   border-radius: 4px;
   font-size: 16px;
-  cursor: pointer;
-
+  cursor: ${(props) => (props.isEnabled ? "pointer" : "not-allowed")};
   &:disabled {
     background-color: #ccc;
+    cursor: not-allowed;
   }
 `;
 
@@ -146,7 +169,6 @@ export const Agreement = styled.div`
   }
 `;
 
-
 export const Loader = styled.div`
   display: none;
   margin-top: 20px;
@@ -160,14 +182,30 @@ export const Loader = styled.div`
     background-color: #333;
     animation: sk-wave 1.2s infinite ease-in-out;
   }
-  .sk-rect1 { animation-delay: -1.2s; }
-  .sk-rect2 { animation-delay: -1.1s; }
-  .sk-rect3 { animation-delay: -1s; }
-  .sk-rect4 { animation-delay: -0.9s; }
-  .sk-rect5 { animation-delay: -0.8s; }
+  .sk-rect1 {
+    animation-delay: -1.2s;
+  }
+  .sk-rect2 {
+    animation-delay: -1.1s;
+  }
+  .sk-rect3 {
+    animation-delay: -1s;
+  }
+  .sk-rect4 {
+    animation-delay: -0.9s;
+  }
+  .sk-rect5 {
+    animation-delay: -0.8s;
+  }
 
   @keyframes sk-wave {
-    0%, 40%, 100% { transform: scaleY(1); }
-    20% { transform: scaleY(2); }
+    0%,
+    40%,
+    100% {
+      transform: scaleY(1);
+    }
+    20% {
+      transform: scaleY(2);
+    }
   }
 `;

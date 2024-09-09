@@ -53,6 +53,10 @@ const buildPageDeconstructionQUery = (locale: string) => `{
     _type == 'quote_section' => ${buildQuoteSectionQuery(locale, fallbackLocale)},
     _type == 'tab_items_section' => ${buildTabItemsSectionQuery(locale, fallbackLocale)},
     _type == 'only_text_section' => ${buildOnlyTextSectionQuery(locale, fallbackLocale)},
+    _type == 'tick_items_section' => ${buildTickItemsSectionQuery(locale, fallbackLocale)},
+    _type == 'get_in_touch_section' => ${buildGetInTouchSectionQuery(locale, fallbackLocale)},
+    _type == 'job_offer_section' => ${buildJobOfferSectionQuery(locale, fallbackLocale)},
+
 
 
   }
@@ -87,8 +91,6 @@ const buildHeroSectionQuery = (locale: string) => {
     'height': coalesce(height, 'auto') // Add height field
   }`;
 };
-
-
 
 const buildInfoSectionQuery = (locale: string, fallbackLocale: string) => `
 {
@@ -227,7 +229,10 @@ const buildHomePageTopPostQuery = () => `{
   'description': description
 }`;
 
-const buildConsultationSectionQuery = (locale: string, fallbackLocale: string) => `
+const buildConsultationSectionQuery = (
+  locale: string,
+  fallbackLocale: string,
+) => `
 {
   'title': coalesce(title.${locale}, title.${fallbackLocale}),
   'consultationSwiperSlides': consultationSwiperSlides[]{
@@ -247,7 +252,10 @@ const buildSolutionsSectionQuery = (locale: string, fallbackLocale: string) => `
     'icon': icon
   }
 }`;
-const buildPartnerShipSectionQuery = (locale: string, fallbackLocale: string) => `
+const buildPartnerShipSectionQuery = (
+  locale: string,
+  fallbackLocale: string,
+) => `
 {
   'header': coalesce(header.${locale}, header.${fallbackLocale}),
   'partnershipCards': partnershipCards[]{
@@ -257,7 +265,10 @@ const buildPartnerShipSectionQuery = (locale: string, fallbackLocale: string) =>
   }
 }`;
 
-const buildOurCompanySectionQuery = (locale: string, fallbackLocale: string) => `{
+const buildOurCompanySectionQuery = (
+  locale: string,
+  fallbackLocale: string,
+) => `{
   'accordionItems': accordionItems[]{
     'title': coalesce(title.${locale}, title.${fallbackLocale}),
     'content': coalesce(content.${locale}, content.${fallbackLocale})
@@ -331,6 +342,44 @@ const buildTabItemsSectionQuery = (locale: string, fallbackLocale: string) => `
 const buildOnlyTextSectionQuery = (locale: string, fallbackLocale: string) => `{
   'text': select(defined(text.${locale}) => text.${locale}, text.${fallbackLocale})
 }`;
+
+const buildTickItemsSectionQuery = (locale: string, fallbackLocale: string) => `
+{
+  'header': coalesce(header.${locale}, header.${fallbackLocale}),
+  'tickItems': items[]{
+    'title': coalesce(title.${locale}, title.${fallbackLocale}),
+    'description': coalesce(description.${locale}, description.${fallbackLocale})
+  }
+}`;
+
+const buildGetInTouchSectionQuery = (
+  locale: string,
+  fallbackLocale: string,
+) => {
+  return `{
+    'backgroundImage': backgroundImage.asset->url,
+    'mainHeader': coalesce(mainHeader.${locale}, mainHeader.${fallbackLocale}),
+    'subtitle': coalesce(subtitle.${locale}, subtitle.${fallbackLocale}),
+     'options': options[]{
+      'value': coalesce(@.${locale}, @.${fallbackLocale})
+    },   
+    'agreement': coalesce(agreement.${locale}, agreement.${fallbackLocale}),
+    'buttonLabel': coalesce(buttonLabel.${locale}, buttonLabel.${fallbackLocale}),
+    'rightHeader': coalesce(rightHeader.${locale}, rightHeader.${fallbackLocale})
+  }`;
+};
+
+const buildJobOfferSectionQuery = (locale: string, fallbackLocale: string) => {
+  return `{
+    'header': coalesce(header.${locale}, header.${fallbackLocale}),
+    'jobOffers': jobOffers[]{
+      'title': coalesce(title.${locale}, title.${fallbackLocale}),
+      type,
+      'description': coalesce(description.${locale}, description.${fallbackLocale}),
+      'link': link${buildCustomLinkQuery(locale)}
+    }
+  }`;
+};
 
 /******************************/
 /*   Page By Id and By Slug   */
@@ -577,7 +626,7 @@ export const getHomepageId = async () => {
   }`;
   const sanityClient = getSanityClient();
   const result = await sanityClient.fetch<HomepageResult>(query);
-  
+
   if (!result) {
     throw new Error("Homepage was not configured in SANITY!");
   }
@@ -589,8 +638,6 @@ export const getHomepageId = async () => {
 export const getBlogMainPage = (locale: string) => {
   return getPageById(CustomPageIds.BLOG, locale);
 };
-
-
 
 /**
  * Recupera le info necessarie per il metadata di Homepage

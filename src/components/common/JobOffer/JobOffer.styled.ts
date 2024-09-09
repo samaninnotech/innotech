@@ -1,10 +1,9 @@
-import Link from '@/i18n/Link';
-import styled from 'styled-components';
-
+import Link from "@/i18n/Link";
+import styled from "styled-components";
 
 type JobOfferContainerProps = {
   isEven: boolean;
-}
+};
 
 export const JobOfferContainer = styled.div<JobOfferContainerProps>`
   display: flex;
@@ -12,7 +11,7 @@ export const JobOfferContainer = styled.div<JobOfferContainerProps>`
   justify-content: space-between;
   padding: 20px;
   margin-bottom: 20px;
-  background-color: ${({ isEven }) => (isEven ? '#e3e3e3' : 'transparent')};
+  background-color: ${({ isEven }) => (isEven ? "#e3e3e3" : "transparent")};
   box-shadow: var(--wp--preset--shadow--natural);
 `;
 
@@ -25,7 +24,6 @@ export const JobTitle = styled.h4`
   font-size: 1.25rem;
   margin-bottom: 5px;
   color: #333;
-
 `;
 
 export const JobType = styled.span`
