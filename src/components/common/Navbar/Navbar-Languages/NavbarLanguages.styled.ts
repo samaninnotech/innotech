@@ -37,6 +37,5 @@ export const LanguageElementStyled = styled(Link)<LanguageElementProps>`
   ${mediaRules.lg} {
     border-top: none;
     padding: 0.5rem 1rem;
-
   }
 `;

@@ -1,5 +1,5 @@
-'use client';
-import { FC } from 'react';
+"use client";
+import { FC } from "react";
 import {
   Container,
   InfoIcon,
@@ -10,8 +10,8 @@ import {
   TopBarInfo,
   TopBarLeft,
   TopBarRight,
-  TopBarWrap
-} from './PageTopBar.styled';
+  TopBarWrap,
+} from "./PageTopBar.styled";
 
 type TopBarProps = {
   contactLink: string;
@@ -20,21 +20,30 @@ type TopBarProps = {
   infoText: string;
 };
 
-const PageTopBar: FC<TopBarProps> = ({ contactLink, contactText, infoLink, infoText }) => {
+const PageTopBar: FC<TopBarProps> = ({
+  contactLink,
+  contactText,
+  infoLink,
+  infoText,
+}) => {
   return (
     <PageTopBarContainer>
       <Container>
         <Row>
           <TopBarWrap>
             <TopBarLeft>
-                <a href={contactLink} className="font-medium display-inline">{contactText}</a>
+              <a href={contactLink} className="font-medium display-inline">
+                {contactText}
+              </a>
             </TopBarLeft>
             <TopBarRight>
               <TopBarInfo>
-                  <InfoLink href={infoLink} className="info-link">
-                    <InfoIcon className="info-icon fa fa-phone" />
-                    <InfoText><strong>{infoText}</strong></InfoText>
-                  </InfoLink>
+                <InfoLink href={infoLink} className="info-link">
+                  <InfoIcon className="info-icon fa fa-phone" />
+                  <InfoText>
+                    <strong>{infoText}</strong>
+                  </InfoText>
+                </InfoLink>
               </TopBarInfo>
             </TopBarRight>
           </TopBarWrap>

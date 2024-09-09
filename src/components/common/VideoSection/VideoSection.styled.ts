@@ -1,5 +1,5 @@
 import Image from "next/image";
-import styled from 'styled-components';
+import styled from "styled-components";
 
 // Wrapper for the video section
 export const Wrapper = styled.div`
@@ -43,7 +43,7 @@ export const LeftTopImage = styled(Image)`
   border-radius: 5px;
   z-index: 5;
   animation: moveUpDown 4s infinite ease-in-out;
-  top: 5%; 
+  top: 5%;
   left: 25%;
   @keyframes moveUpDown {
     0% {
@@ -71,7 +71,7 @@ export const LeftBottomImage = styled(Image)`
   z-index: 5;
   animation: moveUpDown 4s infinite ease-in-out;
   top: 70%;
-  left: 15%; 
+  left: 15%;
   @keyframes moveUpDown {
     0% {
       transform: translateY(0);
@@ -97,7 +97,7 @@ export const RightTopImage = styled(Image)`
   border-radius: 5px;
   z-index: 5;
   animation: moveUpDown 4s infinite ease-in-out;
-  top: 5%; 
+  top: 5%;
   left: 65%;
   @keyframes moveUpDown {
     0% {

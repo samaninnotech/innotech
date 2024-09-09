@@ -1,5 +1,5 @@
-import { sanityUrlFor } from '@/sanity/sanity-client';
-import React from 'react';
+import { sanityUrlFor } from "@/sanity/sanity-client";
+import React from "react";
 import {
   ContentWrap,
   Heading,
@@ -7,11 +7,13 @@ import {
   ImageContainer,
   InfoBlockContainer,
   Text,
-} from './Info-block.styled';
+} from "./Info-block.styled";
 
 // Function to convert description into a list
 const formatDescription = (description: string) => {
-  const lines = description.split('\n').filter(line => line.trim().length > 0);
+  const lines = description
+    .split("\n")
+    .filter((line) => line.trim().length > 0);
   return (
     <ul>
       {lines.map((line, index) => (
@@ -28,15 +30,20 @@ interface InfoBlockProps {
   description: string;
 }
 
-const InfoBlock: React.FC<InfoBlockProps> = ({ imageSrc, altText, header, description }) => (
+const InfoBlock: React.FC<InfoBlockProps> = ({
+  imageSrc,
+  altText,
+  header,
+  description,
+}) => (
   <InfoBlockContainer>
-      <ContentWrap>
-        <ImageContainer>
-          <Image src={sanityUrlFor(imageSrc).url()} alt={altText} />
-        </ImageContainer>
-        <Heading>{header}</Heading>
-        <Text>{formatDescription(description)}</Text>
-      </ContentWrap>
+    <ContentWrap>
+      <ImageContainer>
+        <Image src={sanityUrlFor(imageSrc).url()} alt={altText} />
+      </ImageContainer>
+      <Heading>{header}</Heading>
+      <Text>{formatDescription(description)}</Text>
+    </ContentWrap>
   </InfoBlockContainer>
 );
 

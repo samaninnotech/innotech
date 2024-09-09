@@ -12,7 +12,7 @@ export const NavbarLinksStyled = styled.nav<NavbarLinksProps>`
   padding: 0rem 1rem;
   width: 100%;
   align-items: center;
-  
+
   ${mediaRules.lg} {
     justify-content: flex-start;
     position: relative;
@@ -89,7 +89,7 @@ export const SideBarLogoButtonContainer = styled.div`
   background-color: #fff;
   margin: -1rem;
   padding: 1rem;
-  
+
   /* Ensure logo and close button are in a row and spaced correctly */
   img {
     flex: 1;
@@ -129,7 +129,7 @@ export const OverlayStyled = styled.div<{ $showOverlay: boolean }>`
   z-index: 1000; // Ensure it is above the content but below the sidebar
   cursor: pointer; // Indicate clickable area
   overflow: hidden; // Prevent scrolling on the body
-  display: ${({ $showOverlay }) => ($showOverlay ? 'block' : 'none')};
+  display: ${({ $showOverlay }) => ($showOverlay ? "block" : "none")};
 `;
 
 export const GenericLinksContainerStyled = styled.div`
@@ -161,11 +161,11 @@ export const PageLinksContainerStyled = styled(GenericLinksContainerStyled)`
 `;
 
 export const ComplexNavbarLinkContainer = styled.div<{ $selected?: boolean }>`
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-   ${mediaRules.lg} {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  ${mediaRules.lg} {
     display: inline-flex;
     align-items: center;
     white-space: nowrap;
@@ -180,10 +180,10 @@ export const NavbarElementStyled = styled(Link)<{ $selected?: boolean }>`
   text-decoration: none;
   position: relative;
   overflow: hidden;
-  
+
   /* Apply border-top for screens narrower than 1200px */
   border-top: 1px solid gray;
-  
+
   /* Remove border-top for the first child */
   &:first-child {
     border-top: none;
@@ -195,7 +195,7 @@ export const NavbarElementStyled = styled(Link)<{ $selected?: boolean }>`
     margin-top: 0;
     width: auto;
     border-top: none; /* Remove border-top for screens 1200px and wider */
-    
+
     /* Apply border-bottom if selected */
     ${({ $selected }) =>
       $selected &&
@@ -233,7 +233,9 @@ export const NavbarElementStyled = styled(Link)<{ $selected?: boolean }>`
       /* Show the border only for screens larger than 1200px */
       ${mediaRules.lg} {
         &:hover:before {
-          transform: scaleX(2); /* Transition the border in from left to right */
+          transform: scaleX(
+            2
+          ); /* Transition the border in from left to right */
         }
       }
     `}
@@ -248,7 +250,7 @@ export const NavbarMenuStyled = styled.span<{ $selected?: boolean }>`
   position: relative;
   overflow: hidden;
   border-top: 1px solid gray;
-  
+
   ${mediaRules.lg} {
     margin-left: 2rem;
     margin-top: 0;
@@ -338,7 +340,6 @@ export const NavbarLinkButtonStyled = styled(Link)`
 export const SideLinkStyled = styled(Link)<{ $selected?: boolean }>`
   /* Default state: no border */
   border-bottom: none;
-
 
   /* Hide the border on screens smaller than 1200px */
   ${mediaRules.lg} {

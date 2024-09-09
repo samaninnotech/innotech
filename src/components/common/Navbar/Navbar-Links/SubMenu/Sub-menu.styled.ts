@@ -10,7 +10,6 @@ export const SubmenuBlockContainer = styled.div<SubmenuInnerContainerProps>`
   justify-content: flex-start;
   width: 100%;
   z-index: 2;
-  
 
   ${mediaRules.lg} {
     display: flex;
@@ -43,8 +42,8 @@ export const SubMenuLink = styled(Link)`
   margin-right: 5rem;
   padding: 3rem 0;
   ${mediaRules.lg} {
-      color: gray;
-      padding: 0 1rem;
+    color: gray;
+    padding: 0 1rem;
   }
 `;
 
@@ -52,7 +51,8 @@ export const Element = styled.div<SubMenuProps>`
   width: fit-content;
   display: "${(props) => (props.$showSubMenu ? "flex" : "none")}";
   border-bottom: solid 1px var(--light-gray-1);
-  color: black;flex-direction: column;
+  color: black;
+  flex-direction: column;
   height: 100%;
   ${mediaRules.lg} {
     position: absolute;
@@ -63,7 +63,7 @@ export const Element = styled.div<SubMenuProps>`
     border-top: 0;
     background-color: white;
     max-height: 600px; /* Set a maximum height, adjust as needed */
-    overflow-y: auto;  height: auto;
-
+    overflow-y: auto;
+    height: auto;
   }
 `;

@@ -1,11 +1,22 @@
 "use client";
 // PartnerShipSection.tsx
-import { PartnerShipCardType } from '@/sanity/types';
-import { faChalkboardTeacher, faCheckSquare, faCogs, faEuroSign, IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
-import PartnerShipCard from '../PartnerShipCard/PartnerShipCard';
-import { CardsContainer, Container, Header, InnerContainer } from './PartnerShipSection.styled';
+import { PartnerShipCardType } from "@/sanity/types";
+import {
+  faChalkboardTeacher,
+  faCheckSquare,
+  faCogs,
+  faEuroSign,
+  IconDefinition,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
+import PartnerShipCard from "../PartnerShipCard/PartnerShipCard";
+import {
+  CardsContainer,
+  Container,
+  Header,
+  InnerContainer,
+} from "./PartnerShipSection.styled";
 
 // Define icons
 const iconMapping: { [key: string]: IconDefinition } = {
@@ -18,9 +29,12 @@ const iconMapping: { [key: string]: IconDefinition } = {
 type PartnerShipSectionProps = {
   partnershipCards: PartnerShipCardType[]; // Make it optional to handle undefined cases
   header: string;
-}
+};
 
-const PartnerShipSection: React.FC<PartnerShipSectionProps> = ({ partnershipCards = [], header }) => (
+const PartnerShipSection: React.FC<PartnerShipSectionProps> = ({
+  partnershipCards = [],
+  header,
+}) => (
   <Container>
     <InnerContainer>
       <Header>
@@ -29,12 +43,16 @@ const PartnerShipSection: React.FC<PartnerShipSectionProps> = ({ partnershipCard
       <CardsContainer>
         {partnershipCards.length > 0 ? (
           partnershipCards.map((data, index) => (
-            <PartnerShipCard 
+            <PartnerShipCard
               key={index}
-              icon={<FontAwesomeIcon icon={iconMapping[data.icon] || faCheckSquare} />}
+              icon={
+                <FontAwesomeIcon
+                  icon={iconMapping[data.icon] || faCheckSquare}
+                />
+              }
               title={data.title}
-              text={data.text} 
-              _key={data._key || ''} // Make sure to pass a valid key
+              text={data.text}
+              _key={data._key || ""} // Make sure to pass a valid key
             />
           ))
         ) : (

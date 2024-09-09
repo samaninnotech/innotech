@@ -1,5 +1,5 @@
-import { mediaRules } from '@/themes/media-breakpoints';
-import styled from 'styled-components';
+import { mediaRules } from "@/themes/media-breakpoints";
+import styled from "styled-components";
 
 export const PageTopBarContainer = styled.div`
   background-color: transparent;
@@ -22,23 +22,22 @@ export const PageTopBarContainer = styled.div`
   }
 `;
 
-
 export const Container = styled.div`
   margin: 0 auto;
   height: 100%;
   padding: 0 15px;
-  display: none; 
+  display: none;
   box-sizing: inherit;
   ${mediaRules.sm} {
-    display: block; 
+    display: block;
     max-width: 720px;
   }
   ${mediaRules.md} {
-    display: block; 
+    display: block;
     max-width: 940px;
   }
   ${mediaRules.lg} {
-    display: block; 
+    display: block;
     max-width: 1100px;
   }
 `;
@@ -59,8 +58,6 @@ export const TopBarWrap = styled.div`
 `;
 
 export const TopBarLeft = styled.div``;
-
-
 
 export const TopBarRight = styled.div``;
 

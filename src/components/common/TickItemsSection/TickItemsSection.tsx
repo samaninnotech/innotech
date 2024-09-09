@@ -1,32 +1,30 @@
 "use client";
-import React from 'react';
-import TickItem from '../TickItem';
+import { TickItemType } from "@/sanity/types";
+import React from "react";
+import TickItem from "../TickItem";
 import {
-    HeadingContainer,
-    ItemsContainer,
-    SectionHeading,
-    TickItemsSectionContainer,
-} from './TickItemsSection.styled';
-
-interface TickItemData {
-  title: string;
-  description: string;
-}
+  HeaderContainer,
+  ItemsContainer,
+  SectionHeader,
+  TickItemsSectionContainer,
+} from "./TickItemsSection.styled";
 
 interface TickItemsSectionProps {
   header: string;
-  items: TickItemData[];
+  tickItems: TickItemType[];
 }
 
-  
-const TickItemsSection: React.FC<TickItemsSectionProps> = ({ header, items }) => {
+const TickItemsSection: React.FC<TickItemsSectionProps> = ({
+  header,
+  tickItems = [],
+}) => {
   return (
     <TickItemsSectionContainer>
-      <HeadingContainer>
-        <SectionHeading>{header}</SectionHeading>
-      </HeadingContainer>
+      <HeaderContainer>
+        <SectionHeader>{header}</SectionHeader>
+      </HeaderContainer>
       <ItemsContainer>
-        {items.map((item, index) => (
+        {tickItems.map((item, index) => (
           <TickItem
             key={index}
             title={item.title}

@@ -1,5 +1,5 @@
-import { mediaRules } from '@/themes/media-breakpoints';
-import styled from 'styled-components';
+import { mediaRules } from "@/themes/media-breakpoints";
+import styled from "styled-components";
 
 export const TickItemsSectionContainer = styled.section`
   padding: 20px;
@@ -7,12 +7,14 @@ export const TickItemsSectionContainer = styled.section`
   margin: 0 5rem;
 `;
 
-export const HeadingContainer = styled.header`
+export const HeaderContainer = styled.header`
   text-align: center;
   margin-bottom: 20px;
 `;
 
-export const SectionHeading = styled.h4`
+export const SectionHeader = styled.h3`
+  padding-left: 1rem;
+  padding-right: 1rem;
   text-align: center;
   margin: auto;
   margin-bottom: 4rem;

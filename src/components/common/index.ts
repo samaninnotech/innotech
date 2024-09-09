@@ -1,25 +1,47 @@
-import { HomePageTopPost } from '@/components/common/HomePageTopPost/HomePageTopPost';
-import PageTopBar from '@/components/common/PageTopBar';
+import { HomePageTopPost } from "@/components/common/HomePageTopPost/HomePageTopPost";
+import PageTopBar from "@/components/common/PageTopBar";
 import PartnerShipSection from "@/components/common/PartnerShipSection/PartnerShipSection";
-import { SolutionsSection } from '@/components/common/SolutionsSection/SolutionsSection';
+import { SolutionsSection } from "@/components/common/SolutionsSection/SolutionsSection";
 import Button from "./Button";
-import ConsultationSection from './ConsultationSection';
-import DraftBanner from './DraftBanner';
+import ConsultationSection from "./ConsultationSection";
+import DraftBanner from "./DraftBanner";
 import GenericLink from "./Generic-Link";
-import HeroSectionComponent from './HeroSection';
-import InfoSection from './InfoSection';
-import LatestBlogPosts from './LatestBlogPosts';
-import OurCompanySection from './OurCompanySection/OurCompanySection';
-import PageTopBanner from './PageTopBanner';
-import QuoteSection from './QuoteSection';
-import TabItemsSection from './TabItemsSection';
-import TeamList from './TeamList';
-import VideoSection from './VideoSection';
-import VisionsSection from './VisionsSection';
-
-
+import GetInTouchSection from "./GetInTouchSection";
+import HeroSectionComponent from "./HeroSection";
+import InfoSection from "./InfoSection";
+import JobOfferSection from "./JobOfferSection";
+import LatestBlogPosts from "./LatestBlogPosts";
+import OnlyTextSection from "./OnlyTextSection";
+import OurCompanySection from "./OurCompanySection/OurCompanySection";
+import PageTopBanner from "./PageTopBanner";
+import QuoteSection from "./QuoteSection";
+import TabItemsSection from "./TabItemsSection";
+import TeamList from "./TeamList";
+import TickItemsSection from "./TickItemsSection";
+import VideoSection from "./VideoSection";
+import VisionsSection from "./VisionsSection";
 
 export {
-  Button, ConsultationSection, DraftBanner, GenericLink, HeroSectionComponent, HomePageTopPost, InfoSection, LatestBlogPosts, OurCompanySection, PageTopBanner, PageTopBar, PartnerShipSection, QuoteSection, SolutionsSection, TabItemsSection, TeamList, VideoSection, VisionsSection
+  Button,
+  ConsultationSection,
+  DraftBanner,
+  GenericLink,
+  GetInTouchSection,
+  HeroSectionComponent,
+  HomePageTopPost,
+  InfoSection,
+  JobOfferSection,
+  LatestBlogPosts,
+  OnlyTextSection,
+  OurCompanySection,
+  PageTopBanner,
+  PageTopBar,
+  PartnerShipSection,
+  QuoteSection,
+  SolutionsSection,
+  TabItemsSection,
+  TeamList,
+  TickItemsSection,
+  VideoSection,
+  VisionsSection,
 };
-

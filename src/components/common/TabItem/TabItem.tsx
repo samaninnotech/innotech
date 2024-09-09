@@ -1,5 +1,5 @@
-import React from 'react';
-import { TabButton } from './TabItem.styled';
+import React from "react";
+import { TabButton } from "./TabItem.styled";
 
 interface TabItemProps {
   title: string;

@@ -2,10 +2,18 @@
 
 import { FC, useEffect, useState } from "react";
 import NavbarLinks from "./Navbar-Links/Navbar-Links";
-import { MainNavbarStyled, NavbarInnerWrapper, NavbarWrapper, SecondaryNavbarStyled } from "./Navbar.styled";
+import {
+  MainNavbarStyled,
+  NavbarInnerWrapper,
+  NavbarWrapper,
+  SecondaryNavbarStyled,
+} from "./Navbar.styled";
 import { SlugMapping } from "./types";
 
-export type NavbarProps = { slugMapping: SlugMapping,  onSidebarToggle: () => void;  };
+export type NavbarProps = {
+  slugMapping: SlugMapping;
+  onSidebarToggle: () => void;
+};
 
 const Navbar: FC<NavbarProps> = ({ slugMapping, onSidebarToggle }) => {
   const [showSecondaryNavbar, setShowSecondaryNavbar] = useState(false);
@@ -32,7 +40,11 @@ const Navbar: FC<NavbarProps> = ({ slugMapping, onSidebarToggle }) => {
       <MainNavbarStyled isVisible={!hideMainNavbar}>
         <NavbarWrapper>
           <NavbarInnerWrapper>
-            <NavbarLinks slugMapping={slugMapping} logoSrc="/site-logo.png" onSidebarToggle={onSidebarToggle}/>
+            <NavbarLinks
+              slugMapping={slugMapping}
+              logoSrc="/site-logo.png"
+              onSidebarToggle={onSidebarToggle}
+            />
           </NavbarInnerWrapper>
         </NavbarWrapper>
       </MainNavbarStyled>
@@ -41,7 +53,11 @@ const Navbar: FC<NavbarProps> = ({ slugMapping, onSidebarToggle }) => {
       <SecondaryNavbarStyled isVisible={showSecondaryNavbar}>
         <NavbarWrapper>
           <NavbarInnerWrapper>
-            <NavbarLinks slugMapping={slugMapping} logoSrc="/site-logo-blue.png" onSidebarToggle={onSidebarToggle}/>
+            <NavbarLinks
+              slugMapping={slugMapping}
+              logoSrc="/site-logo-blue.png"
+              onSidebarToggle={onSidebarToggle}
+            />
           </NavbarInnerWrapper>
         </NavbarWrapper>
       </SecondaryNavbarStyled>

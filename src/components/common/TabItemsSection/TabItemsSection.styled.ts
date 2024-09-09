@@ -1,5 +1,5 @@
-import { mediaRules } from '@/themes/media-breakpoints';
-import styled from 'styled-components';
+import { mediaRules } from "@/themes/media-breakpoints";
+import styled from "styled-components";
 
 export const Header = styled.div`
   padding-left: 1rem;
@@ -49,7 +49,9 @@ export const TabContentContainer = styled.div`
   max-width: 1000px;
   opacity: 0;
   transform: translateY(30px);
-  transition: opacity 1.5s ease, transform 1.5s ease;
+  transition:
+    opacity 1.5s ease,
+    transform 1.5s ease;
 
   &.active {
     opacity: 1;
@@ -66,5 +68,5 @@ export const ContentHeading = styled.h5`
 export const ContentText = styled.div`
   padding-left: 40px;
   margin-bottom: 1.5rem;
-   line-height: 1.5;
+  line-height: 1.5;
 `;

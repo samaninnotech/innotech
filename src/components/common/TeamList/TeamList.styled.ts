@@ -1,10 +1,10 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Container = styled.div`
   position: relative;
   width: 100%;
   overflow: visible;
-  transition: opacity .5s ease;
+  transition: opacity 0.5s ease;
   display: flex;
   justify-content: center;
 `;

@@ -1,3 +1,3 @@
-import TeamList from "./TeamList"
+import TeamList from "./TeamList";
 
-export default TeamList
+export default TeamList;

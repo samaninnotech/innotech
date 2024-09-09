@@ -1,23 +1,33 @@
 "use client";
-import { sanityUrlFor } from '@/sanity/sanity-client';
-import React, { useState } from 'react';
-import { CentralImage, LeftBottomImage, LeftTopImage, PlayButton, RightBottomImage, RightTopImage, VideoContainer, VideoOverlay, Wrapper } from './VideoSection.styled';
+import { sanityUrlFor } from "@/sanity/sanity-client";
+import React, { useState } from "react";
+import {
+  CentralImage,
+  LeftBottomImage,
+  LeftTopImage,
+  PlayButton,
+  RightBottomImage,
+  RightTopImage,
+  VideoContainer,
+  VideoOverlay,
+  Wrapper,
+} from "./VideoSection.styled";
 
 type VideoSectionProps = {
-  centralImage: string;  
+  centralImage: string;
   leftTopImage: string;
   leftBottomImage: string;
   rightTopImage: string;
   rightBottomImage: string;
   videoLink: string; // Add this line
-}
+};
 const VideoSection: React.FC<VideoSectionProps> = ({
-  centralImage, 
-  leftTopImage, 
-  leftBottomImage, 
-  rightBottomImage, 
+  centralImage,
+  leftTopImage,
+  leftBottomImage,
+  rightBottomImage,
   rightTopImage,
-  videoLink
+  videoLink,
 }) => {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
 
@@ -33,37 +43,33 @@ const VideoSection: React.FC<VideoSectionProps> = ({
     <Wrapper>
       <CentralImage
         src={sanityUrlFor(centralImage).url()}
-        alt=''
+        alt=""
         width={500}
         height={250}
       />
       <LeftTopImage
         src={sanityUrlFor(leftTopImage).url()}
-        alt=''
+        alt=""
         width={150}
         height={150}
-
       />
       <RightTopImage
         src={sanityUrlFor(rightTopImage).url()}
-        alt=''
+        alt=""
         width={150}
         height={150}
-
       />
       <LeftBottomImage
         src={sanityUrlFor(leftBottomImage).url()}
-        alt=''
+        alt=""
         width={150}
         height={150}
-
       />
       <RightBottomImage
         src={sanityUrlFor(rightBottomImage).url()}
-        alt=''
+        alt=""
         width={150}
         height={150}
-
       />
       <PlayButton onClick={handlePlayClick}>
         <div className="pulse"></div>

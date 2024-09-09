@@ -1,6 +1,6 @@
-import { mediaRules } from '@/themes/media-breakpoints';
+import { mediaRules } from "@/themes/media-breakpoints";
 import { SlArrowDown } from "react-icons/sl";
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const SectionWrapper = styled.section`
   padding: 50px 0;
@@ -64,33 +64,29 @@ export const Row = styled.div`
   margin: 0 auto;
   ${mediaRules.sm} {
     max-width: 720px;
-
-}
+  }
   ${mediaRules.md} {
     max-width: 940px;
-
-}
+  }
   ${mediaRules.lg} {
-      flex-direction: row;
-      max-width: 1170px;
+    flex-direction: row;
+    max-width: 1170px;
   }
 `;
 
 export const Column = styled.div<{ md?: number }>`
-  flex: ${({ md }) => (md ? `0 0 ${(md / 12) * 100}%` : '1 1 100%')};
-  max-width: 100%;;
+  flex: ${({ md }) => (md ? `0 0 ${(md / 12) * 100}%` : "1 1 100%")};
+  max-width: 100%;
   padding: 15px;
   width: 100%;
-   ${mediaRules.sm} {
+  ${mediaRules.sm} {
     max-width: 100%;
-
   }
   ${mediaRules.md} {
     max-width: 100%;
-
-}
+  }
   ${mediaRules.lg} {
-      max-width: 50%;
+    max-width: 50%;
   }
 `;
 
@@ -102,18 +98,19 @@ export const AccordionSection = styled.div<{ active: boolean }>`
   border: 1px solid #ddd;
   margin: 10px 0;
   border-radius: 5px;
-  background-color: ${({ active }) => (active ? '#25567a' : 'transparent')};
-  transition: background-color 0.4s ease;  /* Smooth background transition */
+  background-color: ${({ active }) => (active ? "#25567a" : "transparent")};
+  transition: background-color 0.4s ease; /* Smooth background transition */
 
   &:hover {
     background-color: #25567a;
- h6 {
+    h6 {
       color: #fff;
     }
 
     svg {
       color: #fff;
-    }  }
+    }
+  }
 `;
 
 export const AccordionTitleWrapper = styled.div`
@@ -122,35 +119,42 @@ export const AccordionTitleWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
 `;
 
 export const AccordionTitle = styled.h6<{ active: boolean }>`
   font-size: 1.25rem;
   color: #333;
-  color: ${({ active }) => (active ? '#fff' : '#333')};
-
+  color: ${({ active }) => (active ? "#fff" : "#333")};
 `;
 
 export const AccordionIcon = styled(SlArrowDown)<{ active: boolean }>`
-  transition: transform 0.4s ease, color 0.4s ease;  /* Smooth transform and color transition */
+  transition:
+    transform 0.4s ease,
+    color 0.4s ease; /* Smooth transform and color transition */
   ${({ active }) => active && `transform: rotate(180deg);`}
-  color: ${({ active }) => (active ? '#fff' : '#333')};
-
+  color: ${({ active }) => (active ? "#fff" : "#333")};
 `;
 
 export const AccordionContent = styled.div<{ active: boolean }>`
   font-size: 1rem;
   color: #666;
-  padding: ${({ active }) => (active ? '25px' : '0 25px')}; /* Maintain horizontal padding, but adjust vertical padding */
+  padding: ${({ active }) =>
+    active
+      ? "25px"
+      : "0 25px"}; /* Maintain horizontal padding, but adjust vertical padding */
   text-align: left;
   background-color: #fff;
   overflow: hidden;
-  height: ${({ active }) => (active ? 'auto' : '10px')}; /* Set initial height to 10px when inactive */
-  max-height: ${({ active }) => (active ? '700px' : '10px')}; /* Keep a small height when inactive */
+  height: ${({ active }) =>
+    active ? "auto" : "10px"}; /* Set initial height to 10px when inactive */
+  max-height: ${({ active }) =>
+    active ? "700px" : "10px"}; /* Keep a small height when inactive */
   opacity: ${({ active }) => (active ? 1 : 0)};
-  transition: max-height 0.2s ease, opacity 0.2s ease, height 0.2s ease, padding 0.2s ease;
-
+  transition:
+    max-height 0.2s ease,
+    opacity 0.2s ease,
+    height 0.2s ease,
+    padding 0.2s ease;
 `;
 
 export const MarkedText = styled.mark`
