@@ -43,21 +43,24 @@ type HeroSectionProps = {
   rightColumn: HeroColumn;
   backgroundColor?: string;
   backgroundImage?: string;
+  height?: string;
 };
 const HeroSectionComponent: FC<HeroSectionProps> = ({
   id,
   leftColumn,
   rightColumn,
   backgroundColor,
-  backgroundImage
+  backgroundImage,
+  height
 }) => {
   const leftTextColor = isHeroTextColumn(leftColumn) ? leftColumn.text_color : undefined;
   const rightTextColor = isHeroTextColumn(rightColumn) ? rightColumn.text_color : undefined;
   const leftTextAlign = isHeroTextColumn(leftColumn) ? leftColumn.text_alignment : "left";
   const rightTextAlign = isHeroTextColumn(rightColumn) ? rightColumn.text_alignment : "left";
+  console.log(height, "bor")
   if (!rightColumn) {
     return (
-      <Element id={id || ""} $background={backgroundColor}>
+      <Element id={id || ""} $background={backgroundColor} $height={height}>
         <OnlyTextContainer>
           {leftColumn && (
             <HeroColumnComponent column={leftColumn} textColor={leftTextColor} textAlign={leftTextAlign}></HeroColumnComponent>
@@ -69,7 +72,7 @@ const HeroSectionComponent: FC<HeroSectionProps> = ({
     const revertOnMobile =
       isHeroTextColumn(rightColumn) && isHeroImageColumn(leftColumn);
     return (
-      <Element id={id || ""} $background={backgroundColor}>
+      <Element id={id || ""} $background={backgroundColor} $height={height}>
         <InnerContainer1 $bgImg = {backgroundImage}>
           <InnerContainer2 $revertOnMobile={revertOnMobile}>
             {leftColumn && (

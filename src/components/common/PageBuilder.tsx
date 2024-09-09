@@ -8,6 +8,7 @@ import {
   isHeroSection,
   isHomePageTopPost,
   isInfoSection,
+  isOnlyTextSection,
   isOurCompanySection,
   isPageTopBanner,
   isPageTopBar,
@@ -18,6 +19,7 @@ import {
   isTeamList,
   isVideoSection,
   isVisionsSection,
+  OnlyTextSection,
   OurCompanySection,
   PageTopBanner,
   PageTopBar,
@@ -36,6 +38,7 @@ import {
   HeroSectionComponent,
   HomePageTopPost as HomePageTopPostComponent,
   InfoSection as InfoSectionComponent,
+  OnlyTextSection as OnlyTextSectionComponent,
   OurCompanySection as OurCompanySectionComponent,
   PageTopBanner as PageTopBannerComponent,
   PageTopBar as PageTopBarComponent,
@@ -45,7 +48,7 @@ import {
   TabItemsSection as TabItemsSectionComponent,
   TeamList as TeamListcomponent,
   VideoSection as VideoSectionComponent,
-  VisionsSection as VisionsSectionComponent,
+  VisionsSection as VisionsSectionComponent
 } from ".";
 // import {
 //   Carousel as CarouselComponent,
@@ -111,6 +114,9 @@ const PageBuilder: FC<PageBuilderProps> = async ({ sections, locale }) => {
     }
     else if (isTabItemsSection(s)) {
       renderedSections.push(buildTabItemsSection(s));
+    }
+    else if (isOnlyTextSection(s)) {
+      renderedSections.push(buildOnlyTextSection(s));
     }
     // if (isContactsSection(s)) {
     //   const accountInfo = await getGlobalAccountInfo(locale);
@@ -251,6 +257,12 @@ const buildTabItemsSection = (s: TabItemsSection) => {
     />
   );
 };
+const buildOnlyTextSection = (s: OnlyTextSection) => {
+  const {text} = s;
+  return (
+    <OnlyTextSectionComponent text={text}/>
+  )
+}
 
 
 // const buildCardLinkSection = (s: CardLinksSection) => {
@@ -292,7 +304,7 @@ const buildTabItemsSection = (s: TabItemsSection) => {
 // };
 
 const buildHeroSection = (s: HeroSection) => {
-  const { _key, anchor, left_column, right_column, backgroundColor, backgroundImage } = s;
+  const { _key, anchor, left_column, right_column, backgroundColor, backgroundImage, height } = s;
   return (
     <HeroSectionComponent
       key={_key}
@@ -301,6 +313,7 @@ const buildHeroSection = (s: HeroSection) => {
       rightColumn={right_column}
       backgroundColor={backgroundColor}  
       backgroundImage={backgroundImage}   
+      height={height}
     />
   );
 };
