@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 // Container for each team member grid item
 export const GridItem = styled.div`
@@ -42,7 +42,9 @@ export const SocialNetworks = styled.div`
   height: 60px; /* Adjust height as needed */
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
   background: #25567a; /* Color for the rectangle box */
 `;
 
@@ -53,9 +55,9 @@ export const SocialNetworksInner = styled.div`
   align-items: center;
   height: 100%;
   width: 100%;
-  svg{
+  svg {
     color: #fff;
-     font-size: 18px;
+    font-size: 18px;
   }
 `;
 

@@ -1,5 +1,5 @@
-import Image from 'next/image';
-import styled from 'styled-components';
+import Image from "next/image";
+import styled from "styled-components";
 // Container for the entire banner
 export const BannerContainer = styled.div`
   width: 100%;

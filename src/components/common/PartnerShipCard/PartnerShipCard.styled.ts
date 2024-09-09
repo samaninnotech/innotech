@@ -1,5 +1,5 @@
 // PartnerShipCard.styled.ts
-import styled from 'styled-components';
+import styled from "styled-components";
 
 // Styles for the PartnerShipCard
 export const Card = styled.div`
@@ -12,7 +12,9 @@ export const Card = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 
   &:hover {
     transform: translateY(-5px);

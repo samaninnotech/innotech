@@ -51,19 +51,30 @@ const HeroSectionComponent: FC<HeroSectionProps> = ({
   rightColumn,
   backgroundColor,
   backgroundImage,
-  height
+  height,
 }) => {
-  const leftTextColor = isHeroTextColumn(leftColumn) ? leftColumn.text_color : undefined;
-  const rightTextColor = isHeroTextColumn(rightColumn) ? rightColumn.text_color : undefined;
-  const leftTextAlign = isHeroTextColumn(leftColumn) ? leftColumn.text_alignment : "left";
-  const rightTextAlign = isHeroTextColumn(rightColumn) ? rightColumn.text_alignment : "left";
-  console.log(height, "bor")
+  const leftTextColor = isHeroTextColumn(leftColumn)
+    ? leftColumn.text_color
+    : undefined;
+  const rightTextColor = isHeroTextColumn(rightColumn)
+    ? rightColumn.text_color
+    : undefined;
+  const leftTextAlign = isHeroTextColumn(leftColumn)
+    ? leftColumn.text_alignment
+    : "left";
+  const rightTextAlign = isHeroTextColumn(rightColumn)
+    ? rightColumn.text_alignment
+    : "left";
   if (!rightColumn) {
     return (
       <Element id={id || ""} $background={backgroundColor} $height={height}>
         <OnlyTextContainer>
           {leftColumn && (
-            <HeroColumnComponent column={leftColumn} textColor={leftTextColor} textAlign={leftTextAlign}></HeroColumnComponent>
+            <HeroColumnComponent
+              column={leftColumn}
+              textColor={leftTextColor}
+              textAlign={leftTextAlign}
+            ></HeroColumnComponent>
           )}
         </OnlyTextContainer>
       </Element>
@@ -73,13 +84,21 @@ const HeroSectionComponent: FC<HeroSectionProps> = ({
       isHeroTextColumn(rightColumn) && isHeroImageColumn(leftColumn);
     return (
       <Element id={id || ""} $background={backgroundColor} $height={height}>
-        <InnerContainer1 $bgImg = {backgroundImage}>
+        <InnerContainer1 $bgImg={backgroundImage}>
           <InnerContainer2 $revertOnMobile={revertOnMobile}>
             {leftColumn && (
-              <HeroColumnComponent column={leftColumn} textColor={leftTextColor} textAlign={leftTextAlign}></HeroColumnComponent>
+              <HeroColumnComponent
+                column={leftColumn}
+                textColor={leftTextColor}
+                textAlign={leftTextAlign}
+              ></HeroColumnComponent>
             )}
             {rightColumn && (
-              <HeroColumnComponent column={rightColumn} textColor={rightTextColor} textAlign={rightTextAlign}></HeroColumnComponent>
+              <HeroColumnComponent
+                column={rightColumn}
+                textColor={rightTextColor}
+                textAlign={rightTextAlign}
+              ></HeroColumnComponent>
             )}
           </InnerContainer2>
         </InnerContainer1>
@@ -89,8 +108,16 @@ const HeroSectionComponent: FC<HeroSectionProps> = ({
 };
 
 /* Colonna generica, ritorna una TextColumn o una ImageColumn in base al tipo */
-type HeroColumnProps = { column: HeroColumn, textColor?: string, textAlign?: string };
-const HeroColumnComponent: FC<HeroColumnProps> = ({ column, textColor, textAlign }) => {
+type HeroColumnProps = {
+  column: HeroColumn;
+  textColor?: string;
+  textAlign?: string;
+};
+const HeroColumnComponent: FC<HeroColumnProps> = ({
+  column,
+  textColor,
+  textAlign,
+}) => {
   if (isHeroTextColumn(column)) {
     return (
       <HeroTextColumnComponent
@@ -154,8 +181,15 @@ const HeroLinkComponent: FC<HeroLinkProps> = ({ heroLink }) => {
   }
 
   if (type === HeroLinkType.Button) {
-    return <Button href={href} label={link.label} margin={"0"} bgColor={button_color}
-    textColor={button_text_color}></Button>;
+    return (
+      <Button
+        href={href}
+        label={link.label}
+        margin={"0"}
+        bgColor={button_color}
+        textColor={button_text_color}
+      ></Button>
+    );
   } else {
     return <GenericLink href={href}>{link.label}</GenericLink>;
   }

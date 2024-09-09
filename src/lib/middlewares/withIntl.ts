@@ -49,10 +49,12 @@ import { extractLngFromPath } from "./utils";
 const intlMiddleware = (
   request: NextRequest,
   _next: NextFetchEvent,
-  next: NextMiddleware
+  next: NextMiddleware,
 ) => {
   // Extract locale and pathname from the request path
-  const { locale, explicit, pathname } = extractLngFromPath(request.nextUrl.pathname);
+  const { locale, explicit, pathname } = extractLngFromPath(
+    request.nextUrl.pathname,
+  );
 
   // Redirect to the correct locale path if the extracted locale is the fallback locale
   if (explicit && locale === fallbackLocale) {
@@ -61,7 +63,9 @@ const intlMiddleware = (
 
   // Rewrite URL to include fallback locale if locale is not explicitly provided
   if (!explicit) {
-    return NextResponse.rewrite(new URL(`/${fallbackLocale}${pathname}`, request.url));
+    return NextResponse.rewrite(
+      new URL(`/${fallbackLocale}${pathname}`, request.url),
+    );
   }
 
   // Proceed to the next middleware or request handler

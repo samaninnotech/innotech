@@ -46,8 +46,5 @@ export const extractLngFromPath: ExtractLngFromPathFn = (pathname) => {
 };
 
 export const findBestMatchingLng = (acceptLangHeader: string) => {
-
- 
-
   return fallbackLocale;
 };

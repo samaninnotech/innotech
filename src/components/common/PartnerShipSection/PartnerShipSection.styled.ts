@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 // Container for the entire section
 export const Container = styled.div`
@@ -12,7 +12,7 @@ export const Container = styled.div`
 
 // Inner container to control responsiveness
 export const InnerContainer = styled.div`
-   @media (min-width: 1200px) {
+  @media (min-width: 1200px) {
     max-width: 1200px;
   }
 
@@ -53,11 +53,14 @@ export const Header = styled.div`
 // Container for the card items
 export const CardsContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Default to 2 columns for small screens */
+  grid-template-columns: repeat(
+    2,
+    1fr
+  ); /* Default to 2 columns for small screens */
   grid-column-gap: 5px; /* Adjust the gap as needed */
   grid-row-gap: 5px; /* Adjust the gap as needed */
   width: 100%;
- @media (max-width: 576px) {
+  @media (max-width: 576px) {
     grid-template-columns: repeat(1, 1fr); /* Adjust for very small screens */
   }
   @media (min-width: 768px) {
@@ -85,7 +88,9 @@ export const Card = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 
   &:hover {
     transform: translateY(-5px);

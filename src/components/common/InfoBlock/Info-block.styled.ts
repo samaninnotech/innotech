@@ -1,11 +1,13 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const InfoBlockContainer = styled.article`
   margin: 20px 0;
   padding: 15px; /* Optional: Add padding for better spacing */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   background-color: #fff; /* Ensure the background is white */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transform and shadow transition */
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease; /* Smooth transform and shadow transition */
   :hover {
     transform: translateY(-10px);
   }
@@ -17,8 +19,7 @@ export const ContentWrap = styled.section`
   justify-content: center;
   flex-direction: column;
   padding: 10px;
-    text-align: left;
-
+  text-align: left;
 `;
 
 export const ImageContainer = styled.figure`

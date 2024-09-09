@@ -11,7 +11,14 @@ type ButtonProps = ComponentPropsWithoutRef<"button"> & {
   textColor?: string;
 };
 
-const Button: FC<ButtonProps> = ({ className, margin, label, href, bgColor, textColor }) => {
+const Button: FC<ButtonProps> = ({
+  className,
+  margin,
+  label,
+  href,
+  bgColor,
+  textColor,
+}) => {
   return (
     <Element
       className={className}

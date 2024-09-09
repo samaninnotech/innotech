@@ -1,5 +1,5 @@
 import Image from "next/image";
-import styled from 'styled-components';
+import styled from "styled-components";
 
 // Define styles for the hover state and movement
 export const Slide = styled.div`
@@ -7,7 +7,9 @@ export const Slide = styled.div`
   flex-shrink: 0;
   position: relative;
   background-color: white;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
   border-radius: 5px;
   margin: 12px 0;
   &:hover {

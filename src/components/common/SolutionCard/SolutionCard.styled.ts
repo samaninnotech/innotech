@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes } from "styled-components";
 
 // Keyframes for drawing the icon
 const draw = keyframes`
@@ -16,7 +16,9 @@ export const Card = styled.div`
   border-radius: 3px;
   box-shadow: none;
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
   color: #696969;
   font-family: CerebriSans;
   font-size: 2px !important;
@@ -70,7 +72,7 @@ export const TextContent = styled.p`
 
 export const LearnMoreLink = styled.a`
   display: inline-block;
-  color: #005a87;  // Blue color as per the icon stroke color
+  color: #005a87; // Blue color as per the icon stroke color
   font-size: 15px;
   text-decoration: none;
   position: relative;

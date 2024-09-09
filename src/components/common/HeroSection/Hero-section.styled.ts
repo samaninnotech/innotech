@@ -71,13 +71,16 @@ export const InnerContainer2 = styled.div<InnerContainer2Props>`
   }
 }`;
 
-export const InnerContainerLeft = styled.div<{ $textColor?: string; $textAlign?: string }>`
+export const InnerContainerLeft = styled.div<{
+  $textColor?: string;
+  $textAlign?: string;
+}>`
   padding-left: 0.5rem;
   margin-top: -2rem;
   margin-bottom: 2.5rem;
   font-size: 1.15rem;
   line-height: 1.75rem;
-  color: ${({ $textColor }) => $textColor || 'var(--text-light-color)'};
+  color: ${({ $textColor }) => $textColor || "var(--text-light-color)"};
   text-align: ${({ $textAlign }) => $textAlign || "left"};
   text-wrap: pretty;
   overflow-wrap: break-word;
@@ -95,7 +98,7 @@ export const InnerContainerRight = styled(GenericSection)`
 }`;
 
 export const HeroLinksContainer = styled.div<{ $textAlign?: string }>`
-  align-items: ${({ $textAlign }) =>  $textAlign || "left"};
+  align-items: ${({ $textAlign }) => $textAlign || "left"};
   column-gap: 1em;
   margin-top: 3rem;
   color: var(--black-color);

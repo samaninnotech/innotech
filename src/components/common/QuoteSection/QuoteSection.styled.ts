@@ -33,15 +33,14 @@ export const InnerContainer2 = styled.div`
   display: flex;
   margin-right: -0.5rem;
   flex-wrap: wrap;
-  align-items: flex-start;  /* Align items to the top */
+  align-items: flex-start; /* Align items to the top */
   text-align: center;
   flex-direction: column;
   ${mediaRules.lg} {
     text-align: left;
     display: flex;
-    align-items: flex-start;  
+    align-items: flex-start;
     flex-direction: row;
-
   }
 `;
 
@@ -57,7 +56,7 @@ export const InnerContainerLeft = styled.div`
 
   ${mediaRules.lg} {
     font-size: 1.75rem;
-    margin-top: 0;  /* Remove negative margin */
+    margin-top: 0; /* Remove negative margin */
   }
 `;
 
@@ -76,7 +75,7 @@ export const InnerContainerRight = styled.div`
 
   ${mediaRules.lg} {
     font-size: 1.25rem;
-    margin-top: 0;  /* Remove negative margin */
+    margin-top: 0; /* Remove negative margin */
   }
 `;
 

@@ -3,7 +3,13 @@
 
 import Link from "@/i18n/Link";
 import PagesConfigContext from "@/i18n/PagesConfigContext";
-import { CustomLink, customLinkToHref, DecoratedLinkType, isNavbarSubmenu, NavbarSubmenuSection } from "@/sanity/types";
+import {
+  CustomLink,
+  customLinkToHref,
+  DecoratedLinkType,
+  isNavbarSubmenu,
+  NavbarSubmenuSection,
+} from "@/sanity/types";
 import Image from "next/image";
 import { useParams, usePathname } from "next/navigation";
 import { FC, useContext, useEffect, useState } from "react";
@@ -26,69 +32,78 @@ import {
   SideBarLogoButtonContainer,
   SidebarStyled,
   SideLinkStyled,
-  SVGContainer
+  SVGContainer,
 } from "./Navbar-Links.styled";
 import SubMenu from "./SubMenu";
 
-export type NavbarLinksProps = { 
-  slugMapping: SlugMapping; 
-  logoSrc: string; 
-  onSidebarToggle: () => void; 
+export type NavbarLinksProps = {
+  slugMapping: SlugMapping;
+  logoSrc: string;
+  onSidebarToggle: () => void;
 };
 
-const NavbarLinks: FC<NavbarLinksProps> = ({ slugMapping, logoSrc, onSidebarToggle }) => {
+const NavbarLinks: FC<NavbarLinksProps> = ({
+  slugMapping,
+  logoSrc,
+  onSidebarToggle,
+}) => {
   const [showMenu, setShowMenu] = useState(false);
-const [isOverlayVisible, setIsOverlayVisible] = useState(false);
+  const [isOverlayVisible, setIsOverlayVisible] = useState(false);
 
-const handleSidebarToggle = () => {
-  setShowMenu(prev => !prev);
-  setIsOverlayVisible(prev => !prev); // Toggle overlay visibility
-  onSidebarToggle(); // Notify parent component of the sidebar toggle
-};
-
-useEffect(() => {
-  if (showMenu) {
-    document.body.style.overflow = 'hidden'; // Prevent scrolling on body
-  } else {
-    document.body.style.overflow = ''; // Re-enable scrolling
-  }
-  return () => {
-    document.body.style.overflow = ''; // Cleanup on unmount
+  const handleSidebarToggle = () => {
+    setShowMenu((prev) => !prev);
+    setIsOverlayVisible((prev) => !prev); // Toggle overlay visibility
+    onSidebarToggle(); // Notify parent component of the sidebar toggle
   };
-}, [showMenu]);
 
-return (
-  <>
-    <NavbarLinksStyled $showMenu={showMenu}>
-      <LogoContainerStyled>
-        <Link href="/" aria-label="Home">
-          <Image src={logoSrc} alt="Logo" height={50} width={250} />
-        </Link>
-      </LogoContainerStyled>
-      <MainLinksContainerStyled>
-        <PageLinksContainer />
-        <NavbarLanguages slugMapping={slugMapping} />
-      </MainLinksContainerStyled>
-      <BurgerMenuButton onClick={handleSidebarToggle}>
-        {showMenu ? <MdMenu /> : <MdMenu />}
-      </BurgerMenuButton>
-    </NavbarLinksStyled>
-    <SidebarStyled $showMenu={showMenu}>
-      <SidebarContentStyled>
-        <SideBarLogoButtonContainer>
-          <Image src="/site-logo-blue.png" alt="Logo"  height={50} width={250}/>
-          <MdClose onClick={handleSidebarToggle} />    
-        </SideBarLogoButtonContainer>
-        <PageLinksContainer />
-        <NavbarLanguages slugMapping={slugMapping} />
-      </SidebarContentStyled>
-    </SidebarStyled>
-    <OverlayStyled
-      $showOverlay={isOverlayVisible}
-      onClick={handleSidebarToggle} // Close sidebar when overlay is clicked
-    />
-  </>
-);
+  useEffect(() => {
+    if (showMenu) {
+      document.body.style.overflow = "hidden"; // Prevent scrolling on body
+    } else {
+      document.body.style.overflow = ""; // Re-enable scrolling
+    }
+    return () => {
+      document.body.style.overflow = ""; // Cleanup on unmount
+    };
+  }, [showMenu]);
+
+  return (
+    <>
+      <NavbarLinksStyled $showMenu={showMenu}>
+        <LogoContainerStyled>
+          <Link href="/" aria-label="Home">
+            <Image src={logoSrc} alt="Logo" height={50} width={250} />
+          </Link>
+        </LogoContainerStyled>
+        <MainLinksContainerStyled>
+          <PageLinksContainer />
+          <NavbarLanguages slugMapping={slugMapping} />
+        </MainLinksContainerStyled>
+        <BurgerMenuButton onClick={handleSidebarToggle}>
+          {showMenu ? <MdMenu /> : <MdMenu />}
+        </BurgerMenuButton>
+      </NavbarLinksStyled>
+      <SidebarStyled $showMenu={showMenu}>
+        <SidebarContentStyled>
+          <SideBarLogoButtonContainer>
+            <Image
+              src="/site-logo-blue.png"
+              alt="Logo"
+              height={50}
+              width={250}
+            />
+            <MdClose onClick={handleSidebarToggle} />
+          </SideBarLogoButtonContainer>
+          <PageLinksContainer />
+          <NavbarLanguages slugMapping={slugMapping} />
+        </SidebarContentStyled>
+      </SidebarStyled>
+      <OverlayStyled
+        $showOverlay={isOverlayVisible}
+        onClick={handleSidebarToggle} // Close sidebar when overlay is clicked
+      />
+    </>
+  );
 };
 
 const PageLinksContainer: FC = () => {
@@ -157,7 +172,7 @@ const SimpleNavbarLink: FC<SimpleNavbarLinkProperties> = ({
   return isButton ? (
     <NavbarLinkButtonStyled href={link}>{label}</NavbarLinkButtonStyled>
   ) : (
-    <NavbarElementStyled href={link} $selected={!selected}>
+    <NavbarElementStyled href={link} $selected={!!selected}>
       {label}
     </NavbarElementStyled>
   );
@@ -191,9 +206,7 @@ const ComplexNavbarLink: FC<ComplexNavbarLinkProperties> = ({
       >
         <ComplexNavbarLinkContainer $selected={!!selected}>
           {label}
-          <SVGContainer>
-            {icon}
-          </SVGContainer>
+          <SVGContainer>{icon}</SVGContainer>
         </ComplexNavbarLinkContainer>
       </NavbarMenuStyled>
       {selected && config && <SubMenu showSubMenu={true} config={config} />}

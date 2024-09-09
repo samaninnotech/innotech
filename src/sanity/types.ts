@@ -153,13 +153,15 @@ export interface BlogCategory {
   tag: string;
   _updatedAt: string;
 }
-/* Latest Blog Posts*/ 
+/* Latest Blog Posts*/
 export interface LatestBlogPosts extends Section {
-  title: string,
+  title: string;
   posts: BlogPostType[];
 }
 
-export function isLatestBlogPosts(section: Section): section is LatestBlogPosts {
+export function isLatestBlogPosts(
+  section: Section,
+): section is LatestBlogPosts {
   return sectionMatchType(section, "latest_blog_posts");
 }
 
@@ -177,7 +179,9 @@ export interface ConsultationSection extends Section {
   consultationSwiperSlides: ConsultationSwiperSlideType[];
 }
 
-export function isConsultationSection(section: Section): section is ConsultationSection {
+export function isConsultationSection(
+  section: Section,
+): section is ConsultationSection {
   return sectionMatchType(section, "consultation_section");
 }
 
@@ -193,7 +197,9 @@ export interface PartnerShipSection extends Section {
   partnershipCards: PartnerShipCardType[];
 }
 
-export function isPartnerShipSection(section: Section): section is PartnerShipSection {
+export function isPartnerShipSection(
+  section: Section,
+): section is PartnerShipSection {
   return sectionMatchType(section, "partnership_section");
 }
 
@@ -206,11 +212,13 @@ export interface PartnerShipCardType extends SanityElement {
 /* Solutions Section*/
 export interface SolutionsSection extends Section {
   solutionCards: SolutionCardType[];
-  title?: string,
-  text?: string
+  title?: string;
+  text?: string;
 }
 
-export function isSolutionsSection(section: Section): section is SolutionsSection {
+export function isSolutionsSection(
+  section: Section,
+): section is SolutionsSection {
   return sectionMatchType(section, "solutions_section");
 }
 
@@ -222,7 +230,7 @@ export interface SolutionCardType extends SanityElement {
 
 /*Event Section*/
 export interface EventSection extends Section {
-  title: string,
+  title: string;
   events: EventType[];
 }
 
@@ -257,35 +265,37 @@ export function isPageTopBar(section: Section): section is PageTopBar {
 /* Home Page Top Post */
 export interface HomePageTopPost extends Section {
   backgroundImage: string;
-  
 }
 
-export function isHomePageTopPost(section: Section): section is HomePageTopPost {
+export function isHomePageTopPost(
+  section: Section,
+): section is HomePageTopPost {
   return sectionMatchType(section, "home_page_top_post");
 }
 
 /* Our Company Section */
 export interface OurCompanySection extends Section {
   accordionItems: AccordionItem[];
-  
 }
 
-export function isOurCompanySection(section: Section): section is OurCompanySection {
+export function isOurCompanySection(
+  section: Section,
+): section is OurCompanySection {
   return sectionMatchType(section, "our_company_section");
 }
 export interface AccordionItem {
   title: string;
   content: string;
-};
+}
 
 /* Video Section */
 export interface VideoSection extends Section {
-  centralImage: string;  
+  centralImage: string;
   leftTopImage: string;
   leftBottomImage: string;
   rightTopImage: string;
   rightBottomImage: string;
-  videoLink: string; 
+  videoLink: string;
 }
 
 export function isVideoSection(section: Section): section is VideoSection {
@@ -328,6 +338,26 @@ export interface TeamMemberType extends SanityElement {
   linkedIn: CustomLink;
 }
 
+/* Job Offer Section*/
+export interface JobOfferSection extends Section {
+  header: string;
+  jobOffers: JobOfferType[];
+}
+
+export function isJobOfferSection(
+  section: Section,
+): section is JobOfferSection {
+  return sectionMatchType(section, "job_offer_section");
+}
+
+export interface JobOfferType extends SanityElement {
+  _key: string;
+  title: string;
+  type: string;
+  description: string;
+  link: CustomLink;
+}
+
 /* Page Top Banner*/
 export interface PageTopBanner extends Section {
   imageUrl: string;
@@ -337,7 +367,6 @@ export interface PageTopBanner extends Section {
 export function isPageTopBanner(section: Section): section is PageTopBanner {
   return sectionMatchType(section, "page_top_banner");
 }
-
 
 /* Info Section */
 export interface InfoSection extends Section {
@@ -363,7 +392,9 @@ export interface TabItemsSection extends Section {
   tabItems: TabItemType[];
 }
 
-export function isTabItemsSection(section: Section): section is TabItemsSection {
+export function isTabItemsSection(
+  section: Section,
+): section is TabItemsSection {
   return sectionMatchType(section, "tab_items_section");
 }
 
@@ -375,15 +406,51 @@ export interface TabItemType extends SanityElement {
 interface ContentItem {
   heading: string;
   text: string | string[];
-};
+}
 
-/* Tab Items Section */
+/* Only Text Section */
 export interface OnlyTextSection extends Section {
   text: string;
 }
 
-export function isOnlyTextSection(section: Section): section is OnlyTextSection {
+export function isOnlyTextSection(
+  section: Section,
+): section is OnlyTextSection {
   return sectionMatchType(section, "only_text_section");
+}
+
+/* Tick Items Section */
+export interface TickItemsSection extends Section {
+  header: string;
+  tickItems: TickItemType[];
+}
+
+export function isTickItemsSection(
+  section: Section,
+): section is TickItemsSection {
+  return sectionMatchType(section, "tick_items_section");
+}
+
+export interface TickItemType extends SanityElement {
+  title: string;
+  description: string;
+}
+
+/* Get In touc Section */
+export interface GetInTouchSection extends Section {
+  mainHeader: string;
+  subtitle: string;
+  options: { value: string }[];
+  agreement: string;
+  buttonLabel: string;
+  rightHeader: string;
+  backgroundImage: string;
+}
+
+export function isGetInTouchSection(
+  section: Section,
+): section is GetInTouchSection {
+  return sectionMatchType(section, "get_in_touch_section");
 }
 
 /* Card Link Section */
@@ -455,7 +522,6 @@ export function isHeroColumn(element: any): element is HeroColumn {
 export interface HeroTextColumn extends HeroColumn {
   rich_text: any;
   links?: HeroLink[];
-  
 }
 
 export enum HeroLinkType {

@@ -1,10 +1,10 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Container = styled.div`
   position: relative;
   width: 100%;
   overflow: visible;
-  transition: opacity .5s ease;
+  transition: opacity 0.5s ease;
   display: flex;
   justify-content: center;
 `;
@@ -28,7 +28,6 @@ export const InnerContainer1 = styled.div`
   padding: 0;
 `;
 
-
 export const InnerContainer2 = styled.div`
   padding: 0 15px;
   width: 100%;
@@ -49,7 +48,8 @@ export const Header = styled.div`
 export const Paragraph = styled.div`
   flex: 0 0 55%; /* Takes 75% of the width */
   text-align: left;
-  margin-bottom: 20px;color: #696969;
+  margin-bottom: 20px;
+  color: #696969;
 `;
 
 export const RightBox = styled.div`
@@ -99,7 +99,6 @@ export const Row = styled.div`
     grid-template-columns: 1fr; /* 1 card per row for the smallest screens */
   }
 `;
-
 
 export const Spacer = styled.div`
   height: 124px; /* Adjust spacer height as needed */

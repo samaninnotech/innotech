@@ -1,14 +1,26 @@
-import React from 'react';
-import { CardWrapper, ContentWrapper, ImageWrapper, Text, Title, VisionImage } from './VisionCard.styled';
+import React from "react";
+import {
+  CardWrapper,
+  ContentWrapper,
+  ImageWrapper,
+  Text,
+  Title,
+  VisionImage,
+} from "./VisionCard.styled";
 
 type VisionCardProps = {
   imgSrc: string;
   imgAlt: string;
   title: string;
   text: string;
-}
+};
 
-const VisionCard: React.FC<VisionCardProps> = ({ imgSrc, imgAlt, title, text }) => {
+const VisionCard: React.FC<VisionCardProps> = ({
+  imgSrc,
+  imgAlt,
+  title,
+  text,
+}) => {
   return (
     <CardWrapper>
       <ImageWrapper>

@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes } from "styled-components";
 
 type RowContainerProps = {
   backgroundImage: string;
@@ -38,7 +38,7 @@ export const RowContainer = styled.div<RowContainerProps>`
   color: white;
 
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -54,7 +54,7 @@ export const ColumnContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 15px;
-  z-index: 2; 
+  z-index: 2;
   box-sizing: inherit;
 
   h3 {
@@ -83,7 +83,9 @@ export const Heading = styled.div<{ align: string }>`
   animation: ${moveUp} 1s ease-out;
   z-index: 2; /* Ensure content is above the overlay */
 
-  h6, h3, div {
+  h6,
+  h3,
+  div {
     margin: 0;
   }
 

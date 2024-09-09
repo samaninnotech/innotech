@@ -1,5 +1,5 @@
-import { mediaRules } from '@/themes/media-breakpoints';
-import styled from 'styled-components';
+import { mediaRules } from "@/themes/media-breakpoints";
+import styled from "styled-components";
 
 export const SectionWrapper = styled.div`
   position: relative;
@@ -11,7 +11,7 @@ export const SectionWrapper = styled.div`
 
 export const Heading = styled.h3<{ large?: boolean }>`
   text-align: center;
-  font-size: ${(props) => (props.large ? '36px' : '20px')};
+  font-size: ${(props) => (props.large ? "36px" : "20px")};
   line-height: 1.2;
   color: #696969;
   margin: 0;
@@ -39,12 +39,10 @@ export const GridWrapper = styled.div`
     max-width: 910px;
     flex-direction: row;
     gap: 20px;
-
   }
   ${mediaRules.lg} {
     max-width: 1200px;
     flex-direction: row;
     gap: 60px;
-
   }
 `;

@@ -1,8 +1,17 @@
 "use client";
-import { TeamMemberType } from '@/sanity/types';
-import React from 'react';
-import TeamMember from '../TeamMember/TeamMember';
-import { Container, Header, InnerContainer1, InnerContainer2, InnerContainer3, ListContainer, Row, Spacer } from './TeamList.styled';
+import { TeamMemberType } from "@/sanity/types";
+import React from "react";
+import TeamMember from "../TeamMember/TeamMember";
+import {
+  Container,
+  Header,
+  InnerContainer1,
+  InnerContainer2,
+  InnerContainer3,
+  ListContainer,
+  Row,
+  Spacer,
+} from "./TeamList.styled";
 
 type TeamListProps = {
   header: string;
@@ -10,12 +19,15 @@ type TeamListProps = {
 };
 const TeamList: React.FC<TeamListProps> = ({ header, teamMembers }) => {
   const rowConfigurations = [
-    { columns: 3, count: 3 }, 
-    { columns: 3, count: 3 }, 
-    { columns: 4, count: Infinity } 
+    { columns: 3, count: 3 },
+    { columns: 3, count: 3 },
+    { columns: 4, count: Infinity },
   ];
 
-  const createRowsFromConfiguration = (members: TeamMemberType[], configurations: any[]) => {
+  const createRowsFromConfiguration = (
+    members: TeamMemberType[],
+    configurations: any[],
+  ) => {
     let index = 0;
     const rows = [];
 
@@ -39,12 +51,13 @@ const TeamList: React.FC<TeamListProps> = ({ header, teamMembers }) => {
       <InnerContainer1>
         <InnerContainer2>
           <InnerContainer3>
-            <Header>
-              {header}
-            </Header>
+            <Header>{header}</Header>
             <ListContainer>
               {rows.map((row, index) => (
-                <Row key={index} style={{ gridTemplateColumns: `repeat(${row.columns}, 1fr)` }}>
+                <Row
+                  key={index}
+                  style={{ gridTemplateColumns: `repeat(${row.columns}, 1fr)` }}
+                >
                   {row.members.map((member, idx) => (
                     <TeamMember
                       key={idx}

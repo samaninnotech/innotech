@@ -140,7 +140,7 @@
 //     max-width: 1200px;
 //   }
 
-//   margin: 0 auto; 
+//   margin: 0 auto;
 //   }
 
 //   button {
@@ -282,6 +282,5 @@ const GlobalStyles = createGlobalStyle`
   transition: transform 0.3s ease;
 }
 `;
-
 
 export default GlobalStyles;

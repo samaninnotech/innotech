@@ -1,5 +1,5 @@
-import Image from 'next/image';
-import styled from 'styled-components';
+import Image from "next/image";
+import styled from "styled-components";
 
 export const CardWrapper = styled.div`
   flex: 1 1 30%;
@@ -28,7 +28,7 @@ export const VisionImage = styled(Image)`
   width: 100%;
   height: 100%;
   object-fit: cover;
-`
+`;
 export const ContentWrapper = styled.div`
   padding: 20px;
 `;

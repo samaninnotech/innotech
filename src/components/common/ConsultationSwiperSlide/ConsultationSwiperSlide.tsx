@@ -1,5 +1,5 @@
-import { sanityUrlFor } from '@/sanity/sanity-client';
-import React from 'react';
+import { sanityUrlFor } from "@/sanity/sanity-client";
+import React from "react";
 import {
   BoxImage,
   Content,
@@ -8,8 +8,8 @@ import {
   Slide,
   SlideInner,
   SwiperImage,
-  TextContent
-} from './ConsultationSwiperSlide.styled';
+  TextContent,
+} from "./ConsultationSwiperSlide.styled";
 
 interface SwiperSlideProps {
   imageSrc: string;
@@ -17,14 +17,23 @@ interface SwiperSlideProps {
   text: string;
 }
 
-const ConsultationSwiperSlide: React.FC<SwiperSlideProps> = ({ imageSrc, heading, text }) => {
+const ConsultationSwiperSlide: React.FC<SwiperSlideProps> = ({
+  imageSrc,
+  heading,
+  text,
+}) => {
   return (
     <Slide>
       <SlideInner>
         <BoxImage>
           <ContentWrap>
             <Content>
-              <SwiperImage src={sanityUrlFor(imageSrc).url()} alt={heading} width={100} height={100}/>
+              <SwiperImage
+                src={sanityUrlFor(imageSrc).url()}
+                alt={heading}
+                width={100}
+                height={100}
+              />
               <Heading>{heading}</Heading>
               <TextContent>{text}</TextContent>
             </Content>

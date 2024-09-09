@@ -16,7 +16,7 @@ export enum SupportedLocales {
   English = "en", // Only include Italian and English
 }
 
-export const locales: SupportedLocales[] =  Object.values(SupportedLocales); // Only Italian and English
+export const locales: SupportedLocales[] = Object.values(SupportedLocales); // Only Italian and English
 export const fallbackLocale = SupportedLocales.Italian; // Italian as the fallback locale
 export const namespace = "public";
 

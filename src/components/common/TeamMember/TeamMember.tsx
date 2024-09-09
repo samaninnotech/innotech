@@ -1,9 +1,9 @@
 "use client";
-import { CustomLink, customLinkToHref } from '@/sanity/types';
-import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
-import Link from '../../../i18n/Link'; // Import Link from Next.js
+import { CustomLink, customLinkToHref } from "@/sanity/types";
+import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
+import Link from "../../../i18n/Link"; // Import Link from Next.js
 import {
   GridItemWithHover,
   InfoContainer,
@@ -14,16 +14,21 @@ import {
   SocialNetworks,
   SocialNetworksInner,
   TeamMemberContainer,
-} from './TeamMember.styled';
+} from "./TeamMember.styled";
 
 type TeamMemberProps = {
   image: string;
   name: string;
   position: string;
-  linkedIn: CustomLink; 
+  linkedIn: CustomLink;
 };
 
-const TeamMember: React.FC<TeamMemberProps> = ({ image, name, position, linkedIn }) => {
+const TeamMember: React.FC<TeamMemberProps> = ({
+  image,
+  name,
+  position,
+  linkedIn,
+}) => {
   const href = customLinkToHref(linkedIn);
 
   return (
@@ -34,7 +39,7 @@ const TeamMember: React.FC<TeamMemberProps> = ({ image, name, position, linkedIn
           <SocialNetworks>
             <SocialNetworksInner>
               <Link href={href} target="_blank" aria-label="LinkedIn">
-              <FontAwesomeIcon icon={faLinkedin} size="1x" />
+                <FontAwesomeIcon icon={faLinkedin} size="1x" />
               </Link>
             </SocialNetworksInner>
           </SocialNetworks>

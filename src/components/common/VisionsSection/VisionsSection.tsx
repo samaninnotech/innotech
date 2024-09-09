@@ -1,17 +1,27 @@
 "use client";
-import { VisionCardType } from '@/sanity/types';
-import React from 'react';
-import VisionCard from '../VisionCard';
-import { GridWrapper, Heading, SectionWrapper, Spacer } from './VisionsSection.styled';
+import { VisionCardType } from "@/sanity/types";
+import React from "react";
+import VisionCard from "../VisionCard";
+import {
+  GridWrapper,
+  Heading,
+  SectionWrapper,
+  Spacer,
+} from "./VisionsSection.styled";
 
 type VisionsSectionProps = {
-  sectionTitle?: string,
-  topHeading: string,
-  footerText: string,
-  visionCards?: VisionCardType[]
-}
+  sectionTitle?: string;
+  topHeading: string;
+  footerText: string;
+  visionCards?: VisionCardType[];
+};
 
-const VisionsSection: React.FC<VisionsSectionProps> = ({ sectionTitle, topHeading, footerText, visionCards}) => {
+const VisionsSection: React.FC<VisionsSectionProps> = ({
+  sectionTitle,
+  topHeading,
+  footerText,
+  visionCards,
+}) => {
   return (
     <SectionWrapper>
       <Spacer />

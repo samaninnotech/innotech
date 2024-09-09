@@ -29,8 +29,7 @@ const components: Partial<PortableTextReactComponents> = {
     title: ({ children }) => <Title>{children}</Title>,
     subtitle: ({ children }) => <Subtitle>{children}</Subtitle>,
     normal: ({ children }) => <Normal>{children}</Normal>,
-    blockquote: ({ children }) => <BlockQuote >{children}</BlockQuote>
-    ,
+    blockquote: ({ children }) => <BlockQuote>{children}</BlockQuote>,
   },
   types: {
     blockImage: ({

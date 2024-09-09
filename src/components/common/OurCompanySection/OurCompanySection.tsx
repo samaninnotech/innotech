@@ -1,6 +1,6 @@
 "use client";
-import { AccordionItem } from '@/sanity/types';
-import React, { useState } from 'react';
+import { AccordionItem } from "@/sanity/types";
+import React, { useState } from "react";
 import {
   AccordionContent,
   AccordionIcon,
@@ -18,13 +18,11 @@ import {
   Row,
   SectionWrapper,
   Spacer,
-} from './OurCompanySection.styled';
-
+} from "./OurCompanySection.styled";
 
 export type OurCompanySectionProps = {
   accordionItems: AccordionItem[];
 };
-
 
 const OurCompanySection: React.FC<OurCompanySectionProps> = ({
   accordionItems,
@@ -34,14 +32,18 @@ const OurCompanySection: React.FC<OurCompanySectionProps> = ({
   const toggleAccordion = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index);
   };
-  
+
   return (
     <SectionWrapper>
       <Spacer />
       <HeadingSmall>La nostra azienda</HeadingSmall>
       <Spacer />
       <HeadingLarge>
-        Abbiamo l’ambizione di portare <MarkedText>l’innovazione tecnologica</MarkedText> nel mondo attraverso <MarkedText>soluzioni e progetti di implementazione tecnologica.</MarkedText>
+        Abbiamo l’ambizione di portare{" "}
+        <MarkedText>l’innovazione tecnologica</MarkedText> nel mondo attraverso{" "}
+        <MarkedText>
+          soluzioni e progetti di implementazione tecnologica.
+        </MarkedText>
       </HeadingLarge>
       <Row>
         <Column md={6}>
@@ -49,7 +51,9 @@ const OurCompanySection: React.FC<OurCompanySectionProps> = ({
             <MarkedNumber>29</MarkedNumber> Team People
           </LeftColumn>
           <LeftColumnText>
-            Lavoriamo insieme per <MarkedText>985 ore alla settimana.</MarkedText> Costruiamo progetti di successo con i nostri partner.
+            Lavoriamo insieme per{" "}
+            <MarkedText>985 ore alla settimana.</MarkedText> Costruiamo progetti
+            di successo con i nostri partner.
           </LeftColumnText>
           <Spacer />
         </Column>
@@ -58,7 +62,9 @@ const OurCompanySection: React.FC<OurCompanySectionProps> = ({
             {accordionItems.map((item, index) => (
               <AccordionSection key={index} active={activeIndex === index}>
                 <AccordionTitleWrapper onClick={() => toggleAccordion(index)}>
-                  <AccordionTitle active={activeIndex === index}>{item.title}</AccordionTitle>
+                  <AccordionTitle active={activeIndex === index}>
+                    {item.title}
+                  </AccordionTitle>
                   <AccordionIcon active={activeIndex === index} />
                 </AccordionTitleWrapper>
                 <AccordionContent active={activeIndex === index}>
