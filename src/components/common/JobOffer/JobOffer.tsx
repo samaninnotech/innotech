@@ -1,15 +1,31 @@
-import React from 'react';
-import { ButtonLink, ButtonText, JobButton, JobDescription, JobInfo, JobOfferContainer, JobTitle, JobType } from './JobOffer.styled';
+import { CustomLink, customLinkToHref } from "@/sanity/types";
+import React from "react";
+import {
+  ButtonLink,
+  ButtonText,
+  JobButton,
+  JobDescription,
+  JobInfo,
+  JobOfferContainer,
+  JobTitle,
+  JobType,
+} from "./JobOffer.styled";
 
 type JobOfferProps = {
   title: string;
   type: string;
   description: string;
-  link: string;
+  link: CustomLink;
   index: number;
-}
+};
 
-const JobOffer: React.FC<JobOfferProps> = ({ title, type, description, link, index }) => {
+const JobOffer: React.FC<JobOfferProps> = ({
+  title,
+  type,
+  description,
+  link,
+  index,
+}) => {
   return (
     <JobOfferContainer isEven={index % 2 === 0}>
       <JobInfo>
@@ -18,7 +34,7 @@ const JobOffer: React.FC<JobOfferProps> = ({ title, type, description, link, ind
       </JobInfo>
       <JobDescription>{description}</JobDescription>
       <JobButton>
-        <ButtonLink href={link}>
+        <ButtonLink href={customLinkToHref(link)}>
           <ButtonText>Maggiori Dettagli</ButtonText>
         </ButtonLink>
       </JobButton>
