@@ -5,10 +5,18 @@ import {
   PortableTextTypeComponentProps,
 } from "@portabletext/react";
 import ImageBlock, { ImageBlockProps } from "./ImageBlock";
+import ImageTextBlock from "./ImageTextBlock";
 import Link from "./Link";
 import TweetBlock from "./TweetBlock";
 import VideoBlock from "./VideoBlock";
-import { BlockQuote, Normal, Subtitle, Title, UnorderedList } from "./styles";
+import {
+  BlockQuote,
+  BlockQuoteContainer,
+  Normal,
+  Subtitle,
+  Title,
+  UnorderedList,
+} from "./styles";
 
 type VideoEmbed = {
   videoUrl: string;
@@ -16,6 +24,12 @@ type VideoEmbed = {
 
 type TweetEmbed = {
   tweetUrl: string;
+};
+
+type ImageTextBlockProps = {
+  imageColumn: any; // Replace `any` with your image type
+  textColumn: any; // Replace `any` with your text type
+  imagePosition: "left" | "right";
 };
 
 const components: Partial<PortableTextReactComponents> = {
@@ -29,7 +43,11 @@ const components: Partial<PortableTextReactComponents> = {
     title: ({ children }) => <Title>{children}</Title>,
     subtitle: ({ children }) => <Subtitle>{children}</Subtitle>,
     normal: ({ children }) => <Normal>{children}</Normal>,
-    blockquote: ({ children }) => <BlockQuote>{children}</BlockQuote>,
+    blockquote: ({ children }) => (
+      <BlockQuoteContainer>
+        <BlockQuote>{children}</BlockQuote>
+      </BlockQuoteContainer>
+    ),
   },
   types: {
     blockImage: ({
@@ -46,6 +64,11 @@ const components: Partial<PortableTextReactComponents> = {
       value: { tweetUrl },
     }: PortableTextTypeComponentProps<TweetEmbed>) => {
       return <TweetBlock tweetUrl={tweetUrl} />;
+    },
+    imageText: ({
+      value,
+    }: PortableTextTypeComponentProps<ImageTextBlockProps>) => {
+      return <ImageTextBlock {...value} />;
     },
   },
   marks: {

@@ -64,6 +64,7 @@ const ImageBlockComponent: FunctionComponent<ImageBlockProps> = ({
         src={url}
         width={imgWidth}
         height={imgHeight}
+        quality={100}
       />
     );
   } else if (image && size === ImageSize.FullWidth) {
@@ -73,6 +74,7 @@ const ImageBlockComponent: FunctionComponent<ImageBlockProps> = ({
         src={sanityUrlFor(image).url()}
         fill
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        quality={100}
       />
     );
   } else if (image) {
@@ -83,6 +85,7 @@ const ImageBlockComponent: FunctionComponent<ImageBlockProps> = ({
         src={sanityUrlFor(image).url()}
         width={width}
         height={height}
+        quality={100}
       />
     );
   }
