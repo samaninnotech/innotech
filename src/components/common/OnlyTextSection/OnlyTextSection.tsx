@@ -5,10 +5,11 @@ import { OnlyText } from "./OnlyTextSection.styled";
 
 type OnlyTextSectionProps = {
   text: any;
+  height?: string;
 };
-const OnlyTextSection: React.FC<OnlyTextSectionProps> = ({ text }) => {
+const OnlyTextSection: React.FC<OnlyTextSectionProps> = ({ text, height }) => {
   return (
-    <OnlyText>
+    <OnlyText $height={height}>
       <PortableText value={text} components={components} />
     </OnlyText>
   );

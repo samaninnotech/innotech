@@ -76,8 +76,6 @@ export const InnerContainerLeft = styled.div<{
   $textAlign?: string;
 }>`
   padding-left: 0.5rem;
-  margin-top: -2rem;
-  margin-bottom: 2.5rem;
   font-size: 1.15rem;
   line-height: 1.75rem;
   color: ${({ $textColor }) => $textColor || "var(--text-light-color)"};
@@ -85,6 +83,7 @@ export const InnerContainerLeft = styled.div<{
   text-wrap: pretty;
   overflow-wrap: break-word;
   word-break: break-word;
+  margin: 0 !important;
 `;
 export const InnerContainerRight = styled(GenericSection)`
     padding-left: 0.5rem;

@@ -13,6 +13,10 @@ export const Subtitle = styled.h3`
 export const Normal = styled.p`
   margin: 0 !important;
 `;
+export const BlockQuoteContainer = styled.div`
+  padding-left: 1rem;
+  border-left: 5px solid gray;
+`;
 export const BlockQuote = styled.h3`
   margin: 0 !important;
 `;
@@ -150,4 +154,39 @@ export const TweetBlock = styled(Link)`
     font-weight: normal;
     font-style: italic;
   }
+`;
+
+export const ImageTextContainer = styled.div<{
+  imagePosition: "left" | "right";
+}>`
+  display: flex;
+  flex-direction: ${({ imagePosition }) =>
+    imagePosition === "left" ? "row" : "row-reverse"};
+  width: 100%;
+  margin: 2rem 0;
+`;
+
+export const ImageColumn = styled.div`
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // padding: 0 1rem;
+
+  img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+`;
+
+interface ImageTextProps {
+  imagePosition: "left" | "right";
+}
+
+export const TextColumn = styled.div<ImageTextProps>`
+  flex: 1;
+  margin: ${({ imagePosition }) =>
+    imagePosition === "left" ? "0  0  0 1.5rem" : "0 1.5rem 0 0 "};
 `;

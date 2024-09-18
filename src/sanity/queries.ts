@@ -4,11 +4,13 @@ import getSanityClient from "./get-sanity-client";
 import sanityClient from "./sanity-client";
 import {
   AssistanceInfoResult,
+  BlogCategory,
   ChildPagesConfigResult,
   GlobalAccountInfoResult,
   NavbarConfigResult,
   Page,
   PagesConfigResult,
+  Post,
 } from "./types";
 
 /************************************/
@@ -56,12 +58,29 @@ const buildPageDeconstructionQUery = (locale: string) => `{
     _type == 'tick_items_section' => ${buildTickItemsSectionQuery(locale, fallbackLocale)},
     _type == 'get_in_touch_section' => ${buildGetInTouchSectionQuery(locale, fallbackLocale)},
     _type == 'job_offer_section' => ${buildJobOfferSectionQuery(locale, fallbackLocale)},
+    _type == 'blog_header_section' => ${buildBlogHeaderSectionQuery(locale)},
+    _type == 'blog_last_updates_section' => ${buildBlogLastUpdatesSectionQuery(locale)},
 
 
 
   }
 }`;
-
+const buildBlogHeaderSectionQuery = (locale: string) => `
+{
+  'title': coalesce(title.${locale}, title.${fallbackLocale}),
+  'subtitle': coalesce(subtitle.${locale}, subtitle.${fallbackLocale}),
+  background_image,
+}`;
+const buildBlogLastUpdatesSectionQuery = (locale: string) => `{
+  'tabs': tabs[]{
+    _key,
+    'title': coalesce(title.${locale}, title.${fallbackLocale}),
+    'category': category->{
+      'title': coalesce(title.${locale}, title.${fallbackLocale}),
+      'tag': coalesce(tag.${locale}.current, tag.${fallbackLocale}.current),
+    }
+  }
+}`;
 const buildHeroSectionQuery = (locale: string) => {
   const buildHeroColumnQuery = (locale: string) => `
   {
@@ -340,7 +359,8 @@ const buildTabItemsSectionQuery = (locale: string, fallbackLocale: string) => `
 }`;
 
 const buildOnlyTextSectionQuery = (locale: string, fallbackLocale: string) => `{
-  'text': select(defined(text.${locale}) => text.${locale}, text.${fallbackLocale})
+  'text': select(defined(text.${locale}) => text.${locale}, text.${fallbackLocale}),
+  'height': coalesce(height, 'auto') // Add height field
 }`;
 
 const buildTickItemsSectionQuery = (locale: string, fallbackLocale: string) => `
@@ -637,6 +657,147 @@ export const getHomepageId = async () => {
 /* BLOG */
 export const getBlogMainPage = (locale: string) => {
   return getPageById(CustomPageIds.BLOG, locale);
+};
+
+const allPostsSlugsQuery = () => {
+  const querySlices = locales.map(
+    (l) => `'title_${l}': title.${l}, 'slug_${l}': slug.${l}.current`,
+  );
+  return `*[ _type == "post"]{
+    _id,
+    ${querySlices.join(",")},
+    'slug_default': slug.${fallbackLocale}.current,
+    _updatedAt
+  }`;
+};
+
+export const getAllPostsSlugs = () => {
+  const query = allPostsSlugsQuery();
+  return sanityClient.fetch<PagesConfigResult[]>(query);
+};
+
+const blogPostsQuery = (
+  locale: string,
+  setLength: number,
+  maxPublishDate?: Date,
+  categorySlug?: string,
+) => {
+  const dateFilter = maxPublishDate
+    ? `&& publish_date < '${maxPublishDate.toISOString().split("T")[0]}' `
+    : "";
+
+  const categoryFilter = categorySlug
+    ? `&& categories[]->{ 'tag': coalesce(tag.${locale}.current, tag.${fallbackLocale}.current) }.tag match '${categorySlug}'`
+    : "";
+
+  return `
+    *[ _type == "post" ${dateFilter} ${categoryFilter}]| order(publish_date desc)[0...${setLength}] {
+      _key,
+      'title': coalesce(title.${locale}, title.${fallbackLocale}),
+      'description': coalesce(description.${locale}, description.${fallbackLocale}),
+      'author': author,
+      'slug': coalesce(slug.${locale}.current, slug.${fallbackLocale}.current),
+      'categories': categories[]->{
+        'title': coalesce(title.${locale}, title.${fallbackLocale}),
+        'tag': coalesce(tag.${locale}.current, tag.${fallbackLocale}.current),
+      },
+      'publish_date': publish_date,
+      'cover': cover,
+    }`;
+};
+
+export const getBlogPosts = (
+  locale: string,
+  setLength: number,
+  maxPublishDate?: Date,
+  categorySlug?: string,
+) => {
+  const query = blogPostsQuery(locale, setLength, maxPublishDate, categorySlug);
+  const sanityClient = getSanityClient();
+  return sanityClient.fetch<Post[]>(query);
+};
+
+const blogCategoriesQuery = (locale: string) => {
+  const slices = locales.map(
+    (l) =>
+      `'tag_${l}': coalesce(tag.${l}.current, tag.${fallbackLocale}.current)`,
+  );
+
+  return `
+    *[ _type == "blog_category"] {
+      'id': _id,
+      'title': coalesce(title.${locale}, title.${fallbackLocale}),
+      'tag': coalesce(tag.${locale}.current, tag.${fallbackLocale}.current),
+      ${slices.join(", ")},
+      sort_order,
+      _updatedAt,
+    }| order(sort_order asc, title asc)`;
+};
+
+export const getBlogCategories = (locale: string, staticExecution = false) => {
+  const query = blogCategoriesQuery(locale);
+  const localSanityClient = staticExecution ? sanityClient : getSanityClient();
+  return localSanityClient.fetch<
+    Array<BlogCategory & { [key: string]: string }>
+  >(query);
+};
+
+export const getPostsCount = (locale?: string, categorySlug?: string) => {
+  const categoryFilter =
+    categorySlug && locale
+      ? `&& categories[]->{ 'tag': coalesce(tag.${locale}.current, tag.${fallbackLocale}.current) }.tag match '${categorySlug}'`
+      : "";
+
+  const query = `count(*[ _type == "post" ${categoryFilter} ])`;
+  const sanityClient = getSanityClient();
+  return sanityClient.fetch<number>(query);
+};
+
+const postBySlugQuery = (locale: string, slug: string) => {
+  const slugSlices = locales.map(
+    (l) =>
+      `'slug_${l}': coalesce(slug.${l}.current, slug.${fallbackLocale}.current)`,
+  );
+
+  return `*[ _type == "post" && slug.${locale}.current == '${slug}' ][0] {
+    _key,
+    'title': coalesce(title.${locale}, title.${fallbackLocale}),
+    'description': coalesce(description.${locale}, description.${fallbackLocale}),
+    'author': author,
+    'slug': coalesce(slug.${locale}.current, slug.${fallbackLocale}.current),
+    ${slugSlices.join(", ")},
+    'categories': categories[]->{
+      'title': coalesce(title.${locale}, title.${fallbackLocale}),
+      'tag': coalesce(tag.${locale}.current, tag.${fallbackLocale}.current),
+    },
+    'publish_date': publish_date,
+    'cover': cover,
+    'body': body.${locale}[] ${deconstructBodyElementsQuery(locale)},
+  }`;
+};
+
+const deconstructBodyElementsQuery = (locale: string) => `
+  {
+    ...,
+    'markDefs': markDefs[] {
+      _type,
+      _type != 'link' => {
+        ...
+      },
+      _type == 'link' => ${buildCustomLinkQuery(locale)},
+      _type == 'imageText' => {
+      'imageColumn': imageColumn.asset->url,
+      'textColumn': textColumn,
+      'imagePosition': imagePosition,
+    },
+    }
+  }
+`;
+
+export const getPostBySlug = (locale: string, slug: string) => {
+  const query = postBySlugQuery(locale, slug);
+  const sanityClient = getSanityClient();
+  return sanityClient.fetch<Post & { [key: string]: string }>(query);
 };
 
 /**

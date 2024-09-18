@@ -1,10 +1,17 @@
+import { getBlogPosts, getPostsCount } from "@/sanity/queries";
 import { sanityUrlFor } from "@/sanity/sanity-client";
 import {
+  BlogHeaderSection,
+  BlogLastUpdatesSection,
+  BlogPostsListSection,
   ConsultationSection,
   GetInTouchSection,
   HeroSection,
   HomePageTopPost,
   InfoSection,
+  isBlogHeaderSection,
+  isBlogLastUpdatesSection,
+  isBlogPostsListSection,
   isConsultationSection,
   isGetInTouchSection,
   isHeroSection,
@@ -29,6 +36,7 @@ import {
   PageTopBanner,
   PageTopBar,
   PartnerShipSection,
+  Post,
   QuoteSection,
   Section,
   SolutionsSection,
@@ -59,6 +67,9 @@ import {
   VideoSection as VideoSectionComponent,
   VisionsSection as VisionsSectionComponent,
 } from ".";
+import BlogHeaderComponent from "./Blog/BlogHeader";
+import PostsList from "./Blog/PostsList";
+import BlogLastUpdate from "./BlogLastUpdates";
 // import {
 //   Carousel as CarouselComponent,
 //   CountersSectionComponent,
@@ -78,9 +89,14 @@ import {
 type PageBuilderProps = {
   sections: Section[];
   locale: string;
+  blogData?: { categorySlug: string };
 };
 
-const PageBuilder: FC<PageBuilderProps> = async ({ sections, locale }) => {
+const PageBuilder: FC<PageBuilderProps> = async ({
+  sections,
+  locale,
+  blogData,
+}) => {
   if (!sections?.length) {
     return <></>;
   }
@@ -123,6 +139,25 @@ const PageBuilder: FC<PageBuilderProps> = async ({ sections, locale }) => {
       renderedSections.push(buildGetInTouchSection(s));
     } else if (isJobOfferSection(s)) {
       renderedSections.push(buildJobOfferSection(s));
+    } else if (isBlogHeaderSection(s)) {
+      // const categories = await getBlogCategories(locale);
+      renderedSections.push(buildBlogHeaderSection(s));
+    } else if (isBlogPostsListSection(s)) {
+      const categorySlug = blogData?.categorySlug;
+      const posts = await getBlogPosts(locale, 12, undefined, categorySlug);
+      const postsCount = await getPostsCount(locale, categorySlug);
+      renderedSections.push(buildBlogPostsListSection(s, posts, postsCount));
+    } else if (isBlogLastUpdatesSection(s)) {
+      const posts: { [tabId: string]: Post[] } = {};
+
+      // Recupero i post per ogni tab
+      for (const tab of (s as BlogLastUpdatesSection).tabs) {
+        const categorySlug = tab.category?.tag || undefined;
+        const tabPosts = await getBlogPosts(locale, 3, undefined, categorySlug);
+        posts[tab._key] = tabPosts;
+      }
+
+      renderedSections.push(buildBlogLastUpdatesSection(s, posts));
     }
     // if (isContactsSection(s)) {
     //   const accountInfo = await getGlobalAccountInfo(locale);
@@ -288,8 +323,8 @@ const buildTabItemsSection = (s: TabItemsSection) => {
   return <TabItemsSectionComponent header={header} tabItems={tabItems} />;
 };
 const buildOnlyTextSection = (s: OnlyTextSection) => {
-  const { text } = s;
-  return <OnlyTextSectionComponent text={text} />;
+  const { text, height } = s;
+  return <OnlyTextSectionComponent text={text} height={height} />;
 };
 const buildTickItemsSection = (s: TickItemsSection) => {
   const { header, tickItems } = s;
@@ -322,6 +357,61 @@ const buildJobOfferSection = (s: JobOfferSection) => {
   return <JobOfferSectionComponent header={header} jobOffers={jobOffers} />;
 };
 
+const buildBlogHeaderSection = (section: BlogHeaderSection) => {
+  const { title, subtitle, background_image } = section;
+  return (
+    <>
+      <BlogHeaderComponent
+        title={title}
+        subtitle={subtitle}
+        imgSrc={sanityUrlFor(background_image).url()}
+      />
+      {/* <CategorySelectionComponent categories={categories} /> */}
+    </>
+  );
+};
+
+const buildBlogPostsListSection = (
+  section: BlogPostsListSection,
+  posts: Post[],
+  postsCount: number,
+) => {
+  const postListItems = posts.map((p) => ({
+    title: p.title,
+    publishedOn: p.publish_date,
+    imgSrc: sanityUrlFor(p.cover).url(),
+    categories: p.categories?.map((c) => c.title) || [],
+    slug: p.slug,
+    description: p.description,
+    author: p.author,
+  }));
+
+  return <PostsList posts={postListItems} postsCount={postsCount} />;
+};
+const buildBlogLastUpdatesSection = (
+  s: BlogLastUpdatesSection,
+  posts: { [tabId: string]: Post[] },
+) => {
+  const { background } = s;
+  const tabs = s.tabs.map((t) => {
+    const tabPosts = (posts[t._key] || []).map((p) => ({
+      title: p.title,
+      publishedOn: p.publish_date,
+      imgSrc: sanityUrlFor(p.cover).url(),
+      categories: p.categories?.map((c) => c.title) || [],
+      slug: p.slug,
+      description: p.description,
+      author: p.author,
+    }));
+
+    return {
+      title: t.title,
+      posts: tabPosts,
+    };
+  });
+
+  return <BlogLastUpdate tabs={tabs} background={background}></BlogLastUpdate>;
+};
 // const buildCardLinkSection = (s: CardLinksSection) => {
 //   const { title, card_links, _key, background } = s;
 //   return (

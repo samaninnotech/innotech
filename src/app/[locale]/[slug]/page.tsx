@@ -1,4 +1,3 @@
-
 import { SlugMapping } from "@/components/common/Navbar";
 import PageBaseLayout from "@/components/common/PageBaseLayout";
 import PageRenderer from "@/components/common/PageRenderer";

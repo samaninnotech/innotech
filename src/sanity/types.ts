@@ -37,7 +37,13 @@ export interface DecoratedLink extends SanityElement {
   type: DecoratedLinkType;
 }
 
+enum InterLinkRefType {
+  PAGE = "page",
+  POST = "post",
+}
+
 export interface InternalLink extends CustomLink {
+  refType: InterLinkRefType;
   linkType: CustomLinkType.Internal;
   internalRef?: string;
   internalAnchor?: string;
@@ -71,15 +77,20 @@ export function customLinkToHref(link: CustomLink) {
 }
 
 function internalLinkToHref(link: InternalLink) {
-  if (link.internalRef && link.internalAnchor) {
-    return `/${link.internalRef}#${link.internalAnchor}`;
-  } else if (link.internalRef) {
-    return `/${link.internalRef}`;
-  } else if (link.internalAnchor) {
-    return `#${link.internalAnchor}`;
-  } else {
-    return "";
+  let href = "";
+  if (link.refType === InterLinkRefType.POST) {
+    href = "/blog";
   }
+
+  if (link.internalRef && link.internalAnchor) {
+    href += `/${link.internalRef}#${link.internalAnchor}`;
+  } else if (link.internalRef) {
+    href += `/${link.internalRef}`;
+  } else if (link.internalAnchor) {
+    href += `#${link.internalAnchor}`;
+  }
+
+  return href;
 }
 
 /* Navbar Config */
@@ -146,12 +157,29 @@ export interface Post extends SanityElement {
   cover: string;
   body: any[]; // TODO fix
   _updatedAt: string;
+  description: string;
+  author: string;
 }
 
 export interface BlogCategory {
   title: string;
   tag: string;
   _updatedAt: string;
+}
+
+export interface BlogLastUpdatesSection extends Section {
+  tabs: BlogLastUpdatesSectionTab[];
+}
+
+interface BlogLastUpdatesSectionTab extends SanityElement {
+  title: string;
+  category: BlogCategory;
+}
+
+export function isBlogLastUpdatesSection(
+  section: Section,
+): section is BlogLastUpdatesSection {
+  return sectionMatchType(section, "blog_last_updates_section");
 }
 /* Latest Blog Posts*/
 export interface LatestBlogPosts extends Section {
@@ -411,6 +439,7 @@ interface ContentItem {
 /* Only Text Section */
 export interface OnlyTextSection extends Section {
   text: string;
+  height: string;
 }
 
 export function isOnlyTextSection(
