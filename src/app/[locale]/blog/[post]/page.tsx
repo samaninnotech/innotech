@@ -54,7 +54,6 @@ const Post: FC<{ params: { locale: string; post: string } }> = async ({
       <BlogHeader
         title={detail.title}
         imgSrc={sanityUrlFor(detail.cover).url()}
-        categories={detail.categories}
         publishedOn={formattedDate}
       />
       <BlogBodySection post={detail} />

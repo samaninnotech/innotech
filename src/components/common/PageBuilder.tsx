@@ -4,6 +4,7 @@ import {
   BlogHeaderSection,
   BlogLastUpdatesSection,
   BlogPostsListSection,
+  Carousel,
   ConsultationSection,
   GetInTouchSection,
   HeroSection,
@@ -12,6 +13,7 @@ import {
   isBlogHeaderSection,
   isBlogLastUpdatesSection,
   isBlogPostsListSection,
+  isCarousel,
   isConsultationSection,
   isGetInTouchSection,
   isHeroSection,
@@ -48,6 +50,7 @@ import {
 } from "@/sanity/types";
 import { FC, ReactNode } from "react";
 import {
+  Carousel as CarouselComponent,
   ConsultationSection as ConsultationSectionComponent,
   GetInTouchSection as GetInTouchSectionComponent,
   HeroSectionComponent,
@@ -140,24 +143,16 @@ const PageBuilder: FC<PageBuilderProps> = async ({
     } else if (isJobOfferSection(s)) {
       renderedSections.push(buildJobOfferSection(s));
     } else if (isBlogHeaderSection(s)) {
-      // const categories = await getBlogCategories(locale);
       renderedSections.push(buildBlogHeaderSection(s));
     } else if (isBlogPostsListSection(s)) {
-      const categorySlug = blogData?.categorySlug;
-      const posts = await getBlogPosts(locale, 12, undefined, categorySlug);
-      const postsCount = await getPostsCount(locale, categorySlug);
+      const posts = await getBlogPosts(locale, 12, undefined);
+      const postsCount = await getPostsCount(locale);
       renderedSections.push(buildBlogPostsListSection(s, posts, postsCount));
     } else if (isBlogLastUpdatesSection(s)) {
-      const posts: { [tabId: string]: Post[] } = {};
-
-      // Recupero i post per ogni tab
-      for (const tab of (s as BlogLastUpdatesSection).tabs) {
-        const categorySlug = tab.category?.tag || undefined;
-        const tabPosts = await getBlogPosts(locale, 3, undefined, categorySlug);
-        posts[tab._key] = tabPosts;
-      }
-
+      const posts = await getBlogPosts(locale, 12, undefined);
       renderedSections.push(buildBlogLastUpdatesSection(s, posts));
+    } else if (isCarousel(s)) {
+      renderedSections.push(buildCarousel(s));
     }
     // if (isContactsSection(s)) {
     //   const accountInfo = await getGlobalAccountInfo(locale);
@@ -380,7 +375,6 @@ const buildBlogPostsListSection = (
     title: p.title,
     publishedOn: p.publish_date,
     imgSrc: sanityUrlFor(p.cover).url(),
-    categories: p.categories?.map((c) => c.title) || [],
     slug: p.slug,
     description: p.description,
     author: p.author,
@@ -388,30 +382,29 @@ const buildBlogPostsListSection = (
 
   return <PostsList posts={postListItems} postsCount={postsCount} />;
 };
+
 const buildBlogLastUpdatesSection = (
   s: BlogLastUpdatesSection,
-  posts: { [tabId: string]: Post[] },
+  posts: Post[],
 ) => {
-  const { background } = s;
-  const tabs = s.tabs.map((t) => {
-    const tabPosts = (posts[t._key] || []).map((p) => ({
-      title: p.title,
-      publishedOn: p.publish_date,
-      imgSrc: sanityUrlFor(p.cover).url(),
-      categories: p.categories?.map((c) => c.title) || [],
-      slug: p.slug,
-      description: p.description,
-      author: p.author,
-    }));
-
-    return {
-      title: t.title,
-      posts: tabPosts,
-    };
-  });
-
-  return <BlogLastUpdate tabs={tabs} background={background}></BlogLastUpdate>;
+  return <BlogLastUpdate posts={posts} />;
 };
+
+const buildCarousel = (s: Carousel) => {
+  const { _key, title, images, background } = s;
+  const imgSrc = images?.map((i) => sanityUrlFor(i).url()) || [];
+  return (
+    <CarouselComponent
+      key={_key}
+      title={title}
+      imgSrc={imgSrc}
+      imgWidth={200}
+      imgHeight={200}
+      background={background}
+    ></CarouselComponent>
+  );
+};
+
 // const buildCardLinkSection = (s: CardLinksSection) => {
 //   const { title, card_links, _key, background } = s;
 //   return (
@@ -483,21 +476,6 @@ const buildHeroSection = (s: HeroSection) => {
 //       title={title}
 //       paragraph={paragraph}
 //     ></FAQSectionComponent>
-//   );
-// };
-
-// const buildCarousel = (s: Carousel) => {
-//   const { _key, title, images, background } = s;
-//   const imgSrc = images?.map((i) => sanityUrlFor(i).url()) || [];
-//   return (
-//     <CarouselComponent
-//       key={_key}
-//       title={title}
-//       imgSrc={imgSrc}
-//       imgWidth={1000}
-//       imgHeight={1000}
-//       background={background}
-//     ></CarouselComponent>
 //   );
 // };
 

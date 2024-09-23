@@ -24,15 +24,14 @@ export const PostDescription = styled.p`
   font-weight: 300;
   margin-bottom: 1rem;
   color: var(--text-light-color);
-    padding: 0 1rem;
-
+  padding: 0 1rem;
 `;
 export const PublishedDate = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 1rem auto;
-  svg{
+  svg {
     width: 15px;
   }
 `;
@@ -96,7 +95,7 @@ export const PostTileStyled = styled(Link)`
   overflow: hidden;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
-  
+
   &:hover {
     transform: translateY(-5px);
     text-decoration: none;
@@ -104,7 +103,7 @@ export const PostTileStyled = styled(Link)`
 `;
 export const LearnMoreLink = styled.div`
   display: inline-block;
-  color: #005a87; 
+  color: #005a87;
   font-size: 15px;
   font-weight: bold;
   text-decoration: none;
@@ -113,11 +112,11 @@ export const LearnMoreLink = styled.div`
   padding: 1.5rem 0;
   width: 100%;
   border-top: 1px solid gray;
-  overflow: hidden; 
+  overflow: hidden;
 
   /* Pseudo-element for the inner cover */
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: 0;
@@ -152,7 +151,6 @@ export const LearnMoreLink = styled.div`
   }
 `;
 
-
 export const SectionWrapper = styled.div`
   position: relative;
   box-sizing: border-box;
@@ -160,8 +158,8 @@ export const SectionWrapper = styled.div`
   background-color: #f8f8f8;
   margin: 0 auto;
   top: 120px;
-  padding-top: 120px; 
-  padding-bottom: 80px; 
+  padding-top: 120px;
+  padding-bottom: 80px;
 `;
 
 export const TilesContainer = styled.div`

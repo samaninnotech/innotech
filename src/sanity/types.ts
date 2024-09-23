@@ -152,7 +152,6 @@ export function isBlogPostsListSection(
 export interface Post extends SanityElement {
   title: string;
   slug: string;
-  categories: BlogCategory[];
   publish_date: string;
   cover: string;
   body: any[]; // TODO fix
@@ -162,45 +161,12 @@ export interface Post extends SanityElement {
   carousel: Carousel;
 }
 
-export interface BlogCategory {
-  title: string;
-  tag: string;
-  _updatedAt: string;
-}
-
-export interface BlogLastUpdatesSection extends Section {
-  tabs: BlogLastUpdatesSectionTab[];
-}
-
-interface BlogLastUpdatesSectionTab extends SanityElement {
-  title: string;
-  category: BlogCategory;
-}
+export interface BlogLastUpdatesSection extends Section {}
 
 export function isBlogLastUpdatesSection(
   section: Section,
 ): section is BlogLastUpdatesSection {
   return sectionMatchType(section, "blog_last_updates_section");
-}
-/* Latest Blog Posts*/
-export interface LatestBlogPosts extends Section {
-  title: string;
-  posts: BlogPostType[];
-}
-
-export function isLatestBlogPosts(
-  section: Section,
-): section is LatestBlogPosts {
-  return sectionMatchType(section, "latest_blog_posts");
-}
-
-export interface BlogPostType extends SanityElement {
-  title: string;
-  url: string;
-  image: string;
-  author: string;
-  date: string;
-  excerpt: string;
 }
 
 /* Consultation Section*/
