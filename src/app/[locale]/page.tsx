@@ -1,41 +1,3 @@
-// "use client";
-
-// import ConsultationSection from '@/components/common/ConsultationSection/ConsultationSection';
-// import EventsSection from '@/components/common/EventsSection/EventsSection';
-// import Footer from '@/components/common/Footer';
-// import HomePageTopPost from '@/components/common/HomePageTopPost/HomePageTopPost';
-// import LatestBlogPosts from '@/components/common/LatestBlogPosts'; // Import the LatestBlogPosts component
-// import PageTopBar from '@/components/common/PageTopBar';
-// import PartnerShipSection from '@/components/common/PartnerShipSection/PartnerShipSection';
-// import SolutionsSection from '@/components/common/SolutionsSection/SolutionsSection';
-// import React from 'react';
-// import RootLayout from './layout';
-
-// const HomePage: React.FC = () => {
-//   return (
-//     <RootLayout params={{ locale: '' }}>
-//       <PageTopBar
-//         contactLink="/contatti"
-//         contactText="Contattaci per trovare una soluzione adatta ai tuoi clienti"
-//         infoLink="tel:+39%20045%204450055"
-//         infoText="+39 045 4450055"
-//       />
-//       <HomePageTopPost
-//         backgroundImage="https://innotech.software/wp-content/uploads/2021/01/slider1.jpg"
-//       />
-//       <main>
-//         <ConsultationSection consultationSwiperSlides={[]} /> 
-//         <SolutionsSection /> 
-//         <PartnerShipSection />
-//         <LatestBlogPosts posts={[]} /> {/* Include the LatestBlogPosts component here */}
-//         <EventsSection events={[]} />
-//         <Footer/>
-//       </main>
-//     </RootLayout>
-//   );
-// };
-
-// export default HomePage;
 import PageBaseLayout from "@/components/common/PageBaseLayout";
 import PageRenderer from "@/components/common/PageRenderer";
 import { getHomepageId } from "@/sanity/queries";
@@ -106,4 +68,3 @@ const Home: FC<{ params: { locale: string } }> = async ({
 };
 
 export default Home;
-

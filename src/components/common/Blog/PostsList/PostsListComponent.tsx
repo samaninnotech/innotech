@@ -1,7 +1,6 @@
 "use client";
 
 import useTranslation from "@/i18n/useTranslation";
-import { useParams } from "next/navigation";
 import { FC, useState } from "react";
 import Spinner from "../../Spinner";
 import { CalendarIcon } from "../BlogHeader/BlogHeader.styled";
@@ -16,8 +15,6 @@ import {
   PostTitle,
   PublishedDate,
   SectionWrapper,
-  TagBadge,
-  TagBadgeContainer,
   TilesContainer,
 } from "./PostsList.styled";
 
@@ -29,7 +26,6 @@ const PostsListComponent: FC<PostsListProps> = ({ posts, postsCount }) => {
     posts.length < postsCount,
   );
   const { locale: currentLocale } = useTranslation();
-  const { categorySlug } = useParams();
 
   const loadMorePosts = async () => {
     setIsLoading(true);
@@ -44,10 +40,6 @@ const PostsListComponent: FC<PostsListProps> = ({ posts, postsCount }) => {
       setLength: "12",
       maxPublishDate: maxPublishDate,
     });
-
-    if (categorySlug) {
-      queryParams.append("categorySlug", categorySlug as string);
-    }
 
     const url = `/api/blog/posts?${queryParams.toString()}`;
 
@@ -80,7 +72,6 @@ export type PostListItem = {
   title: string;
   imgSrc: string;
   publishedOn: string;
-  categories: string[];
   slug: string;
   description: string;
   author: string;
@@ -90,18 +81,11 @@ export type PostTileProps = {
   post: PostListItem;
 };
 export const PostTile: FC<PostTileProps> = ({
-  post: { title, imgSrc, publishedOn, slug, categories, description, author },
+  post: { title, imgSrc, publishedOn, slug, description },
 }) => {
   const { locale: currentLocale } = useTranslation();
   return (
     <PostTileStyled href={"/blog/" + slug}>
-      {!!categories.length && (
-        <TagBadgeContainer>
-          {categories.map((c) => (
-            <TagBadge key={c}>{c}</TagBadge>
-          ))}
-        </TagBadgeContainer>
-      )}
       <ImageContainer>
         <PostImage
           src={imgSrc}
