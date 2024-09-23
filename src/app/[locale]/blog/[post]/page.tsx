@@ -1,3 +1,4 @@
+import { Carousel } from "@/components/common";
 import BlogBodySection from "@/components/common/Blog/BlogBodySection";
 import BlogHeader from "@/components/common/Blog/BlogHeader";
 import { SlugMapping } from "@/components/common/Navbar";
@@ -57,6 +58,15 @@ const Post: FC<{ params: { locale: string; post: string } }> = async ({
         publishedOn={formattedDate}
       />
       <BlogBodySection post={detail} />
+      {detail.carousel?.images && (
+        <Carousel
+          imgSrc={detail.carousel.images.map((img) => sanityUrlFor(img).url())}
+          title={detail.carousel.title}
+          imgWidth={370}
+          imgHeight={200}
+          background="#f5f5f5" // Customize the background as needed
+        />
+      )}
     </PageBaseLayout>
   );
 };

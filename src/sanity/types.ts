@@ -159,6 +159,7 @@ export interface Post extends SanityElement {
   _updatedAt: string;
   description: string;
   author: string;
+  carousel: Carousel;
 }
 
 export interface BlogCategory {
