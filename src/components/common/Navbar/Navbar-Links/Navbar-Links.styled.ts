@@ -9,13 +9,21 @@ type NavbarLinksProps = { $showMenu: boolean };
 export const NavbarLinksStyled = styled.nav<NavbarLinksProps>`
   display: flex;
   justify-content: space-between;
-  padding: 0rem 1rem;
+  padding: 1rem 1rem;
   width: 100%;
   align-items: center;
+  &.text-white {
+      color: white;
+    }
 
+    &.text-black {
+      color: black;
+    }
   ${mediaRules.lg} {
     justify-content: flex-start;
     position: relative;
+      padding: 0rem 1rem;
+
   }
 `;
 
@@ -37,9 +45,8 @@ export const MainLinksContainerStyled = styled.div`
   top: 100%;
   width: 100%;
   height: calc(100vh - 50px - 2.5em);
-  height: calc(100dvh - 50px - 2.5em);
   justify-content: space-between;
-
+  
   ${mediaRules.lg} {
     align-items: baseline;
     display: flex;
@@ -63,7 +70,6 @@ export const SidebarStyled = styled.div<{ $showMenu: boolean }>`
   transition: transform 0.3s ease-in-out; /* Shorten transition duration for responsiveness */
   transform: translateX(100%);
   z-index: 99999;
-
   ${({ $showMenu }) =>
     $showMenu &&
     css`
@@ -79,7 +85,7 @@ export const SidebarStyled = styled.div<{ $showMenu: boolean }>`
 export const SidebarContentStyled = styled.div`
   padding: 1rem;
   height: 100%;
-  overflow-y: auto;
+  overflow-y: scroll;
   display: flex;
   flex-direction: column;
 `;
@@ -104,16 +110,16 @@ export const SideBarLogoButtonContainer = styled.div`
   }
 `;
 
-export const BurgerMenuButton = styled.button`
+export const BurgerMenuButton = styled.button<{$burgerButtoncolor: string}>`
   display: block;
   font-size: 1.5rem;
   padding: 0 0.75rem;
   place-content: center;
-  color: white;
+  color: ${({ $burgerButtoncolor }) => ($burgerButtoncolor)};;
   background-color: transparent;
   z-index: 100001; /* Very high z-index */
   position: relative; /* Ensure positioning context */
-
+  
   ${mediaRules.lg} {
     display: none;
   }
@@ -124,7 +130,7 @@ export const OverlayStyled = styled.div<{ $showOverlay: boolean }>`
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.5); // Semi-transparent gray
   z-index: 1000; // Ensure it is above the content but below the sidebar
   cursor: pointer; // Indicate clickable area
