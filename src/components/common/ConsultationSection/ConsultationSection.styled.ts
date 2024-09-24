@@ -6,7 +6,7 @@ export const Section = styled.div`
   box-sizing: border-box;
   width: 100%;
   background-color: #f8f8f8;
-  top: -120px;
+  top: -230px;
   display: flex;
   justify-content: center;
   padding-bottom: 40px;

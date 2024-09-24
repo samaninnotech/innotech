@@ -19,7 +19,7 @@ export const RowContainer = styled.div<RowContainerProps>`
   position: relative;
   box-sizing: border-box;
   width: 100%;
-  height: 100vh;
+  height: 160vh;
   padding: 0px;
   background-image: url(${(props) => props.backgroundImage});
   background-size: cover;
@@ -29,7 +29,7 @@ export const RowContainer = styled.div<RowContainerProps>`
   align-items: center;
   justify-content: center;
   z-index: 1;
-  top: -60px;
+  top: -150px;
   font-family: CerebriSans;
   font-size: 15px;
   font-weight: 400;

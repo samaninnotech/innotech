@@ -61,7 +61,7 @@ const Home: FC<{ params: { locale: string } }> = async ({
 }) => {
   const { homepage } = await getHomepageId();
   return (
-    <PageBaseLayout slugMapping={{}}>
+    <PageBaseLayout slugMapping={{}} isHomepage={true}>
       <PageRenderer pageId={homepage} locale={locale}></PageRenderer>
     </PageBaseLayout>
   );

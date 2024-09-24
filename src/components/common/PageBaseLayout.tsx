@@ -5,9 +5,15 @@ import Footer from "./Footer";
 import { Navbar } from "./Navbar";
 import { SlugMapping } from "./Navbar/types";
 
-const PageBaseLayout: FC<PropsWithChildren<{ slugMapping: SlugMapping }>> = ({
+interface PageBaseLayoutProps {
+  slugMapping: SlugMapping;
+  isHomepage?: boolean; // Add isHomepage prop
+}
+
+const PageBaseLayout: FC<PropsWithChildren<PageBaseLayoutProps>> = ({
   children,
   slugMapping,
+  isHomepage = false, // Default to false if not passed
 }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -31,7 +37,11 @@ const PageBaseLayout: FC<PropsWithChildren<{ slugMapping: SlugMapping }>> = ({
 
   return (
     <>
-      <Navbar slugMapping={slugMapping} onSidebarToggle={handleSidebarToggle} />
+      <Navbar
+        slugMapping={slugMapping}
+        onSidebarToggle={handleSidebarToggle}
+        isHomepage={isHomepage} 
+      />
       <main className="flex-grow container mx-auto pt-32">{children}</main>
       <footer>
         <Footer />

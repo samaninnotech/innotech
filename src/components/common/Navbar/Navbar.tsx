@@ -13,43 +13,42 @@ import { SlugMapping } from "./types";
 export type NavbarProps = {
   slugMapping: SlugMapping;
   onSidebarToggle: () => void;
+  isHomepage: boolean;
 };
 
-const Navbar: FC<NavbarProps> = ({ slugMapping, onSidebarToggle }) => {
+const Navbar: FC<NavbarProps> = ({ slugMapping, onSidebarToggle, isHomepage }) => {
   const [showSecondaryNavbar, setShowSecondaryNavbar] = useState(false);
-  const [hideMainNavbar, setHideMainNavbar] = useState(false);
+  
+  const handleScroll = () => {
+    const scrollY = window.scrollY;
+    const shouldShow = scrollY > 50;
+    setShowSecondaryNavbar(shouldShow);
+  };
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-
-      // Hide the main navbar after scrolling 50px
-      setHideMainNavbar(scrollY > 50);
-
-      // Show the secondary navbar after scrolling 200px
-      setShowSecondaryNavbar(scrollY > 200);
-    };
-
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   return (
     <>
-      {/* Main Transparent Navbar */}
-      <MainNavbarStyled isVisible={!hideMainNavbar}>
+      {/* Main Navbar (for all pages) */}
+      <MainNavbarStyled isVisible={!showSecondaryNavbar}>
         <NavbarWrapper>
           <NavbarInnerWrapper>
             <NavbarLinks
               slugMapping={slugMapping}
-              logoSrc="/site-logo.png"
+              logoSrc={isHomepage ? "/site-logo.png" : "/site-logo-blue.png"}
               onSidebarToggle={onSidebarToggle}
-            />
+              textColorClass={isHomepage ? "text-white" : "text-black"} // Pass the text color class
+              burgerButtoncolor={isHomepage ? "white" : "black"}            />
           </NavbarInnerWrapper>
         </NavbarWrapper>
       </MainNavbarStyled>
 
-      {/* Secondary White Navbar */}
+      {/* Secondary Navbar (for all pages) */}
       <SecondaryNavbarStyled isVisible={showSecondaryNavbar}>
         <NavbarWrapper>
           <NavbarInnerWrapper>
@@ -57,7 +56,8 @@ const Navbar: FC<NavbarProps> = ({ slugMapping, onSidebarToggle }) => {
               slugMapping={slugMapping}
               logoSrc="/site-logo-blue.png"
               onSidebarToggle={onSidebarToggle}
-            />
+              textColorClass="text-black" // Always black for the secondary navbar
+              burgerButtoncolor={"black"}            />
           </NavbarInnerWrapper>
         </NavbarWrapper>
       </SecondaryNavbarStyled>

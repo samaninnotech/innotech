@@ -235,6 +235,7 @@ const GlobalStyles = createGlobalStyle`
   body {
     height: 100%;
     background-color: white; /* Ensure a default background color */
+    padding-top: 150px;
   }
 
   button {
@@ -248,7 +249,7 @@ const GlobalStyles = createGlobalStyle`
       text-decoration: underline;
     }
   }
-
+  
   /* Heading styles */
   h1, h2, h3, h4 {
     font-weight: 700;

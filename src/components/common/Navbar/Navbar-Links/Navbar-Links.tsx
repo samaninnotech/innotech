@@ -40,21 +40,37 @@ export type NavbarLinksProps = {
   slugMapping: SlugMapping;
   logoSrc: string;
   onSidebarToggle: () => void;
+  textColorClass: string;
+  burgerButtoncolor: string;
 };
 
 const NavbarLinks: FC<NavbarLinksProps> = ({
   slugMapping,
   logoSrc,
   onSidebarToggle,
+  textColorClass,
+  burgerButtoncolor
 }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
+  const [scrollY, setScrollY] = useState(0); // Track scroll position
 
   const handleSidebarToggle = () => {
     setShowMenu((prev) => !prev);
-    setIsOverlayVisible((prev) => !prev); // Toggle overlay visibility
-    onSidebarToggle(); // Notify parent component of the sidebar toggle
+    setIsOverlayVisible((prev) => !prev);
+    onSidebarToggle();
   };
+
+  const handleScroll = () => {
+    setScrollY(window.scrollY); // Update scroll position on scroll
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   useEffect(() => {
     if (showMenu) {
@@ -69,7 +85,7 @@ const NavbarLinks: FC<NavbarLinksProps> = ({
 
   return (
     <>
-      <NavbarLinksStyled $showMenu={showMenu}>
+      <NavbarLinksStyled $showMenu={showMenu} className={textColorClass}>
         <LogoContainerStyled>
           <Link href="/" aria-label="Home">
             <Image src={logoSrc} alt="Logo" height={50} width={250} />
@@ -79,11 +95,11 @@ const NavbarLinks: FC<NavbarLinksProps> = ({
           <PageLinksContainer />
           <NavbarLanguages slugMapping={slugMapping} />
         </MainLinksContainerStyled>
-        <BurgerMenuButton onClick={handleSidebarToggle}>
-          {showMenu ? <MdMenu /> : <MdMenu />}
+        <BurgerMenuButton onClick={handleSidebarToggle} $burgerButtoncolor={burgerButtoncolor}>
+          {showMenu ? <MdClose /> : <MdMenu />}
         </BurgerMenuButton>
       </NavbarLinksStyled>
-      <SidebarStyled $showMenu={showMenu}>
+      <SidebarStyled $showMenu={showMenu} style={{ top: `${scrollY}px` }}>
         <SidebarContentStyled>
           <SideBarLogoButtonContainer>
             <Image
@@ -100,7 +116,8 @@ const NavbarLinks: FC<NavbarLinksProps> = ({
       </SidebarStyled>
       <OverlayStyled
         $showOverlay={isOverlayVisible}
-        onClick={handleSidebarToggle} // Close sidebar when overlay is clicked
+        onClick={handleSidebarToggle}
+        style={{ top: `${scrollY}px` }}
       />
     </>
   );
