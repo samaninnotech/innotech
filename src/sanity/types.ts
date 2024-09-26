@@ -194,11 +194,13 @@ export interface Event extends SanityElement {
   title: string;
   slug: string;
   publish_date: string;
-  event_date: Array<{        // Array of event date objects
-    date: string;             // Date of the event (e.g., '2024-09-26')
-    start_time?: string;      // Optional start time (e.g., '14:00')
-    end_time?: string;        // Optional end time (e.g., '16:00')
-  }>;  cover: string;
+  event_date: Array<{
+    // Array of event date objects
+    date: string; // Date of the event (e.g., '2024-09-26')
+    start_time?: string; // Optional start time (e.g., '14:00')
+    end_time?: string; // Optional end time (e.g., '16:00')
+  }>;
+  cover: string;
   body: any[]; // TODO fix
   _updatedAt: string;
   description: string;

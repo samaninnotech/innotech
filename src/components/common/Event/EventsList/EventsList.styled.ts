@@ -73,9 +73,7 @@ export const EventTileStyled = styled(Link)`
   }
 `;
 
-export const LearnMoreLink = styled.p`
-  
-`;
+export const LearnMoreLink = styled.p``;
 
 export const SectionWrapper = styled.div`
   position: relative;
@@ -112,22 +110,22 @@ export const CalendarIcon = styled(FaCalendarAlt)`
 `;
 
 export const MonthHeading = styled.h2`
-display: flex;
-align-items: center;
-justify-content: center;
-margin: 2rem 0;
-font-size: 1.5rem;
-text-align: center;
-font-weight: bold;
-color: var(--accent-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem 0;
+  font-size: 1.5rem;
+  text-align: center;
+  font-weight: bold;
+  color: var(--accent-color);
 
-&::before,
-&::after {
-  content: "";
-  flex: 1;
-  border-bottom: 2px solid #ddd;
-  margin: 0 1rem;
-}
+  &::before,
+  &::after {
+    content: "";
+    flex: 1;
+    border-bottom: 2px solid #ddd;
+    margin: 0 1rem;
+  }
 `;
 export const ContentContainer = styled.div`
   display: flex;
@@ -146,5 +144,3 @@ export const ContentContainer = styled.div`
     overflow: hidden; /* Prevent overflow */
   }
 `;
-
-

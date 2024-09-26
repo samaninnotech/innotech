@@ -10,7 +10,7 @@ import {
   NavbarConfigResult,
   Page,
   PagesConfigResult,
-  Post
+  Post,
 } from "./types";
 
 /************************************/
@@ -398,7 +398,6 @@ const buildJobOfferSectionQuery = (locale: string, fallbackLocale: string) => {
   }`;
 };
 
-
 const buildCarouselQuery = (locale: string) => {
   return `{
     'title': coalesce(title.${locale}, title.${fallbackLocale}),
@@ -769,7 +768,7 @@ export const getEventsMainPage = (locale: string) => {
 
 const allEventsSlugsQuery = () => {
   const querySlices = locales.map(
-    (l) => `'title_${l}': title.${l}, 'slug_${l}': slug.${l}.current`
+    (l) => `'title_${l}': title.${l}, 'slug_${l}': slug.${l}.current`,
   );
 
   return `*[ _type == "event"]{
@@ -779,7 +778,6 @@ const allEventsSlugsQuery = () => {
     _updatedAt
   }`;
 };
-
 
 export const getAllEventsSlugs = () => {
   const query = allEventsSlugsQuery();
@@ -809,30 +807,25 @@ const eventsQuery = (
     }`;
 };
 
-
-
 export const getEvents = (
   locale: string,
   setLength: number,
   maxEventDate?: Date,
 ) => {
   const query = eventsQuery(locale, setLength, maxEventDate); // Use eventsQuery here
-  const sanityClient = getSanityClient(); 
+  const sanityClient = getSanityClient();
   return sanityClient.fetch<Event[]>(query); // Ensure this fetches Event type
 };
-
 
 export const getEventsCount = (locale?: string) => {
   const query = `count(*[ _type == "event" ])`; // Changed _type to "event"
   const sanityClient = getSanityClient();
   return sanityClient.fetch<number>(query); // Ensure it fetches a number
 };
-;
-
 const eventBySlugQuery = (locale: string, slug: string) => {
   const slugSlices = locales.map(
     (l) =>
-      `'slug_${l}': coalesce(slug.${l}.current, slug.${fallbackLocale}.current)`
+      `'slug_${l}': coalesce(slug.${l}.current, slug.${fallbackLocale}.current)`,
   );
 
   return `*[_type == "event" && slug.${locale}.current == '${slug}'][0] {
@@ -852,13 +845,11 @@ const eventBySlugQuery = (locale: string, slug: string) => {
   }`;
 };
 
-
 export const getEventBySlug = (locale: string, slug: string) => {
   const query = eventBySlugQuery(locale, slug); // Reusing the existing post query for events
   const sanityClient = getSanityClient();
   return sanityClient.fetch<Event & { [key: string]: string }>(query); // Adjusting type to Event
 };
-
 
 /**
  * Recupera le info necessarie per il metadata di Homepage

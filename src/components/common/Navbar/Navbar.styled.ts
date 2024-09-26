@@ -29,8 +29,8 @@ export const NavbarInnerWrapper = styled.div`
 `;
 
 export const MainNavbarStyled = styled.header<{ isVisible: boolean }>`
-  position: fixed; 
-  top: 60px; 
+  position: fixed;
+  top: 60px;
   left: 0;
   width: 100%;
   background-color: transparent;
@@ -42,13 +42,15 @@ export const MainNavbarStyled = styled.header<{ isVisible: boolean }>`
 
 export const SecondaryNavbarStyled = styled.header<{ isVisible: boolean }>`
   position: fixed;
-  top: 0; 
+  top: 0;
   left: 0;
   width: 100%;
   background-color: white;
   color: black;
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-  transform: translateY(${({ isVisible }) => (isVisible ? '0' : '-100%')});
+  transition:
+    opacity 0.3s ease-in-out,
+    transform 0.3s ease-in-out;
+  transform: translateY(${({ isVisible }) => (isVisible ? "0" : "-100%")});
   opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
   z-index: 50;
 `;

@@ -1,6 +1,6 @@
 enum CustomPageIds {
   BLOG = "_CUSTOM_blogHomepagePageID",
-  EVENTS = "_CUSTOM_eventsHomepagePageID"
+  EVENTS = "_CUSTOM_eventsHomepagePageID",
 }
 
 export default CustomPageIds;

@@ -49,7 +49,7 @@ const NavbarLinks: FC<NavbarLinksProps> = ({
   logoSrc,
   onSidebarToggle,
   textColorClass,
-  burgerButtoncolor
+  burgerButtoncolor,
 }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
@@ -95,7 +95,10 @@ const NavbarLinks: FC<NavbarLinksProps> = ({
           <PageLinksContainer />
           <NavbarLanguages slugMapping={slugMapping} />
         </MainLinksContainerStyled>
-        <BurgerMenuButton onClick={handleSidebarToggle} $burgerButtoncolor={burgerButtoncolor}>
+        <BurgerMenuButton
+          onClick={handleSidebarToggle}
+          $burgerButtoncolor={burgerButtoncolor}
+        >
           {showMenu ? <MdClose /> : <MdMenu />}
         </BurgerMenuButton>
       </NavbarLinksStyled>

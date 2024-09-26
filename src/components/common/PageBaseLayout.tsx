@@ -40,7 +40,7 @@ const PageBaseLayout: FC<PropsWithChildren<PageBaseLayoutProps>> = ({
       <Navbar
         slugMapping={slugMapping}
         onSidebarToggle={handleSidebarToggle}
-        isHomepage={isHomepage} 
+        isHomepage={isHomepage}
       />
       <main className="flex-grow container mx-auto pt-32">{children}</main>
       <footer>

@@ -13,17 +13,16 @@ export const NavbarLinksStyled = styled.nav<NavbarLinksProps>`
   width: 100%;
   align-items: center;
   &.text-white {
-      color: white;
-    }
+    color: white;
+  }
 
-    &.text-black {
-      color: black;
-    }
+  &.text-black {
+    color: black;
+  }
   ${mediaRules.lg} {
     justify-content: flex-start;
     position: relative;
-      padding: 0rem 1rem;
-
+    padding: 0rem 1rem;
   }
 `;
 
@@ -46,7 +45,7 @@ export const MainLinksContainerStyled = styled.div`
   width: 100%;
   height: calc(100vh - 50px - 2.5em);
   justify-content: space-between;
-  
+
   ${mediaRules.lg} {
     align-items: baseline;
     display: flex;
@@ -110,16 +109,16 @@ export const SideBarLogoButtonContainer = styled.div`
   }
 `;
 
-export const BurgerMenuButton = styled.button<{$burgerButtoncolor: string}>`
+export const BurgerMenuButton = styled.button<{ $burgerButtoncolor: string }>`
   display: block;
   font-size: 1.5rem;
   padding: 0 0.75rem;
   place-content: center;
-  color: ${({ $burgerButtoncolor }) => ($burgerButtoncolor)};;
+  color: ${({ $burgerButtoncolor }) => $burgerButtoncolor};
   background-color: transparent;
   z-index: 100001; /* Very high z-index */
   position: relative; /* Ensure positioning context */
-  
+
   ${mediaRules.lg} {
     display: none;
   }

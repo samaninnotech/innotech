@@ -1,4 +1,9 @@
-import { getBlogPosts, getEvents, getEventsCount, getPostsCount } from "@/sanity/queries";
+import {
+  getBlogPosts,
+  getEvents,
+  getEventsCount,
+  getPostsCount,
+} from "@/sanity/queries";
 import { sanityUrlFor } from "@/sanity/sanity-client";
 import {
   BlogHeaderSection,
@@ -52,7 +57,7 @@ import {
   TeamList,
   TickItemsSection,
   VideoSection,
-  VisionsSection
+  VisionsSection,
 } from "@/sanity/types";
 import { FC, ReactNode } from "react";
 import {
@@ -82,16 +87,12 @@ import BlogLastUpdate from "./BlogLastUpdates";
 import EventHeaderComponent from "./Event/EventHeader";
 import EventsList from "./Event/EventsList";
 
-
 type PageBuilderProps = {
   sections: Section[];
   locale: string;
 };
 
-const PageBuilder: FC<PageBuilderProps> = async ({
-  sections,
-  locale,
-}) => {
+const PageBuilder: FC<PageBuilderProps> = async ({ sections, locale }) => {
   if (!sections?.length) {
     return <></>;
   }
@@ -145,8 +146,7 @@ const PageBuilder: FC<PageBuilderProps> = async ({
       renderedSections.push(buildBlogLastUpdatesSection(s, posts));
     } else if (isCarousel(s)) {
       renderedSections.push(buildCarousel(s));
-    }
-    else if (isEventHeaderSection(s)) {
+    } else if (isEventHeaderSection(s)) {
       renderedSections.push(buildEventHeaderSection(s));
     } else if (isEventsListSection(s)) {
       const events = await getEvents(locale, 12, undefined);

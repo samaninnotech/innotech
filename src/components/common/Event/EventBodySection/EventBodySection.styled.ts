@@ -96,7 +96,9 @@ export const ShareBubble = styled.div`
   z-index: 10;
   opacity: 0;
   transform: translateY(10px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
 
   &:after {
     content: "";
