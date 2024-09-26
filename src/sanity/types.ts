@@ -169,6 +169,52 @@ export function isBlogLastUpdatesSection(
   return sectionMatchType(section, "blog_last_updates_section");
 }
 
+/* Event */
+export interface EventHeaderSection extends Section {
+  title: string;
+  subtitle: string;
+  background_image: string;
+}
+
+export function isEventHeaderSection(
+  section: Section,
+): section is EventHeaderSection {
+  return sectionMatchType(section, "event_header_section");
+}
+
+export interface EventsListSection extends Section {}
+
+export function isEventsListSection(
+  section: Section,
+): section is EventsListSection {
+  return sectionMatchType(section, "events_list_section");
+}
+
+export interface Event extends SanityElement {
+  title: string;
+  slug: string;
+  publish_date: string;
+  event_date: Array<{        // Array of event date objects
+    date: string;             // Date of the event (e.g., '2024-09-26')
+    start_time?: string;      // Optional start time (e.g., '14:00')
+    end_time?: string;        // Optional end time (e.g., '16:00')
+  }>;  cover: string;
+  body: any[]; // TODO fix
+  _updatedAt: string;
+  description: string;
+  author: string;
+  carousel: Carousel;
+  pageBuilder: Section[];
+}
+
+export interface EventsLastUpdatesSection extends Section {}
+
+export function isEventsLastUpdatesSection(
+  section: Section,
+): section is EventsLastUpdatesSection {
+  return sectionMatchType(section, "events_last_updates_section");
+}
+
 /* Consultation Section*/
 export interface ConsultationSection extends Section {
   consultationSwiperSlides: ConsultationSwiperSlideType[];

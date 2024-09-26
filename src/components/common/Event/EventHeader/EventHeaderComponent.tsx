@@ -2,34 +2,34 @@
 
 import { FC } from "react";
 import {
-  BackgroundImage,
-  CalendarIcon,
-  Date,
-  PublishedDate,
-  Section,
-  TextContainer,
-  Title,
-} from "./BlogHeader.styled";
+    BackgroundImage,
+    CalendarIcon,
+    Date,
+    EventDate,
+    Section,
+    TextContainer,
+    Title,
+} from "./EventHeader.styled";
 
-type BlogHeaderProps = {
+type EventHeaderProps = {
   title: string;
   subtitle?: string;
   imgSrc: string;
-  publishedOn?: string;
+  eventDate?: string;
 };
 
-const BlogHeaderComponent: FC<BlogHeaderProps> = ({
+const EventHeaderComponent: FC<EventHeaderProps> = ({
   title,
   subtitle,
   imgSrc,
-  publishedOn,
+  eventDate,
 }) => (
   <>
     <Section>
       <BackgroundImage
         src={imgSrc}
         fill
-        alt="blog-background"
+        alt="event-background"
         style={{
           objectFit: "cover",
         }}
@@ -38,14 +38,14 @@ const BlogHeaderComponent: FC<BlogHeaderProps> = ({
     <TextContainer className="container">
       <Title>{title}</Title>
       {subtitle && <p>{subtitle}</p>}
-      {!!publishedOn && (
-        <PublishedDate>
+      {!!eventDate && (
+        <EventDate>
           <CalendarIcon className="calendar-icon" />
-          <Date>{publishedOn}</Date>
-        </PublishedDate>
+          <Date>{eventDate}</Date>
+        </EventDate>
       )}
     </TextContainer>
   </>
 );
 
-export default BlogHeaderComponent;
+export default EventHeaderComponent;

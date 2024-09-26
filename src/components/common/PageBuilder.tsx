@@ -1,4 +1,4 @@
-import { getBlogPosts, getPostsCount } from "@/sanity/queries";
+import { getBlogPosts, getEvents, getEventsCount, getPostsCount } from "@/sanity/queries";
 import { sanityUrlFor } from "@/sanity/sanity-client";
 import {
   BlogHeaderSection,
@@ -6,6 +6,9 @@ import {
   BlogPostsListSection,
   Carousel,
   ConsultationSection,
+  Event,
+  EventHeaderSection,
+  EventsListSection,
   GetInTouchSection,
   HeroSection,
   HomePageTopPost,
@@ -15,6 +18,9 @@ import {
   isBlogPostsListSection,
   isCarousel,
   isConsultationSection,
+  isEventHeaderSection,
+  isEventsLastUpdatesSection,
+  isEventsListSection,
   isGetInTouchSection,
   isHeroSection,
   isHomePageTopPost,
@@ -46,7 +52,7 @@ import {
   TeamList,
   TickItemsSection,
   VideoSection,
-  VisionsSection,
+  VisionsSection
 } from "@/sanity/types";
 import { FC, ReactNode } from "react";
 import {
@@ -73,32 +79,18 @@ import {
 import BlogHeaderComponent from "./Blog/BlogHeader";
 import PostsList from "./Blog/PostsList";
 import BlogLastUpdate from "./BlogLastUpdates";
-// import {
-//   Carousel as CarouselComponent,
-//   CountersSectionComponent,
-//   FAQSection as FAQSectionComponent,
-//   HeroSection as HeroSectionComponent,
-//   InfoSection as InfoSectionComponent,
-//   NewsLetterForm,
-//   TextLinkSection as TextLinkSectionComponent,
-// } from ".";
-// import AssistancePage from "../Pages/AssistancePage";
-// import ContactsPage from "../Pages/ContactsPage";
-// import BlockSectionComponent from "./BlockSection";
-// import CardLinkSection from "./CardLinkSection";
-// import ImageLinkSection from "./ImageLinkSection";
-// import LargeBackgroundSectionComponent from "./LargeBackgroundSection";
+import EventHeaderComponent from "./Event/EventHeader";
+import EventsList from "./Event/EventsList";
+
 
 type PageBuilderProps = {
   sections: Section[];
   locale: string;
-  blogData?: { categorySlug: string };
 };
 
 const PageBuilder: FC<PageBuilderProps> = async ({
   sections,
   locale,
-  blogData,
 }) => {
   if (!sections?.length) {
     return <></>;
@@ -154,39 +146,16 @@ const PageBuilder: FC<PageBuilderProps> = async ({
     } else if (isCarousel(s)) {
       renderedSections.push(buildCarousel(s));
     }
-    // if (isContactsSection(s)) {
-    //   const accountInfo = await getGlobalAccountInfo(locale);
-    //   if (accountInfo) {
-    //     renderedSections.push(buildContactsPage(s, accountInfo));
-    //   }
-    // } else if (isAssistanceSection(s)) {
-    //   const assistanceInfo = await getAssistanceInfo();
-    //   if (assistanceInfo) {
-    //     renderedSections.push(buildAssistancePage(s, assistanceInfo));
-    //   }
-    // } else if (isInfoSection(s)) {
-    //   renderedSections.push(buildInfoSection(s));
-    // } else if (isImageLinksSection(s)) {
-    //   renderedSections.push(buildImageLinksSection(s));
-    // } else if (isHeroSection(s)) {
-    //   renderedSections.push(buildHeroSection(s));
-    // } else if (isFAQSection(s)) {
-    //   renderedSections.push(buildFAQSection(s));
-    // } else if (isCarousel(s)) {
-    //   renderedSections.push(buildCarousel(s));
-    // } else if (isTextLinkSection(s)) {
-    //   renderedSections.push(buildTextLinksSection(s));
-    // } else if (isCountersSection(s)) {
-    //   renderedSections.push(buildCountersSection(s));
-    // } else if (isCardLinkSection(s)) {
-    //   renderedSections.push(buildCardLinkSection(s));
-    // } else if (isBlockSection(s)) {
-    //   renderedSections.push(buildBlockSection(s));
-    // } else if (isNewsletterFormSection(s)) {
-    //   renderedSections.push(buildNewsletterFormSection(s));
-    // } else if (isLargeBackgroundSection(s)) {
-    //   renderedSections.push(buildLargeBackgroundSection(s));
-    // }
+    else if (isEventHeaderSection(s)) {
+      renderedSections.push(buildEventHeaderSection(s));
+    } else if (isEventsListSection(s)) {
+      const events = await getEvents(locale, 12, undefined);
+      const postsCount = await getEventsCount(locale);
+      renderedSections.push(buildEventsListSection(s, events, postsCount));
+    } else if (isEventsLastUpdatesSection(s)) {
+      const posts = await getEvents(locale, 12, undefined);
+      renderedSections.push(buildEventsLastUpdatesSection(s, posts));
+    }
   }
 
   return <>{renderedSections}</>;
@@ -390,6 +359,44 @@ const buildBlogLastUpdatesSection = (
   return <BlogLastUpdate posts={posts} />;
 };
 
+const buildEventHeaderSection = (section: EventHeaderSection) => {
+  const { title, subtitle, background_image } = section;
+  return (
+    <>
+      <EventHeaderComponent
+        title={title}
+        subtitle={subtitle}
+        imgSrc={sanityUrlFor(background_image).url()}
+      />
+    </>
+  );
+};
+
+const buildEventsListSection = (
+  section: EventsListSection,
+  events: Event[],
+  eventsCount: number,
+) => {
+  const eventsListItems = events.map((p) => ({
+    title: p.title,
+    publishedOn: p.publish_date,
+    eventDate: p.event_date[0],
+    imgSrc: sanityUrlFor(p.cover).url(),
+    slug: p.slug,
+    description: p.description,
+    author: p.author,
+  }));
+
+  return <EventsList events={eventsListItems} eventsCount={eventsCount} />;
+};
+
+const buildEventsLastUpdatesSection = (
+  s: BlogLastUpdatesSection,
+  posts: Post[],
+) => {
+  return <BlogLastUpdate posts={posts} />;
+};
+
 const buildCarousel = (s: Carousel) => {
   const { _key, title, images, background } = s;
   const imgSrc = images?.map((i) => sanityUrlFor(i).url()) || [];
@@ -404,44 +411,6 @@ const buildCarousel = (s: Carousel) => {
     ></CarouselComponent>
   );
 };
-
-// const buildCardLinkSection = (s: CardLinksSection) => {
-//   const { title, card_links, _key, background } = s;
-//   return (
-//     <CardLinkSection
-//       title={title}
-//       key={_key}
-//       cards={card_links || []}
-//       background={background}
-//     />
-//   );
-// };
-
-// const buildInfoSection = (s: InfoSection) => {
-//   const { title, info_blocks, _key, background } = s;
-
-//   return (
-//     <InfoSectionComponent
-//       key={_key}
-//       heading={title}
-//       blocks={info_blocks}
-//       background={background}
-//     />
-//   );
-// };
-
-// const buildImageLinksSection = (s: ImageLinksSection) => {
-//   const { _key, title, paragraph, image_links, background } = s;
-//   return (
-//     <ImageLinkSection
-//       key={_key}
-//       heading={title}
-//       paragraph={paragraph}
-//       background={background}
-//       imgLinks={image_links}
-//     ></ImageLinkSection>
-//   );
-// };
 
 const buildHeroSection = (s: HeroSection) => {
   const {
@@ -466,104 +435,4 @@ const buildHeroSection = (s: HeroSection) => {
   );
 };
 
-// const buildFAQSection = (s: FAQSection) => {
-//   const { _key, faq_list, background, title, paragraph } = s;
-//   return (
-//     <FAQSectionComponent
-//       key={_key}
-//       background={background}
-//       faqList={faq_list}
-//       title={title}
-//       paragraph={paragraph}
-//     ></FAQSectionComponent>
-//   );
-// };
-
-// const buildTextLinksSection = (s: TextLinksSection) => {
-//   const { _key, title, paragraph, text_links, background } = s;
-//   return (
-//     <TextLinkSectionComponent
-//       key={_key}
-//       heading={title}
-//       paragraph={paragraph}
-//       background={background}
-//       textLinkList={text_links}
-//     ></TextLinkSectionComponent>
-//   );
-// };
-
-// const buildCountersSection = (s: CountersSection) => {
-//   const { _key, duration, counters, background } = s;
-//   const msDuration = duration * 1000;
-//   return (
-//     <CountersSectionComponent
-//       key={_key}
-//       duration={msDuration}
-//       counters={counters || []}
-//       background={background}
-//     ></CountersSectionComponent>
-//   );
-// };
-
-// const buildContactsPage = (
-//   s: ContactsSection,
-//   accountInfo: GlobalAccountInfoResult,
-// ) => {
-//   return (
-//     <ContactsPage
-//       key={s._key}
-//       addresses={accountInfo.account_references || []}
-//       emails={accountInfo.emails || []}
-//     ></ContactsPage>
-//   );
-// };
-
-// const buildAssistancePage = (
-//   s: AssistanceSection,
-//   assistanceInfo: AssistanceInfoResult,
-// ) => {
-//   const { email, phone, address } = assistanceInfo;
-//   return (
-//     <AssistancePage
-//       key={s._key}
-//       email={email}
-//       phone={phone}
-//       address={address}
-//     ></AssistancePage>
-//   );
-// };
-
-// const buildBlockSection = (s: BlockSection) => {
-//   return <BlockSectionComponent section={s} />;
-// };
-
-// const buildNewsletterFormSection = (s: NewsletterFormSection) => {
-//   const {
-//     title,
-//     image,
-//     accept_marketing_message,
-//     legal_consent_message,
-//     background,
-//   } = s;
-//   return (
-//     <NewsLetterForm
-//       heading={title}
-//       imgSrc={sanityUrlFor(image).url()}
-//       marketingConsentMessage={accept_marketing_message}
-//       legalConsentMessage={legal_consent_message}
-//       background={background}
-//     ></NewsLetterForm>
-//   );
-// };
-
-// const buildLargeBackgroundSection = (s: LargeBackgroundSection) => {
-//   const { title, image, link } = s;
-//   return (
-//     <LargeBackgroundSectionComponent
-//       title={title}
-//       bgImage={sanityUrlFor(image).url()}
-//       heroLink={link}
-//     />
-//   );
-// };
 export default PageBuilder;
