@@ -5,11 +5,12 @@ import sanityClient from "./sanity-client";
 import {
   AssistanceInfoResult,
   ChildPagesConfigResult,
+  Event,
   GlobalAccountInfoResult,
   NavbarConfigResult,
   Page,
   PagesConfigResult,
-  Post,
+  Post
 } from "./types";
 
 /************************************/
@@ -60,7 +61,7 @@ const buildPageDeconstructionQUery = (locale: string) => `{
     _type == 'blog_header_section' => ${buildBlogHeaderSectionQuery(locale)},
     _type == 'blog_last_updates_section' => ${buildBlogLastUpdatesSectionQuery(locale)},
     _type == 'carousel' => ${buildCarouselQuery(locale)},
-
+    _type == 'event_header_section' => ${buildEventHeaderSectionQuery(locale)},
 
 
   }
@@ -76,6 +77,12 @@ const buildBlogLastUpdatesSectionQuery = (locale: string) => `{
     _key,
     'title': coalesce(title.${locale}, title.${fallbackLocale}),
   }
+}`;
+const buildEventHeaderSectionQuery = (locale: string) => `
+{
+  'title': coalesce(title.${locale}, title.${fallbackLocale}),
+  'subtitle': coalesce(subtitle.${locale}, subtitle.${fallbackLocale}),
+  background_image,
 }`;
 const buildHeroSectionQuery = (locale: string) => {
   const buildHeroColumnQuery = (locale: string) => `
@@ -391,6 +398,14 @@ const buildJobOfferSectionQuery = (locale: string, fallbackLocale: string) => {
   }`;
 };
 
+
+const buildCarouselQuery = (locale: string) => {
+  return `{
+    'title': coalesce(title.${locale}, title.${fallbackLocale}),
+    'images': images[].asset->url
+  }`;
+};
+
 /******************************/
 /*   Page By Id and By Slug   */
 /******************************/
@@ -703,13 +718,6 @@ export const getPostsCount = (locale?: string) => {
   return sanityClient.fetch<number>(query);
 };
 
-const buildCarouselQuery = (locale: string) => {
-  return `{
-    'title': coalesce(title.${locale}, title.${fallbackLocale}),
-    'images': images[].asset->url
-  }`;
-};
-
 const postBySlugQuery = (locale: string, slug: string) => {
   const slugSlices = locales.map(
     (l) =>
@@ -753,6 +761,104 @@ export const getPostBySlug = (locale: string, slug: string) => {
   const sanityClient = getSanityClient();
   return sanityClient.fetch<Post & { [key: string]: string }>(query);
 };
+
+/* EVENTS */
+export const getEventsMainPage = (locale: string) => {
+  return getPageById(CustomPageIds.EVENTS, locale);
+};
+
+const allEventsSlugsQuery = () => {
+  const querySlices = locales.map(
+    (l) => `'title_${l}': title.${l}, 'slug_${l}': slug.${l}.current`
+  );
+
+  return `*[ _type == "event"]{
+    _id,
+    ${querySlices.join(",")},
+    'slug_default': slug.${fallbackLocale}.current,
+    _updatedAt
+  }`;
+};
+
+
+export const getAllEventsSlugs = () => {
+  const query = allEventsSlugsQuery();
+  return sanityClient.fetch<PagesConfigResult[]>(query);
+};
+
+const eventsQuery = (
+  locale: string,
+  setLength: number,
+  maxEventDate?: Date,
+) => {
+  const dateFilter = maxEventDate
+    ? `&& event_date[0].date < '${maxEventDate.toISOString().split("T")[0]}' ` // Filtering by the first event date
+    : "";
+
+  return `*[_type == "event" ${dateFilter}] | order(event_date[0].date desc)[0...${setLength}] {
+      _id,
+      'title': coalesce(title.${locale}, title.${fallbackLocale}),
+      'description': coalesce(description.${locale}, description.${fallbackLocale}),
+      'event_date': event_date[]{
+        date,
+        start_time,
+        end_time
+      },
+      'slug': coalesce(slug.${locale}.current, slug.${fallbackLocale}.current),
+      'cover': cover.asset->url,
+    }`;
+};
+
+
+
+export const getEvents = (
+  locale: string,
+  setLength: number,
+  maxEventDate?: Date,
+) => {
+  const query = eventsQuery(locale, setLength, maxEventDate); // Use eventsQuery here
+  const sanityClient = getSanityClient(); 
+  return sanityClient.fetch<Event[]>(query); // Ensure this fetches Event type
+};
+
+
+export const getEventsCount = (locale?: string) => {
+  const query = `count(*[ _type == "event" ])`; // Changed _type to "event"
+  const sanityClient = getSanityClient();
+  return sanityClient.fetch<number>(query); // Ensure it fetches a number
+};
+;
+
+const eventBySlugQuery = (locale: string, slug: string) => {
+  const slugSlices = locales.map(
+    (l) =>
+      `'slug_${l}': coalesce(slug.${l}.current, slug.${fallbackLocale}.current)`
+  );
+
+  return `*[_type == "event" && slug.${locale}.current == '${slug}'][0] {
+    _id,
+    'title': coalesce(title.${locale}, title.${fallbackLocale}),
+    'description': coalesce(description.${locale}, description.${fallbackLocale}),
+    'event_date': event_date[]{
+      date,
+      start_time,
+      end_time
+    },
+    ${slugSlices.join(", ")},
+    'slug': coalesce(slug.${locale}.current, slug.${fallbackLocale}.current),
+    'cover': cover.asset->url,
+    'body': body.${locale}[] ${deconstructBodyElementsQuery(locale)},
+    'pageBuilder': pageBuilder[] // Ensure this is fetched correctly
+  }`;
+};
+
+
+export const getEventBySlug = (locale: string, slug: string) => {
+  const query = eventBySlugQuery(locale, slug); // Reusing the existing post query for events
+  const sanityClient = getSanityClient();
+  return sanityClient.fetch<Event & { [key: string]: string }>(query); // Adjusting type to Event
+};
+
 
 /**
  * Recupera le info necessarie per il metadata di Homepage
