@@ -28,7 +28,7 @@ const groupEventsByMonth = (events: EventListItem[]) => {
     const dateStr = event.eventDate?.date || "Invalid date"; // Fallback if date is missing
     const date = new Date(dateStr);
     const month = !isNaN(date.getTime())
-      ? date.toLocaleString('en-US', { month: 'long', year: 'numeric' })
+      ? date.toLocaleString("en-US", { month: "long", year: "numeric" })
       : "Unknown Date"; // Group by "Unknown Date" if no valid date
 
     // Add event to the corresponding month group
@@ -42,10 +42,15 @@ const groupEventsByMonth = (events: EventListItem[]) => {
 };
 
 export type EventsListProps = { events: EventListItem[]; eventsCount: number };
-export const EventsListComponent: FC<EventsListProps> = ({ events, eventsCount }) => {
+export const EventsListComponent: FC<EventsListProps> = ({
+  events,
+  eventsCount,
+}) => {
   const [loadedEvents, setLoadedEvents] = useState<EventListItem[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [moreEventsExist, setMoreEventsExist] = useState(events.length < eventsCount);
+  const [moreEventsExist, setMoreEventsExist] = useState(
+    events.length < eventsCount,
+  );
   const { locale: currentLocale } = useTranslation();
 
   // Combine initial events and loaded events
@@ -56,7 +61,11 @@ export const EventsListComponent: FC<EventsListProps> = ({ events, eventsCount }
 
   const loadMoreEvents = async () => {
     setIsLoading(true);
-    const maxEventDate = (loadedEvents.length ? loadedEvents[loadedEvents.length - 1] : events[events.length - 1]).eventDate?.date || "Invalid date";
+    const maxEventDate =
+      (loadedEvents.length
+        ? loadedEvents[loadedEvents.length - 1]
+        : events[events.length - 1]
+      ).eventDate?.date || "Invalid date";
 
     const queryParams = new URLSearchParams({
       locale: currentLocale,
@@ -102,7 +111,7 @@ export type EventListItem = {
   eventDate: {
     date: string; // Date of the event
     start_time?: string; // Optional start time
-    end_time?: string;   // Optional end time
+    end_time?: string; // Optional end time
   };
   slug: string;
   description: string;
@@ -126,18 +135,16 @@ export const EventTile: FC<EventTileProps> = ({
       <EventDate>
         <CalendarIcon className="calendar-icon" />
         <time>
-          {!isNaN(date.getTime()) ? date.toLocaleString(currentLocale, {
-            day: "2-digit",
-            month: "2-digit",
-            year: "numeric",
-          }) : "Invalid date"}
+          {!isNaN(date.getTime())
+            ? date.toLocaleString(currentLocale, {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+              })
+            : "Invalid date"}
         </time>
-        {eventDate?.start_time && (
-          <span> | Start: {eventDate.start_time}</span>
-        )}
-        {eventDate?.end_time && (
-          <span> | End: {eventDate.end_time}</span>
-        )}
+        {eventDate?.start_time && <span> | Start: {eventDate.start_time}</span>}
+        {eventDate?.end_time && <span> | End: {eventDate.end_time}</span>}
       </EventDate>
       <ContentContainer>
         <ImageContainer>

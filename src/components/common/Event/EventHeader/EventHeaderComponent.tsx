@@ -2,13 +2,13 @@
 
 import { FC } from "react";
 import {
-    BackgroundImage,
-    CalendarIcon,
-    Date,
-    EventDate,
-    Section,
-    TextContainer,
-    Title,
+  BackgroundImage,
+  CalendarIcon,
+  Date,
+  EventDate,
+  Section,
+  TextContainer,
+  Title,
 } from "./EventHeader.styled";
 
 type EventHeaderProps = {

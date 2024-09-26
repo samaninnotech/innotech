@@ -40,13 +40,15 @@ const Event: FC<{ params: { locale: string; event: string } }> = async ({
   }
 
   // Handling multiple event dates
-  const formattedDates = detail.event_date.map(({ date }: { date: string }) =>
-    new Date(date).toLocaleString(locale, {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-    })
-  ).join(' - '); // If event has multiple dates, separate them by ' - '
+  const formattedDates = detail.event_date
+    .map(({ date }: { date: string }) =>
+      new Date(date).toLocaleString(locale, {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+      }),
+    )
+    .join(" - "); // If event has multiple dates, separate them by ' - '
 
   const slugMapping: SlugMapping = {};
   locales.map((l) => {
@@ -62,9 +64,9 @@ const Event: FC<{ params: { locale: string; event: string } }> = async ({
         eventDate={formattedDates} // Show the formatted event dates
       />
       <EventBodySection event={detail} /> {/* Adjust for the event body */}
-      <PageBuilder 
+      <PageBuilder
         sections={detail.pageBuilder} // Double type assertion
-        locale={locale} 
+        locale={locale}
       />
     </PageBaseLayout>
   );

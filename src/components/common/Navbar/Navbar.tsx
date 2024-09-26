@@ -16,9 +16,13 @@ export type NavbarProps = {
   isHomepage: boolean;
 };
 
-const Navbar: FC<NavbarProps> = ({ slugMapping, onSidebarToggle, isHomepage }) => {
+const Navbar: FC<NavbarProps> = ({
+  slugMapping,
+  onSidebarToggle,
+  isHomepage,
+}) => {
   const [showSecondaryNavbar, setShowSecondaryNavbar] = useState(false);
-  
+
   const handleScroll = () => {
     const scrollY = window.scrollY;
     const shouldShow = scrollY > 50;
@@ -43,7 +47,8 @@ const Navbar: FC<NavbarProps> = ({ slugMapping, onSidebarToggle, isHomepage }) =
               logoSrc={isHomepage ? "/site-logo.png" : "/site-logo-blue.png"}
               onSidebarToggle={onSidebarToggle}
               textColorClass={isHomepage ? "text-white" : "text-black"} // Pass the text color class
-              burgerButtoncolor={isHomepage ? "white" : "black"}            />
+              burgerButtoncolor={isHomepage ? "white" : "black"}
+            />
           </NavbarInnerWrapper>
         </NavbarWrapper>
       </MainNavbarStyled>
@@ -57,7 +62,8 @@ const Navbar: FC<NavbarProps> = ({ slugMapping, onSidebarToggle, isHomepage }) =
               logoSrc="/site-logo-blue.png"
               onSidebarToggle={onSidebarToggle}
               textColorClass="text-black" // Always black for the secondary navbar
-              burgerButtoncolor={"black"}            />
+              burgerButtoncolor={"black"}
+            />
           </NavbarInnerWrapper>
         </NavbarWrapper>
       </SecondaryNavbarStyled>

@@ -7,15 +7,15 @@ import { FaLinkedinIn } from "react-icons/fa6";
 import { GoShareAndroid } from "react-icons/go";
 import { IoLogoTwitter } from "react-icons/io";
 import {
-    BubbleContainer,
-    ButtonWrapper,
-    IconsInner,
-    InnerContainer1,
-    Section,
-    ShareBubble,
-    ShareButton,
-    ShareText,
-    Text,
+  BubbleContainer,
+  ButtonWrapper,
+  IconsInner,
+  InnerContainer1,
+  Section,
+  ShareBubble,
+  ShareButton,
+  ShareText,
+  Text,
 } from "./EventBodySection.styled";
 
 import { fallbackLocale } from "@/i18n/settings";
