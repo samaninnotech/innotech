@@ -1,6 +1,7 @@
 "use client";
 
 import useTranslation from "@/i18n/useTranslation";
+import { formatDate } from "@/lib/middlewares/eventDateParser";
 import { FC, useState } from "react";
 import Spinner from "../../Spinner";
 import {
@@ -146,46 +147,25 @@ const EventsListComponent: FC<EventsListProps> = ({ events, eventsCount }) => {
   );
 };
 
-type EventDate =
-  | {
-      date_type: "single";
-      single_date: {
-        date: string;
-        start_time?: string;
-        end_time?: string;
-      };
-    }
-  | {
-      date_type: "multiple";
-      dates: {
-        date: string;
-        start_time?: string;
-        end_time?: string;
-      }[];
-    }
-  | {
-      date_type: "range";
-      start_date: string;
-      end_date: string;
-      start_time?: string;
-      end_time?: string;
-    };
+// Define the EventDate type separately
+type EventDateType = {
+  date?: string; // Optional for single or range events
+  start_time?: string;
+  end_time?: string;
+  end_date?: string; // Optional for range events
+  dates?: {
+    // Optional for multiple events
+    date: string;
+    start_time?: string;
+    end_time?: string;
+  }[];
+};
 
+// Use EventDate type inside EventListItem
 type EventListItem = {
   title: string;
   publishedOn: string;
-  eventDate: {
-    date?: string; // Optional for multiple events
-    start_time?: string;
-    end_time?: string;
-    end_date?: string; // Optional for range events
-    dates?: {
-      // Optional for multiple events
-      date: string;
-      start_time?: string;
-      end_time?: string;
-    }[];
-  } | null;
+  eventDate: EventDateType | null; // Refactored to use the new EventDate type
   imgSrc: string;
   slug: string;
   description: string;
@@ -201,23 +181,6 @@ export const EventTile: FC<EventTileProps> = ({
 }) => {
   const { locale: currentLocale } = useTranslation();
 
-  // Helper function to format the date in the desired format
-  const formatDate = (
-    dateStr: string,
-    startTime?: string,
-    endTime?: string,
-  ) => {
-    const date = new Date(dateStr);
-    if (isNaN(date.getTime())) return "Invalid Date"; // Ensure valid date
-
-    const day = date.getDate().toString(); // Day without leading zero
-    const monthName = date.toLocaleString(currentLocale, { month: "long" });
-    const timeRange =
-      startTime && endTime ? `h. ${startTime} - ${endTime}` : "";
-
-    return `${day} ${monthName} ${timeRange}`.trim();
-  };
-
   return (
     <EventTileStyled href={"/events/" + slug}>
       <EventTitle>{title}</EventTitle>
@@ -231,10 +194,8 @@ export const EventTile: FC<EventTileProps> = ({
                   {/* Display the period format */}
                   {formatDate(
                     eventDate.date,
-                    eventDate.start_time,
-                    eventDate.end_time,
                   )}{" "}
-                  -{" "}
+                  to{" "}
                   {formatDate(
                     eventDate.end_date,
                     eventDate.start_time,

@@ -73,7 +73,7 @@ export const EventTileStyled = styled(Link)`
   border-radius: 8px;
   overflow: hidden;
   transition: transform 0.3s ease;
-
+  margin: 2rem 0;
   &:hover {
     transform: translateY(-5px);
     text-decoration: none;
