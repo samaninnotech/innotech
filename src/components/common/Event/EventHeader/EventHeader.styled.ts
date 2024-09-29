@@ -13,7 +13,7 @@ export const Section = styled.section`
   justify-content: center;
   flex-direction: column;
   margin: auto;
-  height: 80vh;
+  height: 95vh;
 `;
 
 export const BackgroundImage = styled(Image)`

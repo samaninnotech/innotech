@@ -790,17 +790,27 @@ const eventsQuery = (
   maxEventDate?: Date,
 ) => {
   const dateFilter = maxEventDate
-    ? `&& event_date[0].date < '${maxEventDate.toISOString().split("T")[0]}' ` // Filtering by the first event date
+    ? `&& event_date.single_date > '${maxEventDate.toISOString().split("T")[0]}' `
     : "";
 
-  return `*[_type == "event" ${dateFilter}] | order(event_date[0].date desc)[0...${setLength}] {
+  return `*[_type == "event" ${dateFilter}] | order(event_date.single_date desc)[0...${setLength}] {
       _id,
       'title': coalesce(title.${locale}, title.${fallbackLocale}),
       'description': coalesce(description.${locale}, description.${fallbackLocale}),
-      'event_date': event_date[]{
-        date,
-        start_time,
-        end_time
+      'location': location,
+      'organizer': organizer,
+      'event_date': {
+        'date_type': event_date.date_type,
+        'single_date': event_date.single_date,
+        'dates': event_date.dates[]{
+          date,
+          start_time,
+          end_time
+        },
+        'start_date': event_date.start_date,
+        'start_time': event_date.start_time,
+        'end_date': event_date.end_date,
+        'end_time': event_date.end_time
       },
       'slug': coalesce(slug.${locale}.current, slug.${fallbackLocale}.current),
       'cover': cover.asset->url,
@@ -832,10 +842,20 @@ const eventBySlugQuery = (locale: string, slug: string) => {
     _id,
     'title': coalesce(title.${locale}, title.${fallbackLocale}),
     'description': coalesce(description.${locale}, description.${fallbackLocale}),
-    'event_date': event_date[]{
-      date,
-      start_time,
-      end_time
+    'location': location,
+    'organizer': organizer,
+    'event_date': {
+      'date_type': event_date.date_type,
+      'single_date': event_date.single_date,
+      'dates': event_date.dates[]{
+        date,
+        start_time,
+        end_time
+      },
+      'start_date': event_date.start_date,
+      'start_time': event_date.start_time,
+      'end_date': event_date.end_date,
+      'end_time': event_date.end_time
     },
     ${slugSlices.join(", ")},
     'slug': coalesce(slug.${locale}.current, slug.${fallbackLocale}.current),
