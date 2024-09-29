@@ -1,3 +1,4 @@
+import { buildEventDate } from "@/lib/middlewares/eventDateParser";
 import {
   getBlogPosts,
   getEvents,
@@ -360,13 +361,14 @@ const buildBlogLastUpdatesSection = (
 };
 
 const buildEventHeaderSection = (section: EventHeaderSection) => {
-  const { title, subtitle, background_image } = section;
+  const { title, subtitle, background_image, event_date } = section;
   return (
     <>
       <EventHeaderComponent
         title={title}
         subtitle={subtitle}
         imgSrc={sanityUrlFor(background_image).url()}
+        eventDate={event_date}
       />
     </>
   );
@@ -378,60 +380,11 @@ const buildEventsListSection = (
   eventsCount: number,
 ) => {
   const eventsListItems = events.map((p) => {
-    let eventDate: {
-      date?: string; // Optional for single events
-      start_time?: string;
-      end_time?: string;
-      end_date?: string; // Optional for range events
-      dates?: {
-        // Optional for multiple events
-        date: string;
-        start_time?: string;
-        end_time?: string;
-      }[];
-    } | null = null;
-
-    // Handle different types of event dates
-    switch (p.event_date.date_type) {
-      case "single":
-        // Check if single_date is defined
-        if (p.event_date.single_date) {
-          eventDate = {
-            date: p.event_date.single_date.date || "Invalid date",
-            start_time: p.event_date.single_date.start_time,
-            end_time: p.event_date.single_date.end_time,
-          };
-        }
-        break;
-      case "multiple":
-        // Check if dates are defined before mapping
-        if (p.event_date.dates) {
-          eventDate = {
-            dates: p.event_date.dates.map((dateItem) => ({
-              date: dateItem.date,
-              start_time: dateItem.start_time,
-              end_time: dateItem.end_time,
-            })),
-          };
-        }
-        break;
-      case "range":
-        // Ensure all parts of the date range are set correctly
-        eventDate = {
-          date: p.event_date.start_date || "Invalid start date",
-          start_time: p.event_date.start_time || "No start time",
-          end_time: p.event_date.end_time || "No end time",
-          end_date: p.event_date.end_date || "Invalid end date",
-        };
-        break;
-      default:
-        eventDate = null; // Set to null if none of the cases match
-    }
-
+    const eventDate = buildEventDate(p.event_date);
     return {
       title: p.title,
       publishedOn: p.publish_date,
-      eventDate, // Now conforms to EventListItem type
+      eventDate,
       imgSrc: sanityUrlFor(p.cover).url(),
       slug: p.slug,
       description: p.description,

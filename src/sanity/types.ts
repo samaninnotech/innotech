@@ -172,8 +172,9 @@ export function isBlogLastUpdatesSection(
 /* Event */
 export interface EventHeaderSection extends Section {
   title: string;
-  subtitle: string;
-  background_image: string;
+  subtitle?: string;
+  background_image: string; // Can be an image URL or a Sanity image object
+  event_date: EventDate; // Add event_date to follow the structure used in Event
 }
 
 export function isEventHeaderSection(

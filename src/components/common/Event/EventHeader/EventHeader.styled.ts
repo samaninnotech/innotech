@@ -7,13 +7,12 @@ import styled from "styled-components";
 export const Section = styled.section`
   width: 85%;
   position: relative;
-  top: 120px;
-  padding-top: 120px;
   display: flex;
   justify-content: center;
   flex-direction: column;
   margin: auto;
   height: 95vh;
+  margin-bottom: 2rem;
 `;
 
 export const BackgroundImage = styled(Image)`
@@ -26,18 +25,18 @@ export const BackgroundImage = styled(Image)`
 export const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  align-items: flex-start;
   color: var(--white-color);
-  margin-top: 7rem;
   padding: 1rem;
+  width: 85%;
+  margin: auto;
+  flex-wrap: wrap;
 `;
 
 export const Title = styled.h2`
   margin-bottom: 0.5rem;
   font-size: 2.5rem;
-  text-align: center;
+  text-align: left;
   color: var(--white-color);
 
   ${mediaRules.lg} {
@@ -58,7 +57,6 @@ export const EventDate = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 1rem auto;
 `;
 
 export const DateWrapper = styled.div`
@@ -75,4 +73,16 @@ export const CalendarIcon = styled(FaCalendarAlt)`
 export const Date = styled.span`
   color: var(--event-text-color);
   font-size: 1rem;
+  margin: 1rem 0;
+`;
+
+export const MultipleEventDate = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: left;
+  margin: 1rem 1.2rem;
+  svg {
+    width: 15px;
+  }
 `;
