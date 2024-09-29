@@ -1,7 +1,9 @@
 "use client";
 
+"use client";
+
 import useTranslation from "@/i18n/useTranslation";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import Spinner from "../../Spinner";
 import { CalendarIcon } from "../BlogHeader/BlogHeader.styled";
 import {
@@ -22,47 +24,37 @@ export type PostsListProps = { posts: PostListItem[]; postsCount: number };
 const PostsListComponent: FC<PostsListProps> = ({ posts, postsCount }) => {
   const [loadedPosts, setLoadedPosts] = useState<PostListItem[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [morePostsExists, setMorePostsExists] = useState(
-    posts.length < postsCount,
-  );
-  const { locale: currentLocale } = useTranslation();
+  const [morePostsExists, setMorePostsExists] = useState(true);
 
-  const loadMorePosts = async () => {
+  useEffect(() => {
+    const initialPosts = posts.length > 6 ? posts.slice(0, 6) : posts;
+    setLoadedPosts(initialPosts);
+    setMorePostsExists(posts.length > 6);
+  }, [posts]);
+
+  // Function to load more posts
+  const loadMorePosts = () => {
     setIsLoading(true);
-    const maxPublishDate = (
-      loadedPosts.length
-        ? loadedPosts[loadedPosts.length - 1]
-        : posts[posts.length - 1]
-    ).publishedOn;
 
-    const queryParams = new URLSearchParams({
-      locale: currentLocale,
-      setLength: "12",
-      maxPublishDate: maxPublishDate,
-    });
+    // Load more posts only if they exist
+    const newLoadedPosts = posts.slice(0, loadedPosts.length + 2); // Load 2 more posts
+    setLoadedPosts(newLoadedPosts);
 
-    const url = `/api/blog/posts?${queryParams.toString()}`;
+    // Check if more posts exist
+    setMorePostsExists(posts.length > newLoadedPosts.length);
 
-    const result: PostListItem[] = await (await fetch(url)).json();
-    setLoadedPosts((prevLoadedPosts) => {
-      const newLoadedPosts = [...prevLoadedPosts, ...result];
-      setMorePostsExists(posts.length + newLoadedPosts.length < postsCount);
-      setIsLoading(false);
-      return newLoadedPosts;
-    });
+    setIsLoading(false);
   };
 
   return (
     <SectionWrapper>
       <Spinner show={isLoading} />
       <TilesContainer>
-        {!!posts?.length &&
-          posts.map((p) => <PostTile key={p.slug} post={p}></PostTile>)}
-        {!!loadedPosts.length &&
+        {!!loadedPosts?.length &&
           loadedPosts.map((p) => <PostTile key={p.slug} post={p}></PostTile>)}
       </TilesContainer>
-      {morePostsExists && (
-        <LoadMoreButton onClick={loadMorePosts}>Carica Altri</LoadMoreButton>
+      {morePostsExists && !isLoading && (
+        <LoadMoreButton onClick={loadMorePosts}>Load More</LoadMoreButton>
       )}
     </SectionWrapper>
   );

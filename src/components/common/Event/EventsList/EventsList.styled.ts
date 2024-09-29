@@ -28,12 +28,20 @@ export const EventDescription = styled.p`
   padding: 0 1rem;
   text-align: left;
 `;
-
+export const EventDateWrapper = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  svg {
+    width: 15px;
+  }
+`;
 export const EventDate = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 1rem auto;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: left;
+  margin: 1rem 1.2rem;
   svg {
     width: 15px;
   }
@@ -59,12 +67,11 @@ export const EventTileStyled = styled(Link)`
   max-width: 770px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  align-items: left;
+  text-align: left;
   background-color: #fff;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
 
   &:hover {
@@ -73,15 +80,17 @@ export const EventTileStyled = styled(Link)`
   }
 `;
 
-export const LearnMoreLink = styled.p``;
+export const LearnMoreLink = styled.p`
+  padding: 0 1rem;
+`;
 
 export const SectionWrapper = styled.div`
   position: relative;
   box-sizing: border-box;
   width: 100%;
-  background-color: #f8f8f8;
   margin: 0 auto;
   top: 120px;
+  padding: 0 5rem;
   padding-top: 120px;
   padding-bottom: 80px;
 `;
@@ -143,4 +152,14 @@ export const ContentContainer = styled.div`
     flex: 1; /* Allow the description to fill the remaining space */
     overflow: hidden; /* Prevent overflow */
   }
+`;
+
+export const ToggleButton = styled.button`
+  margin: 1rem 0;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  color: black;
+  border: none;
+  background-color: transparent;
 `;

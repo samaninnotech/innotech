@@ -5,12 +5,18 @@ import styled from "styled-components";
 
 export const LoadMoreButton = styled.button`
   background: var(--accent-gradient-background);
-  padding: 0.5rem 1.5rem;
-  margin: 0.5rem auto;
+  padding: 1.5rem 4.5rem;
+  margin: 0 auto;
+  margin-top: 5rem;
   border-radius: 0.25rem;
-  text-transform: uppercase;
   font-size: 0.8rem;
   font-weight: 500;
+  border: 1px solid gray;
+  color: #25567a;
+  &:hover {
+    background-color: #177aa9;
+    color: white;
+  }
 `;
 
 export const PostTitle = styled.h3`
@@ -160,6 +166,9 @@ export const SectionWrapper = styled.div`
   top: 120px;
   padding-top: 120px;
   padding-bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
 `;
 
 export const TilesContainer = styled.div`
