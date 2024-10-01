@@ -1,6 +1,7 @@
-import styled from 'styled-components';
+import Link from "@/i18n/Link";
+import styled from "styled-components";
 
-export const EventContainer = styled.div`
+export const EventContainer = styled(Link)`
   display: flex;
   margin-bottom: 20px;
   border-bottom: 1px solid #ccc;
@@ -12,7 +13,7 @@ export const EventContainer = styled.div`
 export const EventImage = styled.div<{ imageUrl: string }>`
   width: 200px;
   height: 112px;
-  background-image: url(${props => props.imageUrl});
+  background-image: url(${(props) => props.imageUrl});
   background-size: cover;
   background-position: center;
   border-radius: 5px;
@@ -22,7 +23,7 @@ export const EventImage = styled.div<{ imageUrl: string }>`
 
 export const EventDate = styled.div`
   position: absolute;
-  background: rgba(40, 85, 125, .96);
+  background: rgba(40, 85, 125, 0.96);
   color: white;
   padding: 5px;
   border-radius: 3px;

@@ -64,15 +64,31 @@ const EventHeaderComponent: FC<EventHeaderProps> = ({
       );
     }
 
-    if (eventDate.date_type === "range" && eventDate.start_date && eventDate.end_date) {
+    if (
+      eventDate.date_type === "range" &&
+      eventDate.start_date &&
+      eventDate.end_date
+    ) {
       return (
         <>
           <CalendarIcon className="calendar-icon" />
           <StyledDate>
-            {formatDate(eventDate.start_date, undefined, undefined, currentLocale)}{" "}
+            {formatDate(
+              eventDate.start_date,
+              undefined,
+              undefined,
+              currentLocale,
+            )}{" "}
             to&nbsp;
-            {formatDate(eventDate.end_date, undefined, undefined, currentLocale)}
-            {eventDate.start_time && eventDate.end_time && ` h. ${eventDate.start_time} - ${eventDate.end_time}`}
+            {formatDate(
+              eventDate.end_date,
+              undefined,
+              undefined,
+              currentLocale,
+            )}
+            {eventDate.start_time &&
+              eventDate.end_time &&
+              ` h. ${eventDate.start_time} - ${eventDate.end_time}`}
           </StyledDate>
         </>
       );

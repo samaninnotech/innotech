@@ -192,10 +192,7 @@ export const EventTile: FC<EventTileProps> = ({
               {eventDate.end_date ? (
                 <time>
                   {/* Display the period format */}
-                  {formatDate(
-                    eventDate.date,
-                  )}{" "}
-                  to{" "}
+                  {formatDate(eventDate.date)} to{" "}
                   {formatDate(
                     eventDate.end_date,
                     eventDate.start_time,

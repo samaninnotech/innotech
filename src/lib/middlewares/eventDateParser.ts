@@ -51,12 +51,12 @@ export const formatDate = (
   dateStr: string | number | Date,
   startTime?: string,
   endTime?: string,
-  locale?: Intl.LocalesArgument
+  locale?: Intl.LocalesArgument,
 ) => {
   const date = new Date(dateStr);
   if (isNaN(date.getTime())) return "Invalid Date";
 
-  const day = date.getDate().toString();
+  const day = date.getDate().toString().padStart(2, "0");
   const monthName = date.toLocaleString(locale, { month: "long" });
   const timeRange = startTime && endTime ? `h. ${startTime} - ${endTime}` : "";
 

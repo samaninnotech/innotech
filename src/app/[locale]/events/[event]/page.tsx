@@ -49,9 +49,9 @@ const Event: FC<{ params: { locale: string; event: string } }> = async ({
     <PageBaseLayout slugMapping={slugMapping}>
       <EventHeaderComponent
         title={detail.title}
-        subtitle={detail.subtitle} 
+        subtitle={detail.subtitle}
         imgSrc={sanityUrlFor(detail.cover).url()}
-        eventDate={detail.event_date} 
+        eventDate={detail.event_date}
       />
       <EventBodySection event={detail} />
       <PageBuilder sections={detail.pageBuilder} locale={locale} />
