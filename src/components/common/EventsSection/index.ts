@@ -1,3 +1,3 @@
-import EventsSection from "./EventsSection";
+import EventsLastUpdateSection from "./EventsLastUpdatesSection";
 
-export default EventsSection;
+export default EventsLastUpdateSection;

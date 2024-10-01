@@ -6,6 +6,7 @@ import Button from "./Button";
 import Carousel from "./Carousel";
 import ConsultationSection from "./ConsultationSection";
 import DraftBanner from "./DraftBanner";
+import EventsLastUpdatesSection from "./EventsSection/EventsLastUpdatesSection";
 import GenericLink from "./Generic-Link";
 import GetInTouchSection from "./GetInTouchSection";
 import HeroSectionComponent from "./HeroSection";
@@ -26,6 +27,7 @@ export {
   Carousel,
   ConsultationSection,
   DraftBanner,
+  EventsLastUpdatesSection,
   GenericLink,
   GetInTouchSection,
   HeroSectionComponent,

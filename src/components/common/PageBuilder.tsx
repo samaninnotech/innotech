@@ -14,6 +14,7 @@ import {
   ConsultationSection,
   Event,
   EventHeaderSection,
+  EventsLastUpdatesSection,
   EventsListSection,
   GetInTouchSection,
   HeroSection,
@@ -64,6 +65,7 @@ import { FC, ReactNode } from "react";
 import {
   Carousel as CarouselComponent,
   ConsultationSection as ConsultationSectionComponent,
+  EventsLastUpdatesSection as EventsLastUpdatesSectionComponent,
   GetInTouchSection as GetInTouchSectionComponent,
   HeroSectionComponent,
   HomePageTopPost as HomePageTopPostComponent,
@@ -154,8 +156,8 @@ const PageBuilder: FC<PageBuilderProps> = async ({ sections, locale }) => {
       const postsCount = await getEventsCount(locale);
       renderedSections.push(buildEventsListSection(s, events, postsCount));
     } else if (isEventsLastUpdatesSection(s)) {
-      const posts = await getEvents(locale, 12, undefined);
-      renderedSections.push(buildEventsLastUpdatesSection(s, posts));
+      const events = await getEvents(locale, 12, undefined);
+      renderedSections.push(buildEventsLastUpdatesSection(s, events));
     }
   }
 
@@ -396,10 +398,10 @@ const buildEventsListSection = (
 };
 
 const buildEventsLastUpdatesSection = (
-  s: BlogLastUpdatesSection,
-  posts: Post[],
+  s: EventsLastUpdatesSection,
+  events: Event[],
 ) => {
-  return <BlogLastUpdate posts={posts} />;
+  return <EventsLastUpdatesSectionComponent events={events} />;
 };
 
 const buildCarousel = (s: Carousel) => {
