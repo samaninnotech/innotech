@@ -7,7 +7,7 @@ import {
   EventContainer,
   EventContent,
   EventImage,
-  EventTitle
+  EventTitle,
 } from "./Event.styled";
 
 type EventDateType = {
@@ -62,39 +62,53 @@ const Event: React.FC<EventProps> = ({
 
         {/* Display event dates after title */}
         <div>
-          {event_date.date_type === "range" && event_date.start_date && event_date.end_date && (
-            <DateWrapper>
-              <FontAwesomeIcon icon={faClock} /> 
-              <time>
-                {formatDate(event_date.start_date)} to {formatDate(event_date.end_date, event_date.start_time, event_date.end_time)}
-              </time>
-            </DateWrapper>
-          )}
+          {event_date.date_type === "range" &&
+            event_date.start_date &&
+            event_date.end_date && (
+              <DateWrapper>
+                <FontAwesomeIcon icon={faClock} />
+                <time>
+                  {formatDate(event_date.start_date)} to{" "}
+                  {formatDate(
+                    event_date.end_date,
+                    event_date.start_time,
+                    event_date.end_time,
+                  )}
+                </time>
+              </DateWrapper>
+            )}
 
           {event_date.date_type === "multiple" && event_date.dates?.length && (
             <DateWrapper>
               {event_date.dates.map((dateItem, index) => (
                 <div key={index}>
-                  <FontAwesomeIcon icon={faClock} /> 
+                  <FontAwesomeIcon icon={faClock} />
                   <time>
-                    {formatDate(dateItem.date, dateItem.start_time, dateItem.end_time)}
+                    {formatDate(
+                      dateItem.date,
+                      dateItem.start_time,
+                      dateItem.end_time,
+                    )}
                   </time>
                 </div>
               ))}
             </DateWrapper>
           )}
 
-          {event_date.date_type === "single" && event_date.single_date?.date && (
-            <DateWrapper>
-              <FontAwesomeIcon icon={faClock} />
-              <time>
-                {formatDate(event_date.single_date.date, event_date.single_date.start_time, event_date.single_date.end_time)}
-              </time>
-            </DateWrapper>
-          )}
+          {event_date.date_type === "single" &&
+            event_date.single_date?.date && (
+              <DateWrapper>
+                <FontAwesomeIcon icon={faClock} />
+                <time>
+                  {formatDate(
+                    event_date.single_date.date,
+                    event_date.single_date.start_time,
+                    event_date.single_date.end_time,
+                  )}
+                </time>
+              </DateWrapper>
+            )}
         </div>
-
-
       </EventContent>
     </EventContainer>
   );

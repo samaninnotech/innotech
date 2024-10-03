@@ -85,7 +85,7 @@ import {
   TeamList as TeamListcomponent,
   TickItemsSection as TickItemsSectionComponent,
   VideoSection as VideoSectionComponent,
-  VisionsSection as VisionsSectionComponent
+  VisionsSection as VisionsSectionComponent,
 } from ".";
 import BlogHeaderComponent from "./Blog/BlogHeader";
 import PostsList from "./Blog/PostsList";
@@ -326,11 +326,7 @@ const buildGetInTouchSection = (s: GetInTouchSection) => {
 };
 
 const buildContactSection = (s: ContactSection) => {
-  const {
-    rightHeader,
-    agreement,
-    buttonLabel,
-  } = s;
+  const { rightHeader, agreement, buttonLabel } = s;
   return (
     <ContactSectionComponent
       rightHeader={rightHeader}

@@ -5,8 +5,8 @@ export const EventContainer = styled(Link)`
   display: flex;
   margin-bottom: 20px;
   padding-bottom: 10px;
-  position: relative; 
-  overflow: hidden; 
+  position: relative;
+  overflow: hidden;
 `;
 
 export const EventImage = styled.div<{ imageUrl: string }>`
@@ -90,8 +90,8 @@ export const EventTimeWrapper = styled.div`
 
 export const EventClockIcon = styled.div`
   margin-right: 8px;
-  color: #555;  /* Icon color */
-  font-size: 1.2rem;  /* Adjust icon size */
+  color: #555; /* Icon color */
+  font-size: 1.2rem; /* Adjust icon size */
 `;
 
 export const DateWrapper = styled.div`
@@ -99,4 +99,4 @@ export const DateWrapper = styled.div`
   svg {
     margin-right: 5px;
   }
-`
+`;
