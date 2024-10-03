@@ -7,7 +7,7 @@ import styled, { css } from "styled-components";
 export const NavbarLanguagesStyled = styled.div`
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   max-height: 2.5em;
   padding-left: 1rem;
 `;
@@ -20,7 +20,7 @@ export const LanguagesListStyled = styled.ul`
 
   ${mediaRules.lg} {
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: flex-end;
   }
 `;
 

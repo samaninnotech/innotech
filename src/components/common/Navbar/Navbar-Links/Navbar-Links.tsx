@@ -13,7 +13,7 @@ import {
 import Image from "next/image";
 import { useParams, usePathname } from "next/navigation";
 import { FC, useContext, useEffect, useState } from "react";
-import { MdClose, MdMenu } from "react-icons/md";
+import { MdClose, MdMenu, MdSearch } from "react-icons/md";
 import { SlArrowDown } from "react-icons/sl";
 import NavbarLanguages from "../Navbar-Languages/NavbarLanguages";
 import { SlugMapping } from "../types";
@@ -28,6 +28,7 @@ import {
   NavbarMenuStyled,
   OverlayStyled,
   PageLinksContainerStyled,
+  SearchIconContainer,
   SidebarContentStyled,
   SideBarLogoButtonContainer,
   SidebarStyled,
@@ -94,6 +95,9 @@ const NavbarLinks: FC<NavbarLinksProps> = ({
         <MainLinksContainerStyled>
           <PageLinksContainer />
           <NavbarLanguages slugMapping={slugMapping} />
+          <SearchIconContainer>
+            <MdSearch />
+          </SearchIconContainer>
         </MainLinksContainerStyled>
         <BurgerMenuButton
           onClick={handleSidebarToggle}
@@ -189,6 +193,7 @@ const SimpleNavbarLink: FC<SimpleNavbarLinkProperties> = ({
   isButton,
   selected,
 }) => {
+  link = link || "/";
   return isButton ? (
     <NavbarLinkButtonStyled href={link}>{label}</NavbarLinkButtonStyled>
   ) : (

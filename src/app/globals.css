@@ -1,0 +1,26 @@
+:root {
+  --accent-color: #ffb703;
+  --accent-contrast-color: #000;
+  --submenu-bg-color: #f1f5f9;
+  --light-gray-1: #e5e7eb;
+  --black-color: #000;
+  --white-color: #fff;
+  --text-light-color: #6b7280;
+  --foreground-rgb: #111;
+  --background-start-rgb: var(--white-color);
+  --background-end-rgb: var(--white-color);
+  --info-card: #003148;
+  --info-card-bg: #fff;
+}
+
+body {
+  color: var(--foreground-rgb);
+  background: linear-gradient(to bottom, transparent, var(--background-end-rgb))
+    var(--background-start-rgb);
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

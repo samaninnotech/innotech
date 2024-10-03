@@ -57,7 +57,7 @@ const LanguageElement: FC<LanguageElementProps> = ({ language }) => {
       $selected={language.selected}
       locale={language.language}
     >
-      <Image src={flagSrc} alt={`${locale} flag`} width={30} height={20} />
+      <Image src={flagSrc} alt={`${locale} flag`} width={20} height={13} />
     </LanguageElementStyled>
   );
 };

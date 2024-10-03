@@ -15,7 +15,7 @@ export const PageTopBarContainer = styled.div`
   font-size: 14px;
   line-height: 1.78;
   letter-spacing: 0em;
-  margin: 0px;
+  margin: 0px auto;
   a {
     text-decoration: none;
     color: inherit;
@@ -28,6 +28,7 @@ export const Container = styled.div`
   padding: 0 15px;
   display: none;
   box-sizing: inherit;
+  width: 100%;
   ${mediaRules.sm} {
     display: block;
     max-width: 720px;
@@ -38,7 +39,7 @@ export const Container = styled.div`
   }
   ${mediaRules.lg} {
     display: block;
-    max-width: 1100px;
+    max-width: 1170px;
   }
 `;
 

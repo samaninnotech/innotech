@@ -91,7 +91,6 @@ export const SectionWrapper = styled.div`
   margin: 0 auto;
   top: 120px;
   padding: 0 5rem;
-  padding-top: 120px;
   padding-bottom: 80px;
 `;
 
