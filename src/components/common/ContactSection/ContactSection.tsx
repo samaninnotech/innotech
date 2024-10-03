@@ -18,20 +18,19 @@ import {
   SectionWrapper,
   Spacer,
   SubmitButton,
-  TextArea
+  TextArea,
 } from "./ContactSection.styled";
 
 type ContactSectionProps = {
   buttonLabel: string;
   rightHeader: any;
   agreement: string;
-
 };
 
 const ContactSection: React.FC<ContactSectionProps> = ({
   buttonLabel,
   rightHeader,
-  agreement
+  agreement,
 }) => {
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
@@ -60,7 +59,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({
             <PortableText value={rightHeader} components={components} />
             <Spacer />
           </LeftColumn>
-  
+
           {/* Column for the form */}
           <Column>
             <FormWrapper>
@@ -131,7 +130,6 @@ const ContactSection: React.FC<ContactSectionProps> = ({
       </Container>
     </SectionWrapper>
   );
-  
 };
 
 export default ContactSection;

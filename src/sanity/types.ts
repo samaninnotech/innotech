@@ -518,9 +518,7 @@ export interface ContactSection extends Section {
   rightHeader: string;
 }
 
-export function isContactSection(
-  section: Section,
-): section is ContactSection {
+export function isContactSection(section: Section): section is ContactSection {
   return sectionMatchType(section, "contact_section");
 }
 

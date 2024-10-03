@@ -385,17 +385,13 @@ const buildGetInTouchSectionQuery = (
   }`;
 };
 
-const buildContactSectionQuery = (
-  locale: string,
-  fallbackLocale: string,
-) => {
+const buildContactSectionQuery = (locale: string, fallbackLocale: string) => {
   return `{   
     'agreement': coalesce(agreement.${locale}, agreement.${fallbackLocale}),
     'buttonLabel': coalesce(buttonLabel.${locale}, buttonLabel.${fallbackLocale}),
     'rightHeader': coalesce(rightHeader.${locale}, rightHeader.${fallbackLocale})
   }`;
 };
-
 
 const buildJobOfferSectionQuery = (locale: string, fallbackLocale: string) => {
   return `{

@@ -68,22 +68,21 @@ export const LeftColumn = styled.div<ColumnProps>`
   margin-left: 20px;
   border-left: 5px solid #25567a;
   padding-left: 2rem;
-  line-height: 3.0; /* Adjust this value to increase space between lines */
+  line-height: 3; /* Adjust this value to increase space between lines */
 
   ${mediaRules.sm} {
     width: 100%;
   }
-  
+
   ${mediaRules.md} {
     max-width: 45%;
   }
-  
+
   ${mediaRules.lg} {
     margin-left: 50px;
     max-width: 45%;
   }
 `;
-
 
 export const Column = styled.div<ColumnProps>`
   width: 100%;
@@ -104,7 +103,6 @@ export const Column = styled.div<ColumnProps>`
     max-width: 45%;
   }
 `;
-
 
 export const FirstRow = styled.div`
   display: flex;
