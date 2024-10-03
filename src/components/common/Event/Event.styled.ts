@@ -4,10 +4,9 @@ import styled from "styled-components";
 export const EventContainer = styled(Link)`
   display: flex;
   margin-bottom: 20px;
-  border-bottom: 1px solid #ccc;
   padding-bottom: 10px;
-  position: relative; /* Ensure EventDate is positioned relative to EventContainer */
-  overflow: hidden; /* Prevent overflow of EventDate */
+  position: relative; 
+  overflow: hidden; 
 `;
 
 export const EventImage = styled.div<{ imageUrl: string }>`
@@ -82,3 +81,22 @@ export const EventLink = styled.a`
     text-decoration: underline;
   }
 `;
+
+export const EventTimeWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+`;
+
+export const EventClockIcon = styled.div`
+  margin-right: 8px;
+  color: #555;  /* Icon color */
+  font-size: 1.2rem;  /* Adjust icon size */
+`;
+
+export const DateWrapper = styled.div`
+  margin-top: 1rem;
+  svg {
+    margin-right: 5px;
+  }
+`

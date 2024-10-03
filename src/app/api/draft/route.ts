@@ -34,5 +34,3 @@ export async function GET(request: Request) {
 
   redirect(url);
 }
-
-//http://localhost:3000/api/draft?secret=skeIdNJz3RLN2YGV7z2vLzyiFjKmIq9HmyFE2Ecg4CH5noRXnRxSZ8gIqMuDyHt8It4tGqBTwWPaQjcc56lrUEr9BUwfiIRrvyYQxlK4ABiVtqHquydKbKKJcrKasRGLbmipd6ClXdHOgJb2xjocvzQeo1GJv8jtOxEYTus9JeKgEDCsCfv5&type=page&slug=

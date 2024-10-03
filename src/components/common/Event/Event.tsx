@@ -1,14 +1,13 @@
+import { formatDate } from "@/lib/middlewares/eventDateParser";
+import { faClock } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import {
+  DateWrapper,
   EventContainer,
   EventContent,
-  EventDate,
-  EventDateDay,
-  EventDateMonth,
-  EventDateYear,
-  EventDescription,
   EventImage,
-  EventTitle,
+  EventTitle
 } from "./Event.styled";
 
 type EventDateType = {
@@ -45,7 +44,6 @@ const extractDateParts = (dateString: string) => {
   return {
     day: date.getUTCDate(),
     month: date.toLocaleString("default", { month: "long" }),
-    year: date.getUTCFullYear(),
   };
 };
 
@@ -56,34 +54,47 @@ const Event: React.FC<EventProps> = ({
   event_date,
   slug,
 }) => {
-  let displayDate = { day: 0, month: "", year: 0 };
-  if (event_date.date_type === "single" && event_date.single_date?.date) {
-    displayDate = extractDateParts(event_date.single_date.date);
-  }
-
-  // Handle multiple dates (show the first date)
-  if (event_date.date_type === "multiple" && event_date.dates?.length) {
-    displayDate = extractDateParts(event_date.dates[0].date);
-  }
-
-  // Handle range dates (use the start date for display)
-  if (event_date.date_type === "range" && event_date.start_date) {
-    displayDate = extractDateParts(event_date.start_date);
-  }
-
   return (
     <EventContainer href={"/events/" + slug}>
-      <EventImage imageUrl={cover}>
-        <EventDate>
-          <EventDateDay>{displayDate.day}</EventDateDay>
-          <EventDateMonth>{displayDate.month}</EventDateMonth>
-          <EventDateYear>{displayDate.year}</EventDateYear>
-        </EventDate>
-      </EventImage>
+      <EventImage imageUrl={cover} />
       <EventContent>
         <EventTitle>{title}</EventTitle>
-        <EventDescription>{description}</EventDescription>
-        Ulteriori informazioni »
+
+        {/* Display event dates after title */}
+        <div>
+          {event_date.date_type === "range" && event_date.start_date && event_date.end_date && (
+            <DateWrapper>
+              <FontAwesomeIcon icon={faClock} /> 
+              <time>
+                {formatDate(event_date.start_date)} to {formatDate(event_date.end_date, event_date.start_time, event_date.end_time)}
+              </time>
+            </DateWrapper>
+          )}
+
+          {event_date.date_type === "multiple" && event_date.dates?.length && (
+            <DateWrapper>
+              {event_date.dates.map((dateItem, index) => (
+                <div key={index}>
+                  <FontAwesomeIcon icon={faClock} /> 
+                  <time>
+                    {formatDate(dateItem.date, dateItem.start_time, dateItem.end_time)}
+                  </time>
+                </div>
+              ))}
+            </DateWrapper>
+          )}
+
+          {event_date.date_type === "single" && event_date.single_date?.date && (
+            <DateWrapper>
+              <FontAwesomeIcon icon={faClock} />
+              <time>
+                {formatDate(event_date.single_date.date, event_date.single_date.start_time, event_date.single_date.end_time)}
+              </time>
+            </DateWrapper>
+          )}
+        </div>
+
+
       </EventContent>
     </EventContainer>
   );
