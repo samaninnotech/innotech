@@ -4,6 +4,7 @@ import { getHomepageId, getNavbarConfig } from "@/sanity/queries";
 import { Inter } from "next/font/google";
 import { draftMode } from "next/headers";
 import { FC, PropsWithChildren } from "react";
+import "../globals.css";
 import { getDictionary } from "./dictionaries";
 import Providers from "./providers";
 

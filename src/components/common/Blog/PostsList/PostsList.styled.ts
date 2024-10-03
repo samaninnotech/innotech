@@ -164,7 +164,6 @@ export const SectionWrapper = styled.div`
   background-color: #f8f8f8;
   margin: 0 auto;
   top: 120px;
-  padding-top: 120px;
   padding-bottom: 80px;
   display: flex;
   flex-direction: column;

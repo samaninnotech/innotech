@@ -5,6 +5,18 @@ export const NavbarWrapper = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
+  margin: 0 auto;
+  ${mediaRules.sm} {
+    max-width: 720px;
+  }
+
+  ${mediaRules.md} {
+    max-width: 940px;
+  }
+
+  ${mediaRules.lg} {
+    max-width: 1170px;
+  }
 `;
 
 export const NavbarInnerWrapper = styled.div`
@@ -12,6 +24,7 @@ export const NavbarInnerWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 0 auto;
 
   ${mediaRules.sm} {
     max-width: 720px;
@@ -22,10 +35,8 @@ export const NavbarInnerWrapper = styled.div`
   }
 
   ${mediaRules.lg} {
-    max-width: 1188px;
+    max-width: 1170px;
   }
-
-  margin: 0 auto; /* Centering the inner content */
 `;
 
 export const MainNavbarStyled = styled.header<{ isVisible: boolean }>`

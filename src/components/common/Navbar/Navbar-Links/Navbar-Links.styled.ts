@@ -22,7 +22,7 @@ export const NavbarLinksStyled = styled.nav<NavbarLinksProps>`
   ${mediaRules.lg} {
     justify-content: flex-start;
     position: relative;
-    padding: 0rem 1rem;
+    padding: 0rem;
   }
 `;
 
@@ -36,7 +36,6 @@ export const LogoContainerStyled = styled.div`
 
 export const MainLinksContainerStyled = styled.div`
   display: none;
-  background-color: var(--white-color);
   flex-direction: column;
   left: 0;
   padding: 0.75rem;
@@ -180,11 +179,12 @@ export const ComplexNavbarLinkContainer = styled.div<{ $selected?: boolean }>`
 
 export const NavbarElementStyled = styled(Link)<{ $selected?: boolean }>`
   margin-top: 0.75rem;
-  width: 100%;
   padding: 1rem 0rem;
   text-decoration: none;
   position: relative;
   overflow: hidden;
+  width: fit-content; /* Width adjusts based on the content size */
+  white-space: nowrap; /* Prevent text from breaking into multiple lines */
 
   /* Apply border-top for screens narrower than 1200px */
   border-top: 1px solid gray;
@@ -198,7 +198,7 @@ export const NavbarElementStyled = styled(Link)<{ $selected?: boolean }>`
   ${mediaRules.lg} {
     margin-left: 2rem;
     margin-top: 0;
-    width: auto;
+    width: fit-content; /* Width based on content */
     border-top: none; /* Remove border-top for screens 1200px and wider */
 
     /* Apply border-bottom if selected */
@@ -245,6 +245,7 @@ export const NavbarElementStyled = styled(Link)<{ $selected?: boolean }>`
       }
     `}
 `;
+
 
 export const NavbarMenuStyled = styled.span<{ $selected?: boolean }>`
   cursor: pointer;
@@ -349,5 +350,24 @@ export const SideLinkStyled = styled(Link)<{ $selected?: boolean }>`
   /* Hide the border on screens smaller than 1200px */
   ${mediaRules.lg} {
     border-bottom: none;
+  }
+`;
+// Add this styled component for the search icon container
+export const SearchIconContainer = styled.div`
+  display: flex;
+  align-items: right;
+  cursor: pointer; // Make it clickable
+  font-size: 1.5rem; // Adjust the size of the icon
+
+  ${mediaRules.lg} {
+    margin-left: 1rem; // Add some space between the languages and the search icon
+  }
+
+  svg {
+    color: inherit; // Make sure the icon inherits the color from the text
+  }
+
+  &:hover svg {
+    color: #555; // Optional: Change color on hover for better user experience
   }
 `;
