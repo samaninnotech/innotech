@@ -1,3 +1,4 @@
+import ContactSection from '@/components/common/ContactSection';
 import { HomePageTopPost } from "@/components/common/HomePageTopPost/HomePageTopPost";
 import PageTopBar from "@/components/common/PageTopBar";
 import PartnerShipSection from "@/components/common/PartnerShipSection/PartnerShipSection";
@@ -25,8 +26,7 @@ import VisionsSection from "./VisionsSection";
 export {
   Button,
   Carousel,
-  ConsultationSection,
-  DraftBanner,
+  ConsultationSection, ContactSection, DraftBanner,
   EventsLastUpdatesSection,
   GenericLink,
   GetInTouchSection,
@@ -45,5 +45,6 @@ export {
   TeamList,
   TickItemsSection,
   VideoSection,
-  VisionsSection,
+  VisionsSection
 };
+

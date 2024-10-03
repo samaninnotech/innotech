@@ -12,6 +12,7 @@ import {
   BlogPostsListSection,
   Carousel,
   ConsultationSection,
+  ContactSection,
   Event,
   EventHeaderSection,
   EventsLastUpdatesSection,
@@ -25,6 +26,7 @@ import {
   isBlogPostsListSection,
   isCarousel,
   isConsultationSection,
+  isContactSection,
   isEventHeaderSection,
   isEventsLastUpdatesSection,
   isEventsListSection,
@@ -65,6 +67,7 @@ import { FC, ReactNode } from "react";
 import {
   Carousel as CarouselComponent,
   ConsultationSection as ConsultationSectionComponent,
+  ContactSection as ContactSectionComponent,
   EventsLastUpdatesSection as EventsLastUpdatesSectionComponent,
   GetInTouchSection as GetInTouchSectionComponent,
   HeroSectionComponent,
@@ -82,7 +85,7 @@ import {
   TeamList as TeamListcomponent,
   TickItemsSection as TickItemsSectionComponent,
   VideoSection as VideoSectionComponent,
-  VisionsSection as VisionsSectionComponent,
+  VisionsSection as VisionsSectionComponent
 } from ".";
 import BlogHeaderComponent from "./Blog/BlogHeader";
 import PostsList from "./Blog/PostsList";
@@ -136,6 +139,8 @@ const PageBuilder: FC<PageBuilderProps> = async ({ sections, locale }) => {
       renderedSections.push(buildTickItemsSection(s));
     } else if (isGetInTouchSection(s)) {
       renderedSections.push(buildGetInTouchSection(s));
+    } else if (isContactSection(s)) {
+      renderedSections.push(buildContactSection(s));
     } else if (isJobOfferSection(s)) {
       renderedSections.push(buildJobOfferSection(s));
     } else if (isBlogHeaderSection(s)) {
@@ -319,6 +324,22 @@ const buildGetInTouchSection = (s: GetInTouchSection) => {
     />
   );
 };
+
+const buildContactSection = (s: ContactSection) => {
+  const {
+    rightHeader,
+    agreement,
+    buttonLabel,
+  } = s;
+  return (
+    <ContactSectionComponent
+      rightHeader={rightHeader}
+      agreement={agreement}
+      buttonLabel={buttonLabel}
+    />
+  );
+};
+
 const buildJobOfferSection = (s: JobOfferSection) => {
   const { header, jobOffers } = s;
   return <JobOfferSectionComponent header={header} jobOffers={jobOffers} />;

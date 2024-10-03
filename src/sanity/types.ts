@@ -494,7 +494,7 @@ export interface TickItemType extends SanityElement {
   description: string;
 }
 
-/* Get In touc Section */
+/* Get In touch Section */
 export interface GetInTouchSection extends Section {
   mainHeader: string;
   subtitle: string;
@@ -509,6 +509,19 @@ export function isGetInTouchSection(
   section: Section,
 ): section is GetInTouchSection {
   return sectionMatchType(section, "get_in_touch_section");
+}
+
+/* Contact Section */
+export interface ContactSection extends Section {
+  agreement: string;
+  buttonLabel: string;
+  rightHeader: string;
+}
+
+export function isContactSection(
+  section: Section,
+): section is ContactSection {
+  return sectionMatchType(section, "contact_section");
 }
 
 /* Card Link Section */
@@ -718,13 +731,6 @@ export function isCountersSection(
   section: Section,
 ): section is CountersSection {
   return sectionMatchType(section, "counters_section");
-}
-
-export interface ContactsSection extends Section {}
-export function isContactsSection(
-  section: Section,
-): section is ContactsSection {
-  return sectionMatchType(section, "contacts_section");
 }
 
 export interface AssistanceSection extends Section {}
