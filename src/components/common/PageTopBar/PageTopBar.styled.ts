@@ -10,12 +10,12 @@ export const PageTopBarContainer = styled.div`
   font-weight: 400;
   width: 100%;
   z-index: 1000;
-  position: absolute; /* Change from absolute to fixed */
+  position: absolute;
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   font-size: 14px;
   line-height: 1.78;
-  letter-spacing: 0em;
-  margin: 0px auto;
+  margin: 0 auto;
+
   a {
     text-decoration: none;
     color: inherit;
@@ -27,18 +27,14 @@ export const Container = styled.div`
   height: 100%;
   padding: 0 15px;
   display: none;
-  box-sizing: inherit;
   width: 100%;
-  ${mediaRules.sm} {
-    display: block;
-    max-width: 720px;
-  }
+
   ${mediaRules.md} {
     display: block;
     max-width: 940px;
   }
+
   ${mediaRules.lg} {
-    display: block;
     max-width: 1170px;
   }
 `;
@@ -48,14 +44,14 @@ export const Row = styled.div`
   flex-wrap: wrap;
   align-items: center;
   height: 100%;
-  margin: 0px -15px;
+  margin: 0 -15px;
 `;
 
 export const TopBarWrap = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding: 10px 0; /* Add padding to ensure some space around the text */
+  padding: 10px 0; /* Add padding for spacing */
 `;
 
 export const TopBarLeft = styled.div``;
@@ -67,14 +63,6 @@ export const TopBarInfo = styled.ul`
   padding: 0;
   margin: 0;
   display: flex;
-`;
-
-export const InfoItem = styled.li`
-  margin-left: 15px;
-
-  &:first-child {
-    margin-left: 0;
-  }
 `;
 
 export const InfoLink = styled.a`

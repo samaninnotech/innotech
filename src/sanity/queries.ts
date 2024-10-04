@@ -43,7 +43,7 @@ const buildPageDeconstructionQUery = (locale: string) => `{
     _type == 'newsletter_form_section' => ${buildNewsletterSectionQuery(locale)},
     _type == 'large_background_section' => ${buildLargeBackgroundSectionQuery(locale)},
     _type == 'page_top_bar' => ${buildPageTopBarQuery(locale)},
-    _type == 'home_page_top_post' => ${buildHomePageTopPostQuery()},
+    _type == 'home_page_top_post' => ${buildHomePageTopPostQuery(locale)},
     _type == 'consultation_section' => ${buildConsultationSectionQuery(locale, fallbackLocale)},
     _type == 'solutions_section' => ${buildSolutionsSectionQuery(locale, fallbackLocale)},
     _type == 'partnership_section' => ${buildPartnerShipSectionQuery(locale, fallbackLocale)},
@@ -237,11 +237,9 @@ const buildPageTopBarQuery = (locale: string) => `{
   'infoIcon': infoIcon
 }`;
 
-const buildHomePageTopPostQuery = () => `{
+const buildHomePageTopPostQuery = (locale: string) => `{
   'backgroundImage': backgroundImage.asset->url,
-  'heading1': heading1,
-  'heading2': heading2,
-  'description': description
+  'heading': coalesce(heading.${locale}, heading.${fallbackLocale}),
 }`;
 
 const buildConsultationSectionQuery = (
@@ -884,7 +882,7 @@ const eventBySlugQuery = (locale: string, slug: string) => {
     _type == 'newsletter_form_section' => ${buildNewsletterSectionQuery(locale)},
     _type == 'large_background_section' => ${buildLargeBackgroundSectionQuery(locale)},
     _type == 'page_top_bar' => ${buildPageTopBarQuery(locale)},
-    _type == 'home_page_top_post' => ${buildHomePageTopPostQuery()},
+    _type == 'home_page_top_post' => ${buildHomePageTopPostQuery(locale)},
     _type == 'consultation_section' => ${buildConsultationSectionQuery(locale, fallbackLocale)},
     _type == 'solutions_section' => ${buildSolutionsSectionQuery(locale, fallbackLocale)},
     _type == 'partnership_section' => ${buildPartnerShipSectionQuery(locale, fallbackLocale)},

@@ -21,6 +21,7 @@ export const LanguagesListStyled = styled.ul`
   ${mediaRules.lg} {
     flex-direction: row;
     justify-content: flex-end;
+    width: 0;
   }
 `;
 

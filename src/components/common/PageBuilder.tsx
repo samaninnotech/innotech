@@ -180,10 +180,11 @@ const buildPageTopBar = (s: PageTopBar) => {
   );
 };
 const buildHomePageTopPost = (s: HomePageTopPost) => {
-  const { backgroundImage } = s;
+  const { backgroundImage, heading } = s;
   return (
     <HomePageTopPostComponent
       backgroundImage={sanityUrlFor(backgroundImage).url()}
+      heading={heading}
     />
   );
 };

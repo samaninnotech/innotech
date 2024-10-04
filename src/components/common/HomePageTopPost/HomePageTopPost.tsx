@@ -1,5 +1,7 @@
 "use client";
+import { PortableText } from "@portabletext/react";
 import React from "react";
+import components from "../BlockContent/components";
 import {
   ColumnContainer,
   Heading,
@@ -10,10 +12,12 @@ import {
 
 interface HomePageTopPostProps {
   backgroundImage: string;
+  heading: any;
 }
 
 export const HomePageTopPost: React.FC<HomePageTopPostProps> = ({
   backgroundImage,
+  heading,
 }) => {
   return (
     <RowContainer backgroundImage={backgroundImage}>
@@ -21,25 +25,8 @@ export const HomePageTopPost: React.FC<HomePageTopPostProps> = ({
         <div>
           <Spacer />
           <Heading align="center">
-            <h6>Soluzioni Software per</h6>
+            <PortableText value={heading} components={components} />
           </Heading>
-          <Spacer />
-          <Heading align="center">
-            <h3>
-              Progetti di Innovazione
-              <br />
-              Tecnologica
-            </h3>
-          </Heading>
-          <Spacer />
-          <Heading align="center">
-            <div>
-              Forniamo Competenze e Tecnologia funzionali alla crescita delle
-              PMI
-            </div>
-          </Heading>
-          <Spacer />
-          <Spacer />
         </div>
       </ColumnContainer>
       <Separator>
