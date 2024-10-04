@@ -9,7 +9,6 @@ type NavbarLinksProps = { $showMenu: boolean };
 export const NavbarLinksStyled = styled.nav<NavbarLinksProps>`
   display: flex;
   justify-content: space-between;
-  padding: 1rem 1rem;
   width: 100%;
   align-items: center;
   &.text-white {
@@ -28,7 +27,7 @@ export const NavbarLinksStyled = styled.nav<NavbarLinksProps>`
 
 export const LogoContainerStyled = styled.div`
   max-height: 50px;
-
+  margin-right: 2rem;
   ${mediaRules.lg} {
     max-height: unset;
   }
@@ -38,7 +37,7 @@ export const MainLinksContainerStyled = styled.div`
   display: none;
   flex-direction: column;
   left: 0;
-  padding: 0.75rem;
+  padding: 0rem;
   position: absolute;
   top: 100%;
   width: 100%;
@@ -245,7 +244,6 @@ export const NavbarElementStyled = styled(Link)<{ $selected?: boolean }>`
       }
     `}
 `;
-
 
 export const NavbarMenuStyled = styled.span<{ $selected?: boolean }>`
   cursor: pointer;

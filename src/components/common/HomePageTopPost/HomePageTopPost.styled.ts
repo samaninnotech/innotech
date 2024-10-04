@@ -1,3 +1,4 @@
+import { mediaRules } from "@/themes/media-breakpoints";
 import styled, { keyframes } from "styled-components";
 
 type RowContainerProps = {
@@ -19,7 +20,7 @@ export const RowContainer = styled.div<RowContainerProps>`
   position: relative;
   box-sizing: border-box;
   width: 100%;
-  height: 160vh;
+  height: 110vh;
   padding: 0px;
   background-image: url(${(props) => props.backgroundImage});
   background-size: cover;
@@ -30,7 +31,6 @@ export const RowContainer = styled.div<RowContainerProps>`
   justify-content: center;
   z-index: 1;
   top: -150px;
-  font-family: CerebriSans;
   font-size: 15px;
   font-weight: 400;
   letter-spacing: 0em;
@@ -56,21 +56,17 @@ export const ColumnContainer = styled.div`
   padding: 15px;
   z-index: 2;
   box-sizing: inherit;
-
-  h3 {
-    font-size: 50px;
-    line-height: 1.2;
-    word-wrap: break-word;
-  }
-
-  h6 {
+  h2 {
     font-size: 30px;
     line-height: 1.2;
+    margin: 1rem !important;
   }
-
-  div {
-    font-size: 13px;
-    line-height: 1.2;
+  ${mediaRules.lg} {
+    h2 {
+      font-size: 70px;
+      line-height: 1.2;
+      margin: 1rem !important;
+    }
   }
 `;
 
@@ -82,17 +78,6 @@ export const Heading = styled.div<{ align: string }>`
   text-align: ${({ align }) => align};
   animation: ${moveUp} 1s ease-out;
   z-index: 2; /* Ensure content is above the overlay */
-
-  h6,
-  h3,
-  div {
-    margin: 0;
-  }
-
-  h3 {
-    display: inline-block;
-    white-space: pre-wrap; /* Allows wrapping of the text */
-  }
 `;
 
 export const Separator = styled.div`

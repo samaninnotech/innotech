@@ -322,6 +322,7 @@ export function isPageTopBar(section: Section): section is PageTopBar {
 /* Home Page Top Post */
 export interface HomePageTopPost extends Section {
   backgroundImage: string;
+  heading: string;
 }
 
 export function isHomePageTopPost(

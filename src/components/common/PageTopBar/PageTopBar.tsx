@@ -32,14 +32,14 @@ const PageTopBar: FC<TopBarProps> = ({
         <Row>
           <TopBarWrap>
             <TopBarLeft>
-              <a href={contactLink} className="font-medium display-inline">
+              <a href={contactLink} className="font-medium">
                 {contactText}
               </a>
             </TopBarLeft>
             <TopBarRight>
               <TopBarInfo>
-                <InfoLink href={infoLink} className="info-link">
-                  <InfoIcon className="info-icon fa fa-phone" />
+                <InfoLink href={infoLink}>
+                  <InfoIcon className="fa fa-phone" />
                   <InfoText>
                     <strong>{infoText}</strong>
                   </InfoText>
