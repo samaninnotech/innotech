@@ -217,6 +217,10 @@ const ComplexNavbarLink: FC<ComplexNavbarLinkProperties> = ({
   index,
   config,
 }) => {
+  const [submenuPosition, setSubmenuPosition] = useState<{
+    left: number;
+  } | null>(null); // State for submenu position
+
   const icon: React.ReactNode = (
     <SlArrowDown
       style={{
@@ -224,17 +228,52 @@ const ComplexNavbarLink: FC<ComplexNavbarLinkProperties> = ({
       }}
     />
   );
+
+  // Create a function to handle mouse leave
+  const handleMouseLeave = () => {
+    if (openSubMenu) {
+      openSubMenu(-1); // Close the submenu
+    }
+  };
+
+  // Function to get the position of the submenu
+  const getSubMenuPosition = (event: React.MouseEvent) => {
+    const { currentTarget } = event;
+    const { left, width } = currentTarget.getBoundingClientRect();
+    const submenuWidth = 200; // Set a fixed width for the submenu or calculate based on content
+
+    return {
+      left: left + (width - submenuWidth) - 30, // Center the submenu based on the parent width
+    };
+  };
+
   return (
     <>
       <NavbarMenuStyled
-        onClick={openSubMenu ? () => openSubMenu(index) : undefined}
+        onClick={(event) => {
+          if (openSubMenu) {
+            const position = getSubMenuPosition(event); // Call the function to get position
+            setSubmenuPosition(position); // Update the state with the submenu position
+            openSubMenu(index, position); // Pass position to open submenu
+          }
+        }}
+        $selected={selected}
       >
-        <ComplexNavbarLinkContainer $selected={!!selected}>
+        <ComplexNavbarLinkContainer>
           {label}
           <SVGContainer>{icon}</SVGContainer>
         </ComplexNavbarLinkContainer>
       </NavbarMenuStyled>
-      {selected && config && <SubMenu showSubMenu={true} config={config} />}
+      {selected &&
+        config &&
+        submenuPosition && ( // Check if submenuPosition is not null
+          <SubMenu
+            showSubMenu={true}
+            config={config}
+            onMouseLeave={handleMouseLeave} // Pass onMouseLeave to SubMenu
+            position={submenuPosition} // Pass the submenuPosition state
+          />
+        )}
     </>
   );
 };
