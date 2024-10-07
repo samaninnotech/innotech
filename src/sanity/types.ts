@@ -309,10 +309,10 @@ export interface EventType extends SanityElement {
 
 /* Page Top Bar */
 export interface PageTopBar extends Section {
-  contactLink: string;
+  contactLink: CustomLink;
   contactText: string;
-  infoLink: string;
-  infoText: string;
+  phoneContact: string;
+  phoneContactLink: string;
 }
 
 export function isPageTopBar(section: Section): section is PageTopBar {

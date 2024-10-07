@@ -42,7 +42,7 @@ const buildPageDeconstructionQUery = (locale: string) => `{
     _type == 'block_section' => ${buildBlockSectionQuery(locale)},
     _type == 'newsletter_form_section' => ${buildNewsletterSectionQuery(locale)},
     _type == 'large_background_section' => ${buildLargeBackgroundSectionQuery(locale)},
-    _type == 'page_top_bar' => ${buildPageTopBarQuery(locale)},
+    _type == 'page_top_bar' => ${buildPageTopBarQuery(locale, fallbackLocale)},
     _type == 'home_page_top_post' => ${buildHomePageTopPostQuery(locale)},
     _type == 'consultation_section' => ${buildConsultationSectionQuery(locale, fallbackLocale)},
     _type == 'solutions_section' => ${buildSolutionsSectionQuery(locale, fallbackLocale)},
@@ -229,12 +229,11 @@ const buildLargeBackgroundSectionQuery = (locale: string) => `
   }
 }`;
 
-const buildPageTopBarQuery = (locale: string) => `{
-  'contactText': select(defined(contactText.${locale}) => contactText.${locale}, contactText.${fallbackLocale}),
-  'contactLink': contactLink,
-  'infoText': select(defined(infoText.${locale}) => infoText.${locale}, infoText.${fallbackLocale}),
-  'infoLink': infoLink,
-  'infoIcon': infoIcon
+const buildPageTopBarQuery = (locale: string, fallbackLocale: string) => `{
+  'contactLink': contactLink${buildCustomLinkQuery(locale)},
+  'contactText': coalesce(contactText.${locale}, contactText.${fallbackLocale}),
+  'phoneContact': phoneContact,
+  'phoneContactLink': phoneContactLink
 }`;
 
 const buildHomePageTopPostQuery = (locale: string) => `{
@@ -881,7 +880,7 @@ const eventBySlugQuery = (locale: string, slug: string) => {
     _type == 'block_section' => ${buildBlockSectionQuery(locale)},
     _type == 'newsletter_form_section' => ${buildNewsletterSectionQuery(locale)},
     _type == 'large_background_section' => ${buildLargeBackgroundSectionQuery(locale)},
-    _type == 'page_top_bar' => ${buildPageTopBarQuery(locale)},
+    _type == 'page_top_bar' => ${buildPageTopBarQuery(locale, fallbackLocale)},
     _type == 'home_page_top_post' => ${buildHomePageTopPostQuery(locale)},
     _type == 'consultation_section' => ${buildConsultationSectionQuery(locale, fallbackLocale)},
     _type == 'solutions_section' => ${buildSolutionsSectionQuery(locale, fallbackLocale)},
