@@ -163,7 +163,7 @@ export const PageLinksContainerStyled = styled(GenericLinksContainerStyled)`
   }
 `;
 
-export const ComplexNavbarLinkContainer = styled.div<{ $selected?: boolean }>`
+export const ComplexNavbarLinkContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -182,7 +182,7 @@ export const NavbarElementStyled = styled(Link)<{ $selected?: boolean }>`
   text-decoration: none;
   position: relative;
   overflow: hidden;
-  width: fit-content; /* Width adjusts based on the content size */
+  width: 100%; /* Width adjusts based on the content size */
   white-space: nowrap; /* Prevent text from breaking into multiple lines */
 
   /* Apply border-top for screens narrower than 1200px */
@@ -199,7 +199,7 @@ export const NavbarElementStyled = styled(Link)<{ $selected?: boolean }>`
     margin-top: 0;
     width: fit-content; /* Width based on content */
     border-top: none; /* Remove border-top for screens 1200px and wider */
-
+    width: fit-content;
     /* Apply border-bottom if selected */
     ${({ $selected }) =>
       $selected &&
@@ -270,7 +270,7 @@ export const NavbarMenuStyled = styled.span<{ $selected?: boolean }>`
   ${({ $selected }) =>
     $selected &&
     css`
-      border-bottom: 3px solid #287ca4;
+      padding: 2rem 0;
     `}
 
   &:hover {

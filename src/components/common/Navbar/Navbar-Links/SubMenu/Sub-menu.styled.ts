@@ -31,6 +31,7 @@ export const SubmenuParentContainer = styled.div`
 
 type SubMenuProps = {
   $showSubMenu?: boolean;
+  $left?: number;
 };
 
 export const SubMenuLink = styled(Link)`
@@ -49,17 +50,16 @@ export const SubMenuLink = styled(Link)`
 
 export const Element = styled.div<SubMenuProps>`
   width: fit-content;
-  display: "${(props) => (props.$showSubMenu ? "flex" : "none")}";
-  border-bottom: solid 1px var(--light-gray-1);
+  display: ${(props) => (props.$showSubMenu ? "flex" : "none")};
   color: black;
   flex-direction: column;
   height: 100%;
+
   ${mediaRules.lg} {
     position: absolute;
-    top: 100%;
-    flex-direction: column;
-    left: 400px;
-    border: solid 1px rgba(0, 0, 0, 0.24);
+    top: 80px;
+    left: ${(props) => props.$left}px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
     border-top: 0;
     background-color: white;
     max-height: 600px; /* Set a maximum height, adjust as needed */

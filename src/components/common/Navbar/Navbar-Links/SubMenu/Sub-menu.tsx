@@ -17,10 +17,23 @@ import SubmenuSection from "./SubMenuSection";
 type SubMenuProps = ComponentPropsWithoutRef<"div"> & {
   showSubMenu: boolean;
   config: (CustomLink | NavbarSubmenuSection)[];
+  onMouseLeave: () => void;
+  position: { left: number };
 };
-const SubMenu: FC<SubMenuProps> = ({ showSubMenu, config }) => {
+
+const SubMenu: FC<SubMenuProps> = ({
+  showSubMenu,
+  config,
+  onMouseLeave,
+  position,
+}) => {
+  const { left } = position;
   return (
-    <Element $showSubMenu={showSubMenu}>
+    <Element
+      $showSubMenu={showSubMenu}
+      onMouseLeave={onMouseLeave}
+      $left={Math.ceil(left)}
+    >
       <SubmenuParentContainer>
         {config.map((l, index) => {
           const isSection = isNavbarSubmenuSection(l);
@@ -30,10 +43,7 @@ const SubMenu: FC<SubMenuProps> = ({ showSubMenu, config }) => {
               flexAlignment={isSection ? "flex-start" : "center"}
             >
               {isSection && (
-                <SubmenuSection
-                  title={l.title}
-                  links={l.links || []}
-                ></SubmenuSection>
+                <SubmenuSection title={l.title} links={l.links || []} />
               )}
               {!isSection && (
                 <SubMenuLink href={customLinkToHref(l)}>{l.label}</SubMenuLink>
