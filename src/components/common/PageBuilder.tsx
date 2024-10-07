@@ -169,13 +169,13 @@ const PageBuilder: FC<PageBuilderProps> = async ({ sections, locale }) => {
   return <>{renderedSections}</>;
 };
 const buildPageTopBar = (s: PageTopBar) => {
-  const { contactLink, contactText, infoLink, infoText } = s;
+  const { contactLink, contactText, phoneContact, phoneContactLink } = s;
   return (
     <PageTopBarComponent
       contactLink={contactLink}
       contactText={contactText}
-      infoLink={infoLink}
-      infoText={infoText}
+      phoneContact={phoneContact}
+      phoneContactLink={phoneContactLink}
     />
   );
 };

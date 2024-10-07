@@ -15,10 +15,11 @@ export const PageTopBarContainer = styled.div`
   font-size: 14px;
   line-height: 1.78;
   margin: 0 auto;
-
   a {
-    text-decoration: none;
-    color: inherit;
+    &:hover {
+      color: var(--innotech-color);
+      text-decoration: none;
+    }
   }
 `;
 
@@ -63,9 +64,14 @@ export const TopBarInfo = styled.ul`
   padding: 0;
   margin: 0;
   display: flex;
+
+  &:hover {
+    color: var(--innotech-color);
+    text-decoration: none;
+  }
 `;
 
-export const InfoLink = styled.a`
+export const PhoneContact = styled.a`
   text-decoration: none;
   color: inherit;
   display: flex;
@@ -73,9 +79,10 @@ export const InfoLink = styled.a`
 `;
 
 export const InfoIcon = styled.i`
-  margin-right: 5px;
+  margin: 2px 5px 0 0;
+  transform: scaleX(-1);
 `;
 
-export const InfoText = styled.span`
+export const PhoneContactLink = styled.a`
   font-weight: bold;
 `;

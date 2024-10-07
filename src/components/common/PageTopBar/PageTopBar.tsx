@@ -1,11 +1,13 @@
 "use client";
+import Link from "@/i18n/Link";
+import { CustomLink, customLinkToHref } from "@/sanity/types";
 import { FC } from "react";
+import { FaPhone } from "react-icons/fa6";
 import {
   Container,
   InfoIcon,
-  InfoLink,
-  InfoText,
   PageTopBarContainer,
+  PhoneContactLink,
   Row,
   TopBarInfo,
   TopBarLeft,
@@ -14,36 +16,36 @@ import {
 } from "./PageTopBar.styled";
 
 type TopBarProps = {
-  contactLink: string;
-  contactText: string;
-  infoLink: string;
-  infoText: string;
+  contactLink: CustomLink;
+  contactText: any;
+  phoneContact: string;
+  phoneContactLink: string;
 };
 
 const PageTopBar: FC<TopBarProps> = ({
   contactLink,
   contactText,
-  infoLink,
-  infoText,
+  phoneContact,
+  phoneContactLink,
 }) => {
+  const href = customLinkToHref(contactLink);
   return (
     <PageTopBarContainer>
       <Container>
         <Row>
           <TopBarWrap>
             <TopBarLeft>
-              <a href={contactLink} className="font-medium">
-                {contactText}
-              </a>
+              <Link href={href}>{contactLink.label} </Link>
+              {contactText}
             </TopBarLeft>
             <TopBarRight>
               <TopBarInfo>
-                <InfoLink href={infoLink}>
-                  <InfoIcon className="fa fa-phone" />
-                  <InfoText>
-                    <strong>{infoText}</strong>
-                  </InfoText>
-                </InfoLink>
+                <InfoIcon>
+                  <FaPhone />
+                </InfoIcon>
+                <PhoneContactLink href={phoneContactLink}>
+                  <strong>{phoneContact}</strong>
+                </PhoneContactLink>
               </TopBarInfo>
             </TopBarRight>
           </TopBarWrap>

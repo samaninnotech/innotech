@@ -20,7 +20,7 @@ export const RowContainer = styled.div<RowContainerProps>`
   position: relative;
   box-sizing: border-box;
   width: 100%;
-  height: 110vh;
+  height: 120vh;
   padding: 0px;
   background-image: url(${(props) => props.backgroundImage});
   background-size: cover;
