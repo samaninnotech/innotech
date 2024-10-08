@@ -6,12 +6,11 @@ import PagesConfigContext from "@/i18n/PagesConfigContext";
 import {
   CustomLink,
   customLinkToHref,
-  DecoratedLinkType,
   isNavbarSubmenu,
   NavbarSubmenuSection,
 } from "@/sanity/types";
 import Image from "next/image";
-import { useParams, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { FC, useContext, useEffect, useState } from "react";
 import { MdClose, MdMenu, MdSearch } from "react-icons/md";
 import { SlArrowDown } from "react-icons/sl";
@@ -32,7 +31,6 @@ import {
   SidebarContentStyled,
   SideBarLogoButtonContainer,
   SidebarStyled,
-  SideLinkStyled,
   SVGContainer,
 } from "./Navbar-Links.styled";
 import SubMenu from "./SubMenu";
@@ -54,7 +52,7 @@ const NavbarLinks: FC<NavbarLinksProps> = ({
 }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [isOverlayVisible, setIsOverlayVisible] = useState(false);
-  const [scrollY, setScrollY] = useState(0); // Track scroll position
+  const [scrollY, setScrollY] = useState(0);
 
   const handleSidebarToggle = () => {
     setShowMenu((prev) => !prev);
@@ -63,7 +61,7 @@ const NavbarLinks: FC<NavbarLinksProps> = ({
   };
 
   const handleScroll = () => {
-    setScrollY(window.scrollY); // Update scroll position on scroll
+    setScrollY(window.scrollY);
   };
 
   useEffect(() => {
@@ -75,12 +73,12 @@ const NavbarLinks: FC<NavbarLinksProps> = ({
 
   useEffect(() => {
     if (showMenu) {
-      document.body.style.overflow = "hidden"; // Prevent scrolling on body
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = ""; // Re-enable scrolling
+      document.body.style.overflow = "";
     }
     return () => {
-      document.body.style.overflow = ""; // Cleanup on unmount
+      document.body.style.overflow = "";
     };
   }, [showMenu]);
 
@@ -133,7 +131,7 @@ const NavbarLinks: FC<NavbarLinksProps> = ({
 const PageLinksContainer: FC = () => {
   const { mainConfig } = useContext(PagesConfigContext);
   const pathname = usePathname();
-  const slug = pathname.split("/").pop(); // Get the last part of the path
+  const slug = pathname.split("/").pop();
 
   const [selectedIndex, setSelectedIndex] = useState(-1);
 
@@ -171,7 +169,7 @@ const PageLinksContainer: FC = () => {
           label={l.label}
           link={href}
           isButton={false}
-          selected={href.replace("/", "") === slug} // Compare with slug from pathname
+          selected={href.replace("/", "") === slug}
         />
       );
     }
@@ -187,6 +185,7 @@ type SimpleNavbarLinkProperties = {
   isButton?: boolean;
   selected?: boolean;
 };
+
 const SimpleNavbarLink: FC<SimpleNavbarLinkProperties> = ({
   label,
   link,
@@ -210,40 +209,38 @@ type ComplexNavbarLinkProperties = {
   index?: number;
   config?: Array<CustomLink | NavbarSubmenuSection> | undefined;
 };
+
 const ComplexNavbarLink: FC<ComplexNavbarLinkProperties> = ({
   label,
   selected,
   openSubMenu,
-  index,
+  index = -1,
   config,
 }) => {
   const [submenuPosition, setSubmenuPosition] = useState<{
     left: number;
-  } | null>(null); // State for submenu position
-
+  } | null>(null);
   const icon: React.ReactNode = (
     <SlArrowDown
       style={{
         transform: selected ? "rotate(-180deg)" : "rotate(0deg)",
+        transition: "transform 0.3s ease",
       }}
     />
   );
 
-  // Create a function to handle mouse leave
   const handleMouseLeave = () => {
     if (openSubMenu) {
-      openSubMenu(-1); // Close the submenu
+      openSubMenu(-1);
     }
   };
 
-  // Function to get the position of the submenu
   const getSubMenuPosition = (event: React.MouseEvent) => {
     const { currentTarget } = event;
     const { left, width } = currentTarget.getBoundingClientRect();
-    const submenuWidth = 200; // Set a fixed width for the submenu or calculate based on content
-
+    const submenuWidth = 200;
     return {
-      left: left + (width - submenuWidth) - 30, // Center the submenu based on the parent width
+      left: left + (width - submenuWidth) - 30,
     };
   };
 
@@ -252,9 +249,9 @@ const ComplexNavbarLink: FC<ComplexNavbarLinkProperties> = ({
       <NavbarMenuStyled
         onClick={(event) => {
           if (openSubMenu) {
-            const position = getSubMenuPosition(event); // Call the function to get position
-            setSubmenuPosition(position); // Update the state with the submenu position
-            openSubMenu(index, position); // Pass position to open submenu
+            const position = getSubMenuPosition(event);
+            setSubmenuPosition(position);
+            openSubMenu(index, position);
           }
         }}
         $selected={selected}
@@ -264,60 +261,16 @@ const ComplexNavbarLink: FC<ComplexNavbarLinkProperties> = ({
           <SVGContainer>{icon}</SVGContainer>
         </ComplexNavbarLinkContainer>
       </NavbarMenuStyled>
-      {selected &&
-        config &&
-        submenuPosition && ( // Check if submenuPosition is not null
-          <SubMenu
-            showSubMenu={true}
-            config={config}
-            onMouseLeave={handleMouseLeave} // Pass onMouseLeave to SubMenu
-            position={submenuPosition} // Pass the submenuPosition state
-          />
-        )}
+      {selected && config && submenuPosition && (
+        <SubMenu
+          showSubMenu={true}
+          config={config}
+          onMouseLeave={handleMouseLeave}
+          position={submenuPosition}
+        />
+      )}
     </>
   );
 };
-
-const SideLinksContainer: FC = () => {
-  const { sideConfig } = useContext(PagesConfigContext);
-  const { slug } = useParams();
-
-  if (!sideConfig?.length) {
-    return <MainLinksContainerStyled />;
-  }
-
-  return (
-    <MainLinksContainerStyled>
-      {sideConfig.map((l) => {
-        const { type, link } = l;
-        const href = customLinkToHref(link);
-        return (
-          <SideLink
-            key={link._key}
-            label={link.label}
-            link={href}
-            isButton={type === DecoratedLinkType.Button}
-            selected={href.replace("/", "") === slug} // TODO: TEMP - check if it works with nested pages too
-          ></SideLink>
-        );
-      })}
-    </MainLinksContainerStyled>
-  );
-};
-
-type SideLinkProps = {
-  label: string;
-  link: string;
-  isButton?: boolean;
-  selected?: boolean;
-};
-const SideLink: FC<SideLinkProps> = ({ label, link, isButton, selected }) =>
-  isButton ? (
-    <NavbarLinkButtonStyled href={link}>{label}</NavbarLinkButtonStyled>
-  ) : (
-    <SideLinkStyled href={link} $selected={!!selected}>
-      {label}
-    </SideLinkStyled>
-  );
 
 export default NavbarLinks;

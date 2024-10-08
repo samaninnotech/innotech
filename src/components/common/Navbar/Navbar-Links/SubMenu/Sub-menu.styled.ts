@@ -10,6 +10,7 @@ export const SubmenuBlockContainer = styled.div<SubmenuInnerContainerProps>`
   justify-content: flex-start;
   width: 100%;
   z-index: 2;
+  margin: 1rem 0;
 
   ${mediaRules.lg} {
     display: flex;
@@ -53,7 +54,7 @@ export const Element = styled.div<SubMenuProps>`
   display: ${(props) => (props.$showSubMenu ? "flex" : "none")};
   color: black;
   flex-direction: column;
-  height: 100%;
+  height: auto;
 
   ${mediaRules.lg} {
     position: absolute;
