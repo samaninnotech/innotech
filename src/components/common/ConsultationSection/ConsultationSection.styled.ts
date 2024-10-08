@@ -1,6 +1,6 @@
+import { mediaRules } from "@/themes/media-breakpoints";
 import styled from "styled-components";
 
-// Container for the entire section
 export const Section = styled.div`
   position: relative;
   box-sizing: border-box;
@@ -12,7 +12,6 @@ export const Section = styled.div`
   padding-bottom: 40px;
 `;
 
-// Wrapper for the row
 export const Row = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -20,57 +19,55 @@ export const Row = styled.div`
   width: 100%;
 `;
 
-// Wrapper for columns in the row
 export const Column = styled.div`
   flex: 1;
   display: flex;
   justify-content: center;
-  padding: 0 10px; /* Add padding to create space around each column */
-  width: 100%; /* Full width by default */
-  max-width: 100%; /* Default to full width */
+  padding: 0 10px;
+  width: 100%;
+  max-width: 100%;
 
-  @media (min-width: 768px) {
-    max-width: 720px; /* Maximum width from 768px and up */
+  ${mediaRules.sm} {
+    max-width: 720px;
   }
-
-  @media (min-width: 990px) {
-    max-width: 940px; /* Maximum width from 990px and up */
+  ${mediaRules.md} {
+    max-width: 940px;
   }
-
-  @media (min-width: 1200px) {
-    max-width: 1170px; /* Maximum width from 1200px and up */
+  ${mediaRules.lg} {
+    max-width: 1170px;
   }
 `;
 
-// Swiper container
 export const SwiperContainer = styled.div`
   width: 100%;
-
+  .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   .swiper-pagination {
-    display: block; /* Ensure pagination dots are visible */
+    display: block;
     position: absolute;
-    bottom: -10px; /* Adjust based on your design */
+    bottom: -10px;
     left: 0;
     width: 100%;
     text-align: center;
   }
 
-  @media (min-width: 991px) {
+  ${mediaRules.md} {
     .swiper-pagination {
-      display: none; /* Hide pagination from 991px and up */
+      display: none;
     }
   }
 `;
 
-// Spacer element
 export const Spacer = styled.div`
-  height: 60px; /* Increased height to ensure pagination is visible */
+  height: 60px;
 `;
 
-// Pagination container for positioning pagination dots
 export const PaginationContainer = styled.div`
   width: 100%;
   text-align: center;
   position: relative;
-  bottom: -30px; /* Adjust this value to position the pagination dots */
+  bottom: -30px;
 `;
