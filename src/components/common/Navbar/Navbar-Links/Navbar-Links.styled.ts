@@ -270,7 +270,7 @@ export const NavbarMenuStyled = styled.span<{ $selected?: boolean }>`
   ${({ $selected }) =>
     $selected &&
     css`
-      padding: 2rem 0;
+      color: var(--innotech-color);
     `}
 
   &:hover {
