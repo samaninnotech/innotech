@@ -1,9 +1,9 @@
+import { mediaRules } from "@/themes/media-breakpoints";
 import Image from "next/image";
 import styled from "styled-components";
 
-// Define styles for the hover state and movement
 export const Slide = styled.div`
-  width: 90%;
+  width: 60%;
   flex-shrink: 0;
   position: relative;
   background-color: white;
@@ -17,20 +17,18 @@ export const Slide = styled.div`
     color: white;
     transform: translateY(-5px); // This moves the entire slide up
   }
+  height: 100%;
 
-  @media (min-width: 1200px) {
-    width: 95%;
+  ${mediaRules.xsm} {
+    width: 70%;
   }
-
-  @media (min-width: 990px) and (max-width: 1199px) {
-    width: 95%;
-  }
-
-  @media (min-width: 768px) and (max-width: 989px) {
+  ${mediaRules.sm} {
     width: 90%;
   }
-
-  @media (max-width: 767px) {
+  ${mediaRules.md} {
+    width: 95%;
+  }
+  ${mediaRules.lg} {
     width: 95%;
   }
 `;

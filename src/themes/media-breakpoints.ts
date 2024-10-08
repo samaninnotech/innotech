@@ -1,4 +1,5 @@
 const breakpoints = {
+  xsm: "576px",
   sm: "768px",
   md: "990px",
   lg: "1200px",
@@ -7,6 +8,7 @@ const breakpoints = {
 };
 
 const mediaRules = {
+  xsm: `@media (min-width: ${breakpoints.xsm})`,
   sm: `@media (min-width: ${breakpoints.sm})`,
   md: `@media (min-width: ${breakpoints.md})`,
   lg: `@media (min-width: ${breakpoints.lg})`,
