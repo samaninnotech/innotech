@@ -8,7 +8,7 @@ import {
 } from "./SolutionCard.styled";
 
 interface SolutionCardProps {
-  icon: string; // Updated to accept JSX.Element for SVG
+  icon: string;
   title: string;
   text: string;
 }
@@ -18,7 +18,7 @@ const SolutionCard: React.FC<SolutionCardProps> = ({ icon, title, text }) => {
     return (
       <div
         dangerouslySetInnerHTML={{ __html: svgString }}
-        style={{ width: "100%", height: "100%" }} // Adjust size as needed
+        style={{ width: "100%", height: "100%" }}
       />
     );
   };
@@ -26,9 +26,7 @@ const SolutionCard: React.FC<SolutionCardProps> = ({ icon, title, text }) => {
   const svgElement = createSvgElement(icon);
   return (
     <Card>
-      <IconContainer>
-        {svgElement} {/* Render the icon here */}
-      </IconContainer>
+      <IconContainer>{svgElement}</IconContainer>
       <Heading>{title}</Heading>
       <TextContent>{text}</TextContent>
       <LearnMoreLink href="#">

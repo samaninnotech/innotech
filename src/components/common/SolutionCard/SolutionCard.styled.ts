@@ -19,8 +19,6 @@ export const Card = styled.div`
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease;
-  color: #696969;
-  font-family: CerebriSans;
   font-size: 2px !important;
   font-weight: 400;
   letter-spacing: 0em;
@@ -30,7 +28,7 @@ export const Card = styled.div`
   padding: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   &:hover {
     transform: translateY(-5px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -45,12 +43,11 @@ export const Card = styled.div`
 export const IconContainer = styled.div`
   width: 100%;
   height: 60px;
-  margin-bottom: 10px;
+  margin: 20px 0;
   position: relative;
-
   svg {
-    width: 80%;
-    height: 80%;
+    width: 100%;
+    height: 100%;
     stroke: #005a87;
     fill: none;
     stroke-width: 1.7;
@@ -60,14 +57,18 @@ export const IconContainer = styled.div`
 `;
 
 export const Heading = styled.h4`
-  font-size: 15px;
+  font-size: 24px;
   margin: 10px 0;
+  font-weight: 500;
+  color: var(--text-black-color);
 `;
 
 export const TextContent = styled.p`
-  font-size: 10px;
+  font-size: 15px;
   line-height: 1.74;
-  margin: 0;
+  margin-bottom: 15px;
+  color: var(--text-gray-color);
+  font-weight: 400;
 `;
 
 export const LearnMoreLink = styled.a`
@@ -76,7 +77,9 @@ export const LearnMoreLink = styled.a`
   font-size: 15px;
   text-decoration: none;
   position: relative;
-  margin-top: 20px;
+  margin-bottom: 10px;
+  margin-top: auto; // This pushes the link to the bottom
+
   .arrow-icon {
     margin-left: 5px;
     transition: transform 0.3s ease;

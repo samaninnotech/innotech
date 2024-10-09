@@ -5,7 +5,9 @@
   --light-gray-1: #e5e7eb;
   --black-color: #000;
   --white-color: #fff;
-  --text-light-color: #6b7280;
+  --text-light-color: #aeaeae;
+  --text-black-color: #333333;
+  --text-gray-color: #777977;
   --foreground-rgb: #111;
   --background-start-rgb: var(--white-color);
   --background-end-rgb: var(--white-color);
