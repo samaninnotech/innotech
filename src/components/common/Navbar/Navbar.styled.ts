@@ -6,6 +6,11 @@ export const NavbarWrapper = styled.div`
   justify-content: center;
   width: 100%;
   margin: 0 auto;
+
+  ${mediaRules.xsm} {
+    max-width: 576px;
+  }
+
   ${mediaRules.sm} {
     max-width: 720px;
   }
@@ -64,4 +69,7 @@ export const SecondaryNavbarStyled = styled.header<{ isVisible: boolean }>`
   transform: translateY(${({ isVisible }) => (isVisible ? "0" : "-100%")});
   opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
   z-index: 50;
+  height: 20%;
+  display: flex;
+  align-content: center;
 `;

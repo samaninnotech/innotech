@@ -131,7 +131,8 @@ const NavbarLinks: FC<NavbarLinksProps> = ({
 const PageLinksContainer: FC = () => {
   const { mainConfig } = useContext(PagesConfigContext);
   const pathname = usePathname();
-  const slug = pathname.split("/").pop();
+  const slug =
+    pathname === "/" || pathname === "/en" ? "" : pathname.split("/").pop();
 
   const [selectedIndex, setSelectedIndex] = useState(-1);
 
@@ -169,7 +170,10 @@ const PageLinksContainer: FC = () => {
           label={l.label}
           link={href}
           isButton={false}
-          selected={href.replace("/", "") === slug}
+          selected={
+            href.replace("/", "") === slug ||
+            (slug === "" && (href === "/" || href === "/en"))
+          }
         />
       );
     }

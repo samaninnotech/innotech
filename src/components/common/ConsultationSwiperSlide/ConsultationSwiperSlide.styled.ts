@@ -17,7 +17,7 @@ export const Slide = styled.div`
     color: white;
     transform: translateY(-5px); // This moves the entire slide up
   }
-  height: 100%;
+  min-height: 300px;
 
   ${mediaRules.xsm} {
     width: 70%;

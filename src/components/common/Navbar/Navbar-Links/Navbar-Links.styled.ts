@@ -267,11 +267,13 @@ export const NavbarMenuStyled = styled.span<{ $selected?: boolean }>`
   border-bottom: none;
 
   /* If the item is selected, keep the border-bottom visible */
-  ${({ $selected }) =>
-    $selected &&
-    css`
-      color: var(--innotech-color);
-    `}
+  ${mediaRules.lg} {
+    ${({ $selected }) =>
+      $selected &&
+      css`
+        color: var(--innotech-color);
+      `}
+  }
 
   &:hover {
     text-decoration: none;
