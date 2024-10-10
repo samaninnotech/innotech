@@ -275,7 +275,7 @@ const buildPartnerShipSectionQuery = (
   'partnershipCards': partnershipCards[]{
     'title': coalesce(title.${locale}, title.${fallbackLocale}),
     'text': coalesce(text.${locale}, text.${fallbackLocale}),
-    'icon': icon
+    'icon': icon.asset->url
   }
 }`;
 

@@ -1,14 +1,13 @@
-// PartnerShipCard.styled.ts
+import Image from "next/image";
 import styled from "styled-components";
 
-// Styles for the PartnerShipCard
 export const Card = styled.div`
   background-color: #fff;
   border-radius: 5px;
   text-align: center;
   padding: 20px;
   margin: 10px;
-  flex: 1 1 300px; // Flex-grow, flex-shrink, flex-basis
+  flex: 1 1 300px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -24,24 +23,21 @@ export const Card = styled.div`
 export const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 export const IconContainer = styled.div`
-  width: 40px;
-  height: 40px;
-  margin-bottom: 15px;
-  margin-right: 15px;
-
+  margin-right: 20px;
   svg {
-    width: 100%;
-    height: 100%;
-    color: #005a87; // Match the icon color as needed
+    color: var(--innotech-color);
   }
 `;
 
+export const Icon = styled(Image)``;
 export const Heading = styled.h4`
-  font-size: 18px;
-  margin: 10px 0;
-  color: #333;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--innotech-color);
+  text-align: left;
 `;
 
 export const TextContent = styled.div`
