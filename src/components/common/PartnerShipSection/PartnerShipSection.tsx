@@ -1,15 +1,9 @@
 "use client";
 // PartnerShipSection.tsx
 import { PartnerShipCardType } from "@/sanity/types";
-import {
-  faChalkboardTeacher,
-  faCheckSquare,
-  faCogs,
-  faEuroSign,
-  IconDefinition,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { PortableText } from "@portabletext/react";
 import React from "react";
+import components from "../BlockContent/components";
 import PartnerShipCard from "../PartnerShipCard/PartnerShipCard";
 import {
   CardsContainer,
@@ -18,45 +12,32 @@ import {
   InnerContainer,
 } from "./PartnerShipSection.styled";
 
-// Define icons
-const iconMapping: { [key: string]: IconDefinition } = {
-  euroSign: faEuroSign,
-  checkSquare: faCheckSquare,
-  cogs: faCogs,
-  chalkboardTeacher: faChalkboardTeacher,
-};
-
 type PartnerShipSectionProps = {
-  partnershipCards: PartnerShipCardType[]; // Make it optional to handle undefined cases
-  header: string;
+  partnershipCards: PartnerShipCardType[];
+  header: any;
 };
 
 const PartnerShipSection: React.FC<PartnerShipSectionProps> = ({
-  partnershipCards = [],
+  partnershipCards,
   header,
 }) => (
   <Container>
     <InnerContainer>
       <Header>
-        <h4>{header}</h4>
+        <PortableText value={header} components={components} />
       </Header>
       <CardsContainer>
         {partnershipCards.length > 0 ? (
           partnershipCards.map((data, index) => (
             <PartnerShipCard
               key={index}
-              icon={
-                <FontAwesomeIcon
-                  icon={iconMapping[data.icon] || faCheckSquare}
-                />
-              }
+              icon={data.icon}
               title={data.title}
               text={data.text}
-              _key={data._key || ""} // Make sure to pass a valid key
             />
           ))
         ) : (
-          <p>No partnership cards available</p> // Handle the case when there are no cards
+          <p>No partnership cards available</p>
         )}
       </CardsContainer>
     </InnerContainer>
