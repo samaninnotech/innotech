@@ -283,6 +283,8 @@ export interface SolutionCardType extends SanityElement {
   icon: string;
   title: string;
   text: string;
+  link: CustomLink;
+  learnMore: string;
 }
 
 /*Event Section*/
