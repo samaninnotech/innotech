@@ -161,7 +161,9 @@ export interface Post extends SanityElement {
   carousel: Carousel;
 }
 
-export interface BlogLastUpdatesSection extends Section {}
+export interface BlogLastUpdatesSection extends Section {
+  header: string;
+}
 
 export function isBlogLastUpdatesSection(
   section: Section,

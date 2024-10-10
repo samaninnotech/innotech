@@ -58,7 +58,8 @@ export const formatDate = (
 
   const day = date.getDate().toString().padStart(2, "0");
   const monthName = date.toLocaleString(locale, { month: "long" });
+  const year = date.getFullYear(); // Retrieve the year
   const timeRange = startTime && endTime ? `h. ${startTime} - ${endTime}` : "";
 
-  return `${day} ${monthName} ${timeRange}`.trim();
+  return `${day} ${monthName} ${year} ${timeRange}`.trim(); // Include year in the return
 };

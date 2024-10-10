@@ -72,10 +72,7 @@ const buildBlogHeaderSectionQuery = (locale: string) => `
   background_image,
 }`;
 const buildBlogLastUpdatesSectionQuery = (locale: string) => `{
-  'tabs': tabs[]{
-    _key,
-    'title': coalesce(title.${locale}, title.${fallbackLocale}),
-  }
+  'header': coalesce(header.${locale}, header.${fallbackLocale}),
 }`;
 const buildEventHeaderSectionQuery = (locale: string) => `
 {

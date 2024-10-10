@@ -13,6 +13,7 @@ import {
   BlogPostMeta,
   BlogPostReadMore,
   BlogPostTitle,
+  Header,
   LatestBlogPostsContainer,
   PostsWrapper,
   SmallPostContainer,
@@ -22,16 +23,22 @@ import {
   SmallPostsContainer,
   SmallPostTitle,
   SmallPostUser,
-  UserIcon,
+  UserIconContainer,
 } from "./Blog-last-update.styled";
 
+import { formatDate } from "@/lib/middlewares/eventDateParser";
+import { faCalendarAlt, faUser } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 type BlogLastUpdateProps = {
+  header: string;
   posts: Post[];
 };
 
-const BlogLastUpdate: FC<BlogLastUpdateProps> = ({ posts }) => {
+const BlogLastUpdate: FC<BlogLastUpdateProps> = ({ header, posts }) => {
   return (
     <LatestBlogPostsContainer>
+      <Header>{header}</Header>
       {posts.length > 0 && (
         <PostsWrapper>
           <BigPostContainer>
@@ -39,21 +46,23 @@ const BlogLastUpdate: FC<BlogLastUpdateProps> = ({ posts }) => {
               <BlogPostImage
                 src={sanityUrlFor(posts[0].cover).url()}
                 alt={posts[0].title}
+                width={500}
+                height={300}
               />
               <BlogPostInfo>
                 <BlogPostMeta>
                   <BlogPostAuthor>
-                    <UserIcon>
-                      <img src="./user.png" alt="User" />
-                    </UserIcon>
+                    <UserIconContainer>
+                      <FontAwesomeIcon icon={faUser} color="white" />
+                    </UserIconContainer>
                     {posts[0].author}
                   </BlogPostAuthor>
                   <BlogPostDate>
-                    {new Date(posts[0].publish_date).toLocaleString("default", {
-                      day: "2-digit",
-                      month: "2-digit",
-                      year: "numeric",
-                    })}
+                    <FontAwesomeIcon
+                      icon={faCalendarAlt}
+                      style={{ marginRight: "5px" }}
+                    />
+                    {formatDate(posts[0].publish_date)}
                   </BlogPostDate>
                 </BlogPostMeta>
 
@@ -69,10 +78,8 @@ const BlogLastUpdate: FC<BlogLastUpdateProps> = ({ posts }) => {
           </BigPostContainer>
 
           <SmallPostsContainer>
-            {posts.slice(1, 4).map((post, index) => (
+            {posts.slice(1, 4).map((post) => (
               <div key={post.slug}>
-                {" "}
-                {/* Wrap the content in a div to separate the link */}
                 <Link href={`/blog/${post.slug}`}>
                   <SmallPostContainer>
                     <SmallPostImage
@@ -84,15 +91,24 @@ const BlogLastUpdate: FC<BlogLastUpdateProps> = ({ posts }) => {
                     />
                     <SmallPostInfo>
                       <SmallPostDate>
-                        {new Date(post.publish_date).toLocaleString("default", {
-                          day: "2-digit",
-                          month: "2-digit",
-                          year: "numeric",
-                        })}
+                        <FontAwesomeIcon
+                          icon={faCalendarAlt}
+                          style={{ marginRight: "5px" }}
+                        />
+                        {formatDate(post.publish_date)}
                       </SmallPostDate>
                       <SmallPostTitle>{post.title}</SmallPostTitle>
                     </SmallPostInfo>
-                    <SmallPostUser>{post.author}</SmallPostUser>
+                    <SmallPostUser>
+                      <UserIconContainer>
+                        <FontAwesomeIcon
+                          icon={faUser}
+                          color="white"
+                          style={{ fontSize: "10px" }}
+                        />
+                      </UserIconContainer>
+                      {post.author}
+                    </SmallPostUser>
                   </SmallPostContainer>
                 </Link>
               </div>
