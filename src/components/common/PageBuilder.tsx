@@ -377,7 +377,8 @@ const buildBlogLastUpdatesSection = (
   s: BlogLastUpdatesSection,
   posts: Post[],
 ) => {
-  return <BlogLastUpdate posts={posts} />;
+  const { header } = s;
+  return <BlogLastUpdate posts={posts} header={header} />;
 };
 
 const buildEventHeaderSection = (section: EventHeaderSection) => {

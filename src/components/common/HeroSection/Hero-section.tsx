@@ -80,12 +80,10 @@ const HeroSectionComponent: FC<HeroSectionProps> = ({
       </Element>
     );
   } else {
-    const revertOnMobile =
-      isHeroTextColumn(rightColumn) && isHeroImageColumn(leftColumn);
     return (
       <Element id={id || ""} $background={backgroundColor} $height={height}>
         <InnerContainer1 $bgImg={backgroundImage}>
-          <InnerContainer2 $revertOnMobile={revertOnMobile}>
+          <InnerContainer2>
             {leftColumn && (
               <HeroColumnComponent
                 column={leftColumn}

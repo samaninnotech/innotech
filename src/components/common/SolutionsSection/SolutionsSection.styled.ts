@@ -22,7 +22,7 @@ export const InnerContainer1 = styled.div`
     max-width: 940px;
   }
   ${mediaRules.lg} {
-    max-width: 1200px;
+    max-width: 1170px;
   }
   padding: 0;
 `;

@@ -1,6 +1,6 @@
 "use client";
 import { mediaRules } from "@/themes/media-breakpoints";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import GenericSection from "../GenericSection";
 
 export const HeroTitle = styled.h2`
@@ -32,13 +32,11 @@ export const InnerContainer1 = styled.div<{ $bgImg?: string }>`
   background-size: auto;
   background-position: center right;
   background-repeat: no-repeat; /* Prevents the image from repeating */
-
   height: 100%;
   display: flex;
   justify-content: center;
 `;
 
-/* TODO gestione colore del testo (leggibilità) */
 export const OnlyTextContainer = styled.div`
     padding-left: 1rem;
     padding-right: 1rem;
@@ -48,27 +46,25 @@ export const OnlyTextContainer = styled.div`
       max-width: 768px;
     }
 }`;
-type InnerContainer2Props = { $revertOnMobile: boolean };
-export const InnerContainer2 = styled.div<InnerContainer2Props>`
-    display: flex;
-    ${({ $revertOnMobile }) =>
-      $revertOnMobile
-        ? css`
-            flex-direction: column-reverse;
-          `
-        : css`
-            flex-direction: column;
-          `}
-    margin-right: -0.5rem;
+export const InnerContainer2 = styled.div`
+    display: grid;
     flex-wrap: wrap;
     align-items: center;
     text-align: center;
 
-    ${mediaRules.lg} {
-      text-align: left;
-      display: grid;
+    ${mediaRules.xsm} {
+      max-width: 576px;
+    }
+    ${mediaRules.sm} {
+      max-width: 720px;
+    }
+    ${mediaRules.md} {
+      max-width: 940px;
       grid-template-columns: 50% 50%;
-  }
+    }
+    ${mediaRules.lg} {
+      max-width: 1170px;
+    }
 }`;
 
 export const InnerContainerLeft = styled.div<{
@@ -84,6 +80,14 @@ export const InnerContainerLeft = styled.div<{
   overflow-wrap: break-word;
   word-break: break-word;
   margin: 0 !important;
+  h2 {
+    font-size: 25px;
+  }
+  ${mediaRules.sm} {
+    h2 {
+      font-size: 40px;
+    }
+  }
 `;
 export const InnerContainerRight = styled(GenericSection)`
     padding-left: 0.5rem;
