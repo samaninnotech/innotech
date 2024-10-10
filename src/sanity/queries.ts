@@ -261,7 +261,9 @@ const buildSolutionsSectionQuery = (locale: string, fallbackLocale: string) => `
   'solutionCards': solutionCards[]{
     'title': coalesce(title.${locale}, title.${fallbackLocale}),
     'text': coalesce(text.${locale}, text.${fallbackLocale}),
-    'icon': icon
+    'icon': icon.asset->url,
+    'link': link${buildCustomLinkQuery(locale)},
+    'learnMore': coalesce(learn_more.${locale}, learn_more.${fallbackLocale})
   }
 }`;
 const buildPartnerShipSectionQuery = (

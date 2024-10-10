@@ -1,6 +1,8 @@
 "use client";
 import { SolutionCardType } from "@/sanity/types";
+import { PortableText } from "@portabletext/react";
 import { FC } from "react";
+import components from "../BlockContent/components";
 import SolutionCard from "../SolutionCard/SolutionCard";
 import {
   CardsContainer,
@@ -16,7 +18,7 @@ import {
 
 type SolutionsSectionProps = {
   title?: string;
-  text?: string;
+  text?: any;
   solutionCards?: SolutionCardType[];
 };
 // SolutionsSection Component
@@ -33,9 +35,9 @@ export const SolutionsSection: FC<SolutionsSectionProps> = ({
             <Header>
               <Paragraph>
                 <p>{title}</p>
-                <h2>{text}</h2>
+                <PortableText value={text} components={components} />
               </Paragraph>
-              <RightBox>{/* Right box content here if needed */}</RightBox>
+              <RightBox />
             </Header>
 
             <CardsContainer>
@@ -47,6 +49,8 @@ export const SolutionsSection: FC<SolutionsSectionProps> = ({
                       icon={solution.icon}
                       title={solution.title}
                       text={solution.text}
+                      link={solution.link}
+                      learnMore={solution.learnMore}
                     />
                   ))}
               </Row>

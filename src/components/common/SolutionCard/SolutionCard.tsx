@@ -1,7 +1,13 @@
+import { sanityUrlFor } from "@/sanity/sanity-client";
+import { CustomLink, customLinkToHref } from "@/sanity/types";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons"; // or free-regular-svg-icons
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import React from "react";
 import {
   Card,
   Heading,
+  Icon,
   IconContainer,
   LearnMoreLink,
   TextContent,
@@ -11,27 +17,34 @@ interface SolutionCardProps {
   icon: string;
   title: string;
   text: string;
+  link: CustomLink;
+  learnMore: string;
 }
 
-const SolutionCard: React.FC<SolutionCardProps> = ({ icon, title, text }) => {
-  const createSvgElement = (svgString: string): JSX.Element => {
-    return (
-      <div
-        dangerouslySetInnerHTML={{ __html: svgString }}
-        style={{ width: "100%", height: "100%" }}
-      />
-    );
-  };
+const SolutionCard: React.FC<SolutionCardProps> = ({
+  icon,
+  title,
+  text,
+  link,
+  learnMore,
+}) => {
+  const href = customLinkToHref(link);
 
-  const svgElement = createSvgElement(icon);
   return (
-    <Card>
-      <IconContainer>{svgElement}</IconContainer>
+    <Card href={href}>
+      <IconContainer>
+        <Icon
+          src={sanityUrlFor(icon).url()}
+          alt="icon"
+          width={70}
+          height={60}
+        />
+      </IconContainer>
       <Heading>{title}</Heading>
       <TextContent>{text}</TextContent>
-      <LearnMoreLink href="#">
-        Scopri la soluzione
-        <span className="arrow-icon">→</span>
+      <LearnMoreLink>
+        {learnMore}
+        <FontAwesomeIcon icon={faArrowRight} />
       </LearnMoreLink>
     </Card>
   );

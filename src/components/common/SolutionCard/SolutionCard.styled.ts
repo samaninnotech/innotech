@@ -1,16 +1,8 @@
-import styled, { keyframes } from "styled-components";
+import Link from "@/i18n/Link";
+import Image from "next/image";
+import styled from "styled-components";
 
-// Keyframes for drawing the icon
-const draw = keyframes`
-  from {
-    stroke-dashoffset: 1000;
-  }
-  to {
-    stroke-dashoffset: 0;
-  }
-`;
-
-export const Card = styled.div`
+export const Card = styled(Link)`
   width: 100%;
   background-color: #fff;
   border-radius: 3px;
@@ -33,10 +25,7 @@ export const Card = styled.div`
     transform: translateY(-5px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     border: none;
-
-    & > div svg {
-      animation: ${draw} 5s forwards;
-    }
+    text-decoration: none;
   }
 `;
 
@@ -45,17 +34,9 @@ export const IconContainer = styled.div`
   height: 60px;
   margin: 20px 0;
   position: relative;
-  svg {
-    width: 100%;
-    height: 100%;
-    stroke: #005a87;
-    fill: none;
-    stroke-width: 1.7;
-    stroke-dasharray: 1000;
-    stroke-dashoffset: 0;
-  }
 `;
 
+export const Icon = styled(Image)``;
 export const Heading = styled.h4`
   font-size: 24px;
   margin: 10px 0;
@@ -71,21 +52,20 @@ export const TextContent = styled.p`
   font-weight: 400;
 `;
 
-export const LearnMoreLink = styled.a`
-  display: inline-block;
-  color: #005a87; // Blue color as per the icon stroke color
-  font-size: 15px;
+export const LearnMoreLink = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #005a87;
+  font-size: 13px;
+  font-weight: 500;
   text-decoration: none;
   position: relative;
   margin-bottom: 10px;
-  margin-top: auto; // This pushes the link to the bottom
+  margin-top: auto;
 
-  .arrow-icon {
+  svg {
     margin-left: 5px;
     transition: transform 0.3s ease;
-  }
-
-  &:hover .arrow-icon {
-    transform: translateX(5px);
   }
 `;
