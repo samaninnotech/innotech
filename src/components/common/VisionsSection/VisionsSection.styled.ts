@@ -13,14 +13,10 @@ export const Heading = styled.h3<{ large?: boolean }>`
   text-align: center;
   font-size: ${(props) => (props.large ? "36px" : "20px")};
   line-height: 1.2;
-  color: #696969;
+  color: ${(props) =>
+    props.large ? "var(--text-black-color)" : "var(--text-light-color)"};
   margin: 0;
   padding: 0;
-
-  mark {
-    background-color: transparent;
-    color: #007aff;
-  }
 `;
 
 export const Spacer = styled.div`

@@ -13,12 +13,12 @@ export const Spacer = styled.div`
 `;
 
 export const HeadingSmall = styled.h6`
-  font-size: 1.25rem;
-  color: #333;
+  font-size: 1rem;
+  color: var(--text-light-color);
   text-transform: uppercase;
 `;
 
-export const HeadingLarge = styled.h3`
+export const HeadingLarge = styled.div`
   font-size: 2.5rem;
   color: #000;
   margin: 0 auto;
@@ -26,23 +26,20 @@ export const HeadingLarge = styled.h3`
   width: 60%;
   text-align: center;
   max-width: 1170px;
-  mark {
-    background: none;
-    color: #25567a;
-    font-weight: bold;
-  }
 `;
 export const LeftColumn = styled.h3`
   color: #000;
   text-align: left;
   margin: 0;
+  color: var(--text-light-color);
+
   mark {
     background: none;
-    color: #25567a;
+    color: var(--innotech-color);
     font-weight: bold;
   }
 `;
-export const LeftColumnText = styled.h3`
+export const LeftColumnText = styled.div`
   color: #000;
   text-align: left;
   font-size: 30px;
@@ -115,14 +112,14 @@ export const AccordionSection = styled.div<{ active: boolean }>`
 
 export const AccordionTitleWrapper = styled.div`
   cursor: pointer;
-  padding: 25px;
+  padding: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 `;
 
 export const AccordionTitle = styled.h6<{ active: boolean }>`
-  font-size: 1.25rem;
+  font-size: 1rem;
   color: #333;
   color: ${({ active }) => (active ? "#fff" : "#333")};
 `;

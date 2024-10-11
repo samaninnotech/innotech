@@ -35,14 +35,15 @@ const TeamMember: React.FC<TeamMemberProps> = ({
     <GridItemWithHover>
       <TeamMemberContainer>
         <PhotoContainer>
-          <ProfileImage src={image} alt={name} />
-          <SocialNetworks>
-            <SocialNetworksInner>
-              <Link href={href} target="_blank" aria-label="LinkedIn">
+          <ProfileImage src={image} alt={name} width={1000} height={1000} />
+
+          <Link href={href} target="_blank" aria-label="LinkedIn">
+            <SocialNetworks>
+              <SocialNetworksInner>
                 <FontAwesomeIcon icon={faLinkedin} size="1x" />
-              </Link>
-            </SocialNetworksInner>
-          </SocialNetworks>
+              </SocialNetworksInner>
+            </SocialNetworks>
+          </Link>
         </PhotoContainer>
         <InfoContainer>
           <Name>{name}</Name>

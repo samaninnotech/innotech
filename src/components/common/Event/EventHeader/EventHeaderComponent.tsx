@@ -100,7 +100,7 @@ const EventHeaderComponent: FC<EventHeaderProps> = ({
           <CalendarIcon className="calendar-icon" />
           <MultipleEventDate>
             {eventDate.dates.map(({ date, start_time, end_time }) => (
-              <div key={date}>
+              <div key={date} style={{ marginTop: "5px" }}>
                 {formatDate(date, start_time, end_time, currentLocale)}
               </div>
             ))}

@@ -18,7 +18,7 @@ export const LatestBlogPostsContainer = styled.div`
   flex-direction: column;
   align-items: center;
   max-width: 100%;
-  margin: 0 auto;
+  margin: 2rem auto;
   a {
     &:hover {
       text-decoration: none;
@@ -37,7 +37,7 @@ export const LatestBlogPostsContainer = styled.div`
   }
 
   ${mediaRules.lg} {
-    max-width: 1200px;
+    max-width: 1170px;
   }
 `;
 export const Header = styled.h1`
@@ -63,17 +63,19 @@ export const BlogPostMeta = styled.div`
   justify-content: flex-start;
   align-items: center;
   position: absolute;
-  margin-top: -45px;
+  margin-top: -105px;
   color: white;
   padding-left: 25px;
   font-size: 0.9rem;
   width: 100%;
   background: linear-gradient(
     to top,
-    rgba(0, 0, 0, 0.5) 60%,
+    rgba(0, 0, 0, 0.7) 60%,
     rgba(0, 0, 0, 0) 100%
   );
-  height: auto;
+  height: 20%;
+  border-bottom-left-radius: 10px; /* Add radius to the bottom left */
+  border-bottom-right-radius: 10px; /* Add radius to the bottom right */
 `;
 
 export const UserIconContainer = styled.div`
@@ -123,7 +125,7 @@ export const BlogPostReadMore = styled(Link)`
 `;
 
 export const SmallPostsContainer = styled.div`
-  flex: 1.5;
+  flex: 1.3;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

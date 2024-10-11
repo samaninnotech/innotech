@@ -215,7 +215,7 @@ export const EventTile: FC<EventTileProps> = ({
           {/* Handle multiple dates */}
           {eventDate?.dates &&
             eventDate.dates.map((dateItem, index) => (
-              <div key={index}>
+              <div key={index} style={{ marginTop: "5px" }}>
                 <time>
                   {formatDate(
                     dateItem.date,

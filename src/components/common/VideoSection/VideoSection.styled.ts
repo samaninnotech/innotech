@@ -1,25 +1,28 @@
+import { mediaRules } from "@/themes/media-breakpoints";
 import Image from "next/image";
 import styled from "styled-components";
 
-// Wrapper for the video section
 export const Wrapper = styled.div`
   position: relative;
   width: 100%;
-  height: 500px;
-  overflow: hidden;
+  height: 700px;
   background: transparent;
-  margin: 0 auto;
+  margin-bottom: 4rem;
 
-  @media (min-width: 768px) {
+  ${mediaRules.xsm} {
     height: 300px;
   }
-
-  @media (min-width: 1024px) {
+  ${mediaRules.sm} {
+    height: 400px;
+  }
+  ${mediaRules.md} {
     height: 500px;
+  }
+  ${mediaRules.lg} {
+    height: 700px;
   }
 `;
 
-// Central image styling
 export const CentralImage = styled(Image)`
   position: absolute;
   top: 50%;
@@ -27,24 +30,36 @@ export const CentralImage = styled(Image)`
   transform: translate(-50%, -50%);
   border-radius: 5px;
   z-index: 10;
-
-  @media (min-width: 768px) {
-    width: 50%;
+  width: 60%;
+  height: 35%;
+  ${mediaRules.xsm} {
+    width: 40%;
+    height: 55%;
   }
-
-  @media (min-width: 1024px) {
-    width: 30%;
+  ${mediaRules.sm} {
+    width: 40%;
+    height: 60%;
+  }
+  ${mediaRules.md} {
+    width: 40%;
+    height: 60%;
+  }
+  ${mediaRules.lg} {
+    width: 40%;
+    height: 50%;
   }
 `;
 
-// Background image styling with dynamic positioning and sizing
 export const LeftTopImage = styled(Image)`
   position: absolute;
   border-radius: 5px;
   z-index: 5;
   animation: moveUpDown 4s infinite ease-in-out;
   top: 5%;
-  left: 25%;
+  left: 15%;
+  width: 20%;
+  height: 15%;
+  display: none;
   @keyframes moveUpDown {
     0% {
       transform: translateY(0);
@@ -57,12 +72,23 @@ export const LeftTopImage = styled(Image)`
     }
   }
 
-  @media (min-width: 768px) {
-    width: 20%; // Adjust size based on screen width
+  ${mediaRules.xsm} {
+    width: 20%;
+    height: 15%;
   }
-
-  @media (min-width: 1024px) {
-    width: 15%; // Adjust size based on screen width
+  ${mediaRules.sm} {
+    width: 20%;
+    height: 40%;
+  }
+  ${mediaRules.md} {
+    width: 20%;
+    height: 30%;
+    display: block;
+  }
+  ${mediaRules.lg} {
+    width: 20%;
+    height: 30%;
+    display: block;
   }
 `;
 export const LeftBottomImage = styled(Image)`
@@ -72,6 +98,10 @@ export const LeftBottomImage = styled(Image)`
   animation: moveUpDown 4s infinite ease-in-out;
   top: 70%;
   left: 15%;
+  width: 20%;
+  height: 15%;
+  display: none;
+
   @keyframes moveUpDown {
     0% {
       transform: translateY(0);
@@ -84,12 +114,23 @@ export const LeftBottomImage = styled(Image)`
     }
   }
 
-  @media (min-width: 768px) {
-    width: 20%; // Adjust size based on screen width
+  ${mediaRules.xsm} {
+    width: 20%;
+    height: 15%;
   }
-
-  @media (min-width: 1024px) {
-    width: 15%; // Adjust size based on screen width
+  ${mediaRules.sm} {
+    width: 20%;
+    height: 40%;
+  }
+  ${mediaRules.md} {
+    width: 20%;
+    height: 30%;
+    display: block;
+  }
+  ${mediaRules.lg} {
+    width: 20%;
+    height: 30%;
+    display: block;
   }
 `;
 export const RightTopImage = styled(Image)`
@@ -99,6 +140,10 @@ export const RightTopImage = styled(Image)`
   animation: moveUpDown 4s infinite ease-in-out;
   top: 5%;
   left: 65%;
+  width: 20%;
+  height: 15%;
+  display: none;
+
   @keyframes moveUpDown {
     0% {
       transform: translateY(0);
@@ -111,12 +156,23 @@ export const RightTopImage = styled(Image)`
     }
   }
 
-  @media (min-width: 768px) {
-    width: 20%; // Adjust size based on screen width
+  ${mediaRules.xsm} {
+    width: 20%;
+    height: 15%;
   }
-
-  @media (min-width: 1024px) {
-    width: 15%; // Adjust size based on screen width
+  ${mediaRules.sm} {
+    width: 20%;
+    height: 40%;
+  }
+  ${mediaRules.md} {
+    width: 20%;
+    height: 30%;
+    display: block;
+  }
+  ${mediaRules.lg} {
+    width: 20%;
+    height: 30%;
+    display: block;
   }
 `;
 export const RightBottomImage = styled(Image)`
@@ -126,6 +182,10 @@ export const RightBottomImage = styled(Image)`
   animation: moveUpDown 4s infinite ease-in-out;
   top: 70%;
   left: 65%;
+  width: 20%;
+  height: 15%;
+  display: none;
+
   @keyframes moveUpDown {
     0% {
       transform: translateY(0);
@@ -138,15 +198,25 @@ export const RightBottomImage = styled(Image)`
     }
   }
 
-  @media (min-width: 768px) {
-    width: 20%; // Adjust size based on screen width
+  ${mediaRules.xsm} {
+    width: 20%;
+    height: 15%;
   }
-
-  @media (min-width: 1024px) {
-    width: 15%; // Adjust size based on screen width
+  ${mediaRules.sm} {
+    width: 20%;
+    height: 40%;
+  }
+  ${mediaRules.md} {
+    width: 20%;
+    height: 30%;
+    display: block;
+  }
+  ${mediaRules.lg} {
+    width: 20%;
+    height: 30%;
+    display: block;
   }
 `;
-// Play button styling
 export const PlayButton = styled.div`
   position: absolute;
   top: 50%;
@@ -195,35 +265,33 @@ export const PlayButton = styled.div`
   }
 `;
 
-// Overlay for the video
 export const VideoOverlay = styled.div`
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 1);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 30;
+  z-index: 100;
 `;
 
-// Container for the video
 export const VideoContainer = styled.div`
-  width: 80%;
+  width: 100%;
   height: 80%;
   max-width: 800px;
   max-height: 450px;
   background: #000;
 
-  @media (min-width: 768px) {
+  ${mediaRules.sm} {
     width: 90%;
     height: 90%;
   }
 
-  @media (min-width: 1024px) {
-    width: 80%;
+  ${mediaRules.lg} {
+    width: 100%;
     height: 80%;
   }
 `;

@@ -1,3 +1,4 @@
+import { mediaRules } from "@/themes/media-breakpoints";
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -10,22 +11,19 @@ export const Container = styled.div`
 `;
 
 export const InnerContainer1 = styled.div`
-  @media (min-width: 1200px) {
-    max-width: 1200px;
+  width: 100%;
+  ${mediaRules.xsm} {
+    max-width: 570px;
   }
-
-  @media (max-width: 1199px) and (min-width: 991px) {
-    width: 940px;
+  ${mediaRules.sm} {
+    max-width: 720px;
   }
-
-  @media (max-width: 990px) and (min-width: 769px) {
-    width: 720px;
+  ${mediaRules.md} {
+    max-width: 940px;
   }
-
-  @media (max-width: 768px) {
-    width: 100%; /* Shrink to the size of the window */
+  ${mediaRules.lg} {
+    max-width: 1170px;
   }
-  padding: 0;
 `;
 
 export const InnerContainer2 = styled.div`
@@ -33,13 +31,11 @@ export const InnerContainer2 = styled.div`
   width: 100%;
 `;
 
-export const InnerContainer3 = styled.div`
-  // Any additional styling needed here
-`;
+export const InnerContainer3 = styled.div``;
 
 export const Header = styled.h3`
   font-size: 2.5rem;
-  color: #000;
+  color: var(--text-black-color);
   margin-bottom: 3rem;
   line-height: 1.5;
   width: 60%;
@@ -48,61 +44,78 @@ export const Header = styled.h3`
 `;
 
 export const Paragraph = styled.div`
-  flex: 0 0 55%; /* Takes 55% of the width */
+  flex: 0 0 55%;
   text-align: left;
   margin-bottom: 20px;
   color: #696969;
 `;
 
 export const RightBox = styled.div`
-  flex: 0 0 25%; /* Takes 25% of the width */
+  flex: 0 0 25%;
 `;
 
 export const ListContainer = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  margin: 0 auto;
   margin-bottom: 20px;
 
-  @media (max-width: 1200px) {
-    justify-content: space-around;
-  }
-
-  @media (max-width: 990px) {
-    justify-content: center;
-  }
-
-  @media (max-width: 768px) {
+  ${mediaRules.sm} {
     flex-direction: column;
     align-items: center;
   }
+  ${mediaRules.md} {
+    justify-content: center;
+  }
+  ${mediaRules.lg} {
+    justify-content: space-around;
+  }
 `;
 
-export const Row = styled.div`
+export const ManagersRow = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-column-gap: 5px; /* Adjust the gap as needed */
-  grid-row-gap: 5px; /* Adjust the gap as needed */
+  grid-template-columns: repeat(1, 1fr);
+  grid-column-gap: 30px;
+  grid-row-gap: 5px;
   max-width: 1200px;
-  width: 100%;
+  width: 60%;
 
-  @media (max-width: 1200px) {
+  ${mediaRules.sm} {
     grid-template-columns: repeat(3, 1fr);
+    width: 100%;
   }
-
-  @media (max-width: 990px) {
-    grid-template-columns: repeat(2, 1fr); /* Adjust for smaller screens */
+  ${mediaRules.md} {
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
   }
-
-  @media (max-width: 768px) {
-    grid-template-columns: repeat(2, 1fr); /* Adjust for very small screens */
+  ${mediaRules.lg} {
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
   }
+`;
 
-  @media (max-width: 576px) {
-    grid-template-columns: 1fr; /* 1 list item per row for the smallest screens */
+export const EmployeesRow = styled.div`
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-column-gap: 30px;
+  grid-row-gap: 5px;
+  width: 60%;
+
+  ${mediaRules.sm} {
+    grid-template-columns: repeat(4, 1fr);
+    width: 100%;
+  }
+  ${mediaRules.md} {
+    grid-template-columns: repeat(4, 1fr);
+    width: 100%;
+  }
+  ${mediaRules.lg} {
+    grid-template-columns: repeat(4, 1fr);
+    width: 100%;
   }
 `;
 
 export const Spacer = styled.div`
-  height: 124px; /* Adjust spacer height as needed */
+  height: 124px;
 `;

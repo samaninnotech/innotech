@@ -85,8 +85,8 @@ const BlogLastUpdate: FC<BlogLastUpdateProps> = ({ header, posts }) => {
                     <SmallPostImage
                       src={sanityUrlFor(post.cover).url()}
                       alt={post.title}
-                      width={300}
-                      height={150}
+                      width={180}
+                      height={120}
                       quality={100}
                     />
                     <SmallPostInfo>

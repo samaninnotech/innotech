@@ -4,12 +4,13 @@ import React from "react";
 import TeamMember from "../TeamMember/TeamMember";
 import {
   Container,
+  EmployeesRow,
   Header,
   InnerContainer1,
   InnerContainer2,
   InnerContainer3,
   ListContainer,
-  Row,
+  ManagersRow,
   Spacer,
 } from "./TeamList.styled";
 
@@ -17,34 +18,10 @@ type TeamListProps = {
   header: string;
   teamMembers: TeamMemberType[];
 };
+
 const TeamList: React.FC<TeamListProps> = ({ header, teamMembers }) => {
-  const rowConfigurations = [
-    { columns: 3, count: 3 },
-    { columns: 3, count: 3 },
-    { columns: 4, count: Infinity },
-  ];
-
-  const createRowsFromConfiguration = (
-    members: TeamMemberType[],
-    configurations: any[],
-  ) => {
-    let index = 0;
-    const rows = [];
-
-    for (const config of configurations) {
-      const { columns, count } = config;
-      const rowMembers = members.slice(index, index + count);
-      rows.push({ members: rowMembers, columns });
-      index += count;
-
-      // Break loop if all members are processed
-      if (index >= members.length) break;
-    }
-
-    return rows;
-  };
-
-  const rows = createRowsFromConfiguration(teamMembers, rowConfigurations);
+  const managers = teamMembers.slice(0, 6);
+  const employees = teamMembers.slice(6);
 
   return (
     <Container>
@@ -53,22 +30,31 @@ const TeamList: React.FC<TeamListProps> = ({ header, teamMembers }) => {
           <InnerContainer3>
             <Header>{header}</Header>
             <ListContainer>
-              {rows.map((row, index) => (
-                <Row
-                  key={index}
-                  style={{ gridTemplateColumns: `repeat(${row.columns}, 1fr)` }}
-                >
-                  {row.members.map((member, idx) => (
+              <ManagersRow>
+                {managers.map((member, idx) => (
+                  <TeamMember
+                    key={idx}
+                    image={member.image}
+                    name={member.name}
+                    position={member.position}
+                    linkedIn={member.linkedIn}
+                  />
+                ))}
+              </ManagersRow>
+
+              {employees.length > 0 && (
+                <EmployeesRow>
+                  {employees.map((member, idx) => (
                     <TeamMember
-                      key={idx}
+                      key={idx + 6}
                       image={member.image}
                       name={member.name}
                       position={member.position}
                       linkedIn={member.linkedIn}
                     />
                   ))}
-                </Row>
-              ))}
+                </EmployeesRow>
+              )}
             </ListContainer>
             <Spacer />
           </InnerContainer3>

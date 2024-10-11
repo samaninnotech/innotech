@@ -1,28 +1,42 @@
 import Link from "@/i18n/Link";
+import { mediaRules } from "@/themes/media-breakpoints";
 import styled from "styled-components";
 
-export const EventsSectionContainer = styled.div`
-  max-width: 1200px;
+type EventsSectionProps = {
+  $backgroundColor: string;
+};
+
+export const Header = styled.h2`
+  font-weight: 700;
+  color: var(--text-black-color);
+  margin-bottom: 3rem;
+`;
+
+export const EventsSectionContainer = styled.div<EventsSectionProps>`
+  width: 100%;
+  margin: 5rem auto 3rem auto;
+  background-color: ${({ $backgroundColor }) => $backgroundColor || " "};
+`;
+
+export const EventsWrapper = styled.div`
   margin: 0 auto;
-  padding: 20px;
-  @media (min-width: 576px) {
+  ${mediaRules.xsm} {
     max-width: 576px;
   }
 
-  @media (min-width: 768px) {
+  ${mediaRules.sm} {
     flex-direction: row;
     max-width: 720px;
   }
 
-  @media (min-width: 990px) {
+  ${mediaRules.md} {
     max-width: 940px;
   }
 
-  @media (min-width: 1200px) {
-    max-width: 1200px;
+  ${mediaRules.lg} {
+    max-width: 1170px;
   }
 `;
-
 export const EventList = styled.div`
   display: flex;
   flex-direction: column;
