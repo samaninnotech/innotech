@@ -225,7 +225,14 @@ export interface EventDate {
   end_time?: string;
 }
 
-export interface EventsLastUpdatesSection extends Section {}
+export interface EventsLastUpdatesSection extends Section {
+  header: string;
+  sectionBackgroundColor: string;
+  eventBackgroundColor: string;
+  eventTextColor: string;
+  eventOverlayColor: string;
+  overlayTextColor: string;
+}
 
 export function isEventsLastUpdatesSection(
   section: Section,
@@ -337,6 +344,10 @@ export function isHomePageTopPost(
 
 /* Our Company Section */
 export interface OurCompanySection extends Section {
+  smallHeader: string;
+  largeHeader: any;
+  leftColumnText: any;
+  membersNumber: string;
   accordionItems: AccordionItem[];
 }
 

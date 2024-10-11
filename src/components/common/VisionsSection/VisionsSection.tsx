@@ -27,9 +27,7 @@ const VisionsSection: React.FC<VisionsSectionProps> = ({
       <Spacer />
       {sectionTitle && <Heading>{sectionTitle}</Heading>}
       <Spacer />
-      <Heading large>
-        <span dangerouslySetInnerHTML={{ __html: topHeading }} />
-      </Heading>
+      <Heading large>{topHeading}</Heading>
       <Spacer />
       <Spacer />
       <GridWrapper>
@@ -39,9 +37,7 @@ const VisionsSection: React.FC<VisionsSectionProps> = ({
       </GridWrapper>
       <Spacer />
       <Spacer />
-      <Heading large>
-        <span dangerouslySetInnerHTML={{ __html: footerText }} />
-      </Heading>
+      <Heading large>{footerText}</Heading>
       <Spacer />
     </SectionWrapper>
   );

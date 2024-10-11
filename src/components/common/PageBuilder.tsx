@@ -219,8 +219,22 @@ const buildPartnershipSection = (s: PartnerShipSection) => {
 };
 
 const buildOurCompanySection = (s: OurCompanySection) => {
-  const { accordionItems } = s;
-  return <OurCompanySectionComponent accordionItems={accordionItems} />;
+  const {
+    smallHeader,
+    largeHeader,
+    leftColumnText,
+    membersNumber,
+    accordionItems,
+  } = s;
+  return (
+    <OurCompanySectionComponent
+      accordionItems={accordionItems}
+      smallHeader={smallHeader}
+      largeHeader={largeHeader}
+      leftColumnText={leftColumnText}
+      membersNumber={membersNumber}
+    />
+  );
 };
 const buildVideoSection = (s: VideoSection) => {
   const {
@@ -420,7 +434,25 @@ const buildEventsLastUpdatesSection = (
   s: EventsLastUpdatesSection,
   events: Event[],
 ) => {
-  return <EventsLastUpdatesSectionComponent events={events} />;
+  const {
+    header,
+    sectionBackgroundColor,
+    eventBackgroundColor,
+    eventTextColor,
+    eventOverlayColor,
+    overlayTextColor,
+  } = s;
+  return (
+    <EventsLastUpdatesSectionComponent
+      header={header}
+      events={events}
+      sectionBackgroundColor={sectionBackgroundColor}
+      eventBackgroundColor={eventBackgroundColor}
+      eventOverlayColor={eventOverlayColor}
+      overlayTextColor={overlayTextColor}
+      eventTextColor={eventTextColor}
+    />
+  );
 };
 
 const buildCarousel = (s: Carousel) => {

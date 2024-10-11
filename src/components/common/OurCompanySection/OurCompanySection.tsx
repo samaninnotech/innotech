@@ -1,6 +1,8 @@
 "use client";
 import { AccordionItem } from "@/sanity/types";
+import { PortableText } from "@portabletext/react";
 import React, { useState } from "react";
+import components from "../BlockContent/components";
 import {
   AccordionContent,
   AccordionIcon,
@@ -14,17 +16,24 @@ import {
   LeftColumn,
   LeftColumnText,
   MarkedNumber,
-  MarkedText,
   Row,
   SectionWrapper,
   Spacer,
 } from "./OurCompanySection.styled";
 
 export type OurCompanySectionProps = {
+  smallHeader: string;
+  largeHeader: any;
+  leftColumnText: any;
+  membersNumber: string;
   accordionItems: AccordionItem[];
 };
 
 const OurCompanySection: React.FC<OurCompanySectionProps> = ({
+  smallHeader,
+  largeHeader,
+  leftColumnText,
+  membersNumber,
   accordionItems,
 }) => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -36,26 +45,19 @@ const OurCompanySection: React.FC<OurCompanySectionProps> = ({
   return (
     <SectionWrapper>
       <Spacer />
-      <HeadingSmall>La nostra azienda</HeadingSmall>
+      <HeadingSmall>{smallHeader}</HeadingSmall>
       <Spacer />
       <HeadingLarge>
-        Abbiamo l’ambizione di portare{" "}
-        <MarkedText>l’innovazione tecnologica</MarkedText> nel mondo attraverso{" "}
-        <MarkedText>
-          soluzioni e progetti di implementazione tecnologica.
-        </MarkedText>
+        <PortableText value={largeHeader} components={components} />
       </HeadingLarge>
       <Row>
         <Column md={6}>
           <LeftColumn>
-            <MarkedNumber>29</MarkedNumber> Team People
+            <MarkedNumber>{membersNumber}</MarkedNumber> Team People
           </LeftColumn>
           <LeftColumnText>
-            Lavoriamo insieme per{" "}
-            <MarkedText>985 ore alla settimana.</MarkedText> Costruiamo progetti
-            di successo con i nostri partner.
+            <PortableText value={leftColumnText} components={components} />
           </LeftColumnText>
-          <Spacer />
         </Column>
         <Column md={6}>
           <AccordionWrapper>

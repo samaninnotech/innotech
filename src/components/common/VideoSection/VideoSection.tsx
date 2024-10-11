@@ -19,7 +19,7 @@ type VideoSectionProps = {
   leftBottomImage: string;
   rightTopImage: string;
   rightBottomImage: string;
-  videoLink: string; // Add this line
+  videoLink: string;
 };
 const VideoSection: React.FC<VideoSectionProps> = ({
   centralImage,

@@ -6,6 +6,10 @@ import {
   DateWrapper,
   EventContainer,
   EventContent,
+  EventDate,
+  EventDateDay,
+  EventDateMonth,
+  EventDateYear,
   EventImage,
   EventTitle,
 } from "./Event.styled";
@@ -36,31 +40,96 @@ interface EventProps {
   cover: string;
   description: string;
   author: string;
+  backgroundColor: string;
+  eventTextColor: string;
+  overlayColor: string;
+  overlayTextColor: string;
 }
-
-// Function to extract day, month, and year from a date string
-const extractDateParts = (dateString: string) => {
-  const date = new Date(dateString);
-  return {
-    day: date.getUTCDate(),
-    month: date.toLocaleString("default", { month: "long" }),
-  };
-};
 
 const Event: React.FC<EventProps> = ({
   title,
-  description,
   cover,
   event_date,
   slug,
+  backgroundColor,
+  eventTextColor,
+  overlayColor,
+  overlayTextColor,
 }) => {
+  const renderEventDateOverlay = () => {
+    if (event_date.date_type === "single" && event_date.single_date?.date) {
+      const formattedDate = new Date(event_date.single_date.date);
+      return (
+        <EventDate
+          $backgroundColor={overlayColor}
+          $overlayTextColor={overlayTextColor}
+        >
+          <EventDateDay>{formattedDate.getDate()}</EventDateDay>
+          <EventDateMonth>
+            {formattedDate.toLocaleString("default", { month: "long" })}
+          </EventDateMonth>
+          <EventDateYear>{formattedDate.getFullYear()}</EventDateYear>
+        </EventDate>
+      );
+    } else if (
+      event_date.date_type === "multiple" &&
+      event_date.dates?.length
+    ) {
+      return (
+        <EventDate
+          $backgroundColor={overlayColor}
+          $overlayTextColor={overlayTextColor}
+        >
+          {event_date.dates.map((dateItem, index) => {
+            const formattedDate = new Date(dateItem.date);
+            return (
+              <div key={index}>
+                <EventDateDay>{formattedDate.getDate()}</EventDateDay>
+                <EventDateMonth>
+                  {formattedDate.toLocaleString("default", { month: "long" })}
+                </EventDateMonth>
+                <EventDateYear>{formattedDate.getFullYear()}</EventDateYear>
+              </div>
+            );
+          })}
+        </EventDate>
+      );
+    } else if (
+      event_date.date_type === "range" &&
+      event_date.start_date &&
+      event_date.end_date
+    ) {
+      const startFormattedDate = new Date(event_date.start_date);
+      const endFormattedDate = new Date(event_date.end_date);
+      return (
+        <EventDate
+          $backgroundColor={overlayColor}
+          $overlayTextColor={overlayTextColor}
+        >
+          <EventDateDay>
+            {startFormattedDate.getDate()} - {endFormattedDate.getDate()}
+          </EventDateDay>
+          <EventDateMonth>
+            {startFormattedDate.toLocaleString("default", { month: "long" })}
+          </EventDateMonth>
+          <EventDateYear>{startFormattedDate.getFullYear()}</EventDateYear>
+        </EventDate>
+      );
+    }
+    return null;
+  };
+
   return (
-    <EventContainer href={"/events/" + slug}>
-      <EventImage imageUrl={cover} />
+    <EventContainer
+      href={"/events/" + slug}
+      $backgroundColor={backgroundColor}
+      $eventTextColor={eventTextColor}
+    >
+      <EventImage imageUrl={cover}>{renderEventDateOverlay()}</EventImage>
       <EventContent>
         <EventTitle>{title}</EventTitle>
 
-        {/* Display event dates after title */}
+        {/* Display event dates below the title */}
         <div>
           {event_date.date_type === "range" &&
             event_date.start_date &&
@@ -81,7 +150,7 @@ const Event: React.FC<EventProps> = ({
           {event_date.date_type === "multiple" && event_date.dates?.length && (
             <DateWrapper>
               {event_date.dates.map((dateItem, index) => (
-                <div key={index}>
+                <div key={index} style={{ marginTop: "5px" }}>
                   <FontAwesomeIcon icon={faClock} />
                   <time>
                     {formatDate(

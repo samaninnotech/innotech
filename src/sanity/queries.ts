@@ -63,6 +63,9 @@ const buildPageDeconstructionQUery = (locale: string) => `{
     _type == 'carousel' => ${buildCarouselQuery(locale)},
     _type == 'event_header_section' => ${buildEventHeaderSectionQuery(locale)},
     _type == 'contact_section' => ${buildContactSectionQuery(locale, fallbackLocale)},
+    _type == 'events_last_updates_section' => ${buildEventsLastUpdatesSectionQuery(locale)},
+
+    
   }
 }`;
 const buildBlogHeaderSectionQuery = (locale: string) => `
@@ -80,6 +83,15 @@ const buildEventHeaderSectionQuery = (locale: string) => `
   'subtitle': coalesce(subtitle.${locale}, subtitle.${fallbackLocale}),
   background_image,
 }`;
+const buildEventsLastUpdatesSectionQuery = (locale: string) => `{
+  'header': coalesce(header.${locale}, header.${fallbackLocale}),
+  'sectionBackgroundColor': section_background_color,
+  'eventBackgroundColor': event_background_color,
+  'eventTextColor': event_text_color,
+  'eventOverlayColor': event_overlay_color,
+  'overlayTextColor': overlay_text_color
+}`;
+
 const buildHeroSectionQuery = (locale: string) => {
   const buildHeroColumnQuery = (locale: string) => `
   {
@@ -280,6 +292,10 @@ const buildOurCompanySectionQuery = (
   locale: string,
   fallbackLocale: string,
 ) => `{
+  'smallHeader': coalesce(small_header.${locale}, small_header.${fallbackLocale}),
+  'largeHeader': coalesce(large_header.${locale}, large_header.${fallbackLocale}),
+  'leftColumnText': coalesce(left_column_text.${locale}, left_column_text.${fallbackLocale}),
+  'membersNumber': members_number,
   'accordionItems': accordionItems[]{
     'title': coalesce(title.${locale}, title.${fallbackLocale}),
     'content': coalesce(content.${locale}, content.${fallbackLocale})

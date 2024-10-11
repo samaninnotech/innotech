@@ -6,30 +6,54 @@ import Event from "../Event";
 import {
   EventList,
   EventsSectionContainer,
+  EventsWrapper,
+  Header,
 } from "./EventsLastUpdatesSection.styled";
 
 type EventSectionProps = {
+  header: string;
   events: EventType[];
+  sectionBackgroundColor: string;
+  eventBackgroundColor: string;
+  eventTextColor: string;
+  eventOverlayColor: string;
+  overlayTextColor: string;
 };
-// Define the EventsSection component
-const EventsLastUpdatesSection: FC<EventSectionProps> = ({ events }) => (
-  <EventsSectionContainer>
-    <h3>Events</h3>
-    <EventList>
-      {events.map((event, index) => (
-        <Event
-          key={index}
-          title={event.title}
-          description={event.description}
-          cover={event.cover}
-          event_date={event.event_date}
-          slug={event.slug}
-          publish_date={""}
-          author={""}
-        />
-      ))}
-    </EventList>
-  </EventsSectionContainer>
-);
+const EventsLastUpdatesSection: FC<EventSectionProps> = ({
+  header,
+  events,
+  sectionBackgroundColor,
+  eventBackgroundColor,
+  eventOverlayColor,
+  overlayTextColor,
+  eventTextColor,
+}) => {
+  console.log(sectionBackgroundColor);
+  return (
+    <EventsSectionContainer $backgroundColor={sectionBackgroundColor}>
+      <EventsWrapper>
+        <Header>{header}</Header>
+        <EventList>
+          {events.map((event, index) => (
+            <Event
+              key={index}
+              title={event.title}
+              description={event.description}
+              cover={event.cover}
+              event_date={event.event_date}
+              slug={event.slug}
+              publish_date={""}
+              author={""}
+              backgroundColor={eventBackgroundColor}
+              overlayColor={eventOverlayColor}
+              overlayTextColor={overlayTextColor}
+              eventTextColor={eventTextColor}
+            />
+          ))}
+        </EventList>
+      </EventsWrapper>
+    </EventsSectionContainer>
+  );
+};
 
 export default EventsLastUpdatesSection;

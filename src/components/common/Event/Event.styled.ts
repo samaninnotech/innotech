@@ -1,12 +1,20 @@
 import Link from "@/i18n/Link";
 import styled from "styled-components";
 
-export const EventContainer = styled(Link)`
+type EventContainerProps = {
+  $backgroundColor: string;
+  $eventTextColor: string;
+};
+export const EventContainer = styled(Link)<EventContainerProps>`
   display: flex;
   margin-bottom: 20px;
-  padding-bottom: 10px;
   position: relative;
   overflow: hidden;
+  color: ${({ $eventTextColor }) => $eventTextColor || "var(--innotech-color)"};
+  background-color: ${({ $backgroundColor }) => $backgroundColor || ""};
+  &:hover {
+    text-decoration: none;
+  }
 `;
 
 export const EventImage = styled.div<{ imageUrl: string }>`
@@ -15,15 +23,19 @@ export const EventImage = styled.div<{ imageUrl: string }>`
   background-image: url(${(props) => props.imageUrl});
   background-size: cover;
   background-position: center;
-  border-radius: 5px;
   margin-right: 15px;
   position: relative;
 `;
 
-export const EventDate = styled.div`
+type OverlayProps = {
+  $backgroundColor: string;
+  $overlayTextColor: string;
+};
+
+export const EventDate = styled.div<OverlayProps>`
   position: absolute;
-  background: rgba(40, 85, 125, 0.96);
-  color: white;
+  background-color: ${({ $backgroundColor }) => $backgroundColor || ""};
+  color: ${({ $overlayTextColor }) => $overlayTextColor || ""};
   padding: 5px;
   border-radius: 3px;
   display: flex;
@@ -36,7 +48,7 @@ export const EventDate = styled.div`
   left: 0;
   text-align: center;
   justify-content: center;
-  opacity: 1; /* Visible by default */
+  opacity: 0.8; /* Visible by default */
   transition: width 0.3s ease; /* Smooth transition for width */
 
   span {
@@ -62,6 +74,7 @@ export const EventDateYear = styled.span`
 
 export const EventContent = styled.div`
   flex: 1;
+  padding-top: 10px;
 `;
 
 export const EventTitle = styled.h2`

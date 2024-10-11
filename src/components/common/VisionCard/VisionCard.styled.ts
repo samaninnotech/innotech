@@ -1,6 +1,13 @@
 import Image from "next/image";
 import styled from "styled-components";
 
+export const Title = styled.h4`
+  font-size: 22px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+`;
+
 export const CardWrapper = styled.div`
   flex: 1 1 30%;
   max-width: 330px;
@@ -16,6 +23,9 @@ export const CardWrapper = styled.div`
 
   &:hover {
     transform: translateY(-5px);
+    ${Title} {
+      color: var(--innotech-color);
+    }
   }
 `;
 
@@ -31,12 +41,6 @@ export const VisionImage = styled(Image)`
 `;
 export const ContentWrapper = styled.div`
   padding: 20px;
-`;
-
-export const Title = styled.h4`
-  font-size: 18px;
-  color: #333;
-  margin-bottom: 10px;
 `;
 
 export const Text = styled.p`
