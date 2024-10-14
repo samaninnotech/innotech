@@ -6,7 +6,7 @@ type ButtonProps = ComponentPropsWithoutRef<"button"> & {
   className?: string;
   margin?: string;
   label: string;
-  href: string;
+  href?: string; // Optional href
   bgColor?: string;
   textColor?: string;
 };
@@ -18,14 +18,17 @@ const Button: FC<ButtonProps> = ({
   href,
   bgColor,
   textColor,
+  ...props
 }) => {
   return (
     <Element
+      as={href ? "a" : "button"} // Dynamically set as "a" if href is present
       className={className}
+      href={href || undefined} // Pass href only if defined, else undefined
       $margin={margin}
-      href={href}
       $bgColor={bgColor}
       $textColor={textColor}
+      {...props}
     >
       {label}
     </Element>

@@ -1,3 +1,4 @@
+// SpinnerComponent.tsx
 "use client";
 
 import { FC } from "react";
@@ -7,21 +8,25 @@ import {
   SpinnerStyled,
 } from "./Spinner.styled";
 
-type SpinnerProps = { show: boolean; contained?: boolean };
+type SpinnerProps = {
+  show: boolean;
+  contained?: boolean;
+};
+
 const SpinnerComponent: FC<SpinnerProps> = ({ show, contained }) => {
   if (!show) {
-    return <></>;
+    return null;
   } else if (contained) {
     return (
       <SpinnerContainedContainer>
-        <SpinnerStyled></SpinnerStyled>
+        <SpinnerStyled />
       </SpinnerContainedContainer>
     );
   }
 
   return (
     <SpinnerContainer>
-      <SpinnerStyled></SpinnerStyled>
+      <SpinnerStyled />
     </SpinnerContainer>
   );
 };

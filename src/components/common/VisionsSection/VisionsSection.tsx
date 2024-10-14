@@ -31,8 +31,8 @@ const VisionsSection: React.FC<VisionsSectionProps> = ({
       <Spacer />
       <Spacer />
       <GridWrapper>
-        {visionCards?.map((vision) => (
-          <VisionCard key={vision._key} {...vision} />
+        {visionCards?.map((vision, index) => (
+          <VisionCard key={index} {...vision} />
         ))}
       </GridWrapper>
       <Spacer />

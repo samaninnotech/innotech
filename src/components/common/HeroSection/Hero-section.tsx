@@ -1,9 +1,9 @@
+"use client";
 import { sanityUrlFor } from "@/sanity/sanity-client";
 import {
   HeroColumn,
   HeroImageColumn,
   HeroLink,
-  HeroLinkType,
   HeroTextColumn,
   customLinkToHref,
   isHeroImageColumn,
@@ -11,9 +11,9 @@ import {
 } from "@/sanity/types";
 import { PortableText, PortableTextReactComponents } from "@portabletext/react";
 import Image from "next/image";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 
-import { Button, GenericLink } from "..";
+import { Button, GenericLink, PopupForm } from "..";
 import components from "../BlockContent/components";
 import {
   Element,
@@ -147,11 +147,12 @@ const HeroTextColumnComponent: FC<HeroTextColumnProps> = ({
   return (
     <InnerContainerLeft $textColor={text_color} $textAlign={text_alignment}>
       <PortableText components={heroComponents} value={rich_text} />
-      {links?.length && (
+      {links && links.length > 0 && (
         <HeroLinksContainer>
-          {links.map((l) => (
-            <HeroLinkComponent key={l._key} heroLink={l}></HeroLinkComponent>
-          ))}
+          {links.map((l, index) => {
+            const key = l._key || `link-${index}`;
+            return <HeroLinkComponent key={key} heroLink={l} />;
+          })}
         </HeroLinksContainer>
       )}
     </InnerContainerLeft>
@@ -172,13 +173,58 @@ const HeroImageColumnComponent: FC<HeroImageColumnProps> = ({ image }) => {
 type HeroLinkProps = { heroLink: Omit<HeroLink, "_key"> };
 const HeroLinkComponent: FC<HeroLinkProps> = ({ heroLink }) => {
   const { link, type, button_color, button_text_color } = heroLink;
-  const href = customLinkToHref(link);
 
-  if (!link.label || !href) {
-    return null;
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  const togglePopup = () => {
+    setIsPopupOpen(!isPopupOpen);
+  };
+
+  useEffect(() => {
+    if (isPopupOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isPopupOpen]);
+
+  if (link.linkType === "POPUP_FORM") {
+    return (
+      <>
+        <Button
+          onClick={togglePopup}
+          label={link.label}
+          margin={"0"}
+          bgColor={button_color}
+          textColor={button_text_color}
+        />
+        {isPopupOpen && (
+          <PopupForm
+            onClose={togglePopup}
+            header={link.popupForm.header}
+            firstName={link.popupForm.firstNameLabel}
+            lastName={link.popupForm.lastNameLabel}
+            company={link.popupForm.companyLabel}
+            phone={link.popupForm.phoneLabel}
+            email={link.popupForm.emailLabel}
+            agreement={link.popupForm.agreementLabel}
+            submitText={link.popupForm.submitText}
+            thumbnail={link.popupForm.thumbnail}
+            brochure={link.popupForm.brochure}
+            senderEmail={link.popupForm.senderEmail}
+            senderPassword={link.popupForm.senderPassword}
+          />
+        )}
+      </>
+    );
   }
 
-  if (type === HeroLinkType.Button) {
+  const href = customLinkToHref(link);
+  if (type === "Button") {
     return (
       <Button
         href={href}
@@ -186,11 +232,11 @@ const HeroLinkComponent: FC<HeroLinkProps> = ({ heroLink }) => {
         margin={"0"}
         bgColor={button_color}
         textColor={button_text_color}
-      ></Button>
+      />
     );
-  } else {
-    return <GenericLink href={href}>{link.label}</GenericLink>;
   }
+
+  return <GenericLink href={href}>{link.label}</GenericLink>;
 };
 
 export default HeroSectionComponent;
