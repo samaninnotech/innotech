@@ -21,11 +21,13 @@ function sectionMatchType(section: Section, type: string) {
 export enum CustomLinkType {
   Internal = "INTERNAL",
   External = "EXTERNAL",
+  PopupForm = "POPUP_FORM",
 }
 
 export interface CustomLink extends SanityElement {
   label: string;
   linkType: CustomLinkType;
+  popupForm: PopupForm;
 }
 
 export enum DecoratedLinkType {
@@ -643,6 +645,33 @@ export interface HeroSection extends Section {
 
 export function isHeroSection(section: Section): section is HeroSection {
   return sectionMatchType(section, "hero_section");
+}
+
+/* Pop Up Form*/
+export interface Brochure {
+  title?: string | null;
+  description?: string | null;
+  file?: {
+    url: string;
+  } | null;
+}
+export interface PopupForm extends Section {
+  header: string;
+  firstNameLabel: string;
+  lastNameLabel: string;
+  companyLabel: string;
+  phoneLabel: string;
+  emailLabel: string;
+  agreementLabel: string;
+  submitText: string;
+  brochure?: Brochure;
+  thumbnail: string;
+  senderEmail: string;
+  senderPassword: string;
+}
+
+export function isPopupForm(section: Section): section is PopupForm {
+  return sectionMatchType(section, "popup_form");
 }
 
 /* FAQ Section */

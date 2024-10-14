@@ -16,6 +16,7 @@ import JobOfferSection from "./JobOfferSection";
 import OnlyTextSection from "./OnlyTextSection";
 import OurCompanySection from "./OurCompanySection/OurCompanySection";
 import PageTopBanner from "./PageTopBanner";
+import PopupForm from "./PopupForm";
 import QuoteSection from "./QuoteSection";
 import TabItemsSection from "./TabItemsSection";
 import TeamList from "./TeamList";
@@ -41,6 +42,7 @@ export {
   PageTopBanner,
   PageTopBar,
   PartnerShipSection,
+  PopupForm,
   QuoteSection,
   SolutionsSection,
   TabItemsSection,

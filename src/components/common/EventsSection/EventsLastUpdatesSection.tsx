@@ -28,7 +28,6 @@ const EventsLastUpdatesSection: FC<EventSectionProps> = ({
   overlayTextColor,
   eventTextColor,
 }) => {
-  console.log(sectionBackgroundColor);
   return (
     <EventsSectionContainer $backgroundColor={sectionBackgroundColor}>
       <EventsWrapper>

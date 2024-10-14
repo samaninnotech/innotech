@@ -182,9 +182,30 @@ const buildCustomLinkQuery = (locale: string) =>
         coalesce(internalRef->slug.${locale}.current, internalRef->slug.${fallbackLocale}.current)
       ),
     'internalAnchor': coalesce(internalAnchor->slug.${locale}.current, internalAnchor->slug.${fallbackLocale}.current),
+  },
+  linkType == 'POPUP_FORM' => {
+    'popupForm': {
+      'header': coalesce(popupForm.header.${locale}, popupForm.header.${fallbackLocale}),
+      'firstNameLabel': coalesce(popupForm.firstNameLabel.${locale}, popupForm.firstNameLabel.${fallbackLocale}),
+      'lastNameLabel': coalesce(popupForm.lastNameLabel.${locale}, popupForm.lastNameLabel.${fallbackLocale}),
+      'companyLabel': coalesce(popupForm.companyLabel.${locale}, popupForm.companyLabel.${fallbackLocale}),
+      'phoneLabel': coalesce(popupForm.phoneLabel.${locale}, popupForm.phoneLabel.${fallbackLocale}),
+      'emailLabel': coalesce(popupForm.emailLabel.${locale}, popupForm.emailLabel.${fallbackLocale}),
+      'agreementLabel': coalesce(popupForm.agreementLabel.${locale}, popupForm.agreementLabel.${fallbackLocale}),
+      'submitText': coalesce(popupForm.submitText.${locale}, popupForm.submitText.${fallbackLocale}),
+      'thumbnail': popupForm.thumbnail.asset->url, // Retrieves the URL of the thumbnail image
+      'brochure': popupForm.brochure->{
+        'title': coalesce(title.${locale}, title.${fallbackLocale}),
+        'description': coalesce(description.${locale}, description.${fallbackLocale}),
+        'file': file {
+          'url': asset->url
+        }
+      },
+      'senderEmail': popupForm.senderEmail, 
+      'senderPassword': popupForm.senderPassword 
+    }
   }
-}
-`;
+}`;
 
 const buildTextLinksSectionQuery = (locale: string) => `
 {
