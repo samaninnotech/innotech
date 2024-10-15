@@ -1,86 +1,136 @@
-'use client';
-import React from 'react';
-import { FooterColumn, FooterContainer, FooterHeading, FooterInnerContainer, FooterList, FooterLogo, FooterRow, FooterText, FooterWrapper, SocialLinks } from './Footer.styled';
+"use client";
+import { sanityUrlFor } from "@/sanity/sanity-client";
+import { CustomLink, customLinkToHref } from "@/sanity/types";
+import Image from "next/image";
+import React from "react";
+import { BiLogoFacebook } from "react-icons/bi";
+import {
+  FaInstagram,
+  FaLinkedinIn,
+  FaTwitter,
+  FaYoutube,
+} from "react-icons/fa";
+import {
+  FooterColumn,
+  FooterContainer,
+  FooterHeading,
+  FooterInnerContainer,
+  FooterList,
+  FooterLogo,
+  FooterRow,
+  FooterText,
+  FooterWrapper,
+  ServicesList,
+  SocialLinks,
+} from "./Footer.styled";
 
-const Footer: React.FC = () => {
+interface FooterProps {
+  logoSrc: string;
+  address: string;
+  phone: string;
+  email: string;
+  services: string[];
+  quickLinks: CustomLink[];
+  aboutLinks: CustomLink[];
+  socialLinks: CustomLink[];
+  copyrightText: string;
+}
+
+// Mapping of social media labels to their corresponding icons
+const socialIcons: Record<string, JSX.Element> = {
+  Twitter: <FaTwitter />,
+  Facebook: <BiLogoFacebook />,
+  Instagram: <FaInstagram />,
+  LinkedIn: <FaLinkedinIn />,
+  YouTube: <FaYoutube />,
+};
+
+const Footer: React.FC<FooterProps> = ({
+  logoSrc,
+  address,
+  phone,
+  email,
+  services,
+  quickLinks,
+  aboutLinks,
+  socialLinks,
+  copyrightText,
+}) => {
   return (
     <FooterWrapper>
       <FooterContainer>
         <FooterInnerContainer>
-        <FooterRow>
-          <FooterColumn className="logo-column">
-            <FooterLogo href="https://innotech.software/">
-              <img
-                src="https://innotech.software/wp-content/uploads/2021/01/Logo_Innotech_Positive_RGB-250x52.png"
-                alt="InnoTech Logo"
-              />
-            </FooterLogo>
-            <FooterHeading>Centro Direzionale E33</FooterHeading>
-            <FooterText>
-              v.le Del Lavoro, 33<br />
-              37036 San Martino B.A. (VR) – Italy<br />
-              Tel. +39 045 445 00 55
-            </FooterText>
-            <FooterText>
-              <a href="mailto:info@innotech.email">info@innotech.email</a>
-            </FooterText>
-          </FooterColumn>
+          <FooterRow>
+            <FooterColumn>
+              <FooterLogo href="/">
+                <Image
+                  src={sanityUrlFor(logoSrc).url()}
+                  alt={"logo"}
+                  width={300}
+                  height={60}
+                />
+              </FooterLogo>
+              <FooterText dangerouslySetInnerHTML={{ __html: address }} />
+              <FooterText>{phone}</FooterText>
+              <FooterText>
+                <a href={`mailto:${email}`}>{email}</a>
+              </FooterText>
+            </FooterColumn>
 
-          <FooterColumn  className="links-column">
-            <FooterHeading>IT Services</FooterHeading>
-            <FooterList>
-              <li><a href="#">IT Software</a></li>
-              <li><a href="#">IT Project</a></li>
-              <li><a href="#">IT Platform</a></li>
-              <li><a href="#">Production Suite</a></li>
-              <li><a href="#">Cloud Computing</a></li>
-            </FooterList>
-          </FooterColumn>
+            {/* Services List (Without Links) */}
+            <FooterColumn className="services-column">
+              <FooterHeading>IT Services</FooterHeading>
+              <ServicesList>
+                {services.map((service, index) => (
+                  <li key={index}>{service}</li>
+                ))}
+              </ServicesList>
+            </FooterColumn>
 
-          <FooterColumn  className="links-column">
-            <FooterHeading>Quick links</FooterHeading>
-            <FooterList>
-              <li><a href="https://innotech.software/team/">Team</a></li>
-              <li><a href="https://innotech.software/privacy-e-cookie-policy/">Privacy e Cookie Policy</a></li>
-            </FooterList>
-          </FooterColumn>
+            {/* Quick Links */}
+            <FooterColumn className="links-column">
+              <FooterHeading>Quick Links</FooterHeading>
+              <FooterList>
+                {quickLinks.map((link, index) => (
+                  <li key={index}>
+                    <a href={customLinkToHref(link)}>{link.label}</a>
+                  </li>
+                ))}
+              </FooterList>
+            </FooterColumn>
 
-          <FooterColumn className="links-column">
-            <FooterHeading>About Us</FooterHeading>
-            <FooterList>
-              <li><a href="https://innotech.software/contatti/">Contatti</a></li>
-            </FooterList>
-          </FooterColumn>
+            {/* About Links */}
+            <FooterColumn className="links-column">
+              <FooterHeading>About Us</FooterHeading>
+              <FooterList>
+                {aboutLinks.map((link, index) => (
+                  <li key={index}>
+                    <a href={customLinkToHref(link)}>{link.label}</a>
+                  </li>
+                ))}
+              </FooterList>
+            </FooterColumn>
+          </FooterRow>
 
-          <FooterColumn className="social-column">
+          <FooterRow>
+            <FooterText>{copyrightText}</FooterText>
+            {/* Social Links */}
             <SocialLinks>
-              <a href="https://www.twitter.com/innotechsrl" target="_blank" aria-label="Twitter">
-                <i className="fab fa-twitter"></i>
-              </a>
-              <a href="https://www.facebook.com/innotechsrl" target="_blank" aria-label="Facebook">
-                <i className="fab fa-facebook-f"></i>
-              </a>
-              <a href="https://www.instagram.com/innotech_srl" target="_blank" aria-label="Instagram">
-                <i className="fab fa-instagram"></i>
-              </a>
-              <a href="https://www.linkedin.com/company/innotechsrl" target="_blank" aria-label="LinkedIn">
-                <i className="fab fa-linkedin"></i>
-              </a>
-              <a href="https://www.youtube.com/channel/UCs1lvBra7nMneYANtfRsOIA" target="_blank" aria-label="YouTube">
-                <i className="fab fa-youtube"></i>
-              </a>
+              {socialLinks.map((socialLink, index) => {
+                const icon = socialIcons[socialLink.label]; // Get the icon based on the label
+                return (
+                  <a
+                    key={index}
+                    href={customLinkToHref(socialLink)}
+                    aria-label={socialLink.label}
+                    target="_blank"
+                  >
+                    {icon}
+                  </a>
+                );
+              })}
             </SocialLinks>
-          </FooterColumn>
-        </FooterRow>
-
-        <FooterRow>
-          <FooterColumn >
-            <FooterText>
-              © 2021 InnoTech Srl. Tutti i diritti riservati | Cod. Fisc. e P.Iva 04758110235 | REA VR-445854<br />
-              Cap. Soc. Euro 10.000,00 i.v. | Codice Univoco: A4707H7
-            </FooterText>
-          </FooterColumn>
-        </FooterRow>
+          </FooterRow>
         </FooterInnerContainer>
       </FooterContainer>
     </FooterWrapper>

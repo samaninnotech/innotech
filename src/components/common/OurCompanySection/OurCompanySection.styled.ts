@@ -34,7 +34,6 @@ export const LeftColumn = styled.h3`
   color: var(--text-light-color);
 
   mark {
-    background: none;
     color: var(--innotech-color);
     font-weight: bold;
   }
@@ -47,7 +46,6 @@ export const LeftColumnText = styled.div`
   margin: 0;
 
   mark {
-    background: none;
     color: #25567a;
     font-weight: bold;
   }
@@ -154,15 +152,8 @@ export const AccordionContent = styled.div<{ active: boolean }>`
     padding 0.2s ease;
 `;
 
-export const MarkedText = styled.mark`
-  background: none;
-  color: #0073e6;
-  font-weight: bold;
-`;
-
 export const MarkedNumber = styled.mark`
-  background: none;
-  color: #0073e6;
   font-weight: bold;
   font-size: 175px;
+  background-color: white;
 `;

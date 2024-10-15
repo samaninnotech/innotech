@@ -21,7 +21,7 @@ export const Header = styled.div`
 export const InnerContainer1 = styled.div<{ $bgImg?: string }>`
   padding-left: 1rem;
   padding-right: 1rem;
-  background-image: url(${({ $bgImg }) => $bgImg || "none"});
+  background-image: url(${({ $bgImg }) => $bgImg});
   background-size: cover;
   background-position: center;
   height: 100%;

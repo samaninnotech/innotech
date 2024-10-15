@@ -69,7 +69,8 @@ export const SecondaryNavbarStyled = styled.header<{ isVisible: boolean }>`
   transform: translateY(${({ isVisible }) => (isVisible ? "0" : "-100%")});
   opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
   z-index: 50;
-  height: 20%;
+  height: 15%;
   display: flex;
   align-content: center;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.2); /* Subtle shadow at the bottom */
 `;

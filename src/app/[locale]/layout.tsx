@@ -1,6 +1,10 @@
-import { DraftBanner } from "@/components/common";
+import { DraftBanner, Footer } from "@/components/common";
 import { isSupportedLocale } from "@/i18n/settings";
-import { getHomepageId, getNavbarConfig } from "@/sanity/queries";
+import {
+  getFooterConfig,
+  getHomepageId,
+  getNavbarConfig,
+} from "@/sanity/queries"; // Import getFooterConfig
 import { Inter } from "next/font/google";
 import { draftMode } from "next/headers";
 import { FC, PropsWithChildren } from "react";
@@ -14,9 +18,9 @@ const RootLayout: FC<
   PropsWithChildren<{ params: { locale: string } }>
 > = async ({ params: { locale }, children }) => {
   const { navbar_config, side_navbar_config } = await getNavbarConfig(locale);
+  const footerData = await getFooterConfig(locale); // Fetch the footer data
   const { homepage } = await getHomepageId();
-
-  //Generating jsonLd
+  // Generating JSON-LD
   const jsonLd = {
     "@context": "https://schema.org",
     "@id": homepage,
@@ -40,6 +44,7 @@ const RootLayout: FC<
       email: "info@bau4x.com",
     },
   };
+
   const dictionary = isSupportedLocale(locale)
     ? await getDictionary(locale)
     : {};
@@ -64,6 +69,22 @@ const RootLayout: FC<
           }}
         >
           {children}
+
+          {/* Check if footerData is available before rendering Footer */}
+          {footerData && (
+            <Footer
+              logoSrc={footerData.logo} // Assuming logo is in the format you're expecting
+              address={footerData.address} // Provide default value if null
+              phone={footerData.phone} // Provide default value if null
+              email={footerData.email} // Provide default value if null
+              services={footerData.services} // Provide default value if null
+              quickLinks={footerData.quickLinks} // Provide default value if null
+              aboutLinks={footerData.aboutLinks} // Provide default value if null
+              socialLinks={footerData.socialLinks} // Provide default value if null
+              copyrightText={footerData.copyrightText} // Provide default value if null
+            />
+          )}
+
           {draftEnabled && <DraftBanner></DraftBanner>}
         </Providers>
       </body>
