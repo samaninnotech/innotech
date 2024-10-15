@@ -1,19 +1,20 @@
 // Footer.styled.ts
-import { mediaRules } from '@/themes/media-breakpoints';
-import styled from 'styled-components';
+import Link from "@/i18n/Link";
+import { mediaRules } from "@/themes/media-breakpoints";
+import styled from "styled-components";
 
 export const FooterWrapper = styled.div`
-  background-color: #f8f9fa; /* Light background color for the footer */
+  background-color: #f8f9fa;
   padding: 40px 0;
   border-top: 1px solid #e9ecef;
   width: 100%;
   margin-top: 100px;
-
 `;
 
 export const FooterContainer = styled.div`
   width: 100%;
 `;
+
 export const FooterInnerContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -21,60 +22,42 @@ export const FooterInnerContainer = styled.div`
   margin: 0 auto;
   padding: 0 20px;
 `;
+
 export const FooterRow = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 20px;
-  max-width: 576px; 
-  flex-direction: column;
+  max-width: 576px;
 
-  ${mediaRules.sm}{
-    max-width: 720px; 
+  ${mediaRules.sm} {
+    max-width: 720px;
   }
-  ${mediaRules.md}{
-    max-width: 940px; 
+  ${mediaRules.md} {
+    max-width: 940px;
     flex-direction: row;
   }
-  ${mediaRules.lg}{
+  ${mediaRules.lg} {
     flex-direction: row;
-    max-width: 1200px; 
+    max-width: 1200px;
   }
 `;
 
 export const FooterColumn = styled.div`
- &:first-child {
-    flex: 0 0 30%; /* First child takes 40% of the width */
-    max-width: 40%; /* Ensures the first child does not exceed 40% */
+  &:first-child {
+    flex: 0 0 30%;
+    max-width: 40%;
   }
 
   &:not(:first-child) {
-    flex: 1; /* Remaining children share the remaining 60% equally */
-    max-width: calc(60% / 1.5); /* Adjusts the max-width to divide the remaining space equally */
-  }  
+    flex: 1;
+    max-width: calc(60% / 1.5);
+  }
   padding: 0 15px;
-
-  &.logo-column {
-    display: flex;
-    flex-direction: column;
-    // align-items: center;
-  }
-
-  &.links-column, &.social-column {
-    display: flex;
-    flex-direction: column;
-    // justify-content: space-between;
-  }
 `;
 
-export const FooterLogo = styled.a`
+export const FooterLogo = styled(Link)`
   display: block;
   margin-bottom: 20px;
-  // text-align: center;
-
-  img {
-    max-width: 100%;
-    height: auto;
-  }
 `;
 
 export const FooterHeading = styled.h2`
@@ -82,15 +65,13 @@ export const FooterHeading = styled.h2`
   margin-bottom: 10px;
 `;
 
-export const FooterList = styled.div`
+export const FooterList = styled.ul`
   list-style: none;
   padding: 0;
   margin-top: 10px;
-  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  
+
   li {
     margin-bottom: 20px;
 
@@ -104,7 +85,6 @@ export const FooterList = styled.div`
 export const FooterText = styled.p`
   font-size: 0.9em;
   color: #6c757d;
-  // text-align: center;
   margin: 20px 0;
   width: 100%;
 `;
@@ -121,5 +101,19 @@ export const SocialLinks = styled.div`
     &:hover {
       color: #007bff;
     }
+  }
+`;
+
+// New container for services (without links)
+export const ServicesList = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+
+  li {
+    margin-bottom: 20px;
+    color: black;
   }
 `;

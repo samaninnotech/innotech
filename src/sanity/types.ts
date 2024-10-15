@@ -807,3 +807,16 @@ export function isLargeBackgroundSection(
 ): section is LargeBackgroundSection {
   return sectionMatchType(section, "large_background_section");
 }
+
+/* Footer section */
+export interface FooterConfigResult {
+  logo: string;
+  address: string;
+  phone: string;
+  email: string;
+  services: string[];
+  quickLinks: CustomLink[];
+  aboutLinks: CustomLink[];
+  socialLinks: CustomLink[];
+  copyrightText: string;
+}

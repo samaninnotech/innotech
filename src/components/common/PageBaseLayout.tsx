@@ -1,7 +1,6 @@
 "use client";
 
 import { FC, PropsWithChildren, useEffect, useState } from "react";
-import Footer from "./Footer";
 import { Navbar } from "./Navbar";
 import { SlugMapping } from "./Navbar/types";
 
@@ -43,9 +42,6 @@ const PageBaseLayout: FC<PropsWithChildren<PageBaseLayoutProps>> = ({
         isHomepage={isHomepage}
       />
       <main className="flex-grow container mx-auto pt-32">{children}</main>
-      <footer>
-        <Footer />
-      </footer>
     </>
   );
 };

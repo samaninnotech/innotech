@@ -6,6 +6,7 @@ import {
   AssistanceInfoResult,
   ChildPagesConfigResult,
   Event,
+  FooterConfigResult,
   GlobalAccountInfoResult,
   NavbarConfigResult,
   Page,
@@ -64,8 +65,6 @@ const buildPageDeconstructionQUery = (locale: string) => `{
     _type == 'event_header_section' => ${buildEventHeaderSectionQuery(locale)},
     _type == 'contact_section' => ${buildContactSectionQuery(locale, fallbackLocale)},
     _type == 'events_last_updates_section' => ${buildEventsLastUpdatesSectionQuery(locale)},
-
-    
   }
 }`;
 const buildBlogHeaderSectionQuery = (locale: string) => `
@@ -443,6 +442,33 @@ const buildCarouselQuery = (locale: string) => {
     'title': coalesce(title.${locale}, title.${fallbackLocale}),
     'images': images[].asset->url
   }`;
+};
+
+const footerQuery = (locale: string) => `
+*[ _type == "website_settings" && _id == "websiteSettings"][0]{
+  
+    'logo': footer.logo.asset->url,
+    'address': footer.address,
+    'phone': footer.phone,
+    'email': footer.email,
+    'services': footer.services,
+    'quickLinks': footer.quickLinks[]${buildCustomLinkQuery(locale)},
+    'aboutLinks': footer.aboutLinks[]${buildCustomLinkQuery(locale)},
+    'socialLinks': footer.socialLinks[]${buildCustomLinkQuery(locale)},
+    'copyrightText': footer.copyrightText
+  
+}
+`;
+
+export const getFooterConfig = async (locale: string) => {
+  const query = footerQuery(locale);
+  const sanityClient = getSanityClient();
+  const result = await sanityClient.fetch<FooterConfigResult>(query);
+  if (!result) {
+    return null;
+  }
+
+  return result;
 };
 
 /******************************/

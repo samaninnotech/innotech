@@ -8,6 +8,7 @@ import Carousel from "./Carousel";
 import ConsultationSection from "./ConsultationSection";
 import DraftBanner from "./DraftBanner";
 import EventsLastUpdatesSection from "./EventsSection/EventsLastUpdatesSection";
+import Footer from "./Footer";
 import GenericLink from "./Generic-Link";
 import GetInTouchSection from "./GetInTouchSection";
 import HeroSectionComponent from "./HeroSection";
@@ -31,6 +32,7 @@ export {
   ContactSection,
   DraftBanner,
   EventsLastUpdatesSection,
+  Footer,
   GenericLink,
   GetInTouchSection,
   HeroSectionComponent,

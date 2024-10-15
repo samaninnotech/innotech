@@ -40,7 +40,6 @@ export const PopupContainer = styled.div`
 `;
 
 export const PopupContent = styled.div`
-  outline: none;
   color: black;
   display: flex;
 `;

@@ -28,7 +28,7 @@ export const HeroParagraph = styled.p`
 
 export const InnerContainer1 = styled.div<{ $bgImg?: string }>`
   padding: 2rem 0rem;
-  background-image: url(${({ $bgImg }) => $bgImg || "none"});
+  background-image: url(${({ $bgImg }) => $bgImg});
   background-size: auto;
   background-position: center right;
   background-repeat: no-repeat; /* Prevents the image from repeating */

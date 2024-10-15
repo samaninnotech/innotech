@@ -29,7 +29,7 @@ export const LogoContainerStyled = styled.div`
   max-height: 50px;
   margin-right: 2rem;
   ${mediaRules.lg} {
-    max-height: unset;
+    max-height: none;
   }
 `;
 
