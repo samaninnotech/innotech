@@ -1,8 +1,9 @@
 "use client";
+import Link from "@/i18n/Link";
 import { sanityUrlFor } from "@/sanity/sanity-client";
 import { CustomLink, customLinkToHref } from "@/sanity/types";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import { BiLogoFacebook } from "react-icons/bi";
 import {
   FaInstagram,
@@ -11,6 +12,8 @@ import {
   FaYoutube,
 } from "react-icons/fa";
 import {
+  Bubble,
+  CopyRightRow,
   FooterColumn,
   FooterContainer,
   FooterHeading,
@@ -20,6 +23,7 @@ import {
   FooterRow,
   FooterText,
   FooterWrapper,
+  LinksRow,
   ServicesList,
   SocialLinks,
 } from "./Footer.styled";
@@ -36,13 +40,12 @@ interface FooterProps {
   copyrightText: string;
 }
 
-// Mapping of social media labels to their corresponding icons
 const socialIcons: Record<string, JSX.Element> = {
   Twitter: <FaTwitter />,
   Facebook: <BiLogoFacebook />,
   Instagram: <FaInstagram />,
-  LinkedIn: <FaLinkedinIn />,
-  YouTube: <FaYoutube />,
+  Linkedin: <FaLinkedinIn />,
+  Youtube: <FaYoutube />,
 };
 
 const Footer: React.FC<FooterProps> = ({
@@ -56,6 +59,16 @@ const Footer: React.FC<FooterProps> = ({
   socialLinks,
   copyrightText,
 }) => {
+  const [hoveredIcon, setHoveredIcon] = useState<string | null>(null);
+
+  const handleMouseEnter = (iconName: string) => {
+    setHoveredIcon(iconName);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredIcon(null);
+  };
+
   return (
     <FooterWrapper>
       <FooterContainer>
@@ -70,67 +83,70 @@ const Footer: React.FC<FooterProps> = ({
                   height={60}
                 />
               </FooterLogo>
-              <FooterText dangerouslySetInnerHTML={{ __html: address }} />
+              <FooterText style={{ width: "80%" }}>{address}</FooterText>
               <FooterText>{phone}</FooterText>
               <FooterText>
                 <a href={`mailto:${email}`}>{email}</a>
               </FooterText>
             </FooterColumn>
+            <LinksRow>
+              <FooterColumn>
+                <FooterHeading>IT Services</FooterHeading>
+                <ServicesList>
+                  {services.map((service, index) => (
+                    <li key={index}>{service}</li>
+                  ))}
+                </ServicesList>
+              </FooterColumn>
 
-            {/* Services List (Without Links) */}
-            <FooterColumn className="services-column">
-              <FooterHeading>IT Services</FooterHeading>
-              <ServicesList>
-                {services.map((service, index) => (
-                  <li key={index}>{service}</li>
-                ))}
-              </ServicesList>
-            </FooterColumn>
+              <FooterColumn>
+                <FooterHeading>Quick Links</FooterHeading>
+                <FooterList>
+                  {quickLinks.map((link, index) => (
+                    <li key={index}>
+                      <a href={customLinkToHref(link)}>{link.label}</a>
+                    </li>
+                  ))}
+                </FooterList>
+              </FooterColumn>
 
-            {/* Quick Links */}
-            <FooterColumn className="links-column">
-              <FooterHeading>Quick Links</FooterHeading>
-              <FooterList>
-                {quickLinks.map((link, index) => (
-                  <li key={index}>
-                    <a href={customLinkToHref(link)}>{link.label}</a>
-                  </li>
-                ))}
-              </FooterList>
-            </FooterColumn>
-
-            {/* About Links */}
-            <FooterColumn className="links-column">
-              <FooterHeading>About Us</FooterHeading>
-              <FooterList>
-                {aboutLinks.map((link, index) => (
-                  <li key={index}>
-                    <a href={customLinkToHref(link)}>{link.label}</a>
-                  </li>
-                ))}
-              </FooterList>
-            </FooterColumn>
+              <FooterColumn>
+                <FooterHeading>About Us</FooterHeading>
+                <FooterList>
+                  {aboutLinks.map((link, index) => (
+                    <li key={index}>
+                      <a href={customLinkToHref(link)}>{link.label}</a>
+                    </li>
+                  ))}
+                </FooterList>
+              </FooterColumn>
+            </LinksRow>
           </FooterRow>
 
-          <FooterRow>
+          <CopyRightRow>
             <FooterText>{copyrightText}</FooterText>
-            {/* Social Links */}
             <SocialLinks>
               {socialLinks.map((socialLink, index) => {
-                const icon = socialIcons[socialLink.label]; // Get the icon based on the label
+                const icon = socialIcons[socialLink.label];
                 return (
-                  <a
+                  <Link
                     key={index}
                     href={customLinkToHref(socialLink)}
                     aria-label={socialLink.label}
                     target="_blank"
+                    onMouseEnter={() => handleMouseEnter(socialLink.label)}
+                    onMouseLeave={handleMouseLeave}
                   >
                     {icon}
-                  </a>
+
+                    {hoveredIcon === socialLink.label && (
+                      <Bubble className="show">{hoveredIcon}</Bubble>
+                    )}
+                  </Link>
                 );
               })}
             </SocialLinks>
-          </FooterRow>
+          </CopyRightRow>
         </FooterInnerContainer>
       </FooterContainer>
     </FooterWrapper>
