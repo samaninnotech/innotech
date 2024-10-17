@@ -11,11 +11,13 @@ import {
 
 interface TickItemsSectionProps {
   header: string;
+  listStyle: string;
   tickItems: TickItemType[];
 }
 
 const TickItemsSection: React.FC<TickItemsSectionProps> = ({
   header,
+  listStyle,
   tickItems = [],
 }) => {
   return (
@@ -29,6 +31,8 @@ const TickItemsSection: React.FC<TickItemsSectionProps> = ({
             key={index}
             title={item.title}
             description={item.description}
+            listStyle={listStyle}
+            index={index} // Pass the index here
           />
         ))}
       </ItemsContainer>

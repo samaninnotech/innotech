@@ -12,11 +12,13 @@ import {
   BlogPostsListSection,
   Carousel,
   ConsultationSection,
+  ContactForm,
   ContactSection,
   Event,
   EventHeaderSection,
   EventsLastUpdatesSection,
   EventsListSection,
+  FAQSection,
   GetInTouchSection,
   HeroSection,
   HomePageTopPost,
@@ -26,10 +28,12 @@ import {
   isBlogPostsListSection,
   isCarousel,
   isConsultationSection,
+  isContactForm,
   isContactSection,
   isEventHeaderSection,
   isEventsLastUpdatesSection,
   isEventsListSection,
+  isFAQSection,
   isGetInTouchSection,
   isHeroSection,
   isHomePageTopPost,
@@ -37,6 +41,7 @@ import {
   isJobOfferSection,
   isOnlyTextSection,
   isOurCompanySection,
+  isPageMiddleBanner,
   isPageTopBanner,
   isPageTopBar,
   isPartnerShipSection,
@@ -47,9 +52,11 @@ import {
   isTickItemsSection,
   isVideoSection,
   isVisionsSection,
+  isYoutubeSection,
   JobOfferSection,
   OnlyTextSection,
   OurCompanySection,
+  PageMiddleBanner,
   PageTopBanner,
   PageTopBar,
   PartnerShipSection,
@@ -62,13 +69,16 @@ import {
   TickItemsSection,
   VideoSection,
   VisionsSection,
+  YoutubeSection,
 } from "@/sanity/types";
 import { FC, ReactNode } from "react";
 import {
   Carousel as CarouselComponent,
   ConsultationSection as ConsultationSectionComponent,
+  ContactForm as ContactFormComponent,
   ContactSection as ContactSectionComponent,
   EventsLastUpdatesSection as EventsLastUpdatesSectionComponent,
+  FAQSection as FAQSectionComponent,
   GetInTouchSection as GetInTouchSectionComponent,
   HeroSectionComponent,
   HomePageTopPost as HomePageTopPostComponent,
@@ -76,6 +86,7 @@ import {
   JobOfferSection as JobOfferSectionComponent,
   OnlyTextSection as OnlyTextSectionComponent,
   OurCompanySection as OurCompanySectionComponent,
+  PageMiddleBanner as PageMiddleBannerComponent,
   PageTopBanner as PageTopBannerComponent,
   PageTopBar as PageTopBarComponent,
   PartnerShipSection as PartnerShipSectionComponent,
@@ -86,6 +97,7 @@ import {
   TickItemsSection as TickItemsSectionComponent,
   VideoSection as VideoSectionComponent,
   VisionsSection as VisionsSectionComponent,
+  YoutubeSection as YoutubeSectionComponent,
 } from ".";
 import BlogHeaderComponent from "./Blog/BlogHeader";
 import PostsList from "./Blog/PostsList";
@@ -163,6 +175,14 @@ const PageBuilder: FC<PageBuilderProps> = async ({ sections, locale }) => {
     } else if (isEventsLastUpdatesSection(s)) {
       const events = await getEvents(locale, 12, undefined);
       renderedSections.push(buildEventsLastUpdatesSection(s, events));
+    } else if (isYoutubeSection(s)) {
+      renderedSections.push(buildYoutubeSection(s));
+    } else if (isPageMiddleBanner(s)) {
+      renderedSections.push(buildPageMiddleBannerSection(s));
+    } else if (isContactForm(s)) {
+      renderedSections.push(buildContactForm(s));
+    } else if (isFAQSection(s)) {
+      renderedSections.push(buildFAQSection(s));
     }
   }
 
@@ -314,8 +334,14 @@ const buildOnlyTextSection = (s: OnlyTextSection) => {
   return <OnlyTextSectionComponent text={text} height={height} />;
 };
 const buildTickItemsSection = (s: TickItemsSection) => {
-  const { header, tickItems } = s;
-  return <TickItemsSectionComponent header={header} tickItems={tickItems} />;
+  const { header, listStyle, tickItems } = s;
+  return (
+    <TickItemsSectionComponent
+      header={header}
+      listStyle={listStyle}
+      tickItems={tickItems}
+    />
+  );
 };
 const buildGetInTouchSection = (s: GetInTouchSection) => {
   const {
@@ -494,3 +520,69 @@ const buildHeroSection = (s: HeroSection) => {
 };
 
 export default PageBuilder;
+
+const buildYoutubeSection = (s: YoutubeSection) => {
+  const { smallHeader, largeHeader, youtubeLogo, youtubeLink } = s;
+  return (
+    <YoutubeSectionComponent
+      smallHeader={smallHeader}
+      largeHeader={largeHeader}
+      youtubeLogo={youtubeLogo}
+      youtubeLink={youtubeLink}
+    ></YoutubeSectionComponent>
+  );
+};
+
+const buildPageMiddleBannerSection = (s: PageMiddleBanner) => {
+  const { largeHeader, imageUrl, description } = s;
+  return (
+    <PageMiddleBannerComponent
+      description={description}
+      largeHeader={largeHeader}
+      imageUrl={imageUrl}
+    ></PageMiddleBannerComponent>
+  );
+};
+
+const buildContactForm = (s: ContactForm) => {
+  const {
+    header,
+    firstNameLabel,
+    lastNameLabel,
+    companyLabel,
+    phoneLabel,
+    emailLabel,
+    messageLabel,
+    agreementLabel,
+    submitText,
+    senderEmail,
+    senderPassword,
+  } = s;
+
+  return (
+    <ContactFormComponent
+      header={header}
+      firstName={firstNameLabel}
+      lastName={lastNameLabel}
+      company={companyLabel}
+      phone={phoneLabel}
+      email={emailLabel}
+      agreement={agreementLabel}
+      submitText={submitText}
+      message={messageLabel}
+      senderEmail={senderEmail}
+      senderPassword={senderPassword}
+    />
+  );
+};
+
+const buildFAQSection = (s: FAQSection) => {
+  const { title, faqList, background } = s;
+  return (
+    <FAQSectionComponent
+      title={title}
+      faqList={faqList}
+      background={background}
+    ></FAQSectionComponent>
+  );
+};

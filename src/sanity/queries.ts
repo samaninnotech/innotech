@@ -53,6 +53,7 @@ const buildPageDeconstructionQUery = (locale: string) => `{
     _type == 'visions_section' => ${buildVisionsSectionQuery(locale, fallbackLocale)},
     _type == 'team_list' => ${buildTeamListQuery(locale, fallbackLocale)},
     _type == 'page_top_banner' => ${buildPageTopBannerQuery()},
+    _type == 'page_middle_banner' => ${buildPageMiddleBannerQuery(locale, fallbackLocale)},
     _type == 'quote_section' => ${buildQuoteSectionQuery(locale, fallbackLocale)},
     _type == 'tab_items_section' => ${buildTabItemsSectionQuery(locale, fallbackLocale)},
     _type == 'only_text_section' => ${buildOnlyTextSectionQuery(locale, fallbackLocale)},
@@ -65,6 +66,11 @@ const buildPageDeconstructionQUery = (locale: string) => `{
     _type == 'event_header_section' => ${buildEventHeaderSectionQuery(locale)},
     _type == 'contact_section' => ${buildContactSectionQuery(locale, fallbackLocale)},
     _type == 'events_last_updates_section' => ${buildEventsLastUpdatesSectionQuery(locale)},
+    _type == 'youtube_section' => ${buildYouTubeSectionQuery(locale, fallbackLocale)},
+    _type == 'contact_form' => ${buildContactFormQuery(locale, fallbackLocale)},
+
+
+    
   }
 }`;
 const buildBlogHeaderSectionQuery = (locale: string) => `
@@ -149,8 +155,8 @@ const buildCardLinkSectionQuery = (locale: string) =>
 const buildFaqSectionQuery = (locale: string) =>
   `{
   'title': select(defined(title.${locale}) => title.${locale}, title.${fallbackLocale}),
-  'paragraph': select(defined(paragraph.${locale}) => paragraph.${locale}, paragraph.${fallbackLocale}),
-  'faq_list': faq_list[]{
+  'background': background.color,
+  'faqList': faq_list[]{
     _key,
     'question': select(defined(question.${locale}) => question.${locale}, question.${fallbackLocale}),
     'answer': select(defined(answer.${locale}) => answer.${locale}, answer.${fallbackLocale}),
@@ -324,12 +330,22 @@ const buildOurCompanySectionQuery = (
 
 // Query to fetch the Video Section data
 export const buildVideoSectionQuery = () => `{
-  "centralImage": centralImage.asset->url,
-  "leftTopImage": leftTopImage.asset->url,
-  "rightTopImage": rightTopImage.asset->url,
-  "leftBottomImage": leftBottomImage.asset->url,
-  "rightBottomImage": rightBottomImage.asset->url,
-  "videoLink": videoLink
+  'centralImage': centralImage.asset->url,
+  'leftTopImage': leftTopImage.asset->url,
+  'rightTopImage': rightTopImage.asset->url,
+  'leftBottomImage': leftBottomImage.asset->url,
+  'rightBottomImage': rightBottomImage.asset->url,
+  'videoLink': videoLink
+}`;
+
+export const buildYouTubeSectionQuery = (
+  locale: string,
+  fallbackLocale: string,
+) => `{
+  'smallHeader': coalesce(small_header.${locale}, small_header.${fallbackLocale}),
+  'largeHeader': coalesce(large_header.${locale}, large_header.${fallbackLocale}),
+  'youtubeLogo': youtube_logo.asset->url,
+  'youtubeLink': link${buildCustomLinkQuery(locale)}
 }`;
 
 const buildVisionsSectionQuery = (locale: string, fallbackLocale: string) => `
@@ -360,7 +376,14 @@ const buildTeamListQuery = (locale: string, fallbackLocale: string) => `
 const buildPageTopBannerQuery = () => `
 {
   'imageUrl': image.asset->url,
-  'altText': coalesce(image.alt, 'Default Alt Text')
+}
+`;
+
+const buildPageMiddleBannerQuery = (locale: string, fallbackLocale: string) => `
+{
+  'largeHeader': coalesce(large_header.${locale}, large_header.${fallbackLocale}),
+  'imageUrl': imageUrl.asset->url,
+  'description': coalesce(description.${locale}, large_header.${fallbackLocale}),
 }
 `;
 
@@ -394,6 +417,7 @@ const buildOnlyTextSectionQuery = (locale: string, fallbackLocale: string) => `{
 const buildTickItemsSectionQuery = (locale: string, fallbackLocale: string) => `
 {
   'header': coalesce(header.${locale}, header.${fallbackLocale}),
+  'listStyle': listStyle,
   'tickItems': items[]{
     'title': coalesce(title.${locale}, title.${fallbackLocale}),
     'description': coalesce(description.${locale}, description.${fallbackLocale})
@@ -422,6 +446,21 @@ const buildContactSectionQuery = (locale: string, fallbackLocale: string) => {
     'agreement': coalesce(agreement.${locale}, agreement.${fallbackLocale}),
     'buttonLabel': coalesce(buttonLabel.${locale}, buttonLabel.${fallbackLocale}),
     'rightHeader': coalesce(rightHeader.${locale}, rightHeader.${fallbackLocale})
+  }`;
+};
+const buildContactFormQuery = (locale: string, fallbackLocale: string) => {
+  return `{   
+    'header': coalesce(header.${locale}, header.${fallbackLocale}),
+    'firstNameLabel': coalesce(firstNameLabel.${locale}, firstNameLabel.${fallbackLocale}),
+    'lastNameLabel': coalesce(lastNameLabel.${locale}, lastNameLabel.${fallbackLocale}),
+    'companyLabel': coalesce(companyLabel.${locale}, companyLabel.${fallbackLocale}),
+    'phoneLabel': coalesce(phoneLabel.${locale}, phoneLabel.${fallbackLocale}),
+    'emailLabel': coalesce(emailLabel.${locale}, emailLabel.${fallbackLocale}),
+    'messageLabel': coalesce(messageLabel.${locale}, messageLabel.${fallbackLocale}),
+    'agreementLabel': coalesce(agreementLabel.${locale}, agreementLabel.${fallbackLocale}),
+    'submitText': coalesce(submitText.${locale}, submitText.${fallbackLocale}),
+    'senderEmail': senderEmail, 
+    'senderPassword': senderPassword
   }`;
 };
 

@@ -5,7 +5,9 @@ import styled, { css } from "styled-components";
 import { ImageAlignment, ImageSize } from "./ImageBlock";
 
 /* Block Parts */
-export const Title = styled.h2``;
+export const Title = styled.h2`
+  text-align: center;
+`;
 
 export const Subtitle = styled.h3`
   font-weight: 600;
@@ -22,8 +24,8 @@ export const BlockQuote = styled.h3`
 `;
 export const StyledLink = styled(Link)`
   font-weight: bold;
-  text-decoration: underline !important;
-  color: var(--accent-color);
+  text-decoration: none !important;
+  color: black;
 `;
 
 export const UnorderedList = styled.div`

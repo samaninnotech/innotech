@@ -12,8 +12,7 @@ export const BannerContainer = styled.div`
 // Wrapper for the banner to handle positioning
 export const BannerWrapper = styled.div`
   width: 100%;
-  height: 450px;
-  max-height: 450px; // Set max height similar to the original
+  max-height: 650px; // Set max height similar to the original
   position: relative;
   overflow: hidden;
 `;
