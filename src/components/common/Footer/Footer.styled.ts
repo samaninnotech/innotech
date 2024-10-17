@@ -25,6 +25,8 @@ export const FooterContainer = styled.div`
   ${mediaRules.lg} {
     max-width: 1200px;
   }
+  a {
+  }
 `;
 
 export const FooterInnerContainer = styled.div`
@@ -105,7 +107,9 @@ export const FooterColumn = styled.div`
     max-width: calc(60% / 1.5);
   }
   a {
-    text-decoration: none;
+    &:hover {
+      text-decoration: none;
+    }
   }
 `;
 

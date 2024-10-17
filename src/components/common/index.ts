@@ -6,8 +6,10 @@ import { SolutionsSection } from "@/components/common/SolutionsSection/Solutions
 import Button from "./Button";
 import Carousel from "./Carousel";
 import ConsultationSection from "./ConsultationSection";
+import ContactForm from "./ContactForm";
 import DraftBanner from "./DraftBanner";
 import EventsLastUpdatesSection from "./EventsSection/EventsLastUpdatesSection";
+import FAQSection from "./FAQSection";
 import Footer from "./Footer";
 import GenericLink from "./Generic-Link";
 import GetInTouchSection from "./GetInTouchSection";
@@ -16,6 +18,7 @@ import InfoSection from "./InfoSection";
 import JobOfferSection from "./JobOfferSection";
 import OnlyTextSection from "./OnlyTextSection";
 import OurCompanySection from "./OurCompanySection/OurCompanySection";
+import PageMiddleBanner from "./PageMiddleBanner";
 import PageTopBanner from "./PageTopBanner";
 import PopupForm from "./PopupForm";
 import QuoteSection from "./QuoteSection";
@@ -24,14 +27,17 @@ import TeamList from "./TeamList";
 import TickItemsSection from "./TickItemsSection";
 import VideoSection from "./VideoSection";
 import VisionsSection from "./VisionsSection";
+import YoutubeSection from "./YoutubeSection";
 
 export {
   Button,
   Carousel,
   ConsultationSection,
+  ContactForm,
   ContactSection,
   DraftBanner,
   EventsLastUpdatesSection,
+  FAQSection,
   Footer,
   GenericLink,
   GetInTouchSection,
@@ -41,6 +47,7 @@ export {
   JobOfferSection,
   OnlyTextSection,
   OurCompanySection,
+  PageMiddleBanner,
   PageTopBanner,
   PageTopBar,
   PartnerShipSection,
@@ -52,4 +59,5 @@ export {
   TickItemsSection,
   VideoSection,
   VisionsSection,
+  YoutubeSection,
 };

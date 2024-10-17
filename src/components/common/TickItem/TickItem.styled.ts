@@ -14,6 +14,7 @@ export const Marker = styled.div`
   margin-right: 15px;
   color: #25567a;
   font-size: 24px;
+  font-weight: 500;
 `;
 
 export const TitleWrap = styled.div`
@@ -21,10 +22,10 @@ export const TitleWrap = styled.div`
   flex-direction: column;
 `;
 
-export const Title = styled.h6`
+export const Title = styled.h6<{ fontWeight: string }>`
   font-size: 24px;
-  font-weight: bold;
-  margin: 0;
+  font-weight: ${(props) => props.fontWeight};
+  margin-left: 15px;
   color: #25567a;
 `;
 

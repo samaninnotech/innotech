@@ -377,6 +377,18 @@ export function isVideoSection(section: Section): section is VideoSection {
   return sectionMatchType(section, "video_section");
 }
 
+/* Youtube Video Section */
+export interface YoutubeSection extends Section {
+  smallHeader: string;
+  largeHeader: string;
+  youtubeLogo: string;
+  youtubeLink: CustomLink;
+}
+
+export function isYoutubeSection(section: Section): section is YoutubeSection {
+  return sectionMatchType(section, "youtube_section");
+}
+
 /* Visions Section*/
 export interface VisionsSection extends Section {
   sectionTitle?: string;
@@ -443,6 +455,19 @@ export function isPageTopBanner(section: Section): section is PageTopBanner {
   return sectionMatchType(section, "page_top_banner");
 }
 
+/* Page Middle Banner*/
+export interface PageMiddleBanner extends Section {
+  largeHeader: string;
+  imageUrl: string;
+  description: string;
+}
+
+export function isPageMiddleBanner(
+  section: Section,
+): section is PageMiddleBanner {
+  return sectionMatchType(section, "page_middle_banner");
+}
+
 /* Info Section */
 export interface InfoSection extends Section {
   header: string;
@@ -498,6 +523,7 @@ export function isOnlyTextSection(
 /* Tick Items Section */
 export interface TickItemsSection extends Section {
   header: string;
+  listStyle: string;
   tickItems: TickItemType[];
 }
 
@@ -510,6 +536,7 @@ export function isTickItemsSection(
 export interface TickItemType extends SanityElement {
   title: string;
   description: string;
+  listStyle: string;
 }
 
 /* Get In touch Section */
@@ -540,6 +567,24 @@ export function isContactSection(section: Section): section is ContactSection {
   return sectionMatchType(section, "contact_section");
 }
 
+/* Contact Form */
+export interface ContactForm extends Section {
+  header: string;
+  firstNameLabel: string;
+  lastNameLabel: string;
+  companyLabel: string;
+  phoneLabel: string;
+  emailLabel: string;
+  messageLabel: string;
+  agreementLabel: string;
+  submitText: string;
+  senderEmail: string;
+  senderPassword: string;
+}
+
+export function isContactForm(section: Section): section is ContactForm {
+  return sectionMatchType(section, "contact_form");
+}
 /* Card Link Section */
 export interface CardLinksSection extends Section {
   title: string;
@@ -681,9 +726,8 @@ export interface FAQ extends SanityElement {
 }
 
 export interface FAQSection extends Section {
-  title?: string;
-  paragraph?: string;
-  faq_list?: FAQ[];
+  title: string;
+  faqList: FAQ[];
 }
 
 export function isFAQSection(section: Section): section is FAQSection {
