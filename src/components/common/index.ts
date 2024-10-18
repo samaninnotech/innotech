@@ -8,7 +8,7 @@ import Carousel from "./Carousel";
 import ConsultationSection from "./ConsultationSection";
 import ContactForm from "./ContactForm";
 import DraftBanner from "./DraftBanner";
-import EventsLastUpdatesSection from "./EventsSection/EventsLastUpdatesSection";
+import EventsLastUpdatesSection from "./EventsLastUpdates/EventsLastUpdatesSection";
 import FAQSection from "./FAQSection";
 import Footer from "./Footer";
 import GenericLink from "./Generic-Link";
@@ -59,5 +59,6 @@ export {
   TickItemsSection,
   VideoSection,
   VisionsSection,
-  YoutubeSection,
+  YoutubeSection
 };
+
