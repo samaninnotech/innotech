@@ -4,27 +4,35 @@ import { SlArrowDown } from "react-icons/sl";
 import styled from "styled-components";
 import GenericSection from "../GenericSection";
 
-export const InnerContainer1 = styled.div<{ $background?: string }>`
+export const InnerContainer1 = styled.div<{
+  $background?: string;
+  $isFullWidth: boolean;
+}>`
   padding: 1rem 1rem;
   background: ${({ $background }) => $background || ""};
   width: 100%;
   margin: 0 auto;
- ${mediaRules.xsm} {
-    max-width: 576px;
-  }
 
-  ${mediaRules.sm} {
-    max-width: 720px;
-  }
+  ${({ $isFullWidth }) =>
+    !$isFullWidth &&
+    `
+    ${mediaRules.xsm} {
+      max-width: 576px;
+    }
 
-  ${mediaRules.md} {
-    max-width: 940px;
-  }
+    ${mediaRules.sm} {
+      max-width: 720px;
+    }
 
-  ${mediaRules.lg} {
-    max-width: 1170px;
-  }
-}`;
+    ${mediaRules.md} {
+      max-width: 940px;
+    }
+
+    ${mediaRules.lg} {
+      max-width: 1170px;
+    }
+  `}
+`;
 
 export const TitlenParagraphContainer = styled.h1`
   color: white;
@@ -35,29 +43,51 @@ export const TitlenParagraphContainer = styled.h1`
 `;
 export const InnerContainer2 = styled.div`
   margin: 0px auto;
+  
+    ${mediaRules.xsm} {
+      max-width: 576px;
+    }
+
+    ${mediaRules.sm} {
+      max-width: 720px;
+    }
+
+    ${mediaRules.md} {
+      max-width: 940px;
+    }
+
+    ${mediaRules.lg} {
+      max-width: 1170px;
+    }
+  
 }`;
 
-export const InnerContainer3 = styled.div`
+export const InnerContainer3 = styled.div<{ numberOfColumns: number }>`
   display: grid;
-  gap: 0; /* Space between FAQ items */
+  gap: 0;
   width: 100%;
+  grid-template-columns: repeat(1, 1fr); /* Dynamic column count */
   grid-auto-flow: dense; /* Ensure items flow into columns more evenly */
 
   ${mediaRules.xsm} {
     grid-template-columns: repeat(1, 1fr);
-    gap: 0;
   }
   ${mediaRules.sm} {
     grid-template-columns: repeat(1, 1fr);
-    gap: 0;
   }
   ${mediaRules.md} {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px; /* Space between FAQ items */
+    grid-template-columns: repeat(
+      ${({ numberOfColumns }) => numberOfColumns},
+      1fr
+    ); /* Use 2 columns for medium screens */
+    gap: 15px;
   }
   ${mediaRules.lg} {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px; /* Space between FAQ items */
+    grid-template-columns: repeat(
+      ${({ numberOfColumns }) => numberOfColumns},
+      1fr
+    ); /* Use dynamic columns for large screens */
+    gap: 15px;
   }
 `;
 

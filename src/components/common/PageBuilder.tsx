@@ -577,10 +577,12 @@ const buildContactForm = (s: ContactForm) => {
 };
 
 const buildFAQSection = (s: FAQSection) => {
-  const { title, faqList, background } = s;
+  const { title, numberOfColumns, isFullWidth, faqList, background } = s;
   return (
     <FAQSectionComponent
       title={title}
+      numberOfColumns={numberOfColumns}
+      isFullWidth={isFullWidth}
       faqList={faqList}
       background={background}
     ></FAQSectionComponent>
