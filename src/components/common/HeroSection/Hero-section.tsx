@@ -5,9 +5,11 @@ import {
   HeroImageColumn,
   HeroLink,
   HeroTextColumn,
+  HeroVideoColumn,
   customLinkToHref,
   isHeroImageColumn,
   isHeroTextColumn,
+  isHeroVideoColumn,
 } from "@/sanity/types";
 import { PortableText, PortableTextReactComponents } from "@portabletext/react";
 import Image from "next/image";
@@ -26,6 +28,7 @@ import {
   InnerContainerLeft,
   InnerContainerRight,
   OnlyTextContainer,
+  VideoContainer,
 } from "./Hero-section.styled";
 
 const heroComponents: Partial<PortableTextReactComponents> = {
@@ -131,6 +134,10 @@ const HeroColumnComponent: FC<HeroColumnProps> = ({
         image={sanityUrlFor(column.image).url()}
       ></HeroImageColumnComponent>
     );
+  } else if (isHeroVideoColumn(column)) {
+    return (
+      <HeroVideoColumnComponent video={column.video}></HeroVideoColumnComponent>
+    );
   } else {
     return null;
   }
@@ -166,6 +173,24 @@ const HeroImageColumnComponent: FC<HeroImageColumnProps> = ({ image }) => {
     <InnerContainerRight>
       <Image src={image} alt="image" width={600} height={500} />
     </InnerContainerRight>
+  );
+};
+
+/* Colonna Video */
+type HeroVideoColumnProps = Omit<HeroVideoColumn, "_key" | "column_type">;
+const HeroVideoColumnComponent: FC<HeroVideoColumnProps> = ({ video }) => {
+  return (
+    <VideoContainer>
+      <iframe
+        width="100%"
+        height="100%"
+        src={customLinkToHref(video)}
+        title="YouTube video player"
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      ></iframe>
+    </VideoContainer>
   );
 };
 

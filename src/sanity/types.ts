@@ -639,6 +639,7 @@ export function isQuoteSection(section: Section): section is QuoteSection {
 export enum HeroColumnType {
   Text = "Text",
   Image = "Image",
+  Video = "Video",
 }
 
 export interface HeroColumn extends SanityElement {
@@ -675,10 +676,16 @@ export interface HeroImageColumn extends HeroColumn {
   image: string;
 }
 
+export interface HeroVideoColumn extends HeroColumn {
+  video: CustomLink;
+}
 export function isHeroImageColumn(element: any): element is HeroImageColumn {
   return isHeroColumn(element) && element.column_type === HeroColumnType.Image;
 }
 
+export function isHeroVideoColumn(element: any): element is HeroVideoColumn {
+  return isHeroColumn(element) && element.column_type === HeroColumnType.Video;
+}
 export interface HeroSection extends Section {
   anchor?: string;
   left_column: HeroColumn;
@@ -727,6 +734,8 @@ export interface FAQ extends SanityElement {
 
 export interface FAQSection extends Section {
   title: string;
+  numberOfColumns: number;
+  isFullWidth: boolean;
   faqList: FAQ[];
 }
 

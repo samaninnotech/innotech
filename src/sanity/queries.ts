@@ -104,7 +104,7 @@ const buildHeroSectionQuery = (locale: string) => {
     _type,
     column_type,
     'rich_text': coalesce(rich_text.${locale}, rich_text.${fallbackLocale}),
-    'links': links[]{
+    'links': links[] {
       type,
       'link': link${buildCustomLinkQuery(locale)},
       button_text,
@@ -113,7 +113,8 @@ const buildHeroSectionQuery = (locale: string) => {
     },
     text_color,
     text_alignment,
-    image
+    image,
+    video
   }
 `;
 
@@ -156,6 +157,8 @@ const buildFaqSectionQuery = (locale: string) =>
   `{
   'title': select(defined(title.${locale}) => title.${locale}, title.${fallbackLocale}),
   'background': background.color,
+  'numberOfColumns': numberOfColumns,
+  'isFullWidth': isFullWidth,
   'faqList': faq_list[]{
     _key,
     'question': select(defined(question.${locale}) => question.${locale}, question.${fallbackLocale}),

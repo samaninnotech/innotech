@@ -123,3 +123,21 @@ export const Element = styled(GenericSection)<ElementProps>`
   width: 100%;
   height: ${({ $height }) => $height || "auto"} !important;
 `;
+
+export const VideoContainer = styled.div`
+  width: 100%;
+  height: 80%;
+  max-width: 800px;
+  max-height: 450px;
+  background: #000;
+
+  ${mediaRules.sm} {
+    width: 90%;
+    height: 90%;
+  }
+
+  ${mediaRules.lg} {
+    width: 100%;
+    height: 80%;
+  }
+`;
