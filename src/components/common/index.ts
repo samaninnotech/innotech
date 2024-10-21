@@ -8,6 +8,7 @@ import Carousel from "./Carousel";
 import ConsultationSection from "./ConsultationSection";
 import ContactForm from "./ContactForm";
 import DraftBanner from "./DraftBanner";
+import EventRegistrationSection from "./EventRegistrationSection";
 import EventsLastUpdatesSection from "./EventsLastUpdates/EventsLastUpdatesSection";
 import FAQSection from "./FAQSection";
 import Footer from "./Footer";
@@ -36,6 +37,7 @@ export {
   ContactForm,
   ContactSection,
   DraftBanner,
+  EventRegistrationSection,
   EventsLastUpdatesSection,
   FAQSection,
   Footer,
@@ -59,6 +61,5 @@ export {
   TickItemsSection,
   VideoSection,
   VisionsSection,
-  YoutubeSection
+  YoutubeSection,
 };
-

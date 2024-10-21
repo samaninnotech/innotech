@@ -16,6 +16,7 @@ import {
   ContactSection,
   Event,
   EventHeaderSection,
+  EventRegistrationSection,
   EventsLastUpdatesSection,
   EventsListSection,
   FAQSection,
@@ -31,6 +32,7 @@ import {
   isContactForm,
   isContactSection,
   isEventHeaderSection,
+  isEventRegistrationSection,
   isEventsLastUpdatesSection,
   isEventsListSection,
   isFAQSection,
@@ -77,6 +79,7 @@ import {
   ConsultationSection as ConsultationSectionComponent,
   ContactForm as ContactFormComponent,
   ContactSection as ContactSectionComponent,
+  EventRegistrationSection as EventRegistrationSectionComponent,
   EventsLastUpdatesSection as EventsLastUpdatesSectionComponent,
   FAQSection as FAQSectionComponent,
   GetInTouchSection as GetInTouchSectionComponent,
@@ -183,6 +186,8 @@ const PageBuilder: FC<PageBuilderProps> = async ({ sections, locale }) => {
       renderedSections.push(buildContactForm(s));
     } else if (isFAQSection(s)) {
       renderedSections.push(buildFAQSection(s));
+    } else if (isEventRegistrationSection(s)) {
+      renderedSections.push(buildEventRegistrationSection(s));
     }
   }
 
@@ -477,6 +482,16 @@ const buildEventsLastUpdatesSection = (
       eventOverlayColor={eventOverlayColor}
       overlayTextColor={overlayTextColor}
       eventTextColor={eventTextColor}
+    />
+  );
+};
+
+const buildEventRegistrationSection = (s: EventRegistrationSection) => {
+  const { header, eventRegistrationCards } = s;
+  return (
+    <EventRegistrationSectionComponent
+      header={header}
+      eventRegistrationCards={eventRegistrationCards}
     />
   );
 };

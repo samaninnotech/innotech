@@ -197,6 +197,8 @@ const buildCustomLinkQuery = (locale: string) =>
       'firstNameLabel': coalesce(popupForm.firstNameLabel.${locale}, popupForm.firstNameLabel.${fallbackLocale}),
       'lastNameLabel': coalesce(popupForm.lastNameLabel.${locale}, popupForm.lastNameLabel.${fallbackLocale}),
       'companyLabel': coalesce(popupForm.companyLabel.${locale}, popupForm.companyLabel.${fallbackLocale}),
+      'roleLabel': coalesce(popupForm.roleLabel.${locale}, popupForm.roleLabel.${fallbackLocale}),
+      'invitedByLabel': coalesce(popupForm.invitedByLabel.${locale}, popupForm.invitedByLabel.${fallbackLocale}),
       'phoneLabel': coalesce(popupForm.phoneLabel.${locale}, popupForm.phoneLabel.${fallbackLocale}),
       'emailLabel': coalesce(popupForm.emailLabel.${locale}, popupForm.emailLabel.${fallbackLocale}),
       'agreementLabel': coalesce(popupForm.agreementLabel.${locale}, popupForm.agreementLabel.${fallbackLocale}),
@@ -892,6 +894,24 @@ export const getAllEventsSlugs = () => {
   return sanityClient.fetch<PagesConfigResult[]>(query);
 };
 
+const buildEventRegistrationSectionQuery = (locale: string) => {
+  const buildEventRegistrationCardQuery = (locale: string) => `
+  {
+    _key,
+    'title': coalesce(title.${locale}, title.${fallbackLocale}),
+    'registration_deadline': registration_deadline,
+    'images': images[].asset->url,
+    'type': type,
+    'buttonLink': buttonLink${buildCustomLinkQuery(locale)}
+  }
+  `;
+
+  return `{
+    'header': coalesce(header.${locale}, header.${fallbackLocale}),
+    'eventRegistrationCards': event_registration_cards[] ${buildEventRegistrationCardQuery(locale)}
+  }`;
+};
+
 const eventsQuery = (
   locale: string,
   setLength: number,
@@ -973,37 +993,10 @@ const eventBySlugQuery = (locale: string, slug: string) => {
     _type,
     _key,
     'background': bg_color,
-    _type == 'hero_section' => ${buildHeroSectionQuery(locale)},
-    _type == 'info_section' => ${buildInfoSectionQuery(locale, fallbackLocale)},
-    _type == 'faq_section' => ${buildFaqSectionQuery(locale)},
-    _type == 'image_links_section' => ${buildImageLinksSectionQuery(locale)},
-    _type == 'carousel' => ${buildCarouselQuery(locale)},
-    _type == 'text_links_section' => ${buildTextLinksSectionQuery(locale)},
-    _type == 'counters_section' => ${buildCountersSectionQuery(locale)},
-    _type == 'card_link_section' => ${buildCardLinkSectionQuery(locale)},
-    _type == 'block_section' => ${buildBlockSectionQuery(locale)},
-    _type == 'newsletter_form_section' => ${buildNewsletterSectionQuery(locale)},
-    _type == 'large_background_section' => ${buildLargeBackgroundSectionQuery(locale)},
-    _type == 'page_top_bar' => ${buildPageTopBarQuery(locale, fallbackLocale)},
-    _type == 'home_page_top_post' => ${buildHomePageTopPostQuery(locale)},
-    _type == 'consultation_section' => ${buildConsultationSectionQuery(locale, fallbackLocale)},
-    _type == 'solutions_section' => ${buildSolutionsSectionQuery(locale, fallbackLocale)},
-    _type == 'partnership_section' => ${buildPartnerShipSectionQuery(locale, fallbackLocale)},
-    _type == 'our_company_section' => ${buildOurCompanySectionQuery(locale, fallbackLocale)},
     _type == 'video_section' => ${buildVideoSectionQuery()},
-    _type == 'visions_section' => ${buildVisionsSectionQuery(locale, fallbackLocale)},
     _type == 'team_list' => ${buildTeamListQuery(locale, fallbackLocale)},
-    _type == 'page_top_banner' => ${buildPageTopBannerQuery()},
-    _type == 'quote_section' => ${buildQuoteSectionQuery(locale, fallbackLocale)},
-    _type == 'tab_items_section' => ${buildTabItemsSectionQuery(locale, fallbackLocale)},
-    _type == 'only_text_section' => ${buildOnlyTextSectionQuery(locale, fallbackLocale)},
-    _type == 'tick_items_section' => ${buildTickItemsSectionQuery(locale, fallbackLocale)},
-    _type == 'get_in_touch_section' => ${buildGetInTouchSectionQuery(locale, fallbackLocale)},
-    _type == 'job_offer_section' => ${buildJobOfferSectionQuery(locale, fallbackLocale)},
-    _type == 'blog_header_section' => ${buildBlogHeaderSectionQuery(locale)},
-    _type == 'blog_last_updates_section' => ${buildBlogLastUpdatesSectionQuery(locale)},
     _type == 'carousel' => ${buildCarouselQuery(locale)},
-    _type == 'event_header_section' => ${buildEventHeaderSectionQuery(locale)},
+    _type == 'event_registration_section' => ${buildEventRegistrationSectionQuery(locale)},
     }
   }`;
 };

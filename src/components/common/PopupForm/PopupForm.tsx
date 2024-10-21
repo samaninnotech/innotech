@@ -33,25 +33,28 @@ type Brochure = {
 
 type PopupFormProps = {
   header: string;
-  firstName: string;
-  lastName: string;
-  company: string;
-  phone: string;
-  email: string;
-  agreement: string;
+  firstNameLabel: string;
+  lastNameLabel: string;
+  companyLabel: string;
+  invitedByLabel?: string;
+  roleLabel?: string;
+  phoneLabel: string;
+  emailLabel: string;
+  agreementLabel: string;
   submitText: string;
-  thumbnail: string;
+  thumbnail?: string;
   brochure?: Brochure;
   senderEmail: string;
   senderPassword: string;
   onClose: () => void;
 };
 
-// Define a type for form values
 type FormValues = {
   firstName: string;
   lastName: string;
-  company?: string; // Make company optional
+  company?: string;
+  invitedBy?: string;
+  role?: string;
   phone: string;
   email: string;
   agreement: boolean;
@@ -59,12 +62,14 @@ type FormValues = {
 
 const PopupForm: React.FC<PopupFormProps> = ({
   header,
-  firstName,
-  lastName,
-  company,
-  phone,
-  email,
-  agreement,
+  firstNameLabel,
+  lastNameLabel,
+  companyLabel,
+  invitedByLabel,
+  roleLabel,
+  phoneLabel,
+  emailLabel,
+  agreementLabel,
   submitText,
   thumbnail,
   senderEmail,
@@ -73,11 +78,14 @@ const PopupForm: React.FC<PopupFormProps> = ({
   onClose,
 }) => {
   const brochureUrl = brochure?.file?.url || null;
+  console.log(roleLabel, "jujej");
 
   const [formValues, setFormValues] = useState<FormValues>({
     firstName: "",
     lastName: "",
-    company: "", // Set initial value for company
+    company: "",
+    invitedBy: "",
+    role: "",
     phone: "",
     email: "",
     agreement: false,
@@ -85,12 +93,11 @@ const PopupForm: React.FC<PopupFormProps> = ({
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [notification, setNotification] = useState<string | null>(null); // State for floating notification
+  const [notification, setNotification] = useState<string | null>(null);
 
   const validateField = (name: string, value: string | boolean) => {
     const newErrors: Record<string, string> = {};
 
-    // Validate first name
     if (name === "firstName") {
       if (!value || /\d/.test(value as string)) {
         newErrors.firstName =
@@ -98,7 +105,6 @@ const PopupForm: React.FC<PopupFormProps> = ({
       }
     }
 
-    // Validate last name
     if (name === "lastName") {
       if (!value || /\d/.test(value as string)) {
         newErrors.lastName =
@@ -106,7 +112,6 @@ const PopupForm: React.FC<PopupFormProps> = ({
       }
     }
 
-    // Validate phone number
     if (name === "phone") {
       if (!value || /[a-zA-Z]/.test(value as string)) {
         newErrors.phone =
@@ -114,7 +119,6 @@ const PopupForm: React.FC<PopupFormProps> = ({
       }
     }
 
-    // Validate email
     if (name === "email") {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!value || !emailRegex.test(value as string)) {
@@ -122,9 +126,12 @@ const PopupForm: React.FC<PopupFormProps> = ({
       }
     }
 
-    // Check if agreement is ticked
     if (name === "agreement" && !value) {
       newErrors.agreement = "You must agree to the terms.";
+    }
+
+    if (name === "role" && !value) {
+      newErrors.role = "Role is required.";
     }
 
     return newErrors;
@@ -137,10 +144,9 @@ const PopupForm: React.FC<PopupFormProps> = ({
       [name]: type === "checkbox" ? checked : value,
     }));
 
-    // Clear error for the changed field
     setErrors((prevErrors) => {
-      const { [name]: removedError, ...restErrors } = prevErrors; // Remove the error for the current field
-      return restErrors; // Return the rest of the errors
+      const { [name]: removedError, ...restErrors } = prevErrors;
+      return restErrors;
     });
   };
 
@@ -168,7 +174,7 @@ const PopupForm: React.FC<PopupFormProps> = ({
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!validateForm()) return; // Only proceed if the form is valid
+    if (!validateForm()) return;
 
     setIsSubmitting(true);
 
@@ -189,11 +195,11 @@ const PopupForm: React.FC<PopupFormProps> = ({
       const result = await response.json();
       if (response.ok) {
         console.log(result.message);
-        setNotification(`Email sent successfully to ${formValues.email}.`); // Set notification message
+        setNotification(`Email sent successfully to ${formValues.email}.`);
         setTimeout(() => {
-          setNotification(null); // Clear notification after 3 seconds
-          onClose(); // Close popup
-        }, 3000); // Delay before closing the popup
+          setNotification(null);
+          onClose();
+        }, 3000);
       } else {
         console.error(result.message);
       }
@@ -215,8 +221,7 @@ const PopupForm: React.FC<PopupFormProps> = ({
   return (
     <>
       {notification && <Notification>{notification}</Notification>}
-      {isSubmitting && <SpinnerComponent show={true} />}{" "}
-      {/* Show spinner while submitting */}
+      {isSubmitting && <SpinnerComponent show={true} />}
       <Backdrop onClick={onClose} />
       <PopupContainer>
         <CloseButton onClick={onClose}>✖</CloseButton>
@@ -229,7 +234,7 @@ const PopupForm: React.FC<PopupFormProps> = ({
               <FormWrapper>
                 <form noValidate onSubmit={handleSubmit}>
                   <FormField>
-                    <InputLabel>{firstName}</InputLabel>
+                    <InputLabel>{firstNameLabel}</InputLabel>
                     <Input
                       type="text"
                       name="firstName"
@@ -242,7 +247,7 @@ const PopupForm: React.FC<PopupFormProps> = ({
                     )}
                   </FormField>
                   <FormField>
-                    <InputLabel>{lastName}</InputLabel>
+                    <InputLabel>{lastNameLabel}</InputLabel>
                     <Input
                       type="text"
                       name="lastName"
@@ -255,7 +260,7 @@ const PopupForm: React.FC<PopupFormProps> = ({
                     )}
                   </FormField>
                   <FormField>
-                    <InputLabel>{company}</InputLabel>
+                    <InputLabel>{companyLabel}</InputLabel>
                     <Input
                       type="text"
                       name="company"
@@ -264,8 +269,38 @@ const PopupForm: React.FC<PopupFormProps> = ({
                       onBlur={handleBlur}
                     />
                   </FormField>
+
+                  {invitedByLabel && (
+                    <FormField>
+                      <InputLabel>{invitedByLabel}</InputLabel>
+                      <Input
+                        type="text"
+                        name="invitedBy"
+                        value={formValues.invitedBy}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                      />
+                    </FormField>
+                  )}
+
+                  {roleLabel && (
+                    <FormField>
+                      <InputLabel>{roleLabel}</InputLabel>
+                      <Input
+                        type="text"
+                        name="role"
+                        value={formValues.role}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                      />
+                      {errors.role && (
+                        <p style={{ color: "red" }}>{errors.role}</p>
+                      )}
+                    </FormField>
+                  )}
+
                   <FormField>
-                    <InputLabel>{phone}</InputLabel>
+                    <InputLabel>{phoneLabel}</InputLabel>
                     <Input
                       type="text"
                       name="phone"
@@ -278,7 +313,7 @@ const PopupForm: React.FC<PopupFormProps> = ({
                     )}
                   </FormField>
                   <FormField>
-                    <InputLabel>{email}</InputLabel>
+                    <InputLabel>{emailLabel}</InputLabel>
                     <Input
                       type="email"
                       name="email"
@@ -299,32 +334,29 @@ const PopupForm: React.FC<PopupFormProps> = ({
                         onChange={handleChange}
                         onBlur={handleBlur}
                       />
-                      <span>{agreement}</span>
+                      {agreementLabel}
                     </CheckboxLabel>
                     {errors.agreement && (
                       <p style={{ color: "red" }}>{errors.agreement}</p>
                     )}
                   </FormField>
-                  <FormField>
-                    <SubmitButton
-                      type="submit"
-                      value={submitText}
-                      disabled={isSubmitting || !isFormValid}
-                    />
-                  </FormField>
+
+                  <SubmitButton type="submit" disabled={!isFormValid}>
+                    {submitText}
+                  </SubmitButton>
                 </form>
               </FormWrapper>
             </Column>
-            <ImageColumn>
-              <ImageWrap>
-                <Thumbnail
-                  src={sanityUrlFor(thumbnail).url()}
-                  alt="Thumbnail"
-                  width={200}
-                  height={200}
-                />
-              </ImageWrap>
-            </ImageColumn>
+            {thumbnail && (
+              <ImageColumn>
+                <ImageWrap>
+                  <Thumbnail
+                    src={sanityUrlFor(thumbnail).width(500).url()}
+                    alt="Thumbnail"
+                  />
+                </ImageWrap>
+              </ImageColumn>
+            )}
           </Row>
         </PopupContent>
       </PopupContainer>

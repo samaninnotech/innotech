@@ -242,6 +242,24 @@ export function isEventsLastUpdatesSection(
   return sectionMatchType(section, "events_last_updates_section");
 }
 
+export interface EventRegistrationCardType extends SanityElement {
+  title: string;
+  images: string[];
+  buttonLink: CustomLink;
+  type: string;
+}
+
+export interface EventRegistrationSection extends Section {
+  header: string;
+  eventRegistrationCards: EventRegistrationCardType[];
+}
+
+export function isEventRegistrationSection(
+  section: Section,
+): section is EventRegistrationSection {
+  return sectionMatchType(section, "event_registration_section");
+}
+
 /* Consultation Section*/
 export interface ConsultationSection extends Section {
   consultationSwiperSlides: ConsultationSwiperSlideType[];
@@ -712,6 +730,8 @@ export interface PopupForm extends Section {
   firstNameLabel: string;
   lastNameLabel: string;
   companyLabel: string;
+  invitedByLabel?: string;
+  roleLabel?: string;
   phoneLabel: string;
   emailLabel: string;
   agreementLabel: string;

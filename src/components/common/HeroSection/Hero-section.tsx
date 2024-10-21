@@ -231,12 +231,12 @@ const HeroLinkComponent: FC<HeroLinkProps> = ({ heroLink }) => {
           <PopupForm
             onClose={togglePopup}
             header={link.popupForm.header}
-            firstName={link.popupForm.firstNameLabel}
-            lastName={link.popupForm.lastNameLabel}
-            company={link.popupForm.companyLabel}
-            phone={link.popupForm.phoneLabel}
-            email={link.popupForm.emailLabel}
-            agreement={link.popupForm.agreementLabel}
+            firstNameLabel={link.popupForm.firstNameLabel}
+            lastNameLabel={link.popupForm.lastNameLabel}
+            companyLabel={link.popupForm.companyLabel}
+            phoneLabel={link.popupForm.phoneLabel}
+            emailLabel={link.popupForm.emailLabel}
+            agreementLabel={link.popupForm.agreementLabel}
             submitText={link.popupForm.submitText}
             thumbnail={link.popupForm.thumbnail}
             brochure={link.popupForm.brochure}
