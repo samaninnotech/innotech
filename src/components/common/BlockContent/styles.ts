@@ -6,7 +6,7 @@ import { ImageAlignment, ImageSize } from "./ImageBlock";
 
 /* Block Parts */
 export const Title = styled.h2`
-  text-align: center;
+  text-align: left;
 `;
 
 export const Subtitle = styled.h3`

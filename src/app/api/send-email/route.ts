@@ -3,7 +3,6 @@ import nodemailer from "nodemailer";
 
 export async function POST(req: Request) {
   const { email, brochureUrl, senderEmail, senderPassword } = await req.json();
-
   if (!email || !brochureUrl || !senderEmail || !senderPassword) {
     return new Response(
       JSON.stringify({

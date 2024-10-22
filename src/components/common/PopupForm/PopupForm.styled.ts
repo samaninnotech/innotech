@@ -13,8 +13,9 @@ export const Backdrop = styled.div`
   overflow: hidden;
 `;
 
-export const PopupContainer = styled.div`
-  width: 100%;
+export const PopupContainer = styled.div<{ hasThumbnail: boolean }>`
+  width: ${({ hasThumbnail }) =>
+    hasThumbnail ? "100%" : "60%"}; // Use percentage if no thumbnail
   position: fixed;
   top: 50%;
   left: 50%;
@@ -28,26 +29,31 @@ export const PopupContainer = styled.div`
   max-height: calc(100% - 5rem);
   overflow-y: auto;
   margin: 5rem 0;
+
+  // Media rules for max-width when thumbnail exists
   ${mediaRules.sm} {
-    max-width: 576px;
+    max-width: ${({ hasThumbnail }) => (hasThumbnail ? "576px" : "80%")};
   }
   ${mediaRules.md} {
-    max-width: 720px;
+    max-width: ${({ hasThumbnail }) => (hasThumbnail ? "720px" : "80%")};
   }
   ${mediaRules.lg} {
-    max-width: 940px;
+    max-width: ${({ hasThumbnail }) => (hasThumbnail ? "940px" : "80%")};
   }
 `;
 
-export const PopupContent = styled.div`
+export const PopupContent = styled.div<{ fullWidth: boolean }>`
   color: black;
   display: flex;
+  justify-content: center;
+  width: ${({ fullWidth }) => (fullWidth ? "100%" : "auto")};
 `;
 
-export const Row = styled.div`
+export const Row = styled.div<{ fullWidth: boolean }>`
   display: flex;
   flex-wrap: wrap;
   margin: 0 -15px;
+  width: ${({ fullWidth }) => (fullWidth ? "80%" : "auto")};
 `;
 
 export const Column = styled.div`

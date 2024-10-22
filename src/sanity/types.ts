@@ -244,6 +244,7 @@ export function isEventsLastUpdatesSection(
 
 export interface EventRegistrationCardType extends SanityElement {
   title: string;
+  subtitle: string;
   images: string[];
   buttonLink: CustomLink;
   type: string;
@@ -461,6 +462,16 @@ export interface JobOfferType extends SanityElement {
   type: string;
   description: string;
   link: CustomLink;
+}
+
+/* Job Application*/
+export interface JobApplication extends Section {
+  candidateButton: CustomLink;
+  returnButton: CustomLink;
+}
+
+export function isJobApplication(section: Section): section is JobApplication {
+  return sectionMatchType(section, "job_application");
 }
 
 /* Page Top Banner*/

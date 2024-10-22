@@ -23,6 +23,7 @@ const EventRegistrationsSection: React.FC<EventRegistrationsSectionProps> = ({
         <EventRegistrationCard
           key={index}
           title={event.title}
+          subtitle={event.subtitle}
           images={event.images}
           buttonLink={event.buttonLink}
           type={event.type}

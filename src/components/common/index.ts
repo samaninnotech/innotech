@@ -16,6 +16,7 @@ import GenericLink from "./Generic-Link";
 import GetInTouchSection from "./GetInTouchSection";
 import HeroSectionComponent from "./HeroSection";
 import InfoSection from "./InfoSection";
+import JobApplication from "./JobApplication";
 import JobOfferSection from "./JobOfferSection";
 import OnlyTextSection from "./OnlyTextSection";
 import OurCompanySection from "./OurCompanySection/OurCompanySection";
@@ -46,6 +47,7 @@ export {
   HeroSectionComponent,
   HomePageTopPost,
   InfoSection,
+  JobApplication,
   JobOfferSection,
   OnlyTextSection,
   OurCompanySection,

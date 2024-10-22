@@ -40,6 +40,7 @@ import {
   isHeroSection,
   isHomePageTopPost,
   isInfoSection,
+  isJobApplication,
   isJobOfferSection,
   isOnlyTextSection,
   isOurCompanySection,
@@ -55,6 +56,7 @@ import {
   isVideoSection,
   isVisionsSection,
   isYoutubeSection,
+  JobApplication,
   JobOfferSection,
   OnlyTextSection,
   OurCompanySection,
@@ -86,6 +88,7 @@ import {
   HeroSectionComponent,
   HomePageTopPost as HomePageTopPostComponent,
   InfoSection as InfoSectionComponent,
+  JobApplication as JobApplicationComponent,
   JobOfferSection as JobOfferSectionComponent,
   OnlyTextSection as OnlyTextSectionComponent,
   OurCompanySection as OurCompanySectionComponent,
@@ -188,6 +191,8 @@ const PageBuilder: FC<PageBuilderProps> = async ({ sections, locale }) => {
       renderedSections.push(buildFAQSection(s));
     } else if (isEventRegistrationSection(s)) {
       renderedSections.push(buildEventRegistrationSection(s));
+    } else if (isJobApplication(s)) {
+      renderedSections.push(buildJobApplication(s));
     }
   }
 
@@ -601,5 +606,15 @@ const buildFAQSection = (s: FAQSection) => {
       faqList={faqList}
       background={background}
     ></FAQSectionComponent>
+  );
+};
+
+const buildJobApplication = (s: JobApplication) => {
+  const { candidateButton, returnButton } = s;
+  return (
+    <JobApplicationComponent
+      candidateButton={candidateButton}
+      returnButton={returnButton}
+    />
   );
 };

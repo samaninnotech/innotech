@@ -78,7 +78,6 @@ const PopupForm: React.FC<PopupFormProps> = ({
   onClose,
 }) => {
   const brochureUrl = brochure?.file?.url || null;
-  console.log(roleLabel, "jujej");
 
   const [formValues, setFormValues] = useState<FormValues>({
     firstName: "",
@@ -130,10 +129,7 @@ const PopupForm: React.FC<PopupFormProps> = ({
       newErrors.agreement = "You must agree to the terms.";
     }
 
-    if (name === "role" && !value) {
-      newErrors.role = "Role is required.";
-    }
-
+    // Optional: Do not validate invitedBy
     return newErrors;
   };
 
@@ -223,10 +219,10 @@ const PopupForm: React.FC<PopupFormProps> = ({
       {notification && <Notification>{notification}</Notification>}
       {isSubmitting && <SpinnerComponent show={true} />}
       <Backdrop onClick={onClose} />
-      <PopupContainer>
+      <PopupContainer hasThumbnail={!!thumbnail}>
         <CloseButton onClick={onClose}>✖</CloseButton>
-        <PopupContent tabIndex={0}>
-          <Row>
+        <PopupContent tabIndex={0} fullWidth={!thumbnail}>
+          <Row fullWidth={!thumbnail}>
             <Column>
               <TextColumn>
                 <p>{header}</p>
@@ -293,9 +289,6 @@ const PopupForm: React.FC<PopupFormProps> = ({
                         onChange={handleChange}
                         onBlur={handleBlur}
                       />
-                      {errors.role && (
-                        <p style={{ color: "red" }}>{errors.role}</p>
-                      )}
                     </FormField>
                   )}
 
@@ -341,9 +334,11 @@ const PopupForm: React.FC<PopupFormProps> = ({
                     )}
                   </FormField>
 
-                  <SubmitButton type="submit" disabled={!isFormValid}>
-                    {submitText}
-                  </SubmitButton>
+                  <SubmitButton
+                    type="submit"
+                    disabled={isSubmitting || !isFormValid}
+                    value={submitText}
+                  ></SubmitButton>
                 </form>
               </FormWrapper>
             </Column>
@@ -353,6 +348,8 @@ const PopupForm: React.FC<PopupFormProps> = ({
                   <Thumbnail
                     src={sanityUrlFor(thumbnail).width(500).url()}
                     alt="Thumbnail"
+                    width={200}
+                    height={200}
                   />
                 </ImageWrap>
               </ImageColumn>

@@ -60,6 +60,7 @@ const buildPageDeconstructionQUery = (locale: string) => `{
     _type == 'tick_items_section' => ${buildTickItemsSectionQuery(locale, fallbackLocale)},
     _type == 'get_in_touch_section' => ${buildGetInTouchSectionQuery(locale, fallbackLocale)},
     _type == 'job_offer_section' => ${buildJobOfferSectionQuery(locale, fallbackLocale)},
+    _type == 'job_application' => ${buildJobApplicationQuery(locale)},
     _type == 'blog_header_section' => ${buildBlogHeaderSectionQuery(locale)},
     _type == 'blog_last_updates_section' => ${buildBlogLastUpdatesSectionQuery(locale)},
     _type == 'carousel' => ${buildCarouselQuery(locale)},
@@ -481,6 +482,13 @@ const buildJobOfferSectionQuery = (locale: string, fallbackLocale: string) => {
   }`;
 };
 
+const buildJobApplicationQuery = (locale: string) => {
+  return `{
+    'candidateButton': candidate_label${buildCustomLinkQuery(locale)},
+    'returnButton': return_label${buildCustomLinkQuery(locale)}
+  }`;
+};
+
 const buildCarouselQuery = (locale: string) => {
   return `{
     'title': coalesce(title.${locale}, title.${fallbackLocale}),
@@ -899,6 +907,7 @@ const buildEventRegistrationSectionQuery = (locale: string) => {
   {
     _key,
     'title': coalesce(title.${locale}, title.${fallbackLocale}),
+    'subtitle': coalesce(subtitle.${locale}, subtitle.${fallbackLocale}),
     'registration_deadline': registration_deadline,
     'images': images[].asset->url,
     'type': type,

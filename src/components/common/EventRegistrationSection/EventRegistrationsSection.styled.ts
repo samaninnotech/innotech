@@ -12,7 +12,7 @@ export const Header = styled.h2`
   padding-right: 1rem;
   text-align: center;
   margin: auto;
-  margin-bottom: 4rem;
+  margin-bottom: 1rem;
   font-size: 2rem;
   font-weight: 600;
   color: var(--black-color);

@@ -1,20 +1,58 @@
 import Link from "@/i18n/Link";
+import { mediaRules } from "@/themes/media-breakpoints";
 import Image from "next/image";
 import styled from "styled-components";
 export const CardContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px;
   margin-bottom: 20px;
-  background-color: #f9f9f9;
   box-shadow: var(--wp--preset--shadow--natural);
+  width: 100%;
+`;
+export const InnerContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background-color: #eeeeee;
+
+  flex-direction: column;
+  margin: 0 auto;
+  ${mediaRules.sm} {
+    max-width: 720px;
+    flex-direction: row;
+  }
+  ${mediaRules.md} {
+    max-width: 940px;
+    flex-direction: row;
+  }
+  ${mediaRules.lg} {
+    max-width: 1170px;
+    flex-direction: row;
+  }
+`;
+export const LeftSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 20px;
+  flex: 1;
 `;
 
 export const LogosContainer = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  justify-content: center;
+  ${mediaRules.sm} {
+    justify-content: flex-start;
+  }
+  ${mediaRules.md} {
+    justify-content: flex-start;
+  }
+  ${mediaRules.lg} {
+    justify-content: flex-start;
+  }
 `;
 
 export const Logo = styled(Image)`
@@ -32,37 +70,57 @@ export const PlusSign = styled.span`
 
 export const Title = styled.h4`
   font-size: 1.5rem;
-  margin-top: 10px;
+  margin: 10px 0;
   color: #333;
+  font-weight: 600;
 `;
 
+export const Subtitle = styled.div`
+  font-size: 0.9rem;
+  margin: 10px 0;
+  color: var(--text-light-color);
+  font-weight: 600;
+`;
 export const ButtonWrapper = styled.div<{ isCertification: boolean }>`
   margin-top: 1rem;
-  width: 100%;
+  margin-bottom: 1rem;
+
   display: flex;
   justify-content: center;
+  flex: 1;
+  ${mediaRules.sm} {
+    margin-bottom: 0rem;
+  }
+  ${mediaRules.md} {
+    margin-bottom: 0rem;
+  }
+  ${mediaRules.lg} {
+    margin-bottom: 0rem;
+  }
 `;
 
 export const ButtonLink = styled(Link)<{ isCertification: boolean }>`
   display: inline-block;
   padding: 1rem 2rem;
   text-align: center;
-  color: white;
+  color: white; /* Ensure the text is white */
   border-radius: 5px;
-  background: linear-gradient(90deg, #47689c 20%, #c4a22a 50%);
+  background: ${({ isCertification }) =>
+    isCertification
+      ? "var(--innotech-color)"
+      : "linear-gradient(90deg, #47689c 20%, #c4a22a 50%)"};
   transition: background-position 1s;
 
   ${({ isCertification }) =>
     isCertification
-      ? `
-          width: auto;
-        `
-      : `
-          width: 100%;
-        `}
+      ? `width: auto;` // Adjust width if certification
+      : `width: 100%;`}
 
   &:hover {
-    background: linear-gradient(90deg, #c4a22a 20%, #47689c 50%);
+    background: ${({ isCertification }) =>
+      isCertification
+        ? "var(--innotech-color)"
+        : "linear-gradient(90deg, #c4a22a 20%, #47689c 50%)"}; /* Darker red on hover for certification */
     text-decoration: none !important;
   }
 `;
