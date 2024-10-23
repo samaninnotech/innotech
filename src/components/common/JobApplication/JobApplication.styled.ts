@@ -1,67 +1,54 @@
-import Link from "@/i18n/Link";
+import { mediaRules } from "@/themes/media-breakpoints";
 import styled from "styled-components";
 
-type JobOfferContainerProps = {
-  isEven: boolean;
-};
-
-export const JobOfferContainer = styled.div<JobOfferContainerProps>`
+export const Container = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   padding: 20px;
   margin-bottom: 20px;
-  background-color: ${({ isEven }) => (isEven ? "#e3e3e3" : "transparent")};
-  box-shadow: var(--wp--preset--shadow--natural);
+  width: 100%;
+  ${mediaRules.xsm} {
+    max-width: 576px;
+  }
+  ${mediaRules.sm} {
+    max-width: 720px;
+  }
+  ${mediaRules.md} {
+    max-width: 940px;
+  }
+  ${mediaRules.lg} {
+    max-width: 1170px;
+  }
 `;
-
-export const JobInfo = styled.div`
-  flex: 1;
-  padding: 2rem;
-`;
-
-export const JobTitle = styled.h4`
-  font-size: 1.25rem;
-  margin-bottom: 5px;
-  color: #333;
-`;
-
-export const JobType = styled.span`
-  font-size: 1rem;
-  color: #777;
-`;
-
-export const JobDescription = styled.div`
-  flex: 2;
-  font-size: 1rem;
-  color: #696969;
-  line-height: 1.74;
-  padding: 1rem;
-`;
-
-export const JobButton = styled.div`
-  flex: 1;
-  text-align: right;
-  padding-right: 2rem;
-`;
-
-export const ButtonLink = styled(Link)`
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: transparent;
-  color: #177aa9;
-  text-decoration: none;
-  border-radius: 5px;
-  border: 1px solid #cec8c8;
-  transition: background-color 0.3s ease;
-  &:hover {
-    background-color: #177aa9;
-    text-decoration: none;
-    color: #fff;
+export const ButtonsContainer = styled.div`
+  display: flex;
+  flex: 0 0 100%;
+  text-align: left;
+  margin-bottom: 20px;
+  color: var(--text-black-color);
+  flex-direction: column;
+  ${mediaRules.sm} {
+    flex: 0 0 60%;
+    flex-direction: row;
+  }
+  ${mediaRules.md} {
+    flex: 0 0 60%;
+    flex-direction: row;
+  }
+  ${mediaRules.lg} {
+    flex: 0 0 55%;
+    flex-direction: row;
   }
 `;
 
-export const ButtonText = styled.span`
-  font-size: 1rem;
-  font-weight: 600;
+export const LeftBox = styled.div`
+  flex: 0 0 25%;
+
+  ${mediaRules.sm} {
+    display: none;
+  }
+  ${mediaRules.xsm} {
+    display: none;
+  }
 `;

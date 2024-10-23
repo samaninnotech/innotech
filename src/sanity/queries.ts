@@ -204,7 +204,7 @@ const buildCustomLinkQuery = (locale: string) =>
       'emailLabel': coalesce(popupForm.emailLabel.${locale}, popupForm.emailLabel.${fallbackLocale}),
       'agreementLabel': coalesce(popupForm.agreementLabel.${locale}, popupForm.agreementLabel.${fallbackLocale}),
       'submitText': coalesce(popupForm.submitText.${locale}, popupForm.submitText.${fallbackLocale}),
-      'thumbnail': popupForm.thumbnail.asset->url, // Retrieves the URL of the thumbnail image
+      'thumbnail': popupForm.thumbnail.asset->url,
       'brochure': popupForm.brochure->{
         'title': coalesce(title.${locale}, title.${fallbackLocale}),
         'description': coalesce(description.${locale}, description.${fallbackLocale}),
@@ -214,6 +214,23 @@ const buildCustomLinkQuery = (locale: string) =>
       },
       'senderEmail': popupForm.senderEmail, 
       'senderPassword': popupForm.senderPassword 
+    }
+  },
+  linkType == 'JOB_POPUP_FORM' => {
+    'jobPopupForm': {
+      'header': coalesce(jobPopupForm.header.${locale}, jobPopupForm.header.${fallbackLocale}),
+      'subtitle': coalesce(jobPopupForm.subtitle.${locale}, jobPopupForm.subtitle.${fallbackLocale}),
+      'firstNameLabel': coalesce(jobPopupForm.firstNameLabel.${locale}, jobPopupForm.firstNameLabel.${fallbackLocale}),
+      'lastNameLabel': coalesce(jobPopupForm.lastNameLabel.${locale}, jobPopupForm.lastNameLabel.${fallbackLocale}),
+      'emailLabel': coalesce(jobPopupForm.emailLabel.${locale}, jobPopupForm.emailLabel.${fallbackLocale}),
+      'phoneLabel': coalesce(jobPopupForm.phoneLabel.${locale}, jobPopupForm.phoneLabel.${fallbackLocale}),
+      'presentationLabel': coalesce(jobPopupForm.presentationLabel.${locale}, jobPopupForm.presentationLabel.${fallbackLocale}),
+      'fileUploadLabel': coalesce(jobPopupForm.fileUploadLabel.${locale}, jobPopupForm.fileUploadLabel.${fallbackLocale}),
+      'agreementLabel': coalesce(jobPopupForm.agreementLabel.${locale}, jobPopupForm.agreementLabel.${fallbackLocale}),
+      'submitText': coalesce(jobPopupForm.submitText.${locale}, jobPopupForm.submitText.${fallbackLocale}),
+      'senderEmail': jobPopupForm.senderEmail,
+      'senderPassword': jobPopupForm.senderPassword,
+      'receiverEmail': jobPopupForm.receiverEmail,
     }
   }
 }`;
@@ -484,8 +501,12 @@ const buildJobOfferSectionQuery = (locale: string, fallbackLocale: string) => {
 
 const buildJobApplicationQuery = (locale: string) => {
   return `{
-    'candidateButton': candidate_label${buildCustomLinkQuery(locale)},
-    'returnButton': return_label${buildCustomLinkQuery(locale)}
+      'candidate_label': candidate_label${buildCustomLinkQuery(locale)},
+      'candidate_button_color': candidate_button_color,
+      'candidate_button_text_color': candidate_button_text_color,
+      'return_label': return_label${buildCustomLinkQuery(locale)},
+      'return_button_color': return_button_color,
+      'return_button_text_color': return_button_text_color
   }`;
 };
 

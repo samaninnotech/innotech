@@ -610,11 +610,22 @@ const buildFAQSection = (s: FAQSection) => {
 };
 
 const buildJobApplication = (s: JobApplication) => {
-  const { candidateButton, returnButton } = s;
+  const {
+    candidate_label,
+    candidate_button_color,
+    candidate_button_text_color,
+    return_label,
+    return_button_color,
+    return_button_text_color,
+  } = s;
   return (
     <JobApplicationComponent
-      candidateButton={candidateButton}
-      returnButton={returnButton}
+      candidate_label={candidate_label}
+      candidate_button_color={candidate_button_color}
+      candidate_button_text_color={candidate_button_text_color}
+      return_label={return_label}
+      return_button_color={return_button_color}
+      return_button_text_color={return_button_text_color}
     />
   );
 };

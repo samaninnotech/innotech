@@ -1,6 +1,5 @@
 "use client";
 
-import { sanityUrlFor } from "@/sanity/sanity-client";
 import React, { useState } from "react";
 import SpinnerComponent from "../Spinner";
 import {
@@ -10,8 +9,6 @@ import {
   Column,
   FormField,
   FormWrapper,
-  ImageColumn,
-  ImageWrap,
   Input,
   InputLabel,
   Notification,
@@ -20,73 +17,58 @@ import {
   Row,
   SubmitButton,
   TextColumn,
-  Thumbnail,
-} from "./PopupForm.styled";
+} from "./JobPopupForm.styled";
 
-type Brochure = {
-  title?: string | null;
-  description?: string | null;
-  file?: {
-    url: string;
-  } | null;
-};
-
-type PopupFormProps = {
+type JobPopupFormProps = {
   header: string;
+  subtitle: string;
   firstNameLabel: string;
   lastNameLabel: string;
-  companyLabel: string;
-  invitedByLabel?: string;
-  roleLabel?: string;
   phoneLabel: string;
   emailLabel: string;
+  presentationLabel: string;
+  fileUploadLabel: string;
   agreementLabel: string;
   submitText: string;
-  thumbnail?: string;
-  brochure?: Brochure;
   senderEmail: string;
   senderPassword: string;
+  receiverEmail: string;
   onClose: () => void;
 };
 
 type FormValues = {
   firstName: string;
   lastName: string;
-  company?: string;
-  invitedBy?: string;
-  role?: string;
   phone: string;
   email: string;
+  presentation: string;
+  cv: File | null;
   agreement: boolean;
 };
 
-const PopupForm: React.FC<PopupFormProps> = ({
+const JobPopupForm: React.FC<JobPopupFormProps> = ({
   header,
+  subtitle,
   firstNameLabel,
   lastNameLabel,
-  companyLabel,
-  invitedByLabel,
-  roleLabel,
   phoneLabel,
   emailLabel,
+  presentationLabel,
+  fileUploadLabel,
   agreementLabel,
   submitText,
-  thumbnail,
   senderEmail,
   senderPassword,
-  brochure,
+  receiverEmail,
   onClose,
 }) => {
-  const brochureUrl = brochure?.file?.url || null;
-
   const [formValues, setFormValues] = useState<FormValues>({
     firstName: "",
     lastName: "",
-    company: "",
-    invitedBy: "",
-    role: "",
     phone: "",
     email: "",
+    presentation: "",
+    cv: null,
     agreement: false,
   });
 
@@ -125,25 +107,17 @@ const PopupForm: React.FC<PopupFormProps> = ({
       }
     }
 
+    if (name === "presentation") {
+      if (!value) {
+        newErrors.presentation = "Presentation is required.";
+      }
+    }
+
     if (name === "agreement" && !value) {
       newErrors.agreement = "You must agree to the terms.";
     }
 
-    // Optional: Do not validate invitedBy
     return newErrors;
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, type, checked, value } = e.target;
-    setFormValues((prevValues) => ({
-      ...prevValues,
-      [name]: type === "checkbox" ? checked : value,
-    }));
-
-    setErrors((prevErrors) => {
-      const { [name]: removedError, ...restErrors } = prevErrors;
-      return restErrors;
-    });
   };
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -154,11 +128,37 @@ const PopupForm: React.FC<PopupFormProps> = ({
       ...newErrors,
     }));
   };
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, type, checked, value, files } = e.target;
+
+    setFormValues((prevValues) => ({
+      ...prevValues,
+      [name]:
+        type === "checkbox"
+          ? checked
+          : type === "file" && files
+            ? files[0]
+            : value,
+    }));
+
+    setErrors((prevErrors) => {
+      const { [name]: removedError, ...restErrors } = prevErrors;
+      return restErrors;
+    });
+  };
 
   const validateForm = () => {
     const validationErrors = Object.entries(formValues).reduce(
       (acc, [key, value]) => {
-        const newErrors = validateField(key, value);
+        // Skip validation for `cv` as it can be `File | null`
+        if (key === "cv") {
+          if (!value) {
+            return { ...acc, cv: "CV upload is required." };
+          }
+          return acc;
+        }
+
+        const newErrors = validateField(key, value as string | boolean); // Ensure only string or boolean is passed
         return { ...acc, ...newErrors };
       },
       {} as Record<string, string>,
@@ -168,6 +168,18 @@ const PopupForm: React.FC<PopupFormProps> = ({
     return Object.keys(validationErrors).length === 0;
   };
 
+  const handleFileUpload = (file: Blob) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result); // Resolve with base64 string
+      reader.onerror = (error) => {
+        console.error("File reading error:", error);
+        reject(error); // Reject the promise on error
+      };
+      reader.readAsDataURL(file); // Read the file as base64
+    });
+  };
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!validateForm()) return;
@@ -175,32 +187,81 @@ const PopupForm: React.FC<PopupFormProps> = ({
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("/api/send-brochure/", {
+      // Check if the file is defined and valid
+      if (!formValues.cv || !(formValues.cv instanceof File)) {
+        console.error("CV file is not defined or is not a valid File object.");
+        return;
+      }
+
+      // Convert the file to base64
+      const cvBase64 = await handleFileUpload(formValues.cv); // This should return the base64 string
+
+      const payload = {
+        cv: cvBase64, // Base64 representation of the file
+        fileName: formValues.cv.name, // Include the original file name
+        firstName: formValues.firstName,
+        lastName: formValues.lastName,
+        phone: formValues.phone,
+        email: formValues.email,
+        presentation: formValues.presentation,
+        senderEmail: senderEmail,
+        senderPassword: senderPassword,
+      };
+
+      console.log("Receiver Payload:", payload);
+
+      // Email to receiver
+      const receiverResponse = await fetch("/api/notify-marketing", {
         method: "POST",
+        body: JSON.stringify(payload),
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          email: formValues.email,
-          brochureUrl,
-          senderEmail,
-          senderPassword,
-        }),
       });
 
-      const result = await response.json();
-      if (response.ok) {
-        console.log(result.message);
-        setNotification(`Email sent successfully to ${formValues.email}.`);
+      if (!receiverResponse.ok) {
+        const errorDetails = await receiverResponse.text();
+        console.error("Receiver API error:", errorDetails);
+      }
+
+      // Prepare the user data for the second API call
+      const userPayload = {
+        email: formValues.email,
+        firstName: formValues.firstName,
+        lastName: formValues.lastName,
+        status: "Your desired status",
+        senderEmail: senderEmail,
+        senderPassword: senderPassword,
+      };
+
+      console.log("User Payload:", userPayload);
+
+      // Email to user
+      const userResponse = await fetch("/api/notify-applicanta", {
+        method: "POST",
+        body: JSON.stringify(userPayload),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!userResponse.ok) {
+        const errorDetails = await userResponse.text();
+        console.error("User API error:", errorDetails);
+      }
+
+      if (receiverResponse.ok && userResponse.ok) {
+        setNotification(`Emails sent successfully.`);
         setTimeout(() => {
           setNotification(null);
           onClose();
         }, 3000);
       } else {
-        console.error(result.message);
+        setNotification("Failed to send emails. Please try again.");
       }
     } catch (error) {
-      console.error("Error sending email:", error);
+      console.error("Error in handleSubmit:", error);
+      setNotification("An error occurred. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -219,10 +280,10 @@ const PopupForm: React.FC<PopupFormProps> = ({
       {notification && <Notification>{notification}</Notification>}
       {isSubmitting && <SpinnerComponent show={true} />}
       <Backdrop onClick={onClose} />
-      <PopupContainer hasThumbnail={!!thumbnail}>
+      <PopupContainer>
         <CloseButton onClick={onClose}>✖</CloseButton>
-        <PopupContent tabIndex={0} fullWidth={!thumbnail}>
-          <Row fullWidth={!thumbnail}>
+        <PopupContent tabIndex={0}>
+          <Row>
             <Column>
               <TextColumn>
                 <p>{header}</p>
@@ -256,43 +317,6 @@ const PopupForm: React.FC<PopupFormProps> = ({
                     )}
                   </FormField>
                   <FormField>
-                    <InputLabel>{companyLabel}</InputLabel>
-                    <Input
-                      type="text"
-                      name="company"
-                      value={formValues.company}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    />
-                  </FormField>
-
-                  {invitedByLabel && (
-                    <FormField>
-                      <InputLabel>{invitedByLabel}</InputLabel>
-                      <Input
-                        type="text"
-                        name="invitedBy"
-                        value={formValues.invitedBy}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                      />
-                    </FormField>
-                  )}
-
-                  {roleLabel && (
-                    <FormField>
-                      <InputLabel>{roleLabel}</InputLabel>
-                      <Input
-                        type="text"
-                        name="role"
-                        value={formValues.role}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                      />
-                    </FormField>
-                  )}
-
-                  <FormField>
                     <InputLabel>{phoneLabel}</InputLabel>
                     <Input
                       type="text"
@@ -319,41 +343,43 @@ const PopupForm: React.FC<PopupFormProps> = ({
                     )}
                   </FormField>
                   <FormField>
-                    <CheckboxLabel>
-                      <input
-                        type="checkbox"
-                        name="agreement"
-                        checked={formValues.agreement}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                      />
-                      {agreementLabel}
-                    </CheckboxLabel>
+                    <InputLabel>{presentationLabel}</InputLabel>
+                    <Input
+                      type="text"
+                      name="presentation"
+                      value={formValues.presentation}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+                    {errors.presentation && (
+                      <p style={{ color: "red" }}>{errors.presentation}</p>
+                    )}
+                  </FormField>
+                  <FormField>
+                    <InputLabel>{fileUploadLabel}</InputLabel>
+                    <Input type="file" name="cv" onChange={handleChange} />
+                    {errors.cv && <p style={{ color: "red" }}>{errors.cv}</p>}
+                  </FormField>
+                  <CheckboxLabel>
+                    <input
+                      type="checkbox"
+                      name="agreement"
+                      checked={formValues.agreement}
+                      onChange={handleChange}
+                    />
+                    {agreementLabel}
                     {errors.agreement && (
                       <p style={{ color: "red" }}>{errors.agreement}</p>
                     )}
-                  </FormField>
-
+                  </CheckboxLabel>
                   <SubmitButton
                     type="submit"
-                    disabled={isSubmitting || !isFormValid}
+                    disabled={!isFormValid}
                     value={submitText}
                   ></SubmitButton>
                 </form>
               </FormWrapper>
             </Column>
-            {thumbnail && (
-              <ImageColumn>
-                <ImageWrap>
-                  <Thumbnail
-                    src={sanityUrlFor(thumbnail).width(500).url()}
-                    alt="Thumbnail"
-                    width={200}
-                    height={200}
-                  />
-                </ImageWrap>
-              </ImageColumn>
-            )}
           </Row>
         </PopupContent>
       </PopupContainer>
@@ -361,4 +387,4 @@ const PopupForm: React.FC<PopupFormProps> = ({
   );
 };
 
-export default PopupForm;
+export default JobPopupForm;

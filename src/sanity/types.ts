@@ -22,12 +22,14 @@ export enum CustomLinkType {
   Internal = "INTERNAL",
   External = "EXTERNAL",
   PopupForm = "POPUP_FORM",
+  JobPopupForm = "JOB_POPUP_FORM",
 }
 
 export interface CustomLink extends SanityElement {
   label: string;
   linkType: CustomLinkType;
   popupForm: PopupForm;
+  jobPopupForm: JobPopupForm;
 }
 
 export enum DecoratedLinkType {
@@ -466,8 +468,12 @@ export interface JobOfferType extends SanityElement {
 
 /* Job Application*/
 export interface JobApplication extends Section {
-  candidateButton: CustomLink;
-  returnButton: CustomLink;
+  candidate_label: CustomLink;
+  candidate_button_color: string;
+  candidate_button_text_color: string;
+  return_label: CustomLink;
+  return_button_color: string;
+  return_button_text_color: string;
 }
 
 export function isJobApplication(section: Section): section is JobApplication {
@@ -753,8 +759,21 @@ export interface PopupForm extends Section {
   senderPassword: string;
 }
 
-export function isPopupForm(section: Section): section is PopupForm {
-  return sectionMatchType(section, "popup_form");
+/* Job  Pop Up Form*/
+export interface JobPopupForm extends Section {
+  header: string;
+  subtitle: string;
+  firstNameLabel: string;
+  lastNameLabel: string;
+  phoneLabel: string;
+  emailLabel: string;
+  presentationLabel: string;
+  fileUploadLabel: string;
+  agreementLabel: string;
+  submitText: string;
+  senderEmail: string;
+  senderPassword: string;
+  receiverEmail: string;
 }
 
 /* FAQ Section */
