@@ -201,30 +201,30 @@ const ContactSection: React.FC<ContactSectionProps> = ({
             <FormWrapper>
               <Form noValidate onSubmit={handleSubmit}>
                 <FirstRow>
-                <FormItem padding="20px">
-                  <Input
-                    type="text"
-                    name="firstName"
-                    value={formValues.firstName}
-                    onChange={handleChange}
-                    placeholder={firstNameLabel}
-                  />
-                  {errors.firstName && (
-                    <p style={{ color: "red" }}>{errors.firstName}</p>
-                  )}
-                </FormItem>
-                <FormItem>
-                  <Input
-                    type="text"
-                    name="lastName"
-                    value={formValues.lastName}
-                    onChange={handleChange}
-                    placeholder={lastNameLabel}
-                  />
-                  {errors.lastName && (
-                    <p style={{ color: "red" }}>{errors.lastName}</p>
-                  )}
-                </FormItem>
+                  <FormItem padding="20px">
+                    <Input
+                      type="text"
+                      name="firstName"
+                      value={formValues.firstName}
+                      onChange={handleChange}
+                      placeholder={firstNameLabel}
+                    />
+                    {errors.firstName && (
+                      <p style={{ color: "red" }}>{errors.firstName}</p>
+                    )}
+                  </FormItem>
+                  <FormItem>
+                    <Input
+                      type="text"
+                      name="lastName"
+                      value={formValues.lastName}
+                      onChange={handleChange}
+                      placeholder={lastNameLabel}
+                    />
+                    {errors.lastName && (
+                      <p style={{ color: "red" }}>{errors.lastName}</p>
+                    )}
+                  </FormItem>
                 </FirstRow>
                 <FormItem>
                   <Input

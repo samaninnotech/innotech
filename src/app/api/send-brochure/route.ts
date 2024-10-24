@@ -114,9 +114,9 @@ export async function POST(req: Request) {
     );
   }
 
-  const tenant = "49ed77d1-ffe4-4dc4-8a3b-b5060bf68ac9";
-  const clientId = "30a7e384-1ef6-4fb7-984e-06c497df8cf3";
-  const clientSecret = "0uB8Q~ijFBCoiAV-TbjlWfZlWupomj3JYs~bjcMz";
+  const tenant = process.env.TENANT_ID;
+  const clientId = process.env.CLIENT_ID;
+  const clientSecret = process.env.CLIENT_SECRET;
   const tokenUrl = `https://login.microsoftonline.com/${tenant}/oauth2/v2.0/token`;
 
   let accessToken: string;
@@ -127,8 +127,8 @@ export async function POST(req: Request) {
         "Content-Type": "application/x-www-form-urlencoded",
       },
       body: new URLSearchParams({
-        client_id: clientId,
-        client_secret: clientSecret,
+        client_id: clientId!,
+        client_secret: clientSecret!,
         scope: ".default",
         username: senderEmail,
         password: senderPassword,
