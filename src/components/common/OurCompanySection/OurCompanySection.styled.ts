@@ -123,11 +123,10 @@ export const AccordionTitle = styled.h6<{ active: boolean }>`
 `;
 
 export const AccordionIcon = styled(SlArrowDown)<{ active: boolean }>`
-  transition:
-    transform 0.4s ease,
-    color 0.4s ease; /* Smooth transform and color transition */
-  ${({ active }) => active && `transform: rotate(180deg);`}
-  color: ${({ active }) => (active ? "#fff" : "#333")};
+  transition: transform 0.4s ease;
+  transform: ${({ active }) => (active ? "rotate(180deg)" : "rotate(0deg)")};
+  color: ${({ active }) =>
+    active ? "#000" : "#888"}; /* Adjust colors as needed */
 `;
 
 export const AccordionContent = styled.div<{ active: boolean }>`

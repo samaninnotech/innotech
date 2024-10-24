@@ -1,40 +1,26 @@
-import fetch from "node-fetch";
 import nodemailer from "nodemailer";
 
 export async function POST(req: Request) {
-  // Parse the incoming JSON request body
-  const { cv, receiverEmail, senderEmail, senderPassword } = await req.json();
-  console.log(cv, "hghg");
+  // Get the FormData from the request
+  const formData = await req.formData();
+  const cv = formData.get("cv") as File; // 'cv' field in FormData
+  const receiverEmail = formData.get("receiverEmail") as string;
+  const senderEmail = formData.get("senderEmail") as string;
+  const senderPassword = formData.get("senderPassword") as string;
+
   // Validate required fields
   if (!cv || !receiverEmail || !senderEmail || !senderPassword) {
     return new Response(
       JSON.stringify({
-        message:
-          "CV URL, receiver email, sender email, and password are required.",
+        message: "CV, receiver email, sender email, and password are required.",
       }),
-      {
-        status: 400,
-      },
+      { status: 400 },
     );
   }
 
-  let cvBuffer: Buffer;
-  try {
-    // Fetch the CV from the provided URL
-    const response = await fetch(cv);
-    if (!response.ok) {
-      throw new Error(`Failed to fetch CV: ${response.statusText}`);
-    }
-
-    // Convert the fetched CV to a Buffer
-    const arrayBuffer = await response.arrayBuffer();
-    cvBuffer = Buffer.from(arrayBuffer);
-  } catch (error) {
-    console.error("Error fetching CV:", error);
-    return new Response(JSON.stringify({ message: "Error fetching CV." }), {
-      status: 500,
-    });
-  }
+  // Convert the file to a buffer
+  const cvBuffer = await cv.arrayBuffer();
+  const cvBufferData = Buffer.from(cvBuffer);
 
   // Create a transporter for sending emails
   const transporter = nodemailer.createTransport({
@@ -52,11 +38,11 @@ export async function POST(req: Request) {
     from: senderEmail,
     to: receiverEmail,
     subject: "New Job Application Received",
-    text: `A new job application has been received. The CV is attached.`,
+    text: `A new job application has been submitted.`,
     attachments: [
       {
-        filename: "application_cv.pdf", // You can set the filename based on your requirements
-        content: cvBuffer,
+        filename: cv.name, // use the original filename
+        content: cvBufferData, // send the CV file as an attachment
       },
     ],
   };
@@ -65,11 +51,11 @@ export async function POST(req: Request) {
   try {
     await transporter.sendMail(mailOptions);
     return new Response(
-      JSON.stringify({ message: "Notification email sent successfully!" }),
+      JSON.stringify({ message: "Email sent successfully." }),
       { status: 200 },
     );
   } catch (error) {
-    console.error("Error sending notification email:", error);
+    console.error("Error sending email:", error);
     return new Response(JSON.stringify({ message: "Error sending email." }), {
       status: 500,
     });

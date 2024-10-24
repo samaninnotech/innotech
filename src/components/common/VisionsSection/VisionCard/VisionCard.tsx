@@ -15,16 +15,11 @@ type VisionCardProps = {
   text: string;
 };
 
-const VisionCard: React.FC<VisionCardProps> = ({
-  imgSrc,
-  imgAlt,
-  title,
-  text,
-}) => {
+const VisionCard: React.FC<VisionCardProps> = ({ imgSrc, title, text }) => {
   return (
     <CardWrapper>
       <ImageWrapper>
-        <VisionImage src={imgSrc} alt={imgAlt} width={700} height={500} />
+        <VisionImage src={imgSrc} alt={"visioncard"} width={700} height={500} />
       </ImageWrapper>
       <ContentWrapper>
         <Title>{title}</Title>

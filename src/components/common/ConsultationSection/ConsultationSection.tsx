@@ -4,7 +4,6 @@ import { FC } from "react";
 import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
-import ConsultationSwiperSlide from "../ConsultationSwiperSlide";
 import {
   Column,
   PaginationContainer,
@@ -13,6 +12,7 @@ import {
   Spacer,
   SwiperContainer,
 } from "./ConsultationSection.styled";
+import ConsultationSwiperSlide from "./ConsultationSwiperSlide";
 
 type ConsultationSectionProps = {
   consultationSwiperSlides: ConsultationSwiperSlideType[];

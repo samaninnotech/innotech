@@ -43,31 +43,31 @@ const VideoSection: React.FC<VideoSectionProps> = ({
     <Wrapper>
       <CentralImage
         src={sanityUrlFor(centralImage).url()}
-        alt=""
+        alt="Center"
         width={500}
         height={250}
       />
       <LeftTopImage
         src={sanityUrlFor(leftTopImage).url()}
-        alt=""
+        alt="LeftTop"
         width={150}
         height={150}
       />
       <RightTopImage
         src={sanityUrlFor(rightTopImage).url()}
-        alt=""
+        alt="RightTop"
         width={150}
         height={150}
       />
       <LeftBottomImage
         src={sanityUrlFor(leftBottomImage).url()}
-        alt=""
+        alt="LeftBottom"
         width={150}
         height={150}
       />
       <RightBottomImage
         src={sanityUrlFor(rightBottomImage).url()}
-        alt=""
+        alt="RightBottom"
         width={150}
         height={150}
       />

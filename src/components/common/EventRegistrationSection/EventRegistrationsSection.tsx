@@ -1,7 +1,7 @@
 "use client";
 import { EventRegistrationCardType } from "@/sanity/types";
 import React from "react";
-import EventRegistrationCard from "../EventRegistrationCard/EventRegistrationCard";
+import EventRegistrationCard from "./EventRegistrationCard/EventRegistrationCard";
 import {
   EventRegistrationsContainer,
   Header,

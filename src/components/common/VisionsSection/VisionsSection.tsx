@@ -1,7 +1,7 @@
 "use client";
 import { VisionCardType } from "@/sanity/types";
 import React from "react";
-import VisionCard from "../VisionCard";
+import VisionCard from "./VisionCard";
 import {
   GridWrapper,
   Heading,

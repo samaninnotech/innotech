@@ -1,13 +1,13 @@
 "use client";
 import { InfoBlockType } from "@/sanity/types";
 import React from "react";
-import InfoBlock from "../InfoBlock";
 import {
   GridWrapper,
   HeaderContainer,
   InfoSectionContainer,
   SectionHeader,
 } from "./Info-section.styled";
+import InfoBlock from "./InfoBlock";
 
 interface InfoSectionProps {
   header: string;

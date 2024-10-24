@@ -3,7 +3,7 @@ import { SolutionCardType } from "@/sanity/types";
 import { PortableText } from "@portabletext/react";
 import { FC } from "react";
 import components from "../BlockContent/components";
-import SolutionCard from "../SolutionCard/SolutionCard";
+import SolutionCard from "./SolutionCard/SolutionCard";
 import {
   CardsContainer,
   Container,

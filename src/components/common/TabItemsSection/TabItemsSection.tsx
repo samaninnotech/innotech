@@ -1,7 +1,7 @@
 "use client";
 import { PortableText } from "@portabletext/react";
 import React, { useState } from "react";
-import TabItem from "../TabItem";
+import TabItem from "./TabItem";
 import {
   ContentHeading,
   ContentText,

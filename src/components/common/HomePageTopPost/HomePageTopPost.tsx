@@ -24,7 +24,7 @@ export const HomePageTopPost: React.FC<HomePageTopPostProps> = ({
       <ColumnContainer>
         <div>
           <Spacer />
-          <Heading align="center">
+          <Heading>
             <PortableText value={heading} components={components} />
           </Heading>
         </div>

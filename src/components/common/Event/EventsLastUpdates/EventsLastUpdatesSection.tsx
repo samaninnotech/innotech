@@ -2,7 +2,7 @@
 // EventsSection.tsx
 import { Event as EventType } from "@/sanity/types";
 import { FC } from "react";
-import Event from "../Event";
+import Event from "..";
 import {
   EventList,
   EventsSectionContainer,

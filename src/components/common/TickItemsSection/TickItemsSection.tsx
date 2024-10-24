@@ -1,7 +1,7 @@
 "use client";
 import { TickItemType } from "@/sanity/types";
 import React from "react";
-import TickItem from "../TickItem";
+import TickItem from "./TickItem";
 import {
   HeaderContainer,
   ItemsContainer,

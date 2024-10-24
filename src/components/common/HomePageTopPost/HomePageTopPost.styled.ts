@@ -74,10 +74,12 @@ export const Spacer = styled.div`
   height: 20px; /* Adjust spacer height as needed */
 `;
 
-export const Heading = styled.div<{ align: string }>`
-  text-align: ${({ align }) => align};
+export const Heading = styled.div`
   animation: ${moveUp} 1s ease-out;
   z-index: 2; /* Ensure content is above the overlay */
+  h2 {
+    text-align: center !important;
+  }
 `;
 
 export const Separator = styled.div`

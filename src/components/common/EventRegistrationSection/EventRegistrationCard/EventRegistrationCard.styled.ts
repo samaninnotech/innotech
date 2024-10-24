@@ -81,7 +81,7 @@ export const Subtitle = styled.div`
   color: var(--text-light-color);
   font-weight: 600;
 `;
-export const ButtonWrapper = styled.div<{ isCertification: boolean }>`
+export const ButtonsWrapper = styled.div<{ isCertification: boolean }>`
   margin-top: 1rem;
   margin-bottom: 1rem;
 
@@ -99,23 +99,15 @@ export const ButtonWrapper = styled.div<{ isCertification: boolean }>`
   }
 `;
 
-export const ButtonLink = styled(Link)<{ isCertification: boolean }>`
-  display: inline-block;
-  padding: 1rem 2rem;
-  text-align: center;
-  color: white; /* Ensure the text is white */
-  border-radius: 5px;
+export const ButtonWrapper = styled.div<{ isCertification: boolean }>`
   background: ${({ isCertification }) =>
     isCertification
       ? "var(--innotech-color)"
       : "linear-gradient(90deg, #47689c 20%, #c4a22a 50%)"};
-  transition: background-position 1s;
-
   ${({ isCertification }) =>
     isCertification
       ? `width: auto;` // Adjust width if certification
       : `width: 100%;`}
-
   &:hover {
     background: ${({ isCertification }) =>
       isCertification
@@ -123,6 +115,16 @@ export const ButtonLink = styled(Link)<{ isCertification: boolean }>`
         : "linear-gradient(90deg, #c4a22a 20%, #47689c 50%)"}; /* Darker red on hover for certification */
     text-decoration: none !important;
   }
+`;
+
+export const ButtonLink = styled(Link)`
+  display: inline-block;
+  padding: 1rem 2rem;
+  text-align: center;
+  color: white; /* Ensure the text is white */
+  border-radius: 5px;
+
+  transition: background-position 1s;
 `;
 
 export const ButtonText = styled.span`

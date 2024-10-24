@@ -3,7 +3,7 @@ import { CustomLink, customLinkToHref } from "@/sanity/types";
 import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import Link from "../../../i18n/Link"; // Import Link from Next.js
+import Link from "../../../../i18n/Link"; // Import Link from Next.js
 import {
   GridItemWithHover,
   InfoContainer,

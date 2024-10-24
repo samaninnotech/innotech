@@ -4,7 +4,7 @@ import { PartnerShipCardType } from "@/sanity/types";
 import { PortableText } from "@portabletext/react";
 import React from "react";
 import components from "../BlockContent/components";
-import PartnerShipCard from "../PartnerShipCard/PartnerShipCard";
+import PartnerShipCard from "./PartnerShipCard/PartnerShipCard";
 import {
   CardsContainer,
   Container,

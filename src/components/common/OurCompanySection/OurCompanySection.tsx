@@ -2,10 +2,10 @@
 import { AccordionItem } from "@/sanity/types";
 import { PortableText } from "@portabletext/react";
 import React, { useState } from "react";
+import { SlArrowDown } from "react-icons/sl"; // Import the icon here
 import components from "../BlockContent/components";
 import {
   AccordionContent,
-  AccordionIcon,
   AccordionSection,
   AccordionTitle,
   AccordionTitleWrapper,
@@ -61,19 +61,30 @@ const OurCompanySection: React.FC<OurCompanySectionProps> = ({
         </Column>
         <Column md={6}>
           <AccordionWrapper>
-            {accordionItems.map((item, index) => (
-              <AccordionSection key={index} active={activeIndex === index}>
-                <AccordionTitleWrapper onClick={() => toggleAccordion(index)}>
-                  <AccordionTitle active={activeIndex === index}>
-                    {item.title}
-                  </AccordionTitle>
-                  <AccordionIcon active={activeIndex === index} />
-                </AccordionTitleWrapper>
-                <AccordionContent active={activeIndex === index}>
-                  {item.content}
-                </AccordionContent>
-              </AccordionSection>
-            ))}
+            {accordionItems.map((item, index) => {
+              const selected = activeIndex === index; // Determine if the current item is selected
+              return (
+                <AccordionSection key={index} active={selected}>
+                  <AccordionTitleWrapper onClick={() => toggleAccordion(index)}>
+                    <AccordionTitle active={selected}>
+                      {item.title}
+                    </AccordionTitle>
+                    {/* Icon with rotation based on selection */}
+                    <SlArrowDown
+                      style={{
+                        transform: selected
+                          ? "rotate(-180deg)"
+                          : "rotate(0deg)",
+                        transition: "transform 0.3s ease",
+                      }}
+                    />
+                  </AccordionTitleWrapper>
+                  <AccordionContent active={selected}>
+                    {item.content}
+                  </AccordionContent>
+                </AccordionSection>
+              );
+            })}
           </AccordionWrapper>
         </Column>
       </Row>

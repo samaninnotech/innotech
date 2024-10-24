@@ -1,11 +1,12 @@
 import { sanityUrlFor } from "@/sanity/sanity-client";
 import { CustomLink, customLinkToHref } from "@/sanity/types";
 import React, { useEffect, useState } from "react";
-import PopupForm from "../PopupForm";
+import PopupForm from "../../PopupForm";
 import {
   ButtonLink,
   ButtonText,
   ButtonWrapper,
+  ButtonsWrapper,
   CardContainer,
   InnerContainer,
   LeftSection,
@@ -72,28 +73,30 @@ const EventRegistrationCard: React.FC<EventRegistrationCardProps> = ({
           <Title>{title}</Title>
           <Subtitle>{subtitle}</Subtitle>
         </LeftSection>
-        <ButtonWrapper isCertification={isCertificationEvent}>
+        <ButtonsWrapper isCertification={isCertificationEvent}>
           {buttonLink && buttonLink.label && (
             <>
               {buttonLink.linkType === "POPUP_FORM" ? (
-                <ButtonLink
-                  isCertification={isCertificationEvent}
-                  onClick={togglePopup}
-                  href="#" // Placeholder href since we are using it as a button
-                >
-                  <ButtonText>{buttonLink.label}</ButtonText>
-                </ButtonLink>
+                <ButtonWrapper isCertification={isCertificationEvent}>
+                  <ButtonLink
+                    onClick={togglePopup}
+                    href="#" // Placeholder href since we are using it as a button
+                  >
+                    <ButtonText>{buttonLink.label}</ButtonText>
+                  </ButtonLink>
+                </ButtonWrapper>
               ) : (
-                <ButtonLink
-                  isCertification={isCertificationEvent}
-                  href={customLinkToHref(buttonLink)} // Use href when not a popup
-                >
-                  <ButtonText>{buttonLink.label}</ButtonText>
-                </ButtonLink>
+                <ButtonWrapper isCertification={isCertificationEvent}>
+                  <ButtonLink
+                    href={customLinkToHref(buttonLink)} // Use href when not a popup
+                  >
+                    <ButtonText>{buttonLink.label}</ButtonText>
+                  </ButtonLink>
+                </ButtonWrapper>
               )}
             </>
           )}
-        </ButtonWrapper>
+        </ButtonsWrapper>
         {/* Render Popup if the link type is POPUP_FORM */}
         {isPopupOpen && buttonLink?.linkType === "POPUP_FORM" && (
           <PopupForm

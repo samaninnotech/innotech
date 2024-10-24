@@ -1,7 +1,7 @@
 "use client";
 import { JobOfferType } from "@/sanity/types";
 import React from "react";
-import JobOffer from "../JobOffer/JobOffer";
+import JobOffer from "./JobOffer/JobOffer";
 import { Header, JobOffersContainer } from "./JobOffersSection.styled";
 
 type JobOffersSectionProps = {

@@ -168,18 +168,6 @@ const JobPopupForm: React.FC<JobPopupFormProps> = ({
     return Object.keys(validationErrors).length === 0;
   };
 
-  const handleFileUpload = (file: Blob) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onloadend = () => resolve(reader.result); // Resolve with base64 string
-      reader.onerror = (error) => {
-        console.error("File reading error:", error);
-        reject(error); // Reject the promise on error
-      };
-      reader.readAsDataURL(file); // Read the file as base64
-    });
-  };
-
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!validateForm()) return;
@@ -187,36 +175,23 @@ const JobPopupForm: React.FC<JobPopupFormProps> = ({
     setIsSubmitting(true);
 
     try {
-      // Check if the file is defined and valid
-      if (!formValues.cv || !(formValues.cv instanceof File)) {
-        console.error("CV file is not defined or is not a valid File object.");
-        return;
-      }
+      // Prepare FormData to handle the file and other form data
+      const formData = new FormData();
+      formData.append("firstName", formValues.firstName);
+      formData.append("lastName", formValues.lastName);
+      formData.append("phone", formValues.phone);
+      formData.append("email", formValues.email);
+      formData.append("presentation", formValues.presentation);
+      formData.append("senderEmail", senderEmail);
+      formData.append("senderPassword", senderPassword);
+      formData.append("cv", formValues.cv as File); // Append the file
+      formData.append("receiverEmail", receiverEmail);
 
-      // Convert the file to base64
-      const cvBase64 = await handleFileUpload(formValues.cv); // This should return the base64 string
-
-      const payload = {
-        cv: cvBase64, // Base64 representation of the file
-        fileName: formValues.cv.name, // Include the original file name
-        firstName: formValues.firstName,
-        lastName: formValues.lastName,
-        phone: formValues.phone,
-        email: formValues.email,
-        presentation: formValues.presentation,
-        senderEmail: senderEmail,
-        senderPassword: senderPassword,
-      };
-
-      console.log("Receiver Payload:", payload);
-
-      // Email to receiver
+      // Email to receiver (Do NOT set Content-Type manually here)
       const receiverResponse = await fetch("/api/notify-marketing", {
         method: "POST",
-        body: JSON.stringify(payload),
-        headers: {
-          "Content-Type": "application/json",
-        },
+        body: formData, // formData instead of JSON
+        // No need for headers: browser sets the correct Content-Type
       });
 
       if (!receiverResponse.ok) {
@@ -224,7 +199,7 @@ const JobPopupForm: React.FC<JobPopupFormProps> = ({
         console.error("Receiver API error:", errorDetails);
       }
 
-      // Prepare the user data for the second API call
+      // Prepare the user data for the second API call (can still be JSON since it doesn't contain a file)
       const userPayload = {
         email: formValues.email,
         firstName: formValues.firstName,
@@ -234,10 +209,8 @@ const JobPopupForm: React.FC<JobPopupFormProps> = ({
         senderPassword: senderPassword,
       };
 
-      console.log("User Payload:", userPayload);
-
       // Email to user
-      const userResponse = await fetch("/api/notify-applicanta", {
+      const userResponse = await fetch("/api/notify-applicant", {
         method: "POST",
         body: JSON.stringify(userPayload),
         headers: {

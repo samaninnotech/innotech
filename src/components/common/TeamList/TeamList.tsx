@@ -1,7 +1,6 @@
 "use client";
 import { TeamMemberType } from "@/sanity/types";
 import React from "react";
-import TeamMember from "../TeamMember/TeamMember";
 import {
   Container,
   EmployeesRow,
@@ -13,6 +12,7 @@ import {
   ManagersRow,
   Spacer,
 } from "./TeamList.styled";
+import TeamMember from "./TeamMember/TeamMember";
 
 type TeamListProps = {
   header: string;
