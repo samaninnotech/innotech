@@ -50,7 +50,7 @@ export const InnerContainer = styled.div`
   }
   padding: 0;
 `;
-export const Description = styled.h3`
+export const Description = styled.div`
   font-size: 15px;
   font-weight: 350;
   color: var(--text-gray-color); /* Customize the color */
@@ -58,7 +58,7 @@ export const Description = styled.h3`
   align-self: flex-start;
 `;
 
-export const LargeHeader = styled.h1`
+export const LargeHeader = styled.div`
   font-size: 28px;
   text-align: center; /* Center the text */
   margin-top: 0rem; /* Spacing below the large header */

@@ -377,12 +377,28 @@ const buildGetInTouchSection = (s: GetInTouchSection) => {
 };
 
 const buildContactSection = (s: ContactSection) => {
-  const { rightHeader, agreement, buttonLabel } = s;
+  const {
+    firstNameLabel,
+    lastNameLabel,
+    emailLabel,
+    messageLabel,
+    agreementLabel,
+    submitText,
+    senderEmail,
+    senderPassword,
+    leftHeader,
+  } = s;
   return (
     <ContactSectionComponent
-      rightHeader={rightHeader}
-      agreement={agreement}
-      buttonLabel={buttonLabel}
+      firstNameLabel={firstNameLabel}
+      lastNameLabel={lastNameLabel}
+      emailLabel={emailLabel}
+      messageLabel={messageLabel}
+      agreementLabel={agreementLabel}
+      submitText={submitText}
+      senderEmail={senderEmail}
+      senderPassword={senderPassword}
+      leftHeader={leftHeader}
     />
   );
 };
@@ -610,9 +626,22 @@ const buildFAQSection = (s: FAQSection) => {
 };
 
 const buildJobApplication = (s: JobApplication) => {
-  const { candidate_label, candidate_button_color, candidate_button_text_color, return_label, return_button_color,return_button_text_color} = s;
+  const {
+    candidate_label,
+    candidate_button_color,
+    candidate_button_text_color,
+    return_label,
+    return_button_color,
+    return_button_text_color,
+  } = s;
   return (
-    <JobApplicationComponent candidate_label={candidate_label} candidate_button_color={candidate_button_color} candidate_button_text_color={candidate_button_text_color} return_label={return_label} return_button_color={return_button_color} return_button_text_color={return_button_text_color}      
+    <JobApplicationComponent
+      candidate_label={candidate_label}
+      candidate_button_color={candidate_button_color}
+      candidate_button_text_color={candidate_button_text_color}
+      return_label={return_label}
+      return_button_color={return_button_color}
+      return_button_text_color={return_button_text_color}
     />
   );
 };

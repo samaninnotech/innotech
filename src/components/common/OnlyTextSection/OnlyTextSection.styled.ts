@@ -16,4 +16,7 @@ export const OnlyText = styled.div<ElementProps>`
   ${mediaRules.lg} {
     max-width: 1170px;
   }
+  h2 {
+    text-align: center;
+  }
 `;

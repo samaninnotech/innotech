@@ -52,9 +52,9 @@ type PopupFormProps = {
 type FormValues = {
   firstName: string;
   lastName: string;
-  company?: string;
+  company: string;
   invitedBy?: string;
-  role?: string;
+  role: string;
   phone: string;
   email: string;
   agreement: boolean;
@@ -93,6 +93,18 @@ const PopupForm: React.FC<PopupFormProps> = ({
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [notification, setNotification] = useState<string | null>(null);
+  // const [isButtonEnabled, setIsButtonEnabled] = useState(false);
+
+  // useEffect(() => {
+  //   setIsButtonEnabled(
+  //     formValues.firstName.trim() !== "" &&
+  //       formValues.lastName.trim() !== "" &&
+  //       formValues.company.trim() !== "" &&
+  //       formValues.role.trim() !== "" &&
+  //       formValues.email.trim() !== "" &&
+  //       formValues.agreement
+  //   );
+  // }, [formValues.firstName, formValues.lastName, formValues.company, formValues.role, formValues.email,formValues.agreement ]);
 
   const validateField = (name: string, value: string | boolean) => {
     const newErrors: Record<string, string> = {};
@@ -144,15 +156,6 @@ const PopupForm: React.FC<PopupFormProps> = ({
       const { [name]: removedError, ...restErrors } = prevErrors;
       return restErrors;
     });
-  };
-
-  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    const newErrors = validateField(name, value);
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      ...newErrors,
-    }));
   };
 
   const validateForm = () => {
@@ -236,7 +239,6 @@ const PopupForm: React.FC<PopupFormProps> = ({
                       name="firstName"
                       value={formValues.firstName}
                       onChange={handleChange}
-                      onBlur={handleBlur}
                     />
                     {errors.firstName && (
                       <p style={{ color: "red" }}>{errors.firstName}</p>
@@ -249,7 +251,6 @@ const PopupForm: React.FC<PopupFormProps> = ({
                       name="lastName"
                       value={formValues.lastName}
                       onChange={handleChange}
-                      onBlur={handleBlur}
                     />
                     {errors.lastName && (
                       <p style={{ color: "red" }}>{errors.lastName}</p>
@@ -262,7 +263,6 @@ const PopupForm: React.FC<PopupFormProps> = ({
                       name="company"
                       value={formValues.company}
                       onChange={handleChange}
-                      onBlur={handleBlur}
                     />
                   </FormField>
 
@@ -274,7 +274,6 @@ const PopupForm: React.FC<PopupFormProps> = ({
                         name="invitedBy"
                         value={formValues.invitedBy}
                         onChange={handleChange}
-                        onBlur={handleBlur}
                       />
                     </FormField>
                   )}
@@ -287,7 +286,6 @@ const PopupForm: React.FC<PopupFormProps> = ({
                         name="role"
                         value={formValues.role}
                         onChange={handleChange}
-                        onBlur={handleBlur}
                       />
                     </FormField>
                   )}
@@ -299,7 +297,6 @@ const PopupForm: React.FC<PopupFormProps> = ({
                       name="phone"
                       value={formValues.phone}
                       onChange={handleChange}
-                      onBlur={handleBlur}
                     />
                     {errors.phone && (
                       <p style={{ color: "red" }}>{errors.phone}</p>
@@ -312,7 +309,6 @@ const PopupForm: React.FC<PopupFormProps> = ({
                       name="email"
                       value={formValues.email}
                       onChange={handleChange}
-                      onBlur={handleBlur}
                     />
                     {errors.email && (
                       <p style={{ color: "red" }}>{errors.email}</p>
@@ -325,7 +321,6 @@ const PopupForm: React.FC<PopupFormProps> = ({
                         name="agreement"
                         checked={formValues.agreement}
                         onChange={handleChange}
-                        onBlur={handleBlur}
                       />
                       {agreementLabel}
                     </CheckboxLabel>

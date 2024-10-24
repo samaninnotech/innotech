@@ -120,14 +120,6 @@ const JobPopupForm: React.FC<JobPopupFormProps> = ({
     return newErrors;
   };
 
-  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    const newErrors = validateField(name, value);
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      ...newErrors,
-    }));
-  };
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, type, checked, value, files } = e.target;
 
@@ -270,7 +262,6 @@ const JobPopupForm: React.FC<JobPopupFormProps> = ({
                       name="firstName"
                       value={formValues.firstName}
                       onChange={handleChange}
-                      onBlur={handleBlur}
                     />
                     {errors.firstName && (
                       <p style={{ color: "red" }}>{errors.firstName}</p>
@@ -283,7 +274,6 @@ const JobPopupForm: React.FC<JobPopupFormProps> = ({
                       name="lastName"
                       value={formValues.lastName}
                       onChange={handleChange}
-                      onBlur={handleBlur}
                     />
                     {errors.lastName && (
                       <p style={{ color: "red" }}>{errors.lastName}</p>
@@ -296,7 +286,6 @@ const JobPopupForm: React.FC<JobPopupFormProps> = ({
                       name="phone"
                       value={formValues.phone}
                       onChange={handleChange}
-                      onBlur={handleBlur}
                     />
                     {errors.phone && (
                       <p style={{ color: "red" }}>{errors.phone}</p>
@@ -309,7 +298,6 @@ const JobPopupForm: React.FC<JobPopupFormProps> = ({
                       name="email"
                       value={formValues.email}
                       onChange={handleChange}
-                      onBlur={handleBlur}
                     />
                     {errors.email && (
                       <p style={{ color: "red" }}>{errors.email}</p>
@@ -322,7 +310,6 @@ const JobPopupForm: React.FC<JobPopupFormProps> = ({
                       name="presentation"
                       value={formValues.presentation}
                       onChange={handleChange}
-                      onBlur={handleBlur}
                     />
                     {errors.presentation && (
                       <p style={{ color: "red" }}>{errors.presentation}</p>

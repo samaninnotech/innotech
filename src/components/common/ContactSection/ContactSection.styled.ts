@@ -20,8 +20,7 @@ export const SectionWrapper = styled.div<SectionWrapperProps>`
   width: 100%;
   padding-top: 110px; /* Align with the background image's top padding */
   padding-bottom: 120px; /* Align with the background image's bottom padding */
-  background-image: url(${(props) =>
-    props.backgroundImage || "default-image-url"});
+  background-image: url(${(props) => props.backgroundImage});
   background-repeat: no-repeat;
   background-position: center right;
   background-size: auto; /* Ensures that the background is displayed in its original size */
@@ -141,10 +140,19 @@ export const FormItem = styled.div<FormItemProps>`
 
 export const Input = styled.input`
   width: 100%;
-  padding: 15px;
+  padding: 0.5rem;
   border-radius: 4px;
-  font-size: 16px;
   background-color: #f5f5f5;
+  border: 1px solid transparent; /* Add a default border */
+  color: var(
+    --text-gray-color
+  ); /* Set default text color to gray when not focused */
+  padding: 15px;
+  &:focus {
+    border-color: #177aa9; /* Change border color to blue when focused */
+    outline: none; /* Remove the default outline */
+    color: #1b7caa; /* Change text color back to original when focused */
+  }
 `;
 
 export const TextArea = styled.textarea`
@@ -153,6 +161,16 @@ export const TextArea = styled.textarea`
   border-radius: 4px;
   font-size: 16px;
   background-color: #f5f5f5;
+  border: 1px solid transparent; /* Add a default border */
+  color: var(
+    --text-gray-color
+  ); /* Set default text color to gray when not focused */
+
+  &:focus {
+    border: 0.2px solid #177aa9; /* Change to a thinner border */
+    outline: none; /* Remove the default outline */
+    color: #1b7caa; /* Change text color back to original when focused */
+  }
 `;
 
 export const Select = styled.select`
@@ -166,17 +184,16 @@ export const Select = styled.select`
 export const ButtonContainer = styled.div`
   width: 100%;
 `;
-export const SubmitButton = styled.button<{ isEnabled: boolean }>`
-  padding: 15px 30px;
-  background-color: ${(props) => (props.isEnabled ? "#007cba" : "#ccc")};
-  color: #fff;
+export const SubmitButton = styled.button`
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  color: white;
   border: none;
+  cursor: pointer;
   border-radius: 4px;
-  font-size: 16px;
-  cursor: ${(props) => (props.isEnabled ? "pointer" : "not-allowed")};
+
   &:disabled {
     background-color: #ccc;
-    cursor: not-allowed;
   }
 `;
 

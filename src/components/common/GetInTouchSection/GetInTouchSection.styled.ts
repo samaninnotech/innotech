@@ -20,8 +20,7 @@ export const SectionWrapper = styled.div<SectionWrapperProps>`
   width: 100%;
   padding-top: 110px; /* Align with the background image's top padding */
   padding-bottom: 120px; /* Align with the background image's bottom padding */
-  background-image: url(${(props) =>
-    props.backgroundImage || "default-image-url"});
+  background-image: url(${(props) => props.backgroundImage});
   background-repeat: no-repeat;
   background-position: center right;
   background-size: auto; /* Ensures that the background is displayed in its original size */

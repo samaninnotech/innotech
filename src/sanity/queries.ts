@@ -465,10 +465,16 @@ const buildGetInTouchSectionQuery = (
 };
 
 const buildContactSectionQuery = (locale: string, fallbackLocale: string) => {
-  return `{   
-    'agreement': coalesce(agreement.${locale}, agreement.${fallbackLocale}),
-    'buttonLabel': coalesce(buttonLabel.${locale}, buttonLabel.${fallbackLocale}),
-    'rightHeader': coalesce(rightHeader.${locale}, rightHeader.${fallbackLocale})
+  return `{ 
+    'firstNameLabel': coalesce(firstNameLabel.${locale}, firstNameLabel.${fallbackLocale}),
+    'lastNameLabel': coalesce(lastNameLabel.${locale}, lastNameLabel.${fallbackLocale}),
+    'emailLabel': coalesce(emailLabel.${locale}, emailLabel.${fallbackLocale}),
+    'messageLabel': coalesce(messageLabel.${locale}, messageLabel.${fallbackLocale}),
+    'agreementLabel': coalesce(agreementLabel.${locale}, agreementLabel.${fallbackLocale}),
+    'submitText': coalesce(submitText.${locale}, submitText.${fallbackLocale}),
+    'senderEmail': senderEmail, 
+    'senderPassword': senderPassword,
+    'leftHeader': coalesce(leftHeader.${locale}, rightHeader.${fallbackLocale})
   }`;
 };
 const buildContactFormQuery = (locale: string, fallbackLocale: string) => {

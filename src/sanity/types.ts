@@ -593,9 +593,15 @@ export function isGetInTouchSection(
 
 /* Contact Section */
 export interface ContactSection extends Section {
-  agreement: string;
-  buttonLabel: string;
-  rightHeader: string;
+  firstNameLabel: string;
+  lastNameLabel: string;
+  emailLabel: string;
+  messageLabel: string;
+  agreementLabel: string;
+  submitText: string;
+  senderEmail: string;
+  senderPassword: string;
+  leftHeader: string;
 }
 
 export function isContactSection(section: Section): section is ContactSection {

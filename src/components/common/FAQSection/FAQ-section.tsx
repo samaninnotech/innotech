@@ -1,10 +1,10 @@
 "use client";
 import { FAQ as FAQType } from "@/sanity/types";
 import { ComponentPropsWithoutRef, FC, useState } from "react";
+import { SlArrowDown } from "react-icons/sl";
 import { GenericSectionProps } from "../GenericSection";
 import {
   AccordionContent,
-  AccordionIcon,
   AccordionSection,
   AccordionTitle,
   AccordionTitleWrapper,
@@ -76,7 +76,15 @@ const FAQSection: FC<FAQSectionProps> = ({
                         <AccordionTitle active={activeIndex === overallIndex}>
                           {item.question}
                         </AccordionTitle>
-                        <AccordionIcon active={activeIndex === overallIndex} />
+                        <SlArrowDown
+                          style={{
+                            transform:
+                              activeIndex === overallIndex
+                                ? "rotate(-180deg)"
+                                : "rotate(0deg)",
+                            transition: "transform 0.3s ease",
+                          }}
+                        />{" "}
                       </AccordionTitleWrapper>
                       <AccordionContent active={activeIndex === overallIndex}>
                         {item.answer}

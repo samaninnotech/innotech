@@ -16,7 +16,7 @@ export const SmallHeader = styled.h3`
   margin-bottom: 0 !important; /* Spacing below the small header */
 `;
 
-export const LargeHeader = styled.h1`
+export const LargeHeader = styled.div`
   font-size: 28px;
   text-align: center; /* Center the text */
   margin-top: 0rem; /* Spacing below the large header */
