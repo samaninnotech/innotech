@@ -14,8 +14,7 @@ export const Backdrop = styled.div`
 `;
 
 export const PopupContainer = styled.div<{ hasThumbnail: boolean }>`
-  width: ${({ hasThumbnail }) =>
-    hasThumbnail ? "100%" : "60%"}; // Use percentage if no thumbnail
+  width: ${({ hasThumbnail }) => (hasThumbnail ? "100%" : "60%")};
   position: fixed;
   top: 50%;
   left: 50%;
@@ -29,6 +28,20 @@ export const PopupContainer = styled.div<{ hasThumbnail: boolean }>`
   max-height: calc(100% - 5rem);
   overflow-y: auto;
   margin: 5rem 0;
+
+  // Custom scrollbar
+  &::-webkit-scrollbar {
+    width: 3px; /* Adjust width for vertical scrollbar */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3); /* Scroll thumb color */
+    border-radius: 10px; /* Rounded edges for scrollbar */
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent; /* Background of the scrollbar track */
+  }
 
   // Media rules for max-width when thumbnail exists
   ${mediaRules.sm} {
@@ -53,6 +66,7 @@ export const Row = styled.div<{ fullWidth: boolean }>`
   display: flex;
   flex-wrap: wrap;
   margin: 0 -15px;
+  padding: 0 30px;
   width: ${({ fullWidth }) => (fullWidth ? "80%" : "auto")};
 `;
 
@@ -65,6 +79,7 @@ export const Column = styled.div`
   align-items: center;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
+  margin-top: 1rem;
 `;
 
 export const TextColumn = styled.div`
@@ -76,6 +91,10 @@ export const TextColumn = styled.div`
 export const FormWrapper = styled.div`
   animation: move-up 0.3s;
   width: 100%;
+  form {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 export const FormField = styled.p`
@@ -90,10 +109,18 @@ export const InputLabel = styled.label`
 `;
 
 export const Input = styled.input`
-  width: 100%;
+  width: 80%;
   padding: 0.5rem;
-  border: 1px solid #ccc;
   border-radius: 4px;
+  background-color: #f5f5f5;
+  border: 1px solid transparent;
+  color: var(--text-gray-color);
+  padding: 15px;
+  &:focus {
+    border-color: #177aa9;
+    outline: none;
+    color: #1b7caa;
+  }
 `;
 
 export const CheckboxLabel = styled.label`
@@ -101,6 +128,30 @@ export const CheckboxLabel = styled.label`
   align-items: center;
   color: black;
   text-align: center;
+
+  input {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 30px;
+    height: 20px;
+    border: 1px solid black;
+    margin-right: 10px;
+    cursor: pointer;
+    outline: none;
+
+    &:checked {
+      background-color: transparent;
+    }
+
+    &:checked::before {
+      content: "";
+      display: block;
+      width: 10px;
+      height: 10px;
+      background-color: var(--text-black-color);
+      margin: 4px;
+    }
+  }
 `;
 
 export const SubmitButton = styled.input`
@@ -110,14 +161,16 @@ export const SubmitButton = styled.input`
   border: none;
   cursor: pointer;
   border-radius: 4px;
-
+  margin-bottom: 5rem;
+  width: fit-content;
+  align-self: center;
   &:disabled {
     background-color: #ccc;
   }
 `;
 
 export const ImageColumn = styled.div`
-  flex: 1;
+  flex: 0.8;
   animation: move-up 0.3s;
 `;
 
@@ -153,14 +206,14 @@ export const CloseButton = styled.button`
 `;
 
 export const Notification = styled.div`
-  position: fixed;
-  top: 20px;
+  position: relative;
+  top: -50px;
   left: 50%;
   transform: translateX(-50%);
-  background: linear-gradient(135deg, #25567a, #5897c5);
+  font-size: 16px;
+  background-color: #ffb900;
   color: white;
   padding: 15px 25px;
-  border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   z-index: 1000;
   transition:
@@ -169,7 +222,7 @@ export const Notification = styled.div`
   opacity: 1;
   transform: translateX(-50%) translateY(0);
   text-align: left;
-
+  border: 1px solid #beb71b;
   &.fade-out {
     opacity: 0;
     transform: translateX(-50%) translateY(-20px);

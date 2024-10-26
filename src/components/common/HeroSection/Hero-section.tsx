@@ -238,6 +238,7 @@ const HeroLinkComponent: FC<HeroLinkProps> = ({ heroLink }) => {
             emailLabel={link.popupForm.emailLabel}
             agreementLabel={link.popupForm.agreementLabel}
             submitText={link.popupForm.submitText}
+            notificationText={link.popupForm.notificationText}
             thumbnail={link.popupForm.thumbnail}
             brochure={link.popupForm.brochure}
             senderEmail={link.popupForm.senderEmail}

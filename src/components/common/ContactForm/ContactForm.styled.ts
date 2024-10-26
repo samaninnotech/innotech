@@ -1,5 +1,4 @@
 import { mediaRules } from "@/themes/media-breakpoints";
-import Image from "next/image";
 import styled from "styled-components";
 
 export const ContactFormContainer = styled.div`
@@ -151,42 +150,6 @@ export const SubmitButton = styled.input`
   &:disabled {
     background-color: var(--innotech-color);
     opacity: 0.5;
-  }
-`;
-
-export const ImageColumn = styled.div`
-  flex: 1;
-  animation: move-up 0.3s;
-`;
-
-export const ImageWrap = styled.div`
-  text-align: center;
-`;
-
-export const Thumbnail = styled(Image)`
-  width: 80%;
-  height: 100%;
-`;
-
-export const CloseButton = styled.button`
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background-color: var(--innotech-color);
-  border: none;
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  font-size: 0.8rem;
-  cursor: pointer;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: top 0.2s ease;
-
-  &:hover {
-    top: 9px;
   }
 `;
 

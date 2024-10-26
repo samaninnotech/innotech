@@ -759,6 +759,7 @@ export interface PopupForm extends Section {
   emailLabel: string;
   agreementLabel: string;
   submitText: string;
+  notificationText: string;
   brochure?: Brochure;
   thumbnail: string;
   senderEmail: string;

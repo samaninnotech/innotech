@@ -204,6 +204,7 @@ const buildCustomLinkQuery = (locale: string) =>
       'emailLabel': coalesce(popupForm.emailLabel.${locale}, popupForm.emailLabel.${fallbackLocale}),
       'agreementLabel': coalesce(popupForm.agreementLabel.${locale}, popupForm.agreementLabel.${fallbackLocale}),
       'submitText': coalesce(popupForm.submitText.${locale}, popupForm.submitText.${fallbackLocale}),
+      'notificationText': coalesce(popupForm.notificationText.${locale}, popupForm.notificationText.${fallbackLocale}),
       'thumbnail': popupForm.thumbnail.asset->url,
       'brochure': popupForm.brochure->{
         'title': coalesce(title.${locale}, title.${fallbackLocale}),

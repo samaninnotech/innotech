@@ -42,6 +42,7 @@ type PopupFormProps = {
   emailLabel: string;
   agreementLabel: string;
   submitText: string;
+  notificationText: string;
   thumbnail?: string;
   brochure?: Brochure;
   senderEmail: string;
@@ -71,6 +72,7 @@ const PopupForm: React.FC<PopupFormProps> = ({
   emailLabel,
   agreementLabel,
   submitText,
+  notificationText,
   thumbnail,
   senderEmail,
   senderPassword,
@@ -93,18 +95,6 @@ const PopupForm: React.FC<PopupFormProps> = ({
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [notification, setNotification] = useState<string | null>(null);
-  // const [isButtonEnabled, setIsButtonEnabled] = useState(false);
-
-  // useEffect(() => {
-  //   setIsButtonEnabled(
-  //     formValues.firstName.trim() !== "" &&
-  //       formValues.lastName.trim() !== "" &&
-  //       formValues.company.trim() !== "" &&
-  //       formValues.role.trim() !== "" &&
-  //       formValues.email.trim() !== "" &&
-  //       formValues.agreement
-  //   );
-  // }, [formValues.firstName, formValues.lastName, formValues.company, formValues.role, formValues.email,formValues.agreement ]);
 
   const validateField = (name: string, value: string | boolean) => {
     const newErrors: Record<string, string> = {};
@@ -141,7 +131,6 @@ const PopupForm: React.FC<PopupFormProps> = ({
       newErrors.agreement = "You must agree to the terms.";
     }
 
-    // Optional: Do not validate invitedBy
     return newErrors;
   };
 
@@ -191,16 +180,14 @@ const PopupForm: React.FC<PopupFormProps> = ({
         }),
       });
 
-      const result = await response.json();
       if (response.ok) {
-        console.log(result.message);
-        setNotification(`Email sent successfully to ${formValues.email}.`);
+        setNotification(`${notificationText}`);
         setTimeout(() => {
           setNotification(null);
           onClose();
         }, 3000);
       } else {
-        console.error(result.message);
+        setNotification("Failed to send the brochure. Please try again.");
       }
     } catch (error) {
       console.error("Error sending email:", error);
@@ -219,7 +206,6 @@ const PopupForm: React.FC<PopupFormProps> = ({
 
   return (
     <>
-      {notification && <Notification>{notification}</Notification>}
       {isSubmitting && <SpinnerComponent show={true} />}
       <Backdrop onClick={onClose} />
       <PopupContainer hasThumbnail={!!thumbnail}>
@@ -334,6 +320,7 @@ const PopupForm: React.FC<PopupFormProps> = ({
                     disabled={isSubmitting || !isFormValid}
                     value={submitText}
                   ></SubmitButton>
+                  {notification && <Notification>{notification}</Notification>}
                 </form>
               </FormWrapper>
             </Column>
@@ -341,7 +328,7 @@ const PopupForm: React.FC<PopupFormProps> = ({
               <ImageColumn>
                 <ImageWrap>
                   <Thumbnail
-                    src={sanityUrlFor(thumbnail).width(500).url()}
+                    src={sanityUrlFor(thumbnail).url()}
                     alt="Thumbnail"
                     width={200}
                     height={200}
