@@ -304,8 +304,16 @@ const buildTeamList = (s: TeamList) => {
 };
 
 const buildPageTopBanner = (s: PageTopBanner) => {
-  const { imageUrl, altText } = s;
-  return <PageTopBannerComponent imageUrl={imageUrl} altText={altText} />;
+  const { imageUrl, bottomOfImage, firstLink, secondLink, jobTitle } = s;
+  return (
+    <PageTopBannerComponent
+      imageUrl={imageUrl}
+      firstLink={firstLink}
+      secondLink={secondLink}
+      bottomOfImage={bottomOfImage}
+      jobTitle={jobTitle}
+    />
+  );
 };
 const buildQuoteSection = (s: QuoteSection) => {
   const {

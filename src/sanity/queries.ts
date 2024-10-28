@@ -52,7 +52,7 @@ const buildPageDeconstructionQUery = (locale: string) => `{
     _type == 'video_section' => ${buildVideoSectionQuery()},
     _type == 'visions_section' => ${buildVisionsSectionQuery(locale, fallbackLocale)},
     _type == 'team_list' => ${buildTeamListQuery(locale, fallbackLocale)},
-    _type == 'page_top_banner' => ${buildPageTopBannerQuery()},
+    _type == 'page_top_banner' => ${buildPageTopBannerQuery(locale, fallbackLocale)},
     _type == 'page_middle_banner' => ${buildPageMiddleBannerQuery(locale, fallbackLocale)},
     _type == 'quote_section' => ${buildQuoteSectionQuery(locale, fallbackLocale)},
     _type == 'tab_items_section' => ${buildTabItemsSectionQuery(locale, fallbackLocale)},
@@ -125,7 +125,7 @@ const buildHeroSectionQuery = (locale: string) => {
     'backgroundImage': background.image.asset->url,
     'left_column': left_column${buildHeroColumnQuery(locale)},
     'right_column': right_column${buildHeroColumnQuery(locale)},
-    'height': coalesce(height, 'auto') // Add height field
+    'height': coalesce(height, 'auto')
   }`;
 };
 
@@ -397,9 +397,13 @@ const buildTeamListQuery = (locale: string, fallbackLocale: string) => `
   }
 }`;
 
-const buildPageTopBannerQuery = () => `
+const buildPageTopBannerQuery = (locale: string, fallbackLocale: string) => `
 {
   'imageUrl': image.asset->url,
+  'bottomOfImage': bottomOfImage,
+  'firstLink': firstLink${buildCustomLinkQuery(locale)},
+  'secondLink': secondLink${buildCustomLinkQuery(locale)},
+  'jobTitle': coalesce(jobTitle.${locale}, jobTitle.${fallbackLocale}),
 }
 `;
 

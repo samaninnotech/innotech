@@ -68,7 +68,8 @@ export const Row = styled.div<{ fullWidth: boolean }>`
   flex-wrap: ${({ fullWidth }) => (fullWidth ? "wrap" : "nowrap")};
   flex-direction: ${({ fullWidth }) => (fullWidth ? "row" : "column")};
   margin: 0 -15px;
-  padding: 0 30px;
+  // padding: 0 30px;
+  width: 100%;
 `;
 
 export const Column = styled.div<{ hasThumbnail: boolean }>`

@@ -7,7 +7,6 @@ export const FooterWrapper = styled.div`
   background-color: #f8f9fa;
   border-top: 1px solid #e9ecef;
   width: 100%;
-  margin-top: 100px;
 `;
 
 export const FooterContainer = styled.div`

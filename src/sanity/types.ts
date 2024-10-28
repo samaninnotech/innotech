@@ -483,7 +483,10 @@ export function isJobApplication(section: Section): section is JobApplication {
 /* Page Top Banner*/
 export interface PageTopBanner extends Section {
   imageUrl: string;
-  altText?: string;
+  bottomOfImage: string;
+  firstLink?: CustomLink;
+  secondLink?: CustomLink;
+  jobTitle: string;
 }
 
 export function isPageTopBanner(section: Section): section is PageTopBanner {
