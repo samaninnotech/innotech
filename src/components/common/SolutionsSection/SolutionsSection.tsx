@@ -12,7 +12,6 @@ import {
   InnerContainer2,
   InnerContainer3,
   Paragraph,
-  RightBox,
   Row,
 } from "./SolutionsSection.styled";
 
@@ -37,7 +36,6 @@ export const SolutionsSection: FC<SolutionsSectionProps> = ({
                 <p>{title}</p>
                 <PortableText value={text} components={components} />
               </Paragraph>
-              <RightBox />
             </Header>
 
             <CardsContainer>

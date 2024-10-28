@@ -32,11 +32,29 @@ export const Header = styled.div`
   width: 100%;
   justify-content: center;
   color: var(--text-black-color);
+  h2 {
+    font-size: 22px !important;
+  }
+  ${mediaRules.xsm} {
+    h2 {
+      font-size: 26px !important;
+    }
+  }
+  ${mediaRules.sm} {
+    h2 {
+      font-size: 34px !important;
+    }
+  }
+  ${mediaRules.sm} {
+    h2 {
+      font-size: 38px !important;
+    }
+  }
 `;
 
 export const CardsContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   grid-column-gap: 5px;
   grid-row-gap: 5px;
   width: 100%;

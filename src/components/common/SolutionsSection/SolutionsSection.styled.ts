@@ -40,34 +40,30 @@ export const Header = styled.div`
   margin-bottom: 10px;
   width: 100%;
   justify-content: space-between;
-  max-width: 1200px;
+  max-width: 1170px;
+  padding: 0 1rem;
   p {
     color: var(--text-light-color);
+  }
+  ${mediaRules.xsm} {
+    padding: 0 1rem;
+  }
+  ${mediaRules.sm} {
+    padding: 0;
   }
 `;
 
 export const Paragraph = styled.div`
-  flex: 0 0 100%; /* Takes 55% of the width on larger screens */
+  flex: 0 0 100%;
   text-align: left;
   margin-bottom: 20px;
   color: var(--text-black-color);
 
   ${mediaRules.md} {
-    flex: 0 0 60%; /* Takes full width on small screens */
+    flex: 0 0 60%;
   }
   ${mediaRules.lg} {
-    flex: 0 0 55%; /* Takes full width on extra small screens */
-  }
-`;
-
-export const RightBox = styled.div`
-  flex: 0 0 25%; /* Takes 25% of the width on larger screens */
-
-  ${mediaRules.sm} {
-    display: none; /* Hide on small screens */
-  }
-  ${mediaRules.xsm} {
-    display: none; /* Hide on extra small screens */
+    flex: 0 0 55%;
   }
 `;
 
@@ -91,18 +87,18 @@ export const CardsContainer = styled.div`
 
 export const Row = styled.div`
   display: grid;
-  grid-column-gap: 5px;
+  grid-column-gap: 1px;
   grid-row-gap: 5px;
-  max-width: 1200px;
+  max-width: 1170px;
   width: 100%;
+  justify-items: center;
   ${mediaRules.xsm} {
-    grid-template-columns: 2fr; /* 1 card per row for the smallest screens */
-  }
+    grid-template-columns: 2fr; 
   ${mediaRules.sm} {
-    grid-template-columns: repeat(2, 1fr); /* Adjust for very small screens */
+    grid-template-columns: repeat(2, 1fr); 
   }
   ${mediaRules.md} {
-    grid-template-columns: repeat(4, 1fr); /* Adjust for smaller screens */
+    grid-template-columns: repeat(4, 1fr); 
   }
   ${mediaRules.lg} {
     grid-template-columns: repeat(5, 1fr);
@@ -110,5 +106,5 @@ export const Row = styled.div`
 `;
 
 export const Spacer = styled.div`
-  height: 124px; /* Adjust spacer height as needed */
+  height: 124px;
 `;

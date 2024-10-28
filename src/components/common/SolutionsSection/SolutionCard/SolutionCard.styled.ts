@@ -1,9 +1,10 @@
 import Link from "@/i18n/Link";
+import { mediaRules } from "@/themes/media-breakpoints";
 import Image from "next/image";
 import styled from "styled-components";
 
 export const Card = styled(Link)`
-  width: 100%;
+  width: 80%;
   background-color: #fff;
   border-radius: 3px;
   box-shadow: none;
@@ -26,6 +27,12 @@ export const Card = styled(Link)`
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     border: none;
     text-decoration: none;
+  }
+  ${mediaRules.xsm} {
+    width: 70%;
+  }
+  ${mediaRules.sm} {
+    width: 98%;
   }
 `;
 

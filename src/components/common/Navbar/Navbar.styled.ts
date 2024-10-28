@@ -6,13 +6,15 @@ export const NavbarWrapper = styled.div`
   justify-content: center;
   width: 100%;
   margin: 0 auto;
-
+  padding: 0 1rem;
   ${mediaRules.xsm} {
     max-width: 576px;
+    padding: 0 1rem;
   }
 
   ${mediaRules.sm} {
     max-width: 720px;
+    padding: 0;
   }
 
   ${mediaRules.md} {

@@ -3,7 +3,7 @@ import Image from "next/image";
 import styled from "styled-components";
 
 export const Slide = styled.div`
-  width: 60%;
+  width: 70%;
   flex-shrink: 0;
   position: relative;
   background-color: white;
@@ -15,7 +15,7 @@ export const Slide = styled.div`
   &:hover {
     background-color: #25567a;
     color: white;
-    transform: translateY(-5px); // This moves the entire slide up
+    transform: translateY(-5px);
   }
   min-height: 300px;
 
@@ -63,7 +63,7 @@ export const SwiperImage = styled(Image)`
   transition: filter 0.3s ease;
 
   ${BoxImage}:hover & {
-    filter: brightness(0) invert(1); /* Change image color on hover */
+    filter: brightness(0) invert(1);
   }
 `;
 

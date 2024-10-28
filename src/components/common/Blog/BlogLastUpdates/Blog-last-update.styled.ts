@@ -24,12 +24,15 @@ export const LatestBlogPostsContainer = styled.div`
       text-decoration: none;
     }
   }
+  padding: 0 1rem;
   ${mediaRules.xsm} {
     max-width: 576px;
+    padding: 0 1rem;
   }
 
   ${mediaRules.sm} {
     max-width: 720px;
+    padding: 0;
   }
 
   ${mediaRules.md} {

@@ -89,7 +89,7 @@ export const SectionWrapper = styled.div`
   box-sizing: border-box;
   width: 100%;
   margin: 0 auto;
-  top: 120px;
+  top: 20px;
   padding: 0 5rem;
   padding-bottom: 80px;
 `;

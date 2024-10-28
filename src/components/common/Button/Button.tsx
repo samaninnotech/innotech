@@ -6,11 +6,11 @@ type ButtonProps = ComponentPropsWithoutRef<"button"> & {
   className?: string;
   margin?: string;
   label: string;
-  href?: string; 
+  href?: string;
   bgColor?: string;
   textColor?: string;
   icon?: ReactNode | string;
-  iconPosition?: "left" | "right"; 
+  iconPosition?: "left" | "right";
 };
 
 const Button: FC<ButtonProps> = ({
@@ -21,7 +21,7 @@ const Button: FC<ButtonProps> = ({
   bgColor,
   textColor,
   icon,
-  iconPosition = "left", 
+  iconPosition = "left",
   ...props
 }) => {
   return (

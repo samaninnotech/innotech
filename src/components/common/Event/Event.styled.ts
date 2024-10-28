@@ -7,9 +7,11 @@ type EventContainerProps = {
 };
 export const EventContainer = styled(Link)<EventContainerProps>`
   display: flex;
+  align-items: stretch; /* Makes children stretch to fill the container's height */
   margin-bottom: 20px;
   position: relative;
   overflow: hidden;
+  min-height: 120px;
   color: ${({ $eventTextColor }) => $eventTextColor || "var(--innotech-color)"};
   background-color: ${({ $backgroundColor }) => $backgroundColor || ""};
   &:hover {
@@ -18,8 +20,7 @@ export const EventContainer = styled(Link)<EventContainerProps>`
 `;
 
 export const EventImage = styled.div<{ imageUrl: string }>`
-  width: 200px;
-  height: 112px;
+  width: 200px; /* Fixed width */
   background-image: url(${(props) => props.imageUrl});
   background-size: cover;
   background-position: center;

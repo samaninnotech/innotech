@@ -266,8 +266,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({
                     type="submit"
                     disabled={isSubmitting || !isFormValid}
                     value={submitText}
-                  >
-                  </SubmitButton>
+                  ></SubmitButton>
                 </ButtonContainer>
               </Form>
             </FormWrapper>

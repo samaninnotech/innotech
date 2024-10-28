@@ -27,8 +27,8 @@ type TweetEmbed = {
 };
 
 type ImageTextBlockProps = {
-  imageColumn: any; // Replace `any` with your image type
-  textColumn: any; // Replace `any` with your text type
+  imageColumn: any;
+  textColumn: any;
   imagePosition: "left" | "right";
 };
 

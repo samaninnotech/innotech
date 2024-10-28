@@ -20,13 +20,15 @@ export const EventsSectionContainer = styled.div<EventsSectionProps>`
 
 export const EventsWrapper = styled.div`
   margin: 0 auto;
+  padding: 0 1rem;
   ${mediaRules.xsm} {
     max-width: 576px;
+    padding: 0 1rem;
   }
 
   ${mediaRules.sm} {
-    flex-direction: row;
     max-width: 720px;
+    padding: 0;
   }
 
   ${mediaRules.md} {
