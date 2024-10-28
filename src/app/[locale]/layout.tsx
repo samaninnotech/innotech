@@ -1,5 +1,7 @@
 import { DraftBanner, Footer } from "@/components/common";
 import { isSupportedLocale } from "@/i18n/settings";
+import { iubendaSiteId } from "@/iubenda/settings";
+import { getIubendaConfig } from "@/iubenda/utils";
 import {
   getFooterConfig,
   getHomepageId,
@@ -7,6 +9,7 @@ import {
 } from "@/sanity/queries"; // Import getFooterConfig
 import { Inter } from "next/font/google";
 import { draftMode } from "next/headers";
+import Script from "next/script";
 import { FC, PropsWithChildren } from "react";
 import "../globals.css";
 import { getDictionary } from "./dictionaries";
@@ -49,6 +52,7 @@ const RootLayout: FC<
     ? await getDictionary(locale)
     : {};
   const { isEnabled: draftEnabled } = draftMode();
+  const iubendaConfig = JSON.stringify(getIubendaConfig(locale));
 
   return (
     <html lang={locale}>
@@ -58,6 +62,12 @@ const RootLayout: FC<
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        {/* Iubenda */}
+        <Script src={`https://cs.iubenda.com/sync/${iubendaSiteId}.js`} />
+        <Script src="https://cdn.iubenda.com/cs/iubenda_cs.js" />
+        <Script id="load_iubenda_config" type="text/javascript">
+          var _iub = _iub || []; _iub.csConfiguration = {iubendaConfig}
+        </Script>
       </head>
       <body className={"flex flex-col " + inter.className}>
         <Providers
