@@ -304,14 +304,14 @@ const buildTeamList = (s: TeamList) => {
 };
 
 const buildPageTopBanner = (s: PageTopBanner) => {
-  const { imageUrl, bottomOfImage, firstLink, secondLink, jobTitle } = s;
+  const { imageUrl, bottomOfImage, firstLink, secondLink, pageName } = s;
   return (
     <PageTopBannerComponent
       imageUrl={imageUrl}
       firstLink={firstLink}
       secondLink={secondLink}
       bottomOfImage={bottomOfImage}
-      jobTitle={jobTitle}
+      pageName={pageName}
     />
   );
 };

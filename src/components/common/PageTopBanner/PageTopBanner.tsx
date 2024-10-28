@@ -16,7 +16,7 @@ type PageTopBannerProps = {
   bottomOfImage: string;
   firstLink?: CustomLink;
   secondLink?: CustomLink;
-  jobTitle: string;
+  pageName: string;
 };
 
 const PageTopBanner: React.FC<PageTopBannerProps> = ({
@@ -24,7 +24,7 @@ const PageTopBanner: React.FC<PageTopBannerProps> = ({
   bottomOfImage,
   firstLink,
   secondLink,
-  jobTitle,
+  pageName,
 }) => {
   return (
     <BannerContainer>
@@ -36,13 +36,13 @@ const PageTopBanner: React.FC<PageTopBannerProps> = ({
           height={1000}
           $bottomOfImage={bottomOfImage}
         />
-        {jobTitle && <BannerHeader>{jobTitle}</BannerHeader>}
+        {pageName && <BannerHeader>{pageName}</BannerHeader>}
         {firstLink && secondLink && (
           <BannerText>
             <Link href={"/"}>{firstLink.label}</Link>&nbsp; /&nbsp;&nbsp;
             <Link href={customLinkToHref(secondLink)}>{secondLink.label}</Link>
             &nbsp; /&nbsp;&nbsp;
-            {jobTitle}
+            {pageName}
           </BannerText>
         )}
       </BannerWrapper>

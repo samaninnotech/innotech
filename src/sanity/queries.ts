@@ -403,7 +403,7 @@ const buildPageTopBannerQuery = (locale: string, fallbackLocale: string) => `
   'bottomOfImage': bottomOfImage,
   'firstLink': firstLink${buildCustomLinkQuery(locale)},
   'secondLink': secondLink${buildCustomLinkQuery(locale)},
-  'jobTitle': coalesce(jobTitle.${locale}, jobTitle.${fallbackLocale}),
+  'pageName': coalesce(pageName.${locale}, pageName.${fallbackLocale}),
 }
 `;
 

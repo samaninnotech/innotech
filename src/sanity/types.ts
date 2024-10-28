@@ -486,7 +486,7 @@ export interface PageTopBanner extends Section {
   bottomOfImage: string;
   firstLink?: CustomLink;
   secondLink?: CustomLink;
-  jobTitle: string;
+  pageName: string;
 }
 
 export function isPageTopBanner(section: Section): section is PageTopBanner {
