@@ -6,16 +6,17 @@ import {
   Backdrop,
   CheckboxLabel,
   CloseButton,
-  Column,
   FormField,
   FormWrapper,
+  Header,
   Input,
-  InputLabel,
   Notification,
   PopupContainer,
   PopupContent,
   Row,
   SubmitButton,
+  Subtitle,
+  TextArea,
   TextColumn,
 } from "./JobPopupForm.styled";
 
@@ -107,12 +108,6 @@ const JobPopupForm: React.FC<JobPopupFormProps> = ({
       }
     }
 
-    if (name === "presentation") {
-      if (!value) {
-        newErrors.presentation = "Presentation is required.";
-      }
-    }
-
     if (name === "agreement" && !value) {
       newErrors.agreement = "You must agree to the terms.";
     }
@@ -120,8 +115,10 @@ const JobPopupForm: React.FC<JobPopupFormProps> = ({
     return newErrors;
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, type, checked, value, files } = e.target;
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const { name, type, checked, value, files } = e.target as HTMLInputElement;
 
     setFormValues((prevValues) => ({
       ...prevValues,
@@ -242,104 +239,99 @@ const JobPopupForm: React.FC<JobPopupFormProps> = ({
 
   return (
     <>
-      {notification && <Notification>{notification}</Notification>}
       {isSubmitting && <SpinnerComponent show={true} />}
       <Backdrop onClick={onClose} />
       <PopupContainer>
         <CloseButton onClick={onClose}>✖</CloseButton>
         <PopupContent tabIndex={0}>
           <Row>
-            <Column>
-              <TextColumn>
-                <p>{header}</p>
-              </TextColumn>
-              <FormWrapper>
-                <form noValidate onSubmit={handleSubmit}>
-                  <FormField>
-                    <InputLabel>{firstNameLabel}</InputLabel>
-                    <Input
-                      type="text"
-                      name="firstName"
-                      value={formValues.firstName}
-                      onChange={handleChange}
-                    />
-                    {errors.firstName && (
-                      <p style={{ color: "red" }}>{errors.firstName}</p>
-                    )}
-                  </FormField>
-                  <FormField>
-                    <InputLabel>{lastNameLabel}</InputLabel>
-                    <Input
-                      type="text"
-                      name="lastName"
-                      value={formValues.lastName}
-                      onChange={handleChange}
-                    />
-                    {errors.lastName && (
-                      <p style={{ color: "red" }}>{errors.lastName}</p>
-                    )}
-                  </FormField>
-                  <FormField>
-                    <InputLabel>{phoneLabel}</InputLabel>
-                    <Input
-                      type="text"
-                      name="phone"
-                      value={formValues.phone}
-                      onChange={handleChange}
-                    />
-                    {errors.phone && (
-                      <p style={{ color: "red" }}>{errors.phone}</p>
-                    )}
-                  </FormField>
-                  <FormField>
-                    <InputLabel>{emailLabel}</InputLabel>
-                    <Input
-                      type="email"
-                      name="email"
-                      value={formValues.email}
-                      onChange={handleChange}
-                    />
-                    {errors.email && (
-                      <p style={{ color: "red" }}>{errors.email}</p>
-                    )}
-                  </FormField>
-                  <FormField>
-                    <InputLabel>{presentationLabel}</InputLabel>
-                    <Input
-                      type="text"
-                      name="presentation"
-                      value={formValues.presentation}
-                      onChange={handleChange}
-                    />
-                    {errors.presentation && (
-                      <p style={{ color: "red" }}>{errors.presentation}</p>
-                    )}
-                  </FormField>
-                  <FormField>
-                    <InputLabel>{fileUploadLabel}</InputLabel>
-                    <Input type="file" name="cv" onChange={handleChange} />
-                    {errors.cv && <p style={{ color: "red" }}>{errors.cv}</p>}
-                  </FormField>
-                  <CheckboxLabel>
-                    <input
-                      type="checkbox"
-                      name="agreement"
-                      checked={formValues.agreement}
-                      onChange={handleChange}
-                    />
-                    {agreementLabel}
-                    {errors.agreement && (
-                      <p style={{ color: "red" }}>{errors.agreement}</p>
-                    )}
-                  </CheckboxLabel>
-                  <SubmitButton
-                    type="submit"
-                    disabled={!isFormValid}
-                    value={submitText}
-                  ></SubmitButton>
-                </form>
-              </FormWrapper>
-            </Column>
+            <TextColumn>
+              <Header>{header}</Header>
+              <Subtitle>{subtitle}</Subtitle>
+            </TextColumn>
+            <FormWrapper>
+              <form noValidate onSubmit={handleSubmit}>
+                <FormField style={{ marginBottom: "0" }}>
+                  <Input
+                    type="text"
+                    name="firstName"
+                    value={formValues.firstName}
+                    onChange={handleChange}
+                    placeholder={firstNameLabel}
+                  />
+                  {errors.firstName && (
+                    <p style={{ color: "red" }}>{errors.firstName}</p>
+                  )}
+                </FormField>
+                <FormField>
+                  <Input
+                    type="text"
+                    name="lastName"
+                    value={formValues.lastName}
+                    onChange={handleChange}
+                    placeholder={lastNameLabel}
+                  />
+                  {errors.lastName && (
+                    <p style={{ color: "red" }}>{errors.lastName}</p>
+                  )}
+                </FormField>
+                <FormField style={{ marginBottom: "0" }}>
+                  <Input
+                    type="email"
+                    name="email"
+                    value={formValues.email}
+                    onChange={handleChange}
+                    placeholder={emailLabel}
+                  />
+                  {errors.email && (
+                    <p style={{ color: "red" }}>{errors.email}</p>
+                  )}
+                </FormField>
+                <FormField>
+                  <Input
+                    type="text"
+                    name="phone"
+                    value={formValues.phone}
+                    onChange={handleChange}
+                    placeholder={phoneLabel}
+                  />
+                  {errors.phone && (
+                    <p style={{ color: "red" }}>{errors.phone}</p>
+                  )}
+                </FormField>
+                <FormField>
+                  <TextArea
+                    name="presentation"
+                    value={formValues.presentation}
+                    onChange={handleChange}
+                    placeholder={presentationLabel}
+                  />
+                </FormField>
+                <FormField>
+                  {fileUploadLabel}&nbsp;&nbsp;
+                  <input type="file" name="cv" onChange={handleChange} />
+                  {errors.cv && <p style={{ color: "red" }}>{errors.cv}</p>}
+                </FormField>
+                <CheckboxLabel>
+                  <input
+                    type="checkbox"
+                    name="agreement"
+                    checked={formValues.agreement}
+                    onChange={handleChange}
+                  />
+                  {agreementLabel}
+                  {errors.agreement && (
+                    <p style={{ color: "red" }}>{errors.agreement}</p>
+                  )}
+                </CheckboxLabel>
+                <SubmitButton
+                  type="submit"
+                  disabled={!isFormValid}
+                  value={submitText}
+                ></SubmitButton>
+                {notification && <Notification>{notification}</Notification>}
+              </form>
+            </FormWrapper>
           </Row>
         </PopupContent>
       </PopupContainer>

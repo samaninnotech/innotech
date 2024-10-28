@@ -14,7 +14,7 @@ export const Backdrop = styled.div`
 `;
 
 export const PopupContainer = styled.div`
-  width: 100%;
+  width: 80%;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -28,16 +28,18 @@ export const PopupContainer = styled.div`
   max-height: calc(100% - 5rem);
   overflow-y: auto;
   margin: 5rem 0;
-
+  &::-webkit-scrollbar {
+    width: 3px; /* Adjust width for vertical scrollbar */
+  }
   // Media rules for max-width when thumbnail exists
   ${mediaRules.sm} {
     max-width: 576px;
   }
   ${mediaRules.md} {
-    max-width: 720px;
+    max-width: 620px;
   }
   ${mediaRules.lg} {
-    max-width: 940px;
+    max-width: 840px;
   }
 `;
 
@@ -52,34 +54,37 @@ export const Row = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin: 0 -15px;
-  width: 80%;
-`;
-
-export const Column = styled.div`
-  flex: 1;
-  padding: 4rem 15px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
+  width: 100%;
+  padding: 0 10px;
 `;
 
 export const TextColumn = styled.div`
   animation: move-up 0.3s;
-  text-align: center;
+  text-align: left;
   margin-bottom: 1rem;
 `;
 
+export const Header = styled.h2`
+  color: var(--innotech-color);
+  font-weight: 300;
+  margin: 0;
+`;
+
+export const Subtitle = styled.div`
+  color: var(--text-gray-color);
+  font-weight: 300;
+  margin-top: 10px;
+`;
 export const FormWrapper = styled.div`
   animation: move-up 0.3s;
   width: 100%;
 `;
 
 export const FormField = styled.p`
+  margin-top: 0;
   margin-bottom: 1rem;
-  text-align: center;
+  text-align: left;
+  font-size: 14px;
 `;
 
 export const InputLabel = styled.label`
@@ -90,9 +95,16 @@ export const InputLabel = styled.label`
 
 export const Input = styled.input`
   width: 100%;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
+  padding: 1rem;
   border-radius: 4px;
+  background-color: #f5f5f5;
+  border: 1px solid transparent;
+  color: var(--text-gray-color);
+  &:focus {
+    border-color: #177aa9;
+    outline: none;
+    color: #1b7caa;
+  }
 `;
 
 export const CheckboxLabel = styled.label`
@@ -100,18 +112,44 @@ export const CheckboxLabel = styled.label`
   align-items: center;
   color: black;
   text-align: center;
+  margin-bottom: 20px;
+  input {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+    margin-right: 10px;
+    cursor: pointer;
+    outline: none;
+
+    &:checked {
+      background-color: transparent;
+    }
+
+    &:checked::before {
+      content: "";
+      display: block;
+      width: 10px;
+      height: 10px;
+      background-color: var(--text-black-color);
+      margin: 4px;
+    }
+  }
 `;
 
 export const SubmitButton = styled.input`
-  padding: 0.5rem 1rem;
-  background-color: #007bff;
+  padding: 1rem 2.5rem;
+  background-color: var(--innotech-color);
   color: white;
   border: none;
   cursor: pointer;
   border-radius: 4px;
+  margin-bottom: 10rem;
 
   &:disabled {
-    background-color: #ccc;
+    background-color: var(--innotech-color);
+    opacity: 0.5;
   }
 `;
 
@@ -152,14 +190,14 @@ export const CloseButton = styled.button`
 `;
 
 export const Notification = styled.div`
-  position: fixed;
-  top: 20px;
+  position: relative;
+  top: -120px;
   left: 50%;
   transform: translateX(-50%);
-  background: linear-gradient(135deg, #25567a, #5897c5);
+  font-size: 16px;
+  background-color: #ffb900;
   color: white;
   padding: 15px 25px;
-  border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   z-index: 1000;
   transition:
@@ -168,7 +206,7 @@ export const Notification = styled.div`
   opacity: 1;
   transform: translateX(-50%) translateY(0);
   text-align: left;
-
+  border: 1px solid #beb71b;
   &.fade-out {
     opacity: 0;
     transform: translateX(-50%) translateY(-20px);
@@ -177,5 +215,22 @@ export const Notification = styled.div`
   @media (max-width: 600px) {
     width: 90%;
     padding: 12px 15px;
+  }
+`;
+export const TextArea = styled.textarea`
+  width: 100%;
+  padding: 15px;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: #f5f5f5;
+  border: 1px solid transparent; /* Add a default border */
+  color: var(
+    --text-gray-color
+  ); /* Set default text color to gray when not focused */
+
+  &:focus {
+    border: 0.2px solid #177aa9; /* Change to a thinner border */
+    outline: none; /* Remove the default outline */
+    color: #1b7caa; /* Change text color back to original when focused */
   }
 `;

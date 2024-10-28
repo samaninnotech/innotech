@@ -184,16 +184,17 @@ export const Select = styled.select`
 export const ButtonContainer = styled.div`
   width: 100%;
 `;
-export const SubmitButton = styled.button`
+export const SubmitButton = styled.input`
   padding: 0.5rem 1rem;
-  background-color: #007bff;
+  background-color: var(--innotech-color);
   color: white;
   border: none;
   cursor: pointer;
   border-radius: 4px;
 
   &:disabled {
-    background-color: #ccc;
+    background-color: var(--innotech-color);
+    opacity: 0.5;
   }
 `;
 

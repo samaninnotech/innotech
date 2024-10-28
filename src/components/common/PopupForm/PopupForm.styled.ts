@@ -14,7 +14,8 @@ export const Backdrop = styled.div`
 `;
 
 export const PopupContainer = styled.div<{ hasThumbnail: boolean }>`
-  width: ${({ hasThumbnail }) => (hasThumbnail ? "100%" : "60%")};
+  width: 100%;
+  max-width: ${({ hasThumbnail }) => (hasThumbnail ? "600px" : "80%")};
   position: fixed;
   top: 50%;
   left: 50%;
@@ -48,44 +49,45 @@ export const PopupContainer = styled.div<{ hasThumbnail: boolean }>`
     max-width: ${({ hasThumbnail }) => (hasThumbnail ? "576px" : "80%")};
   }
   ${mediaRules.md} {
-    max-width: ${({ hasThumbnail }) => (hasThumbnail ? "720px" : "80%")};
+    max-width: ${({ hasThumbnail }) => (hasThumbnail ? "620px" : "60%")};
   }
   ${mediaRules.lg} {
-    max-width: ${({ hasThumbnail }) => (hasThumbnail ? "940px" : "80%")};
+    max-width: ${({ hasThumbnail }) => (hasThumbnail ? "840px" : "60%")};
   }
 `;
 
-export const PopupContent = styled.div<{ fullWidth: boolean }>`
+export const PopupContent = styled.div`
   color: black;
   display: flex;
   justify-content: center;
-  width: ${({ fullWidth }) => (fullWidth ? "100%" : "auto")};
+  width: 100%;
 `;
 
 export const Row = styled.div<{ fullWidth: boolean }>`
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: ${({ fullWidth }) => (fullWidth ? "wrap" : "nowrap")};
+  flex-direction: ${({ fullWidth }) => (fullWidth ? "row" : "column")};
   margin: 0 -15px;
   padding: 0 30px;
-  width: ${({ fullWidth }) => (fullWidth ? "80%" : "auto")};
 `;
 
-export const Column = styled.div`
+export const Column = styled.div<{ hasThumbnail: boolean }>`
   flex: 1;
-  padding: 4rem 15px;
+  padding: 1rem 15px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: ${({ hasThumbnail }) =>
+    hasThumbnail ? "0 4px 20px rgba(0, 0, 0, 0.2)" : "none"};
   border-radius: 5px;
   margin-top: 1rem;
+  margin-bottom: 5rem;
 `;
 
 export const TextColumn = styled.div`
   animation: move-up 0.3s;
   text-align: center;
-  margin-bottom: 1rem;
 `;
 
 export const FormWrapper = styled.div`
@@ -104,35 +106,37 @@ export const FormField = styled.p`
 
 export const InputLabel = styled.label`
   display: block;
-  margin-bottom: 0.5rem;
-  color: black;
+  color: var(--text-gray-color);
+  font-size: 14px;
 `;
 
 export const Input = styled.input`
-  width: 80%;
-  padding: 0.5rem;
+  width: 90%;
+  padding: 1rem;
   border-radius: 4px;
   background-color: #f5f5f5;
   border: 1px solid transparent;
   color: var(--text-gray-color);
-  padding: 15px;
+  font-size: 16px;
+
   &:focus {
-    border-color: #177aa9;
     outline: none;
-    color: #1b7caa;
+    color: var(--text-gray-color);
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   }
 `;
 
-export const CheckboxLabel = styled.label`
+export const CheckboxLabel = styled.label<{ hasThumbnail: boolean }>`
   display: flex;
   align-items: center;
   color: black;
   text-align: center;
-
+  font-size: 14px;
   input {
     appearance: none;
     -webkit-appearance: none;
-    width: 30px;
+    width: ${({ hasThumbnail }) => (hasThumbnail ? "25px" : "20px")};
     height: 20px;
     border: 1px solid black;
     margin-right: 10px;
@@ -156,16 +160,16 @@ export const CheckboxLabel = styled.label`
 
 export const SubmitButton = styled.input`
   padding: 0.5rem 1rem;
-  background-color: #007bff;
+  background-color: var(--innotech-color);
   color: white;
   border: none;
   cursor: pointer;
   border-radius: 4px;
-  margin-bottom: 5rem;
-  width: fit-content;
-  align-self: center;
+  margin-bottom: 10rem;
+
   &:disabled {
-    background-color: #ccc;
+    background-color: var(--innotech-color);
+    opacity: 0.5;
   }
 `;
 
@@ -207,10 +211,10 @@ export const CloseButton = styled.button`
 
 export const Notification = styled.div`
   position: relative;
-  top: -50px;
+  top: -120px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 16px;
+  font-size: 14px;
   background-color: #ffb900;
   color: white;
   padding: 15px 25px;
@@ -228,7 +232,7 @@ export const Notification = styled.div`
     transform: translateX(-50%) translateY(-20px);
   }
 
-  @media (max-width: 600px) {
+  ${mediaRules.md} {
     width: 90%;
     padding: 12px 15px;
   }

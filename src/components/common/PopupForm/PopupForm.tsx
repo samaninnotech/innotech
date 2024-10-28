@@ -210,12 +210,12 @@ const PopupForm: React.FC<PopupFormProps> = ({
       <Backdrop onClick={onClose} />
       <PopupContainer hasThumbnail={!!thumbnail}>
         <CloseButton onClick={onClose}>✖</CloseButton>
-        <PopupContent tabIndex={0} fullWidth={!thumbnail}>
-          <Row fullWidth={!thumbnail}>
-            <Column>
-              <TextColumn>
-                <p>{header}</p>
-              </TextColumn>
+        <PopupContent tabIndex={0}>
+          <Row fullWidth={!!thumbnail}>
+            <TextColumn>
+              <p>{header}</p>
+            </TextColumn>
+            <Column hasThumbnail={!!thumbnail}>
               <FormWrapper>
                 <form noValidate onSubmit={handleSubmit}>
                   <FormField>
@@ -301,7 +301,7 @@ const PopupForm: React.FC<PopupFormProps> = ({
                     )}
                   </FormField>
                   <FormField>
-                    <CheckboxLabel>
+                    <CheckboxLabel hasThumbnail={!!thumbnail}>
                       <input
                         type="checkbox"
                         name="agreement"
