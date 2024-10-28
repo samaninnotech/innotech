@@ -79,8 +79,8 @@ const Footer: React.FC<FooterProps> = ({
                 <Image
                   src={sanityUrlFor(logoSrc).url()}
                   alt={"logo"}
-                  width={300}
-                  height={60}
+                  width={250}
+                  height={50}
                 />
               </FooterLogo>
               <FooterText style={{ width: "80%" }}>{address}</FooterText>

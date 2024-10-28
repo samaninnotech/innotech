@@ -1,5 +1,7 @@
 "use client";
 import { CustomLink, customLinkToHref } from "@/sanity/types";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import Button from "../Button";
 import JobPopupForm from "../JobPopupForm";
@@ -44,6 +46,8 @@ const JobApplication: React.FC<JobApplicationProps> = ({
         {/* Return button is a normal link */}
         <Button
           label={return_label.label}
+          icon={<FontAwesomeIcon icon={faArrowLeft} />}
+          iconPosition="left"
           href={customLinkToHref(return_label)} // Normal link
           bgColor={return_button_color}
           textColor={return_button_text_color}

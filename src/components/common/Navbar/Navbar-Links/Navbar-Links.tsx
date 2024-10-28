@@ -87,7 +87,7 @@ const NavbarLinks: FC<NavbarLinksProps> = ({
       <NavbarLinksStyled $showMenu={showMenu} className={textColorClass}>
         <LogoContainerStyled>
           <Link href="/" aria-label="Home">
-            <Image src={logoSrc} alt="Logo" height={60} width={300} />
+            <Image src={logoSrc} alt="Logo" height={50} width={250} />
           </Link>
         </LogoContainerStyled>
         <MainLinksContainerStyled>
@@ -110,8 +110,8 @@ const NavbarLinks: FC<NavbarLinksProps> = ({
             <Image
               src="/site-logo-blue.png"
               alt="Logo"
-              height={60}
-              width={300}
+              height={50}
+              width={250}
             />
             <MdClose onClick={handleSidebarToggle} />
           </SideBarLogoButtonContainer>

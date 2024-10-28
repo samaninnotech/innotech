@@ -7,6 +7,7 @@ export const FooterWrapper = styled.div`
   background-color: #f8f9fa;
   border-top: 1px solid #e9ecef;
   width: 100%;
+  padding: 2rem 1rem 0 1rem;
 `;
 
 export const FooterContainer = styled.div`
@@ -22,7 +23,7 @@ export const FooterContainer = styled.div`
     max-width: 940px;
   }
   ${mediaRules.lg} {
-    max-width: 1200px;
+    max-width: 1170px;
   }
   a {
   }
@@ -81,6 +82,7 @@ export const LinksRow = styled.div`
   max-width: 576px;
   justify-content: space-between;
   flex-direction: column;
+  padding: 2rem 0 0 0;
   flex: 1;
   ${mediaRules.sm} {
     max-width: 720px;
