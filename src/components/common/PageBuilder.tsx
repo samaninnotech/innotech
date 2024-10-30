@@ -53,6 +53,7 @@ import {
   isTabItemsSection,
   isTeamList,
   isTickItemsSection,
+  isVideoGridSection,
   isVideoSection,
   isVisionsSection,
   isYoutubeSection,
@@ -71,6 +72,7 @@ import {
   TabItemsSection,
   TeamList,
   TickItemsSection,
+  VideoGridSection,
   VideoSection,
   VisionsSection,
   YoutubeSection,
@@ -101,6 +103,7 @@ import {
   TabItemsSection as TabItemsSectionComponent,
   TeamList as TeamListcomponent,
   TickItemsSection as TickItemsSectionComponent,
+  VideoGridSection as VideoGridSectionComponent,
   VideoSection as VideoSectionComponent,
   VisionsSection as VisionsSectionComponent,
   YoutubeSection as YoutubeSectionComponent,
@@ -193,6 +196,8 @@ const PageBuilder: FC<PageBuilderProps> = async ({ sections, locale }) => {
       renderedSections.push(buildEventRegistrationSection(s));
     } else if (isJobApplication(s)) {
       renderedSections.push(buildJobApplication(s));
+    } else if (isVideoGridSection(s)) {
+      renderedSections.push(buildVideoGridSection(s));
     }
   }
 
@@ -563,8 +568,6 @@ const buildHeroSection = (s: HeroSection) => {
   );
 };
 
-export default PageBuilder;
-
 const buildYoutubeSection = (s: YoutubeSection) => {
   const { smallHeader, largeHeader, youtubeLogo, youtubeLink } = s;
   return (
@@ -574,6 +577,17 @@ const buildYoutubeSection = (s: YoutubeSection) => {
       youtubeLogo={youtubeLogo}
       youtubeLink={youtubeLink}
     ></YoutubeSectionComponent>
+  );
+};
+
+const buildVideoGridSection = (s: VideoGridSection) => {
+  const { header, videoItems, numberOfColumns } = s;
+  return (
+    <VideoGridSectionComponent
+      header={header}
+      numberOfColumns={numberOfColumns}
+      videoItems={videoItems}
+    ></VideoGridSectionComponent>
   );
 };
 
@@ -653,3 +667,4 @@ const buildJobApplication = (s: JobApplication) => {
     />
   );
 };
+export default PageBuilder;

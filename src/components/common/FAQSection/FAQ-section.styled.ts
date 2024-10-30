@@ -66,8 +66,8 @@ export const InnerContainer3 = styled.div<{ numberOfColumns: number }>`
   display: grid;
   gap: 0;
   width: 100%;
-  grid-template-columns: repeat(1, 1fr); /* Dynamic column count */
-  grid-auto-flow: dense; /* Ensure items flow into columns more evenly */
+  grid-template-columns: repeat(1, 1fr);
+  grid-auto-flow: dense;
 
   ${mediaRules.xsm} {
     grid-template-columns: repeat(1, 1fr);
@@ -79,14 +79,14 @@ export const InnerContainer3 = styled.div<{ numberOfColumns: number }>`
     grid-template-columns: repeat(
       ${({ numberOfColumns }) => numberOfColumns},
       1fr
-    ); /* Use 2 columns for medium screens */
+    );
     gap: 15px;
   }
   ${mediaRules.lg} {
     grid-template-columns: repeat(
       ${({ numberOfColumns }) => numberOfColumns},
       1fr
-    ); /* Use dynamic columns for large screens */
+    );
     gap: 15px;
   }
 `;

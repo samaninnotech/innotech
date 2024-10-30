@@ -1,6 +1,9 @@
 import { mediaRules } from "@/themes/media-breakpoints";
 import styled from "styled-components";
-
+export const TabItemsSectionContainer = styled.section`
+  background-color: #fff; /* Optional: Light background for the entire section */
+  width: 100%;
+`;
 export const Header = styled.div`
   padding-left: 1rem;
   padding-right: 1rem;
@@ -19,20 +22,35 @@ export const Header = styled.div`
 export const TabsContainer = styled.div`
   width: 100%;
   margin: 0 auto;
-  padding: 20px;
-  border-radius: 10px;
+  padding: 20px 20px;
+  ${mediaRules.xsm} {
+    max-width: 520px;
+  }
+  ${mediaRules.sm} {
+    max-width: 720px;
+  }
+  ${mediaRules.md} {
+    max-width: 940px;
+  }
+  ${mediaRules.lg} {
+    max-width: 1170px;
+  }
 `;
 
 export const TabsHeader = styled.div`
   display: flex;
+  flex-direction: column;
   overflow-x: auto;
   margin: auto;
   margin-bottom: 20px;
   width: 100%;
   padding-bottom: 10px;
-  justify-content: center;
-  gap: 30px;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: nowrap;
+  ${mediaRules.sm} {
+    flex-direction: row;
+  }
 `;
 
 export const TabContentWrapper = styled.div`

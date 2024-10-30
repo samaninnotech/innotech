@@ -398,6 +398,19 @@ export function isVideoSection(section: Section): section is VideoSection {
   return sectionMatchType(section, "video_section");
 }
 
+/* Video Grid Section */
+export interface VideoGridSection extends Section {
+  header: string;
+  videoItems: CustomLink[];
+  numberOfColumns: number;
+}
+
+export function isVideoGridSection(
+  section: Section,
+): section is VideoGridSection {
+  return sectionMatchType(section, "video_grid_section");
+}
+
 /* Youtube Video Section */
 export interface YoutubeSection extends Section {
   smallHeader: string;

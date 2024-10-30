@@ -27,6 +27,7 @@ import QuoteSection from "./QuoteSection";
 import TabItemsSection from "./TabItemsSection";
 import TeamList from "./TeamList";
 import TickItemsSection from "./TickItemsSection";
+import VideoGridSection from "./VideoGridSection";
 import VideoSection from "./VideoSection";
 import VisionsSection from "./VisionsSection";
 import YoutubeSection from "./YoutubeSection";
@@ -61,6 +62,7 @@ export {
   TabItemsSection,
   TeamList,
   TickItemsSection,
+  VideoGridSection,
   VideoSection,
   VisionsSection,
   YoutubeSection,

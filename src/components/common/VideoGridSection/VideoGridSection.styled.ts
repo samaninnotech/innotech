@@ -4,10 +4,9 @@ import styled from "styled-components";
 type GridProps = {
   numberOfColumns: number;
 };
-export const InfoSectionContainer = styled.section`
-  padding: 20px;
+export const VideoGridContainer = styled.section`
   background-color: #fff; /* Optional: Light background for the entire section */
-  width: 100%;
+  margin: 0 5rem;
 `;
 
 export const HeaderContainer = styled.header`
@@ -31,43 +30,51 @@ export const SectionHeader = styled.h3`
 
 export const GridWrapper = styled.div<GridProps>`
   display: grid;
-  margin: 0 auto;
   gap: 0;
   width: 100%;
   grid-template-columns: repeat(1, 1fr);
   grid-auto-flow: dense;
   grid-row-gap: 10px;
   height: auto;
-  justify-items: center;
-  grid-auto-flow: dense;
-
   ${mediaRules.xsm} {
     grid-template-columns: repeat(1, 1fr);
+    height: 800px;
   }
-  grid-row-gap: 10px;
-
   ${mediaRules.sm} {
     grid-template-columns: repeat(
       ${({ numberOfColumns }) => numberOfColumns - 1},
       1fr
     );
-    gap: 5px;
-    max-width: 720px;
-    grid-row-gap: 15px;
+    gap: 15px;
+    height: 600px;
   }
   ${mediaRules.md} {
     grid-template-columns: repeat(
       ${({ numberOfColumns }) => numberOfColumns},
       1fr
     );
-    gap: 1px;
-    max-width: 940px;
+    height: 250px;
   }
   ${mediaRules.lg} {
     grid-template-columns: repeat(
       ${({ numberOfColumns }) => numberOfColumns},
       1fr
     );
-    max-width: 1170px;
+    height: 350px;
+  }
+`;
+export const VideoContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  background: #000;
+
+  ${mediaRules.sm} {
+    width: 100%;
+    height: 100%;
+  }
+
+  ${mediaRules.lg} {
+    width: 100%;
+    height: 100%;
   }
 `;

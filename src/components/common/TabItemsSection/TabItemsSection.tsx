@@ -8,6 +8,7 @@ import {
   Header,
   TabContentContainer,
   TabContentWrapper,
+  TabItemsSectionContainer,
   TabsContainer,
   TabsHeader,
 } from "./TabItemsSection.styled";
@@ -46,7 +47,7 @@ const TabItemsSection: React.FC<TabItemsSectionProps> = ({
   const { content } = tabItems[activeTab]; // Get content of the active tab
 
   return (
-    <>
+    <TabItemsSectionContainer>
       <Header>{header}</Header>
       <TabsContainer>
         <TabsHeader>
@@ -72,7 +73,7 @@ const TabItemsSection: React.FC<TabItemsSectionProps> = ({
           </TabContentContainer>
         </TabContentWrapper>
       </TabsContainer>
-    </>
+    </TabItemsSectionContainer>
   );
 };
 

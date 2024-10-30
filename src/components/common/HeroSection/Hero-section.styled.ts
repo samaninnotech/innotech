@@ -119,7 +119,7 @@ type ElementProps = { $height?: string };
 export const Element = styled(GenericSection)<ElementProps>`
   padding: 0rem 3rem;
   background: ${({ $background }) => $background || ""};
-  margin: auto;
+  margin: 2rem auto;
   width: 100%;
   height: ${({ $height }) => $height || "auto"} !important;
 `;

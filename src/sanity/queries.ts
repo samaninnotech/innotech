@@ -50,6 +50,7 @@ const buildPageDeconstructionQUery = (locale: string) => `{
     _type == 'partnership_section' => ${buildPartnerShipSectionQuery(locale, fallbackLocale)},
     _type == 'our_company_section' => ${buildOurCompanySectionQuery(locale, fallbackLocale)},
     _type == 'video_section' => ${buildVideoSectionQuery()},
+    _type == 'video_grid_section' => ${buildVideoGridSectionQuery(locale, fallbackLocale)},
     _type == 'visions_section' => ${buildVisionsSectionQuery(locale, fallbackLocale)},
     _type == 'team_list' => ${buildTeamListQuery(locale, fallbackLocale)},
     _type == 'page_top_banner' => ${buildPageTopBannerQuery(locale, fallbackLocale)},
@@ -352,7 +353,6 @@ const buildOurCompanySectionQuery = (
   }
 }`;
 
-// Query to fetch the Video Section data
 export const buildVideoSectionQuery = () => `{
   'centralImage': centralImage.asset->url,
   'leftTopImage': leftTopImage.asset->url,
@@ -360,6 +360,15 @@ export const buildVideoSectionQuery = () => `{
   'leftBottomImage': leftBottomImage.asset->url,
   'rightBottomImage': rightBottomImage.asset->url,
   'videoLink': videoLink
+}`;
+
+export const buildVideoGridSectionQuery = (
+  locale: string,
+  fallbackLocale: string,
+) => `{
+  'header': coalesce(header.${locale}, header.${fallbackLocale}),
+  'numberOfColumns': numberOfColumns,
+  'videoItems': videoItems[]${buildCustomLinkQuery(locale)}
 }`;
 
 export const buildYouTubeSectionQuery = (

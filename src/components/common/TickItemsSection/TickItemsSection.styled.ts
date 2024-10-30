@@ -28,6 +28,15 @@ export const SectionHeader = styled.h3`
 
 export const ItemsContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   gap: 20px;
+  ${mediaRules.sm} {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  ${mediaRules.md} {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  ${mediaRules.lg} {
+    grid-template-columns: repeat(2, 1fr);
+  }
 `;

@@ -115,6 +115,7 @@ const EventRegistrationCard: React.FC<EventRegistrationCardProps> = ({
             brochure={buttonLink.popupForm.brochure}
             senderEmail={buttonLink.popupForm.senderEmail}
             senderPassword={buttonLink.popupForm.senderPassword}
+            notificationText={""}
           />
         )}
       </InnerContainer>

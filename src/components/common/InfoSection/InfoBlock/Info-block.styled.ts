@@ -1,7 +1,7 @@
+import { mediaRules } from "@/themes/media-breakpoints";
 import styled from "styled-components";
 
 export const InfoBlockContainer = styled.article`
-  margin: 20px 0;
   padding: 15px; /* Optional: Add padding for better spacing */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   background-color: #fff; /* Ensure the background is white */
@@ -10,6 +10,19 @@ export const InfoBlockContainer = styled.article`
     box-shadow 0.3s ease; /* Smooth transform and shadow transition */
   :hover {
     transform: translateY(-10px);
+  }
+  width: 90%;
+  ${mediaRules.xsm} {
+    width: 80%;
+  }
+  ${mediaRules.sm} {
+    width: 95%;
+  }
+  ${mediaRules.md} {
+    width: 95%;
+  }
+  ${mediaRules.lg} {
+    width: 95%;
   }
 `;
 
