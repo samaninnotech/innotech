@@ -1,17 +1,21 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import SpinnerComponent from "../Spinner";
 import {
   Agreement,
   ButtonContainer,
+  CheckboxLabel,
   Column,
   Container,
+  ErrorText,
   FirstRow,
   Form,
   FormItem,
   FormWrapper,
   Header,
   Input,
-  Loader,
+  Notification,
+  RightHeader,
   Row,
   SectionWrapper,
   Select,
@@ -24,135 +28,275 @@ import {
 type GetInTouchSectionProps = {
   mainHeader: string;
   subtitle: string;
-  options: { value: string }[]; // Array of objects with value key
-  agreement: string;
-  buttonLabel: string;
   rightHeader: string;
   backgroundImage: string;
+  firstNameLabel: string;
+  lastNameLabel: string;
+  emailLabel: string;
+  optionsLabel: string;
+  options: { value: string }[];
+  presentationLabel: string;
+  agreementLabel: string;
+  submitText: string;
+  notificationText: string;
+  receiverEmail: string;
+  senderEmail: string;
+  senderPassword: string;
+};
+
+type FormValues = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  selectedOption: string;
+  presentation: string;
+  agreement: boolean;
 };
 
 const GetInTouchSection: React.FC<GetInTouchSectionProps> = ({
   mainHeader,
   subtitle,
+  optionsLabel,
   options,
-  agreement,
-  buttonLabel,
   rightHeader,
   backgroundImage,
+  firstNameLabel,
+  lastNameLabel,
+  emailLabel,
+  presentationLabel,
+  agreementLabel,
+  submitText,
+  receiverEmail,
+  senderEmail,
+  senderPassword,
+  notificationText,
 }) => {
-  const [name, setName] = useState("");
-  const [surname, setSurname] = useState("");
-  const [email, setEmail] = useState("");
-  const [selectedOption, setSelectedOption] = useState("");
-  const [description, setDescription] = useState("");
-  const [isAgreementChecked, setIsAgreementChecked] = useState(false);
-  const [isButtonEnabled, setIsButtonEnabled] = useState(false);
+  const [formValues, setFormValues] = useState<FormValues>({
+    firstName: "",
+    lastName: "",
+    email: "",
+    selectedOption: "",
+    presentation: "",
+    agreement: false,
+  });
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [notification, setNotification] = useState<string | null>(null);
 
-  useEffect(() => {
-    setIsButtonEnabled(
-      name.trim() !== "" &&
-        surname.trim() !== "" &&
-        email.trim() !== "" &&
-        selectedOption !== "" &&
-        description.trim() !== "" &&
-        isAgreementChecked,
+  const validateField = (name: string, value: string | boolean) => {
+    const newErrors: Record<string, string> = {};
+
+    if (name === "firstName" && (!value || /\d/.test(value as string))) {
+      newErrors.firstName =
+        "First name is required and must not contain numbers.";
+    }
+
+    if (name === "lastName" && (!value || /\d/.test(value as string))) {
+      newErrors.lastName =
+        "Last name is required and must not contain numbers.";
+    }
+
+    if (
+      name === "email" &&
+      (!value || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value as string))
+    ) {
+      newErrors.email = "Valid email is required.";
+    }
+
+    if (name === "agreement" && !value) {
+      newErrors.agreement = "You must agree to the terms.";
+    }
+
+    return newErrors;
+  };
+
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
+  ) => {
+    const { name, type, value } = e.target;
+
+    const newValue =
+      type === "checkbox" ? (e.target as HTMLInputElement).checked : value;
+
+    setFormValues((prevValues) => ({
+      ...prevValues,
+      [name]: newValue,
+    }));
+
+    setErrors((prevErrors) => {
+      const { [name]: removedError, ...restErrors } = prevErrors;
+      return restErrors;
+    });
+  };
+
+  const validateForm = () => {
+    const validationErrors = Object.entries(formValues).reduce(
+      (acc, [key, value]) => {
+        const newErrors = validateField(key, value);
+        return { ...acc, ...newErrors };
+      },
+      {} as Record<string, string>,
     );
-  }, [name, surname, email, selectedOption, description, isAgreementChecked]);
+
+    setErrors(validationErrors);
+    return Object.keys(validationErrors).length === 0;
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!validateForm()) return;
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/contact-us/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: formValues.email,
+          firstName: formValues.firstName,
+          lastName: formValues.lastName,
+          senderEmail,
+          senderPassword,
+          receiverEmail,
+        }),
+      });
+
+      if (response.ok) {
+        setNotification(notificationText);
+        setTimeout(() => {
+          setNotification(null);
+        }, 3000);
+      } else {
+        setNotification("Failed to send the email. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error sending email:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const isFormValid =
+    formValues.firstName &&
+    formValues.lastName &&
+    formValues.email &&
+    formValues.agreement &&
+    Object.keys(errors).length === 0;
 
   return (
-    <SectionWrapper backgroundImage={backgroundImage}>
-      <Container>
-        <Row>
-          <Column>
-            <Header>{mainHeader}</Header>
-            <Subtitle>{subtitle}</Subtitle>
-            <Spacer />
-            <FormWrapper>
-              <Form>
-                <Row>
-                  <FirstRow>
-                    <FormItem padding="20px">
-                      <Input
-                        type="text"
-                        placeholder="Nome *"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        required
-                      />
-                    </FormItem>
-                    <FormItem>
-                      <Input
-                        type="text"
-                        placeholder="Cognome *"
-                        value={surname}
-                        onChange={(e) => setSurname(e.target.value)}
-                        required
-                      />
-                    </FormItem>
-                  </FirstRow>
-                </Row>
-                <FormItem>
-                  <Input
-                    type="email"
-                    placeholder="E-mail *"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
-                </FormItem>
-                <FormItem>
-                  <Select
-                    value={selectedOption}
-                    onChange={(e) => setSelectedOption(e.target.value)}
-                  >
-                    {options.map((option, index) => (
-                      <option key={index} value={option.value}>
-                        {option.value}
-                      </option>
-                    ))}
-                  </Select>
-                </FormItem>
-                <FormItem>
-                  <TextArea
-                    placeholder="Descrivi la tua richiesta. *"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    required
-                  />
-                </FormItem>
-                <Agreement>
-                  <label>
-                    <input
-                      type="checkbox"
-                      checked={isAgreementChecked}
-                      onChange={(e) => setIsAgreementChecked(e.target.checked)}
-                      required
+    <>
+      {isSubmitting && <SpinnerComponent show={true} />}
+      <SectionWrapper backgroundImage={backgroundImage}>
+        <Container>
+          <Row>
+            <Column>
+              <Header>{mainHeader}</Header>
+              <Subtitle>{subtitle}</Subtitle>
+              <Spacer />
+              <FormWrapper>
+                <Form onSubmit={handleSubmit} noValidate>
+                  <Row>
+                    <FirstRow>
+                      <FormItem padding="20px">
+                        <Input
+                          type="text"
+                          name="firstName"
+                          value={formValues.firstName}
+                          onChange={handleChange}
+                          placeholder={firstNameLabel}
+                        />
+                        {errors.firstName && (
+                          <ErrorText>{errors.firstName}</ErrorText>
+                        )}
+                      </FormItem>
+                      <FormItem>
+                        <Input
+                          type="text"
+                          name="lastName"
+                          value={formValues.lastName}
+                          onChange={handleChange}
+                          placeholder={lastNameLabel}
+                        />
+                        {errors.lastName && (
+                          <ErrorText>{errors.lastName}</ErrorText>
+                        )}
+                      </FormItem>
+                    </FirstRow>
+                  </Row>
+                  <FormItem>
+                    <Input
+                      type="email"
+                      name="email"
+                      value={formValues.email}
+                      onChange={handleChange}
+                      placeholder={emailLabel}
                     />
-                    {agreement}
-                  </label>
-                </Agreement>
-                <ButtonContainer>
-                  <SubmitButton
-                    type="submit"
-                    isEnabled={isButtonEnabled}
-                    disabled={!isButtonEnabled}
-                  >
-                    {buttonLabel}
-                  </SubmitButton>
-                </ButtonContainer>
-                <Loader />
-              </Form>
-            </FormWrapper>
-            <Spacer />
-          </Column>
-          <Column>
-            <Spacer />
-            <Header>{rightHeader}</Header>
-            <Spacer />
-          </Column>
-        </Row>
-      </Container>
-    </SectionWrapper>
+                    {errors.email && <ErrorText>{errors.email}</ErrorText>}
+                  </FormItem>
+                  <FormItem>
+                    <Select
+                      name="selectedOption"
+                      value={formValues.selectedOption}
+                      onChange={handleChange}
+                    >
+                      <option value="">{optionsLabel}</option>
+                      {options.map((option, index) => (
+                        <option key={index} value={option.value}>
+                          {option.value}
+                        </option>
+                      ))}
+                    </Select>
+                  </FormItem>
+                  <FormItem>
+                    <TextArea
+                      name="presentation"
+                      value={formValues.presentation}
+                      onChange={handleChange}
+                      placeholder={presentationLabel}
+                    />
+                  </FormItem>
+                  <Agreement>
+                    <CheckboxLabel>
+                      <input
+                        type="checkbox"
+                        name="agreement"
+                        checked={formValues.agreement}
+                        onChange={handleChange}
+                      />
+                      {agreementLabel}
+                    </CheckboxLabel>
+                    {errors.agreement && (
+                      <ErrorText>{errors.agreement}</ErrorText>
+                    )}
+                  </Agreement>
+                  <ButtonContainer>
+                    <SubmitButton
+                      type="submit"
+                      disabled={isSubmitting || !isFormValid}
+                      value={submitText}
+                    />
+                  </ButtonContainer>
+                  {notification && (
+                    <FormItem>
+                      <Notification>{notification}</Notification>
+                    </FormItem>
+                  )}
+                </Form>
+              </FormWrapper>
+            </Column>
+            <Column>
+              <RightHeader>{rightHeader}</RightHeader>
+              <Spacer />
+            </Column>
+          </Row>
+        </Container>
+      </SectionWrapper>
+    </>
   );
 };
 

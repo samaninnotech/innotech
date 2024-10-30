@@ -18,6 +18,7 @@ export const SectionWrapper = styled.div<SectionWrapperProps>`
   position: relative;
   box-sizing: border-box;
   width: 100%;
+  padding: 0 20px;
   padding-top: 110px; /* Align with the background image's top padding */
   padding-bottom: 120px; /* Align with the background image's bottom padding */
   background-image: url(${(props) => props.backgroundImage});
@@ -31,48 +32,48 @@ export const SectionWrapper = styled.div<SectionWrapperProps>`
 
 export const Container = styled.div`
   margin: 0 auto;
-  padding: 20px;
+  width: 100%;
+  ${mediaRules.xsm} {
+    max-width: 520px;
+  }
   ${mediaRules.sm} {
-    display: block;
     max-width: 720px;
   }
   ${mediaRules.md} {
-    display: block;
     max-width: 940px;
   }
   ${mediaRules.lg} {
-    display: block;
-    max-width: 1200px;
+    max-width: 1170px;
   }
 `;
 
 export const Row = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
+  flex-wrap: nowrap;
+  flex-direction: column;
   width: 100%;
-  @media (max-width: 768px) {
-    flex-direction: column;
+  justify-content: space-between;
+  ${mediaRules.sm} {
+    flex-direction: row;
   }
 `;
 
 export const Column = styled.div<ColumnProps>`
   width: 100%;
-  padding-right: 15px;
   display: flex;
   align-items: flex-start;
   flex-direction: column;
   justify-content: center;
-  margin-left: 20px;
   ${mediaRules.sm} {
     width: 100%;
   }
   ${mediaRules.md} {
     max-width: 45%;
+    margin-right: 20px;
   }
   ${mediaRules.lg} {
-    margin-left: 50px;
-    max-width: 45%;
+    margin-right: 50px;
+    max-width: 55%;
   }
 `;
 
@@ -81,15 +82,32 @@ export const FirstRow = styled.div`
   width: 100%;
   justify-content: space-between;
 `;
-// Styled component with custom props
-export const Header = styled.h1`
-  color: #333;
+export const Header = styled.div`
+  color: var(--text-black-color);
   margin: 1rem 0;
+  font-size: 35px;
+  font-weight: 600;
+`;
+export const RightHeader = styled.div`
+  color: var(--text-black-color);
+  margin: 1rem 0;
+  font-size: 18px;
+  font-weight: 600;
+  ${mediaRules.sm} {
+    font-size: 18px;
+    padding-left: 30px;
+  }
+  ${mediaRules.md} {
+    font-size: 24px;
+    padding-left: 0px;
+  }
 `;
 
 export const Subtitle = styled.h4`
   display: block;
   margin: 1rem 0;
+
+  color: var(--text-gray-color);
 `;
 
 export const Spacer = styled.div`
@@ -110,13 +128,26 @@ export const FormItem = styled.div<FormItemProps>`
   width: 100%;
   padding-right: ${(props) => props.padding || "0"};
 `;
-
+export const InputLabel = styled.label`
+  display: block;
+  color: var(--text-gray-color);
+  font-size: 14px;
+`;
 export const Input = styled.input`
   width: 100%;
-  padding: 15px;
+  padding: 1rem;
   border-radius: 4px;
-  font-size: 16px;
   background-color: #f5f5f5;
+  border: 1px solid transparent;
+  color: var(--text-gray-color);
+  font-size: 16px;
+
+  &:focus {
+    outline: none;
+    color: var(--text-gray-color);
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  }
 `;
 
 export const TextArea = styled.textarea`
@@ -125,6 +156,17 @@ export const TextArea = styled.textarea`
   border-radius: 4px;
   font-size: 16px;
   background-color: #f5f5f5;
+  border: 1px solid transparent; /* Add a default border */
+  color: var(
+    --text-gray-color
+  ); /* Set default text color to gray when not focused */
+
+  &:focus {
+    outline: none;
+    color: var(--text-gray-color);
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  }
 `;
 
 export const Select = styled.select`
@@ -133,22 +175,28 @@ export const Select = styled.select`
   border-radius: 4px;
   font-size: 16px;
   background-color: #f5f5f5;
+  &:focus {
+    outline: none;
+    color: var(--text-gray-color);
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  }
 `;
 
 export const ButtonContainer = styled.div`
   width: 100%;
 `;
-export const SubmitButton = styled.button<{ isEnabled: boolean }>`
-  padding: 15px 30px;
-  background-color: ${(props) => (props.isEnabled ? "#007cba" : "#ccc")};
-  color: #fff;
+export const SubmitButton = styled.input`
+  padding: 0.5rem 1rem;
+  background-color: var(--innotech-color);
+  color: white;
   border: none;
+  cursor: pointer;
   border-radius: 4px;
-  font-size: 16px;
-  cursor: ${(props) => (props.isEnabled ? "pointer" : "not-allowed")};
+
   &:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+    background-color: var(--innotech-color);
+    opacity: 0.5;
   }
 `;
 
@@ -167,44 +215,56 @@ export const Agreement = styled.div`
     }
   }
 `;
+export const ErrorText = styled.p`
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 4px;
+`;
+export const CheckboxLabel = styled.label`
+  display: flex;
+  align-items: center;
+  color: black;
+  text-align: left;
+  font-size: 14px;
+  input {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+    margin-right: 10px;
+    cursor: pointer;
+    outline: none;
 
-export const Loader = styled.div`
-  display: none;
+    &:checked {
+      background-color: transparent;
+    }
+
+    &:checked::before {
+      content: "";
+      display: block;
+      width: 10px;
+      height: 10px;
+      background-color: var(--text-black-color);
+      margin: 4px;
+    }
+  }
+`;
+
+export const Notification = styled.div`
   margin-top: 20px;
-  .sk-wave {
-    display: flex;
-    justify-content: space-between;
-  }
-  .sk-rect {
-    width: 6px;
-    height: 24px;
-    background-color: #333;
-    animation: sk-wave 1.2s infinite ease-in-out;
-  }
-  .sk-rect1 {
-    animation-delay: -1.2s;
-  }
-  .sk-rect2 {
-    animation-delay: -1.1s;
-  }
-  .sk-rect3 {
-    animation-delay: -1s;
-  }
-  .sk-rect4 {
-    animation-delay: -0.9s;
-  }
-  .sk-rect5 {
-    animation-delay: -0.8s;
-  }
+  font-size: 14px;
+  background-color: #ffb900;
+  color: white;
+  padding: 15px 25px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 
-  @keyframes sk-wave {
-    0%,
-    40%,
-    100% {
-      transform: scaleY(1);
-    }
-    20% {
-      transform: scaleY(2);
-    }
+  opacity: 1;
+  text-align: left;
+  border: 2px solid #beb71b;
+
+  ${mediaRules.md} {
+    width: 100%;
+    padding: 12px 15px;
   }
 `;

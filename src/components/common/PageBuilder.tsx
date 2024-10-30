@@ -369,22 +369,40 @@ const buildTickItemsSection = (s: TickItemsSection) => {
 const buildGetInTouchSection = (s: GetInTouchSection) => {
   const {
     mainHeader,
+    backgroundImage,
     subtitle,
     options,
     rightHeader,
-    agreement,
-    buttonLabel,
-    backgroundImage,
+    optionsLabel,
+    firstNameLabel,
+    lastNameLabel,
+    presentationLabel,
+    emailLabel,
+    agreementLabel,
+    submitText,
+    notificationText,
+    receiverEmail,
+    senderEmail,
+    senderPassword,
   } = s;
   return (
     <GetInTouchSectionComponent
       mainHeader={mainHeader}
       subtitle={subtitle}
       rightHeader={rightHeader}
-      agreement={agreement}
-      buttonLabel={buttonLabel}
-      options={options}
       backgroundImage={backgroundImage}
+      firstNameLabel={firstNameLabel}
+      lastNameLabel={lastNameLabel}
+      emailLabel={emailLabel}
+      optionsLabel={optionsLabel}
+      options={options}
+      presentationLabel={presentationLabel}
+      agreementLabel={agreementLabel}
+      submitText={submitText}
+      notificationText={notificationText}
+      receiverEmail={receiverEmail}
+      senderEmail={senderEmail}
+      senderPassword={senderPassword}
     />
   );
 };

@@ -594,11 +594,20 @@ export interface TickItemType extends SanityElement {
 export interface GetInTouchSection extends Section {
   mainHeader: string;
   subtitle: string;
-  options: { value: string }[];
-  agreement: string;
-  buttonLabel: string;
   rightHeader: string;
   backgroundImage: string;
+  firstNameLabel: string;
+  lastNameLabel: string;
+  emailLabel: string;
+  optionsLabel: string;
+  options: { value: string }[];
+  presentationLabel: string;
+  agreementLabel: string;
+  submitText: string;
+  notificationText: string;
+  receiverEmail: string;
+  senderEmail: string;
+  senderPassword: string;
 }
 
 export function isGetInTouchSection(

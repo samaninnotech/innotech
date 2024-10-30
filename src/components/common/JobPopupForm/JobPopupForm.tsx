@@ -31,9 +31,10 @@ type JobPopupFormProps = {
   fileUploadLabel: string;
   agreementLabel: string;
   submitText: string;
+  notificationText: string;
+  receiverEmail: string;
   senderEmail: string;
   senderPassword: string;
-  receiverEmail: string;
   onClose: () => void;
 };
 
@@ -58,11 +59,13 @@ const JobPopupForm: React.FC<JobPopupFormProps> = ({
   fileUploadLabel,
   agreementLabel,
   submitText,
+  notificationText,
   senderEmail,
   senderPassword,
   receiverEmail,
   onClose,
 }) => {
+  console.log(senderEmail, senderPassword);
   const [formValues, setFormValues] = useState<FormValues>({
     firstName: "",
     lastName: "",
@@ -173,54 +176,29 @@ const JobPopupForm: React.FC<JobPopupFormProps> = ({
       formData.append("presentation", formValues.presentation);
       formData.append("senderEmail", senderEmail);
       formData.append("senderPassword", senderPassword);
+      formData.append("receiverEmail", receiverEmail); // Append receiver email
       formData.append("cv", formValues.cv as File); // Append the file
-      formData.append("receiverEmail", receiverEmail);
 
-      // Email to receiver (Do NOT set Content-Type manually here)
-      const receiverResponse = await fetch("/api/notify-marketing", {
+      // Call the combined API
+      const response = await fetch("/api/job-application", {
         method: "POST",
-        body: formData, // formData instead of JSON
+        body: formData, // Use FormData
         // No need for headers: browser sets the correct Content-Type
       });
 
-      if (!receiverResponse.ok) {
-        const errorDetails = await receiverResponse.text();
-        console.error("Receiver API error:", errorDetails);
-      }
-
-      // Prepare the user data for the second API call (can still be JSON since it doesn't contain a file)
-      const userPayload = {
-        email: formValues.email,
-        firstName: formValues.firstName,
-        lastName: formValues.lastName,
-        status: "Your desired status",
-        senderEmail: senderEmail,
-        senderPassword: senderPassword,
-      };
-
-      // Email to user
-      const userResponse = await fetch("/api/notify-applicant", {
-        method: "POST",
-        body: JSON.stringify(userPayload),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (!userResponse.ok) {
-        const errorDetails = await userResponse.text();
-        console.error("User API error:", errorDetails);
-      }
-
-      if (receiverResponse.ok && userResponse.ok) {
-        setNotification(`Emails sent successfully.`);
-        setTimeout(() => {
-          setNotification(null);
-          onClose();
-        }, 3000);
-      } else {
+      if (!response.ok) {
+        const errorDetails = await response.text();
+        console.error("API error:", errorDetails);
         setNotification("Failed to send emails. Please try again.");
+        return;
       }
+
+      const result = await response.json();
+      setNotification(result.message);
+      setTimeout(() => {
+        setNotification(null);
+        onClose();
+      }, 3000);
     } catch (error) {
       console.error("Error in handleSubmit:", error);
       setNotification("An error occurred. Please try again.");

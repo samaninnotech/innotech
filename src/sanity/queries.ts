@@ -230,9 +230,10 @@ const buildCustomLinkQuery = (locale: string) =>
       'fileUploadLabel': coalesce(jobPopupForm.fileUploadLabel.${locale}, jobPopupForm.fileUploadLabel.${fallbackLocale}),
       'agreementLabel': coalesce(jobPopupForm.agreementLabel.${locale}, jobPopupForm.agreementLabel.${fallbackLocale}),
       'submitText': coalesce(jobPopupForm.submitText.${locale}, jobPopupForm.submitText.${fallbackLocale}),
+      'notificationText': coalesce(jobPopupForm.notificationText.${locale}, jobPopupForm.notificationText.${fallbackLocale}),
+      'receiverEmail': jobPopupForm.receiverEmail,
       'senderEmail': jobPopupForm.senderEmail,
       'senderPassword': jobPopupForm.senderPassword,
-      'receiverEmail': jobPopupForm.receiverEmail,
     }
   }
 }`;
@@ -469,12 +470,21 @@ const buildGetInTouchSectionQuery = (
     'backgroundImage': backgroundImage.asset->url,
     'mainHeader': coalesce(mainHeader.${locale}, mainHeader.${fallbackLocale}),
     'subtitle': coalesce(subtitle.${locale}, subtitle.${fallbackLocale}),
-     'options': options[]{
+    'rightHeader': coalesce(rightHeader.${locale}, rightHeader.${fallbackLocale}),   
+    'firstNameLabel': coalesce(firstNameLabel.${locale}, firstNameLabel.${fallbackLocale}),
+    'lastNameLabel': coalesce(lastNameLabel.${locale}, lastNameLabel.${fallbackLocale}),
+    'emailLabel': coalesce(emailLabel.${locale}, emailLabel.${fallbackLocale}),
+    'optionsLabel': coalesce(optionsLabel.${locale}, optionsLabel.${fallbackLocale}),
+    'options': options[]{
       'value': coalesce(@.${locale}, @.${fallbackLocale})
-    },   
-    'agreement': coalesce(agreement.${locale}, agreement.${fallbackLocale}),
-    'buttonLabel': coalesce(buttonLabel.${locale}, buttonLabel.${fallbackLocale}),
-    'rightHeader': coalesce(rightHeader.${locale}, rightHeader.${fallbackLocale})
+    },
+    'presentationLabel': coalesce(presentationLabel.${locale}, presentationLabel.${fallbackLocale}),
+    'agreementLabel': coalesce(agreementLabel.${locale}, agreementLabel.${fallbackLocale}),
+    'submitText': coalesce(submitText.${locale}, submitText.${fallbackLocale}),
+    'notificationText': coalesce(notificationText.${locale}, notificationText.${fallbackLocale}),
+    'receiverEmail': receiverEmail,
+    'senderEmail': senderEmail,
+    'senderPassword': senderPassword,
   }`;
 };
 
