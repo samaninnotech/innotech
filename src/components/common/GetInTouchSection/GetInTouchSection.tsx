@@ -35,7 +35,7 @@ type GetInTouchSectionProps = {
   emailLabel: string;
   optionsLabel: string;
   options: { value: string }[];
-  presentationLabel: string;
+  messageLabel: string;
   agreementLabel: string;
   submitText: string;
   notificationText: string;
@@ -63,7 +63,7 @@ const GetInTouchSection: React.FC<GetInTouchSectionProps> = ({
   firstNameLabel,
   lastNameLabel,
   emailLabel,
-  presentationLabel,
+  messageLabel,
   agreementLabel,
   submitText,
   receiverEmail,
@@ -257,7 +257,7 @@ const GetInTouchSection: React.FC<GetInTouchSectionProps> = ({
                       name="presentation"
                       value={formValues.presentation}
                       onChange={handleChange}
-                      placeholder={presentationLabel}
+                      placeholder={messageLabel}
                     />
                   </FormItem>
                   <Agreement>

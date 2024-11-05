@@ -1,6 +1,6 @@
 "use client";
 import { PortableText } from "@portabletext/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TabItem from "./TabItem";
 import {
   ContentHeading,
@@ -13,13 +13,11 @@ import {
   TabsHeader,
 } from "./TabItemsSection.styled";
 
-// Define type for each content item
 type ContentItem = {
   heading: string;
   text: any;
 };
 
-// Define type for each tab
 type TabItemType = {
   title: string;
   content: ContentItem[];
@@ -29,22 +27,42 @@ type TabItemsSectionProps = {
   header: string;
   tabItems: TabItemType[];
 };
+
 const TabItemsSection: React.FC<TabItemsSectionProps> = ({
   header,
   tabItems,
 }) => {
   const [activeTab, setActiveTab] = useState(0);
   const [isContentVisible, setIsContentVisible] = useState(true);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  // Check if screen is small and set accordion mode
+  useEffect(() => {
+    const handleResize = () => {
+      const isCurrentlySmallScreen = window.innerWidth <= 768;
+      setIsSmallScreen(isCurrentlySmallScreen);
+
+      // Reset content visibility when switching from small to large screen
+      if (!isCurrentlySmallScreen) {
+        setIsContentVisible(true); // Ensure content is visible on larger screens
+      }
+    };
+    handleResize(); // Check initial screen size
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handleTabClick = (index: number) => {
-    setIsContentVisible(false); // Hide current content
-    setTimeout(() => {
-      setActiveTab(index); // Change tab after a delay
-      setIsContentVisible(true); // Show new content
-    }, 300); // Delay to match the transition timing
+    if (isSmallScreen && activeTab === index) {
+      setIsContentVisible(!isContentVisible);
+    } else {
+      setIsContentVisible(false);
+      setTimeout(() => {
+        setActiveTab(index);
+        setIsContentVisible(true);
+      }, 300);
+    }
   };
-
-  const { content } = tabItems[activeTab]; // Get content of the active tab
 
   return (
     <TabItemsSectionContainer>
@@ -52,26 +70,45 @@ const TabItemsSection: React.FC<TabItemsSectionProps> = ({
       <TabsContainer>
         <TabsHeader>
           {tabItems.map((tab, index) => (
-            <TabItem
-              key={index}
-              title={tab.title}
-              isActive={activeTab === index}
-              onClick={() => handleTabClick(index)}
-            />
+            <React.Fragment key={index}>
+              <TabItem
+                title={tab.title}
+                isActive={activeTab === index}
+                onClick={() => handleTabClick(index)}
+              />
+              {isSmallScreen && activeTab === index && isContentVisible && (
+                <TabContentWrapper>
+                  <TabContentContainer className="active">
+                    {tab.content.map((section, idx) => (
+                      <div key={idx}>
+                        <ContentHeading>{section.heading}</ContentHeading>
+                        <ContentText>
+                          <PortableText value={section.text} />
+                        </ContentText>
+                      </div>
+                    ))}
+                  </TabContentContainer>
+                </TabContentWrapper>
+              )}
+            </React.Fragment>
           ))}
         </TabsHeader>
-        <TabContentWrapper>
-          <TabContentContainer className={isContentVisible ? "active" : ""}>
-            {content.map((section, index) => (
-              <div key={index}>
-                <ContentHeading>{section.heading}</ContentHeading>
-                <ContentText>
-                  <PortableText value={section.text} />
-                </ContentText>
-              </div>
-            ))}
-          </TabContentContainer>
-        </TabContentWrapper>
+
+        {/* Display content for larger screens only */}
+        {!isSmallScreen && (
+          <TabContentWrapper>
+            <TabContentContainer className={isContentVisible ? "active" : ""}>
+              {tabItems[activeTab].content.map((section, index) => (
+                <div key={index}>
+                  <ContentHeading>{section.heading}</ContentHeading>
+                  <ContentText>
+                    <PortableText value={section.text} />
+                  </ContentText>
+                </div>
+              ))}
+            </TabContentContainer>
+          </TabContentWrapper>
+        )}
       </TabsContainer>
     </TabItemsSectionContainer>
   );

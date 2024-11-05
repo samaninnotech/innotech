@@ -601,7 +601,7 @@ export interface GetInTouchSection extends Section {
   emailLabel: string;
   optionsLabel: string;
   options: { value: string }[];
-  presentationLabel: string;
+  messageLabel: string;
   agreementLabel: string;
   submitText: string;
   notificationText: string;
@@ -627,6 +627,8 @@ export interface ContactSection extends Section {
   senderEmail: string;
   senderPassword: string;
   leftHeader: string;
+  notificationText: string;
+  receiverEmail: string;
 }
 
 export function isContactSection(section: Section): section is ContactSection {

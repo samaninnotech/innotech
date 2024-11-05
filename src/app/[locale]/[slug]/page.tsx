@@ -65,16 +65,16 @@ export async function generateMetadata({
     }
   }
   return {
-    title: page?.metaTitle + " | BAU4x",
+    title: page?.metaTitle + " | Innotech",
     description: page?.metaDescription,
     openGraph: {
       title: page?.ogTitle,
       description: page?.ogDescription,
       url: currentURL,
-      siteName: "Bau4x",
+      siteName: "Innotech",
       type: "website",
     },
-    metadataBase: new URL("https://bau4x.com"),
+    metadataBase: new URL("https://innotech.software/"),
     alternates: {
       canonical: alternates.canonical,
       languages: languages,

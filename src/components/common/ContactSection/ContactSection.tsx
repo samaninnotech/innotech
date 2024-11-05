@@ -2,18 +2,21 @@
 import { PortableText } from "@portabletext/react";
 import React, { useState } from "react";
 import components from "../BlockContent/components";
+import SpinnerComponent from "../Spinner";
 import {
   Agreement,
   ButtonContainer,
+  CheckboxLabel,
   Column,
   Container,
+  ErrorText,
   FirstRow,
   Form,
   FormItem,
   FormWrapper,
   Input,
   LeftColumn,
-  Loader,
+  Notification,
   Row,
   SectionWrapper,
   SubmitButton,
@@ -24,13 +27,14 @@ type ContactSectionProps = {
   firstNameLabel: string;
   lastNameLabel: string;
   emailLabel: string;
-  messageLabel: string;
   agreementLabel: string;
   submitText: string;
   senderEmail: string;
   senderPassword: string;
   leftHeader: any;
-  isLoading?: boolean;
+  messageLabel: string;
+  receiverEmail: string;
+  notificationText: string;
 };
 
 type FormValues = {
@@ -45,13 +49,14 @@ const ContactSection: React.FC<ContactSectionProps> = ({
   firstNameLabel,
   lastNameLabel,
   emailLabel,
+  leftHeader,
   messageLabel,
   agreementLabel,
   submitText,
-  leftHeader,
+  receiverEmail,
   senderEmail,
   senderPassword,
-  isLoading = false, // Default to not loading
+  notificationText,
 }) => {
   const [formValues, setFormValues] = useState<FormValues>({
     firstName: "",
@@ -141,7 +146,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("/api/notify-applicant/", {
+      const response = await fetch("/api/contact-us/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -149,16 +154,17 @@ const ContactSection: React.FC<ContactSectionProps> = ({
         body: JSON.stringify({
           email: formValues.email,
           firstName: formValues.firstName,
-          status: formValues.message,
+          lastName: formValues.lastName,
           senderEmail,
           senderPassword,
+          receiverEmail,
         }),
       });
 
       const result = await response.json();
       if (response.ok) {
         console.log(result.message);
-        setNotification(`Message sent successfully to ${formValues.email}.`);
+        setNotification(notificationText);
         setTimeout(() => {
           setNotification(null);
           // Optionally, reset form values here
@@ -189,109 +195,101 @@ const ContactSection: React.FC<ContactSectionProps> = ({
     Object.keys(errors).length === 0;
 
   return (
-    <Container>
-      {notification && <div>{notification}</div>}
-      {isSubmitting && <Loader />}
+    <>
+      {isSubmitting && <SpinnerComponent show={true} />}
       <SectionWrapper>
-        <Row>
-          <LeftColumn>
-            <PortableText value={leftHeader} components={components} />
-          </LeftColumn>
-          <Column>
-            <FormWrapper>
-              <Form noValidate onSubmit={handleSubmit}>
-                <FirstRow>
-                  <FormItem padding="20px">
+        {notification && <div>{notification}</div>}
+        <Container>
+          <Row>
+            <LeftColumn>
+              <PortableText value={leftHeader} components={components} />
+            </LeftColumn>
+            <Column>
+              <FormWrapper>
+                <Form noValidate onSubmit={handleSubmit}>
+                  <FirstRow>
+                    <FormItem padding="20px">
+                      <Input
+                        type="text"
+                        name="firstName"
+                        value={formValues.firstName}
+                        onChange={handleChange}
+                        placeholder={firstNameLabel}
+                      />
+                      {errors.firstName && (
+                        <p style={{ color: "red" }}>{errors.firstName}</p>
+                      )}
+                    </FormItem>
+                    <FormItem>
+                      <Input
+                        type="text"
+                        name="lastName"
+                        value={formValues.lastName}
+                        onChange={handleChange}
+                        placeholder={lastNameLabel}
+                      />
+                      {errors.lastName && (
+                        <p style={{ color: "red" }}>{errors.lastName}</p>
+                      )}
+                    </FormItem>
+                  </FirstRow>
+                  <FormItem>
                     <Input
-                      type="text"
-                      name="firstName"
-                      value={formValues.firstName}
+                      type="email"
+                      name="email"
+                      value={formValues.email}
                       onChange={handleChange}
-                      placeholder={firstNameLabel}
+                      placeholder={emailLabel}
                     />
-                    {errors.firstName && (
-                      <p style={{ color: "red" }}>{errors.firstName}</p>
+                    {errors.email && (
+                      <p style={{ color: "red" }}>{errors.email}</p>
                     )}
                   </FormItem>
                   <FormItem>
-                    <Input
-                      type="text"
-                      name="lastName"
-                      value={formValues.lastName}
+                    <TextArea
+                      name="message"
+                      value={formValues.message}
                       onChange={handleChange}
-                      placeholder={lastNameLabel}
+                      placeholder={messageLabel}
                     />
-                    {errors.lastName && (
-                      <p style={{ color: "red" }}>{errors.lastName}</p>
+                    {errors.message && (
+                      <p style={{ color: "red" }}>{errors.message}</p>
                     )}
                   </FormItem>
-                </FirstRow>
-                <FormItem>
-                  <Input
-                    type="email"
-                    name="email"
-                    value={formValues.email}
-                    onChange={handleChange}
-                    placeholder={emailLabel}
-                  />
-                  {errors.email && (
-                    <p style={{ color: "red" }}>{errors.email}</p>
+                  <Agreement>
+                    <CheckboxLabel>
+                      <input
+                        type="checkbox"
+                        name="agreement"
+                        checked={formValues.agreement}
+                        onChange={handleChange}
+                      />
+                      {agreementLabel}
+                    </CheckboxLabel>
+                    {errors.agreement && (
+                      <ErrorText>{errors.agreement}</ErrorText>
+                    )}
+                  </Agreement>
+                  <ButtonContainer>
+                    <SubmitButton
+                      type="submit"
+                      disabled={isSubmitting || !isFormValid}
+                      value={submitText}
+                    ></SubmitButton>
+                  </ButtonContainer>
+                  {notification && (
+                    <FormItem>
+                      <Notification>{notification}</Notification>
+                    </FormItem>
                   )}
-                </FormItem>
-                <FormItem>
-                  <TextArea
-                    name="message"
-                    value={formValues.message}
-                    onChange={handleChange}
-                    placeholder={messageLabel}
-                  />
-                  {errors.message && (
-                    <p style={{ color: "red" }}>{errors.message}</p>
-                  )}
-                </FormItem>
-                <Agreement>
-                  <input
-                    type="checkbox"
-                    name="agreement"
-                    checked={formValues.agreement}
-                    onChange={handleChange}
-                  />
-                  {agreementLabel}
-                  {errors.agreement && (
-                    <p style={{ color: "red" }}>{errors.agreement}</p>
-                  )}
-                </Agreement>
-                <ButtonContainer>
-                  <SubmitButton
-                    type="submit"
-                    disabled={isSubmitting || !isFormValid}
-                    value={submitText}
-                  ></SubmitButton>
-                </ButtonContainer>
-              </Form>
-            </FormWrapper>
-          </Column>
-        </Row>
+                </Form>
+              </FormWrapper>
+            </Column>
+          </Row>
+        </Container>
       </SectionWrapper>
-    </Container>
+    </>
   );
 };
 
 export default ContactSection;
-
-// const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-//   const { name, type, value } = e.target;
-
-//   // Check if the target is an input element and has a 'checked' property
-//   const newValue = type === "checkbox" ? (e.target as HTMLInputElement).checked : value;
-
-//   setFormValues((prevValues) => ({
-//     ...prevValues,
-//     [name]: newValue,
-//   }));
-
-//   setErrors((prevErrors) => {
-//     const { [name]: removedError, ...restErrors } = prevErrors;
-//     return restErrors;
-//   });
-// };

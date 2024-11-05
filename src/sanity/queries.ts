@@ -496,6 +496,8 @@ const buildContactSectionQuery = (locale: string, fallbackLocale: string) => {
     'messageLabel': coalesce(messageLabel.${locale}, messageLabel.${fallbackLocale}),
     'agreementLabel': coalesce(agreementLabel.${locale}, agreementLabel.${fallbackLocale}),
     'submitText': coalesce(submitText.${locale}, submitText.${fallbackLocale}),
+    'notificationText': coalesce(notificationText.${locale}, notificationText.${fallbackLocale}),
+    'receiverEmail': receiverEmail,
     'senderEmail': senderEmail, 
     'senderPassword': senderPassword,
     'leftHeader': coalesce(leftHeader.${locale}, rightHeader.${fallbackLocale})

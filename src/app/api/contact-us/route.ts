@@ -43,7 +43,7 @@ export async function POST(req: Request) {
   const userMailOptions = {
     from: senderEmail,
     to: email,
-    subject: "Richiesta informazioni - Chi Siamo",
+    subject: "Richiesta informazioni",
     html: `
       <div style="text-align: center;">
         <img src="https://innotech.software/wp-content/uploads/2021/01/Logo_Innotech_Positive_RGB-800x166.png" alt="InnoTech Logo" style="max-width: 250px;"/> <!-- Set logo size to 250px -->

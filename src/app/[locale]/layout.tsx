@@ -28,9 +28,9 @@ const RootLayout: FC<
     "@context": "https://schema.org",
     "@id": homepage,
     "@type": "Organization",
-    name: "BAU4X",
-    legalName: "BAU4X SA",
-    url: "https://bau4x.com",
+    name: "Innotech",
+    legalName: "Innotech SRL",
+    url: "https://innotech.software/",
     address: {
       "@type": "PostalAddress",
       streetAddress: "Via ai Ronchi 41",

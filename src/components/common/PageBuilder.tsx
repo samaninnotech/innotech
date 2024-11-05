@@ -376,7 +376,7 @@ const buildGetInTouchSection = (s: GetInTouchSection) => {
     optionsLabel,
     firstNameLabel,
     lastNameLabel,
-    presentationLabel,
+    messageLabel,
     emailLabel,
     agreementLabel,
     submitText,
@@ -396,7 +396,7 @@ const buildGetInTouchSection = (s: GetInTouchSection) => {
       emailLabel={emailLabel}
       optionsLabel={optionsLabel}
       options={options}
-      presentationLabel={presentationLabel}
+      messageLabel={messageLabel}
       agreementLabel={agreementLabel}
       submitText={submitText}
       notificationText={notificationText}
@@ -418,6 +418,8 @@ const buildContactSection = (s: ContactSection) => {
     senderEmail,
     senderPassword,
     leftHeader,
+    notificationText,
+    receiverEmail,
   } = s;
   return (
     <ContactSectionComponent
@@ -430,6 +432,8 @@ const buildContactSection = (s: ContactSection) => {
       senderEmail={senderEmail}
       senderPassword={senderPassword}
       leftHeader={leftHeader}
+      receiverEmail={receiverEmail}
+      notificationText={notificationText}
     />
   );
 };
