@@ -6,7 +6,7 @@ import {
   getFooterConfig,
   getHomepageId,
   getNavbarConfig,
-} from "@/sanity/queries"; // Import getFooterConfig
+} from "@/sanity/queries";
 import { Inter } from "next/font/google";
 import { draftMode } from "next/headers";
 import Script from "next/script";
@@ -21,7 +21,7 @@ const RootLayout: FC<
   PropsWithChildren<{ params: { locale: string } }>
 > = async ({ params: { locale }, children }) => {
   const { navbar_config, side_navbar_config } = await getNavbarConfig(locale);
-  const footerData = await getFooterConfig(locale); // Fetch the footer data
+  const footerData = await getFooterConfig(locale); 
   const { homepage } = await getHomepageId();
   // Generating JSON-LD
   const jsonLd = {
@@ -33,18 +33,18 @@ const RootLayout: FC<
     url: "https://innotech.software/",
     address: {
       "@type": "PostalAddress",
-      streetAddress: "Via ai Ronchi 41",
-      addressLocality: "Monte Ceneri",
-      addressRegion: "Svizzera",
+      streetAddress: "E33 v.le Del Lavoro",
+      addressLocality: "San Martino Buon Albergo",
+      addressRegion: "Verona, Italia",
       postalCode: "6802",
     },
-    logo: "https://bau4x.com/frontend/images/bau4x-logo.svg",
+    logo: "https://innotech.software/wp-content/uploads/2021/01/Logo_Innotech_Negative_RGB-800x166.png",
     foundingDate: "2021",
     contactPoint: {
       "@type": "contactPoint",
       contactType: "customer support",
-      telephone: "+41 91 210 89 77",
-      email: "info@bau4x.com",
+      telephone: "+39 045 445 00 55",
+      email: "info@innotech.email",
     },
   };
 
@@ -57,7 +57,7 @@ const RootLayout: FC<
   return (
     <html lang={locale}>
       <head>
-        {/* Add JSON-LD to your page */}
+        {/* Add JSON-LD to page */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -83,15 +83,15 @@ const RootLayout: FC<
           {/* Check if footerData is available before rendering Footer */}
           {footerData && (
             <Footer
-              logoSrc={footerData.logo} // Assuming logo is in the format you're expecting
-              address={footerData.address} // Provide default value if null
-              phone={footerData.phone} // Provide default value if null
-              email={footerData.email} // Provide default value if null
-              services={footerData.services} // Provide default value if null
-              quickLinks={footerData.quickLinks} // Provide default value if null
-              aboutLinks={footerData.aboutLinks} // Provide default value if null
-              socialLinks={footerData.socialLinks} // Provide default value if null
-              copyrightText={footerData.copyrightText} // Provide default value if null
+              logoSrc={footerData.logo} 
+              address={footerData.address} 
+              phone={footerData.phone} 
+              email={footerData.email} 
+              services={footerData.services} 
+              quickLinks={footerData.quickLinks}
+              aboutLinks={footerData.aboutLinks} 
+              socialLinks={footerData.socialLinks} 
+              copyrightText={footerData.copyrightText} 
             />
           )}
 

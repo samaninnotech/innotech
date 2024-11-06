@@ -6,7 +6,7 @@ export default function NotFound() {
     <PageBaseLayout slugMapping={{}}>
       <div className="w-full h-full flex flex-col items-center justify-center">
         <h1>Questo Post non esiste.</h1>
-        <Button href="/events" label="Torna al Blog"></Button>
+        <Button href="/events" label="Torna ai Eventi"></Button>
       </div>
     </PageBaseLayout>
   );

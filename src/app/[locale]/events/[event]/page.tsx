@@ -9,7 +9,6 @@ import { sanityUrlFor } from "@/sanity/sanity-client";
 import { notFound } from "next/navigation";
 import { FC } from "react";
 
-// Assuming Section is defined somewhere in your types
 type PageWithSlugParams = { locale: string; slug: string };
 
 export async function generateStaticParams() {
