@@ -4,7 +4,7 @@ import styled from "styled-components";
 type SectionWrapperProps = {
   backgroundImage?: string;
 };
-// Define custom props for Column and Heading
+
 type ColumnProps = {
   marginLeft?: string;
 };
@@ -14,13 +14,13 @@ type FormItemProps = {
 };
 
 export const SectionWrapper = styled.div<SectionWrapperProps>`
-  background-color: #fff;
+  background-color: var(--white-color);
   position: relative;
   box-sizing: border-box;
   width: 100%;
   padding: 0 1rem;
-  padding-top: 110px; /* Align with the background image's top padding */
-  padding-bottom: 120px; /* Align with the background image's bottom padding */
+  padding-top: 110px;
+  padding-bottom: 120px;
   background-image: url(${(props) => props.backgroundImage});
   background-repeat: no-repeat;
   background-position: center right;
@@ -62,7 +62,7 @@ export const LeftColumn = styled.div<ColumnProps>`
   flex-direction: column;
   align-items: stretch;
   justify-content: center;
-  border-left: 5px solid #25567a;
+  border-left: 5px solid var(--innotech-color);
   padding-left: 2rem;
   line-height: 3;
   h2 {
@@ -126,11 +126,6 @@ export const FirstRow = styled.div`
   justify-content: space-between;
 `;
 
-export const Header = styled.h1`
-  color: #333;
-  margin: 1rem 0;
-`;
-
 export const Subtitle = styled.h4`
   display: block;
   margin: 1rem 0;
@@ -159,16 +154,14 @@ export const Input = styled.input`
   width: 100%;
   padding: 0.5rem;
   border-radius: 4px;
-  background-color: #f5f5f5;
-  border: 1px solid transparent; /* Add a default border */
-  color: var(
-    --text-gray-color
-  ); /* Set default text color to gray when not focused */
+  background-color: var(--light-gray);
+  border: 1px solid transparent;
+  color: var(--text-gray-color);
   padding: 15px;
   &:focus {
-    border-color: #177aa9; /* Change border color to blue when focused */
-    outline: none; /* Remove the default outline */
-    color: #1b7caa; /* Change text color back to original when focused */
+    border-color: var(--input-border-color);
+    outline: none;
+    color: #1b7caa;
   }
 `;
 
@@ -177,16 +170,14 @@ export const TextArea = styled.textarea`
   padding: 15px;
   border-radius: 4px;
   font-size: 16px;
-  background-color: #f5f5f5;
-  border: 1px solid transparent; /* Add a default border */
-  color: var(
-    --text-gray-color
-  ); /* Set default text color to gray when not focused */
+  background-color: var(--light-gray);
+  border: 1px solid transparent;
+  color: var(--text-gray-color);
 
   &:focus {
-    border: 0.2px solid #177aa9; /* Change to a thinner border */
-    outline: none; /* Remove the default outline */
-    color: #1b7caa; /* Change text color back to original when focused */
+    border: 0.2px solid var(--input-border-color);
+    outline: none;
+    color: #1b7caa;
   }
 `;
 
@@ -195,7 +186,7 @@ export const Select = styled.select`
   padding: 15px;
   border-radius: 4px;
   font-size: 16px;
-  background-color: #f5f5f5;
+  background-color: var(--light-gray);
 `;
 
 export const ButtonContainer = styled.div`
@@ -219,10 +210,10 @@ export const Agreement = styled.div`
   margin-bottom: 20px;
   label {
     font-size: 14px;
-    display: flex; /* Add this to align the checkbox and text horizontally */
-    align-items: center; /* Vertically align the checkbox and text */
+    display: flex;
+    align-items: center;
     input {
-      margin-right: 8px; /* Adjust this value to add space between the checkbox and the text */
+      margin-right: 8px;
     }
     a {
       color: #007cba;

@@ -2,7 +2,7 @@
   --accent-color: #ffb703;
   --accent-contrast-color: #000;
   --submenu-bg-color: #f1f5f9;
-  --light-gray: #e5e7eb;
+  --light-gray: #f5f5f5;
   --black-color: #000;
   --white-color: #fff;
   --text-light-color: #aeaeae;
@@ -14,6 +14,9 @@
   --info-card: #003148;
   --info-card-bg: #fff;
   --innotech-color: #25567a;
+  --background-gray-color: #777977;
+  --input-border-color: #177aa9;
+  --background-gray-color: #f8f8f8;
 }
 
 body {

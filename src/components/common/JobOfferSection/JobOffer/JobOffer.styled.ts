@@ -23,7 +23,7 @@ export const JobInfo = styled.div`
 export const JobTitle = styled.h4`
   font-size: 1.25rem;
   margin-bottom: 5px;
-  color: #333;
+  color: var(--text-black-color);
 `;
 
 export const JobType = styled.span`
@@ -34,7 +34,7 @@ export const JobType = styled.span`
 export const JobDescription = styled.div`
   flex: 2;
   font-size: 1rem;
-  color: #696969;
+  color: var(--text-gray-color);
   line-height: 1.74;
   padding: 1rem;
 `;
@@ -49,15 +49,15 @@ export const ButtonLink = styled(Link)`
   display: inline-block;
   padding: 10px 20px;
   background-color: transparent;
-  color: #177aa9;
+  color: var(--input-border-color);
   text-decoration: none;
   border-radius: 5px;
   border: 1px solid #cec8c8;
   transition: background-color 0.3s ease;
   &:hover {
-    background-color: #177aa9;
+    background-color: var(--input-border-color);
     text-decoration: none;
-    color: #fff;
+    color: var(--white-color);
   }
 `;
 

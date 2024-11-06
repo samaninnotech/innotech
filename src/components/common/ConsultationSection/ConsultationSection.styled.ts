@@ -5,7 +5,7 @@ export const Section = styled.div`
   position: relative;
   box-sizing: border-box;
   width: 100%;
-  background-color: #f8f8f8;
+  background-color: var(--background-gray-color);
   top: -230px;
   display: flex;
   justify-content: center;
@@ -15,7 +15,7 @@ export const Section = styled.div`
 export const Row = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center; /* Center the row items */
+  justify-content: center;
   width: 100%;
 `;
 

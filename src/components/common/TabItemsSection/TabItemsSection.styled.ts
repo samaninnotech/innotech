@@ -1,7 +1,7 @@
 import { mediaRules } from "@/themes/media-breakpoints";
 import styled from "styled-components";
 export const TabItemsSectionContainer = styled.section`
-  background-color: #fff; /* Optional: Light background for the entire section */
+  background-color: var(--white-color);
   width: 100%;
 `;
 export const Header = styled.div`

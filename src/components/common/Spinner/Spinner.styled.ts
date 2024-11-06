@@ -18,22 +18,22 @@ export const SpinnerContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-  z-index: 100000; /* Ensure it's on top of other content */
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 100000;
 `;
 
 export const SpinnerStyled = styled.div`
-  width: 80px; /* Spinner size */
-  height: 80px; /* Ensure the spinner is circular */
-  border: 8px solid transparent; /* Outer border */
-  border-top-color: #3498db; /* Spinner color */
-  border-radius: 50%; /* Make it circular */
-  animation: ${spin} 1s linear infinite; /* Apply spinning animation */
+  width: 80px;
+  height: 80px;
+  border: 8px solid transparent;
+  border-top-color: #3498db;
+  border-radius: 50%;
+  animation: ${spin} 1s linear infinite;
 `;
 
 export const SpinnerContainedContainer = styled(SpinnerContainer)`
   width: 100%;
   height: 100%;
-  position: initial; /* Reset position for contained usage */
-  background: none; /* No background for contained version */
+  position: initial;
+  background: none;
 `;

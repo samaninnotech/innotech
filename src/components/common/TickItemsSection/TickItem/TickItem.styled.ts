@@ -12,7 +12,7 @@ export const Marker = styled.div`
   height: 20px;
   border-radius: 50%;
   margin-right: 15px;
-  color: #25567a;
+  color: var(--innotech-color);
   font-size: 24px;
   font-weight: 500;
 `;
@@ -26,11 +26,11 @@ export const Title = styled.h6<{ fontWeight: string }>`
   font-size: 24px;
   font-weight: ${(props) => props.fontWeight};
   margin-left: 15px;
-  color: #25567a;
+  color: var(--innotech-color);
 `;
 
 export const Description = styled.div`
   font-size: 16px;
-  color: #555; /* Adjust the color as needed */
+  color: #555;
   margin-top: 15px;
 `;

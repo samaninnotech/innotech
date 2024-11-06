@@ -89,6 +89,7 @@ const JobApplication: React.FC<JobApplicationProps> = ({
             subtitle={candidate_label.jobPopupForm.subtitle}
             presentationLabel={candidate_label.jobPopupForm.presentationLabel}
             fileUploadLabel={candidate_label.jobPopupForm.fileUploadLabel}
+            notificationText={""}
           />
         )}
     </Container>

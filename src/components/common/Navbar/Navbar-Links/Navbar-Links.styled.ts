@@ -64,7 +64,7 @@ export const SidebarStyled = styled.div<{ $showMenu: boolean }>`
   height: 100vh;
   background-color: #2d5c7f;
   color: white;
-  transition: transform 0.3s ease-in-out; /* Shorten transition duration for responsiveness */
+  transition: transform 0.3s ease-in-out;
   transform: translateX(100%);
   z-index: 99999;
   ${({ $showMenu }) =>
@@ -88,22 +88,21 @@ export const SidebarContentStyled = styled.div`
 `;
 export const SideBarLogoButtonContainer = styled.div`
   display: flex;
-  align-items: center; /* Align logo and button in a row */
-  background-color: #fff;
+  align-items: center;
+  background-color: var(--white-color);
   margin: -1rem;
   padding: 1rem;
 
-  /* Ensure logo and close button are in a row and spaced correctly */
   img {
     flex: 1;
     padding-left: 1rem;
   }
 
   svg {
-    color: black; /* Set the color of the close button */
-    font-size: 2rem; /* Increase the size of the close button */
-    cursor: pointer; /* Indicate the button is clickable */
-    margin-left: 1rem; /* Space between logo and button */
+    color: black;
+    font-size: 2rem;
+    cursor: pointer;
+    margin-left: 1rem;
   }
 `;
 
@@ -114,8 +113,8 @@ export const BurgerMenuButton = styled.button<{ $burgerButtoncolor: string }>`
   place-content: center;
   color: ${({ $burgerButtoncolor }) => $burgerButtoncolor};
   background-color: transparent;
-  z-index: 100001; /* Very high z-index */
-  position: relative; /* Ensure positioning context */
+  z-index: 100001;
+  position: relative;
 
   ${mediaRules.lg} {
     display: none;
@@ -128,10 +127,10 @@ export const OverlayStyled = styled.div<{ $showOverlay: boolean }>`
   left: 0;
   width: 100%;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5); // Semi-transparent gray
-  z-index: 1000; // Ensure it is above the content but below the sidebar
-  cursor: pointer; // Indicate clickable area
-  overflow: hidden; // Prevent scrolling on the body
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  cursor: pointer;
+  overflow: hidden;
   display: ${({ $showOverlay }) => ($showOverlay ? "block" : "none")};
 `;
 
@@ -182,25 +181,21 @@ export const NavbarElementStyled = styled(Link)<{ $selected?: boolean }>`
   text-decoration: none;
   position: relative;
   overflow: hidden;
-  width: 100%; /* Width adjusts based on the content size */
-  white-space: nowrap; /* Prevent text from breaking into multiple lines */
+  width: 100%;
+  white-space: nowrap;
 
-  /* Apply border-top for screens narrower than 1200px */
   border-top: 1px solid gray;
 
-  /* Remove border-top for the first child */
   &:first-child {
     border-top: none;
   }
 
-  /* Media query for screens 1200px and wider */
   ${mediaRules.lg} {
     margin-left: 2rem;
     margin-top: 0;
-    width: fit-content; /* Width based on content */
-    border-top: none; /* Remove border-top for screens 1200px and wider */
     width: fit-content;
-    /* Apply border-bottom if selected */
+    border-top: none;
+    width: fit-content;
     ${({ $selected }) =>
       $selected &&
       css`
@@ -213,7 +208,6 @@ export const NavbarElementStyled = styled(Link)<{ $selected?: boolean }>`
     text-decoration: none;
   }
 
-  /* Hover effect for unselected items */
   ${({ $selected }) =>
     !$selected &&
     css`
@@ -228,18 +222,14 @@ export const NavbarElementStyled = styled(Link)<{ $selected?: boolean }>`
         transform: scaleX(0);
         transform-origin: left;
 
-        /* Apply transition only for screens larger than 1200px */
         ${mediaRules.lg} {
           transition: transform 0.5s ease-in-out;
         }
       }
 
-      /* Show the border only for screens larger than 1200px */
       ${mediaRules.lg} {
         &:hover:before {
-          transform: scaleX(
-            2
-          ); /* Transition the border in from left to right */
+          transform: scaleX(2);
         }
       }
     `}
@@ -263,10 +253,8 @@ export const NavbarMenuStyled = styled.span<{ $selected?: boolean }>`
     padding: 0.4rem 0rem;
   }
 
-  /* Default state: no border */
   border-bottom: none;
 
-  /* If the item is selected, keep the border-bottom visible */
   ${mediaRules.lg} {
     ${({ $selected }) =>
       $selected &&
@@ -279,7 +267,6 @@ export const NavbarMenuStyled = styled.span<{ $selected?: boolean }>`
     text-decoration: none;
   }
 
-  /* Hover effect for unselected items */
   &:before {
     content: "";
     position: absolute;
@@ -291,27 +278,25 @@ export const NavbarMenuStyled = styled.span<{ $selected?: boolean }>`
     transform: scaleX(0);
     transform-origin: left;
 
-    /* Apply transition only for screens larger than 1200px */
     ${mediaRules.lg} {
       transition: transform 0.5s ease-in-out;
     }
   }
 
-  /* Show the border only for screens larger than 1200px */
   ${mediaRules.lg} {
     &:hover:before {
-      transform: scaleX(2); /* Transition the border in from left to right */
+      transform: scaleX(2);
     }
   }
 `;
 
 export const SVGContainer = styled.div`
-  display: inline-flex; /* Ensure the container takes only the space it needs */
-  align-items: center; /* Center the SVG vertically */
-  justify-content: center; /* Center the SVG horizontally */
-  background-color: #3b6788; /* Gray background */
-  border-radius: 0.25rem; /* Optional: rounded corners for the border */
-  padding: 0.5rem 1rem; /* Space between the SVG and the border */
+  display: inline-flex; 
+  align-items: center;
+  justify-content: center; 
+  background-color: #3b6788; 
+  border-radius: 0.25rem; 
+  padding: 0.5rem 1rem; 
   svg {
     width: 10px;
     height: 20px;
@@ -344,30 +329,27 @@ export const NavbarLinkButtonStyled = styled(Link)`
 `;
 
 export const SideLinkStyled = styled(Link)<{ $selected?: boolean }>`
-  /* Default state: no border */
   border-bottom: none;
 
-  /* Hide the border on screens smaller than 1200px */
   ${mediaRules.lg} {
     border-bottom: none;
   }
 `;
-// Add this styled component for the search icon container
 export const SearchIconContainer = styled.div`
   display: flex;
   align-items: right;
-  cursor: pointer; // Make it clickable
-  font-size: 1.5rem; // Adjust the size of the icon
+  cursor: pointer;
+  font-size: 1.5rem;
 
   ${mediaRules.lg} {
-    margin-left: 1rem; // Add some space between the languages and the search icon
+    margin-left: 1rem;
   }
 
   svg {
-    color: inherit; // Make sure the icon inherits the color from the text
+    color: inherit;
   }
 
   &:hover svg {
-    color: #555; // Optional: Change color on hover for better user experience
+    color: #555;
   }
 `;

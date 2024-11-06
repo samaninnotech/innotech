@@ -63,7 +63,7 @@ const Post: FC<{ params: { locale: string; post: string } }> = async ({
           title={detail.carousel.title}
           imgWidth={370}
           imgHeight={200}
-          background="#f5f5f5" // Customize the background as needed
+          background="var(--light-gray)"
         />
       )}
     </PageBaseLayout>

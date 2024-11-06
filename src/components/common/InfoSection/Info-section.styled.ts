@@ -6,7 +6,7 @@ type GridProps = {
 };
 export const InfoSectionContainer = styled.section`
   padding: 20px;
-  background-color: #fff; /* Optional: Light background for the entire section */
+  background-color: var(--white-color);
   width: 100%;
 `;
 

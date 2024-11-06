@@ -74,5 +74,5 @@ export const SecondaryNavbarStyled = styled.header<{ isVisible: boolean }>`
   height: 15%;
   display: flex;
   align-content: center;
-  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.2); /* Subtle shadow at the bottom */
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.2);
 `;

@@ -21,7 +21,7 @@ const RootLayout: FC<
   PropsWithChildren<{ params: { locale: string } }>
 > = async ({ params: { locale }, children }) => {
   const { navbar_config, side_navbar_config } = await getNavbarConfig(locale);
-  const footerData = await getFooterConfig(locale); 
+  const footerData = await getFooterConfig(locale);
   const { homepage } = await getHomepageId();
   // Generating JSON-LD
   const jsonLd = {
@@ -83,15 +83,15 @@ const RootLayout: FC<
           {/* Check if footerData is available before rendering Footer */}
           {footerData && (
             <Footer
-              logoSrc={footerData.logo} 
-              address={footerData.address} 
-              phone={footerData.phone} 
-              email={footerData.email} 
-              services={footerData.services} 
+              logoSrc={footerData.logo}
+              address={footerData.address}
+              phone={footerData.phone}
+              email={footerData.email}
+              services={footerData.services}
               quickLinks={footerData.quickLinks}
-              aboutLinks={footerData.aboutLinks} 
-              socialLinks={footerData.socialLinks} 
-              copyrightText={footerData.copyrightText} 
+              aboutLinks={footerData.aboutLinks}
+              socialLinks={footerData.socialLinks}
+              copyrightText={footerData.copyrightText}
             />
           )}
 

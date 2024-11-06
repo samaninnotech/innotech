@@ -71,12 +71,12 @@ export const ColumnContainer = styled.div`
 `;
 
 export const Spacer = styled.div`
-  height: 20px; /* Adjust spacer height as needed */
+  height: 20px;
 `;
 
 export const Heading = styled.div`
   animation: ${moveUp} 1s ease-out;
-  z-index: 2; /* Ensure content is above the overlay */
+  z-index: 2;
   h2 {
     text-align: center !important;
   }
@@ -86,12 +86,12 @@ export const Separator = styled.div`
   width: 100%;
   position: absolute;
   bottom: 0;
-  z-index: 2; /* Ensure separator is above the overlay */
+  z-index: 2;
 
   svg {
     display: block;
     width: 100%;
     height: 80px;
-    fill: #f8f8f8;
+    fill: var(--background-gray-color);
   }
 `;

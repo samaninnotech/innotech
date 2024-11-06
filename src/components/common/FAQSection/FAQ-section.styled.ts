@@ -99,17 +99,18 @@ export const AccordionWrapper = styled.div`
 export const AccordionSection = styled.div<{ active: boolean }>`
   margin: 0 10px 15px 10px;
   border-radius: 5px;
-  background-color: ${({ active }) => (active ? "#25567a" : "white")};
-  transition: background-color 0.4s ease; /* Smooth background transition */
+  background-color: ${({ active }) =>
+    active ? "var(--innotech-color)" : "white"};
+  transition: background-color 0.4s ease;
 
   &:hover {
-    background-color: #25567a;
+    background-color: var(--innotech-color);
     h6 {
-      color: #fff;
+      color: var(--white-color);
     }
 
     svg {
-      color: #fff;
+      color: var(--white-color);
     }
   }
 `;
@@ -124,31 +125,28 @@ export const AccordionTitleWrapper = styled.div`
 
 export const AccordionTitle = styled.h6<{ active: boolean }>`
   font-size: 1rem;
-  color: ${({ active }) => (active ? "#fff" : "#333")};
+  color: ${({ active }) =>
+    active ? "var(--white-color)" : "var(--text-black-color)"};
 `;
 
 export const AccordionIcon = styled(SlArrowDown)<{ active: boolean }>`
   transition:
     transform 0.4s ease,
-    color 0.4s ease; /* Smooth transform and color transition */
+    color 0.4s ease;
   ${({ active }) => active && `transform: rotate(180deg);`}
-  color: ${({ active }) => (active ? "#fff" : "#333")};
+  color: ${({ active }) =>
+    active ? "var(--white-color)" : "var(--text-black-color)"};
 `;
 
 export const AccordionContent = styled.div<{ active: boolean }>`
   font-size: 1rem;
-  color: #666;
-  padding: ${({ active }) =>
-    active
-      ? "25px"
-      : "0 25px"}; /* Maintain horizontal padding, but adjust vertical padding */
+  color: var(--text-gray-color);
+  padding: ${({ active }) => (active ? "25px" : "0 25px")};
   text-align: left;
-  background-color: #fff;
+  background-color: var(--white-color);
   overflow: hidden;
-  height: ${({ active }) =>
-    active ? "auto" : "10px"}; /* Set initial height to 10px when inactive */
-  max-height: ${({ active }) =>
-    active ? "700px" : "10px"}; /* Keep a small height when inactive */
+  height: ${({ active }) => (active ? "auto" : "10px")};
+  max-height: ${({ active }) => (active ? "700px" : "10px")};
   opacity: ${({ active }) => (active ? 1 : 0)};
   transition:
     max-height 0.2s ease,

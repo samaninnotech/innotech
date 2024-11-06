@@ -41,13 +41,13 @@ const EventRegistrationCard: React.FC<EventRegistrationCardProps> = ({
 
   useEffect(() => {
     if (isPopupOpen) {
-      document.body.style.overflow = "hidden"; // Prevent scrolling
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "auto"; // Allow scrolling
+      document.body.style.overflow = "auto";
     }
 
     return () => {
-      document.body.style.overflow = "auto"; // Cleanup
+      document.body.style.overflow = "auto";
     };
   }, [isPopupOpen]);
 
@@ -78,18 +78,13 @@ const EventRegistrationCard: React.FC<EventRegistrationCardProps> = ({
             <>
               {buttonLink.linkType === "POPUP_FORM" ? (
                 <ButtonWrapper isCertification={isCertificationEvent}>
-                  <ButtonLink
-                    onClick={togglePopup}
-                    href="#" // Placeholder href since we are using it as a button
-                  >
+                  <ButtonLink onClick={togglePopup} href="#">
                     <ButtonText>{buttonLink.label}</ButtonText>
                   </ButtonLink>
                 </ButtonWrapper>
               ) : (
                 <ButtonWrapper isCertification={isCertificationEvent}>
-                  <ButtonLink
-                    href={customLinkToHref(buttonLink)} // Use href when not a popup
-                  >
+                  <ButtonLink href={customLinkToHref(buttonLink)}>
                     <ButtonText>{buttonLink.label}</ButtonText>
                   </ButtonLink>
                 </ButtonWrapper>

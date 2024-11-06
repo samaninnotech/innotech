@@ -20,7 +20,7 @@ export const HeadingSmall = styled.h6`
 
 export const HeadingLarge = styled.div`
   font-size: 2.5rem;
-  color: #000;
+  color: var(--black-color);
   margin: 0 auto;
   line-height: 1.5;
   width: 60%;
@@ -28,7 +28,7 @@ export const HeadingLarge = styled.div`
   max-width: 1170px;
 `;
 export const LeftColumn = styled.h3`
-  color: #000;
+  color: var(--black-color);
   text-align: left;
   margin: 0;
   color: var(--text-light-color);
@@ -39,14 +39,14 @@ export const LeftColumn = styled.h3`
   }
 `;
 export const LeftColumnText = styled.div`
-  color: #000;
+  color: var(--black-color);
   text-align: left;
   font-size: 30px;
   width: 100%;
   margin: 0;
 
   mark {
-    color: #25567a;
+    color: var(--innotech-color);
     font-weight: bold;
   }
 `;
@@ -93,17 +93,18 @@ export const AccordionSection = styled.div<{ active: boolean }>`
   border: 1px solid #ddd;
   margin: 10px 0;
   border-radius: 5px;
-  background-color: ${({ active }) => (active ? "#25567a" : "transparent")};
-  transition: background-color 0.4s ease; /* Smooth background transition */
+  background-color: ${({ active }) =>
+    active ? "var(--innotech-color)" : "transparent"};
+  transition: background-color 0.4s ease;
 
   &:hover {
-    background-color: #25567a;
+    background-color: var(--innotech-color);
     h6 {
-      color: #fff;
+      color: var(--white-color);
     }
 
     svg {
-      color: #fff;
+      color: var(--white-color);
     }
   }
 `;
@@ -118,31 +119,26 @@ export const AccordionTitleWrapper = styled.div`
 
 export const AccordionTitle = styled.h6<{ active: boolean }>`
   font-size: 1rem;
-  color: #333;
-  color: ${({ active }) => (active ? "#fff" : "#333")};
+  color: var(--text-black-color);
+  color: ${({ active }) =>
+    active ? "var(--white-color)" : "var(--text-black-color)"};
 `;
 
 export const AccordionIcon = styled(SlArrowDown)<{ active: boolean }>`
   transition: transform 0.4s ease;
   transform: ${({ active }) => (active ? "rotate(180deg)" : "rotate(0deg)")};
-  color: ${({ active }) =>
-    active ? "#000" : "#888"}; /* Adjust colors as needed */
+  color: ${({ active }) => (active ? "var(--black-color)" : "#888")};
 `;
 
 export const AccordionContent = styled.div<{ active: boolean }>`
   font-size: 1rem;
-  color: #666;
-  padding: ${({ active }) =>
-    active
-      ? "25px"
-      : "0 25px"}; /* Maintain horizontal padding, but adjust vertical padding */
+  color: var(--text-gray-color);
+  padding: ${({ active }) => (active ? "25px" : "0 25px")};
   text-align: left;
-  background-color: #fff;
+  background-color: var(--white-color);
   overflow: hidden;
-  height: ${({ active }) =>
-    active ? "auto" : "10px"}; /* Set initial height to 10px when inactive */
-  max-height: ${({ active }) =>
-    active ? "700px" : "10px"}; /* Keep a small height when inactive */
+  height: ${({ active }) => (active ? "auto" : "10px")};
+  max-height: ${({ active }) => (active ? "700px" : "10px")};
   opacity: ${({ active }) => (active ? 1 : 0)};
   transition:
     max-height 0.2s ease,

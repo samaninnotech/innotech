@@ -52,7 +52,7 @@ export const TopBarWrap = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding: 10px 0; /* Add padding for spacing */
+  padding: 10px 0;
 `;
 
 export const TopBarLeft = styled.div``;

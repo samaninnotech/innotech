@@ -71,7 +71,7 @@ export const PlusSign = styled.span`
 export const Title = styled.h4`
   font-size: 1.5rem;
   margin: 10px 0;
-  color: #333;
+  color: var(--text-black-color);
   font-weight: 600;
 `;
 
@@ -105,14 +105,12 @@ export const ButtonWrapper = styled.div<{ isCertification: boolean }>`
       ? "var(--innotech-color)"
       : "linear-gradient(90deg, #47689c 20%, #c4a22a 50%)"};
   ${({ isCertification }) =>
-    isCertification
-      ? `width: auto;` // Adjust width if certification
-      : `width: 100%;`}
+    isCertification ? `width: auto;` : `width: 100%;`}
   &:hover {
     background: ${({ isCertification }) =>
       isCertification
         ? "var(--innotech-color)"
-        : "linear-gradient(90deg, #c4a22a 20%, #47689c 50%)"}; /* Darker red on hover for certification */
+        : "linear-gradient(90deg, #c4a22a 20%, #47689c 50%)"};
     text-decoration: none !important;
   }
 `;
@@ -121,7 +119,7 @@ export const ButtonLink = styled(Link)`
   display: inline-block;
   padding: 1rem 2rem;
   text-align: center;
-  color: white; /* Ensure the text is white */
+  color: white;
   border-radius: 5px;
 
   transition: background-position 1s;

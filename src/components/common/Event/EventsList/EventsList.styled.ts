@@ -69,7 +69,7 @@ export const EventTileStyled = styled(Link)`
   flex-direction: column;
   align-items: left;
   text-align: left;
-  background-color: #fff;
+  background-color: var(--white-color);
   border-radius: 8px;
   overflow: hidden;
   transition: transform 0.3s ease;
@@ -137,19 +137,18 @@ export const MonthHeading = styled.h2`
 `;
 export const ContentContainer = styled.div`
   display: flex;
-  align-items: flex-start; /* Align items to the start */
-  width: 100%; /* Full width of the parent */
-  padding: 1rem; /* Optional padding */
+  align-items: flex-start;
+  width: 100%;
+  padding: 1rem;
 
-  /* Ensure the image and description are responsive */
   ${ImageContainer} {
-    flex: 0 0 auto; /* Don't allow the image to grow */
-    margin-right: 1rem; /* Space between image and description */
+    flex: 0 0 auto;
+    margin-right: 1rem;
   }
 
   ${EventDescription} {
-    flex: 1; /* Allow the description to fill the remaining space */
-    overflow: hidden; /* Prevent overflow */
+    flex: 1;
+    overflow: hidden;
   }
 `;
 

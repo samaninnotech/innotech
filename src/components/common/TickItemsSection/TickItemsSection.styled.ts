@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export const TickItemsSectionContainer = styled.section`
   padding: 20px;
-  background-color: #fff;
+  background-color: var(--white-color);
   margin: 0 5rem;
 `;
 

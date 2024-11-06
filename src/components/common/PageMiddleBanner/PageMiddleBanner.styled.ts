@@ -1,7 +1,7 @@
 import { mediaRules } from "@/themes/media-breakpoints";
 import Image from "next/image";
 import styled from "styled-components";
-// Container for the entire banner
+
 export const BannerContainer = styled.div`
   width: 100%;
   margin: 0;
@@ -10,7 +10,6 @@ export const BannerContainer = styled.div`
   overflow: hidden;
 `;
 
-// Wrapper for the banner to handle positioning
 export const BannerWrapper = styled.div`
   width: 100%;
   height: auto;
@@ -18,20 +17,19 @@ export const BannerWrapper = styled.div`
   overflow: hidden;
 `;
 
-// Image within the banner, making it full width and height
 export const BannerImage = styled(Image)`
   width: 100%;
   height: auto;
-  object-fit: cover; // Ensure the image covers the area without distortion
+  object-fit: cover;
   position: relative;
 `;
 
 export const SectionContainer = styled.section`
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center align items horizontally */
-  padding: 2rem; /* Add some padding */
-  background-color: #f9f9f9; /* Background color for the section */
+  align-items: center;
+  padding: 2rem;
+  background-color: var(--background-gray-color);
 `;
 
 export const InnerContainer = styled.div`
@@ -53,13 +51,13 @@ export const InnerContainer = styled.div`
 export const Description = styled.div`
   font-size: 15px;
   font-weight: 350;
-  color: var(--text-gray-color); /* Customize the color */
-  margin-bottom: 0 !important; /* Spacing below the small header */
+  color: var(--text-gray-color);
+  margin-bottom: 0 !important;
   align-self: flex-start;
 `;
 
 export const LargeHeader = styled.div`
   font-size: 28px;
-  text-align: center; /* Center the text */
-  margin-top: 0rem; /* Spacing below the large header */
+  text-align: center;
+  margin-top: 0rem;
 `;

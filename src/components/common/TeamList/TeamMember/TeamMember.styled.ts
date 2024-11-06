@@ -42,7 +42,7 @@ export const SocialNetworks = styled.div`
   transition:
     opacity 0.3s ease,
     visibility 0.3s ease;
-  background: #25567a;
+  background: var(--innotech-color);
 `;
 
 export const SocialNetworksInner = styled.div`
@@ -52,7 +52,7 @@ export const SocialNetworksInner = styled.div`
   height: 100%;
   width: 100%;
   svg {
-    color: #fff;
+    color: var(--white-color);
     font-size: 18px;
   }
 `;
@@ -66,7 +66,7 @@ export const InfoContainer = styled.div`
 
   .position {
     font-size: 16px;
-    color: #666;
+    color: var(--text-gray-color);
   }
 `;
 
@@ -78,7 +78,7 @@ export const Name = styled.h3`
 
 export const Position = styled.div`
   font-size: 16px;
-  color: #666;
+  color: var(--text-gray-color);
 `;
 
 export const GridItemWithHover = styled(GridItem)`

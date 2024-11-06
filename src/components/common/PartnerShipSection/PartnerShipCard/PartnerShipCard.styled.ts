@@ -2,7 +2,7 @@ import Image from "next/image";
 import styled from "styled-components";
 
 export const Card = styled.div`
-  background-color: #fff;
+  background-color: var(--white-color);
   border-radius: 5px;
   text-align: center;
   padding: 20px;
@@ -42,7 +42,7 @@ export const Heading = styled.h4`
 
 export const TextContent = styled.div`
   font-size: 14px;
-  color: #666;
+  color: var(--text-gray-color);
   line-height: 1.5;
   margin: 0;
   text-align: left;

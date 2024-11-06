@@ -7,7 +7,7 @@ type EventContainerProps = {
 };
 export const EventContainer = styled(Link)<EventContainerProps>`
   display: flex;
-  align-items: stretch; /* Makes children stretch to fill the container's height */
+  align-items: stretch;
   margin-bottom: 20px;
   position: relative;
   overflow: hidden;
@@ -20,7 +20,7 @@ export const EventContainer = styled(Link)<EventContainerProps>`
 `;
 
 export const EventImage = styled.div<{ imageUrl: string }>`
-  width: 200px; /* Fixed width */
+  width: 200px;
   background-image: url(${(props) => props.imageUrl});
   background-size: cover;
   background-position: center;
@@ -43,21 +43,21 @@ export const EventDate = styled.div<OverlayProps>`
   flex-direction: column;
   font-size: 1em;
   height: 100%;
-  width: 40%; /* Initial width */
+  width: 40%;
   box-shadow: inset 2px 0 14px -2px #22486a;
   bottom: 0;
   left: 0;
   text-align: center;
   justify-content: center;
-  opacity: 0.8; /* Visible by default */
-  transition: width 0.3s ease; /* Smooth transition for width */
+  opacity: 0.8;
+  transition: width 0.3s ease;
 
   span {
     display: block;
   }
 
   ${EventContainer}:hover & {
-    width: 100%; /* Expand to full width on hover */
+    width: 100%;
   }
 `;
 
@@ -104,8 +104,8 @@ export const EventTimeWrapper = styled.div`
 
 export const EventClockIcon = styled.div`
   margin-right: 8px;
-  color: #555; /* Icon color */
-  font-size: 1.2rem; /* Adjust icon size */
+  color: #555;
+  font-size: 1.2rem;
 `;
 
 export const DateWrapper = styled.div`

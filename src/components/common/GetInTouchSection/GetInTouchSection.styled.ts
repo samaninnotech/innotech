@@ -4,7 +4,7 @@ import styled from "styled-components";
 type SectionWrapperProps = {
   backgroundImage?: string;
 };
-// Define custom props for Column and Heading
+
 type ColumnProps = {
   marginLeft?: string;
 };
@@ -14,17 +14,17 @@ type FormItemProps = {
 };
 
 export const SectionWrapper = styled.div<SectionWrapperProps>`
-  background-color: #fff;
+  background-color: var(--white-color);
   position: relative;
   box-sizing: border-box;
   width: 100%;
   padding: 0 20px;
-  padding-top: 110px; /* Align with the background image's top padding */
-  padding-bottom: 120px; /* Align with the background image's bottom padding */
+  padding-top: 110px;
+  padding-bottom: 120px;
   background-image: url(${(props) => props.backgroundImage});
   background-repeat: no-repeat;
   background-position: center right;
-  background-size: auto; /* Ensures that the background is displayed in its original size */
+  background-size: auto;
   @media (max-width: 768px) {
     background-position: bottom center;
   }
@@ -137,7 +137,7 @@ export const Input = styled.input`
   width: 100%;
   padding: 1rem;
   border-radius: 4px;
-  background-color: #f5f5f5;
+  background-color: var(--light-gray);
   border: 1px solid transparent;
   color: var(--text-gray-color);
   font-size: 16px;
@@ -155,11 +155,9 @@ export const TextArea = styled.textarea`
   padding: 15px;
   border-radius: 4px;
   font-size: 16px;
-  background-color: #f5f5f5;
-  border: 1px solid transparent; /* Add a default border */
-  color: var(
-    --text-gray-color
-  ); /* Set default text color to gray when not focused */
+  background-color: var(--light-gray);
+  border: 1px solid transparent;
+  color: var(--text-gray-color);
 
   &:focus {
     outline: none;
@@ -174,7 +172,7 @@ export const Select = styled.select`
   padding: 15px;
   border-radius: 4px;
   font-size: 16px;
-  background-color: #f5f5f5;
+  background-color: var(--light-gray);
   &:focus {
     outline: none;
     color: var(--text-gray-color);
@@ -204,10 +202,10 @@ export const Agreement = styled.div`
   margin-bottom: 20px;
   label {
     font-size: 14px;
-    display: flex; /* Add this to align the checkbox and text horizontally */
-    align-items: center; /* Vertically align the checkbox and text */
+    display: flex;
+    align-items: center;
     input {
-      margin-right: 8px; /* Adjust this value to add space between the checkbox and the text */
+      margin-right: 8px;
     }
     a {
       color: #007cba;

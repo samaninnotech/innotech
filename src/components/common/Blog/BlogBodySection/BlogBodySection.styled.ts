@@ -52,7 +52,7 @@ export const ShareButton = styled.button`
   justify-content: center;
   align-items: center;
   border: none;
-  background-color: #25567a;
+  background-color: var(--innotech-color);
   cursor: pointer;
   font-size: 1.5rem;
   color: white;
@@ -60,10 +60,10 @@ export const ShareButton = styled.button`
   border-radius: 5rem;
   width: 3.5rem;
   height: 3.5rem;
-  transition: background-color 0.3s ease; /* Optional: add transition for button hover */
+  transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #1e3a5f; /* Darker shade on hover */
+    background-color: #1e3a5f;
   }
 `;
 
@@ -100,21 +100,19 @@ export const ShareBubble = styled.div`
     opacity 0.3s ease,
     transform 0.3s ease;
 
-  /* Arrow styling */
   &:after {
     content: "";
     position: absolute;
-    bottom: -0.5rem; /* Adjust to position arrow as needed */
+    bottom: -0.5rem; /
     left: 50%;
     transform: translateX(-50%);
     width: 0;
     height: 0;
     border-left: 0.5rem solid transparent;
     border-right: 0.5rem solid transparent;
-    border-top: 0.5rem solid white; /* Arrow color should match the bubble background */
+    border-top: 0.5rem solid white; 
   }
 
-  /* Bubble visible state */
   &.show {
     opacity: 1;
     transform: translateY(0);
@@ -138,7 +136,7 @@ export const IconsInner = styled.div`
     transition: color 0.3s ease;
 
     &:hover {
-      color: #25567a; /* Change color on hover */
+      color: var(--innotech-color);
     }
   }
 `;

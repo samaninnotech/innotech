@@ -33,7 +33,7 @@ export const InnerContainer2 = styled.div`
   display: flex;
   margin-right: -0.5rem;
   flex-wrap: wrap;
-  align-items: flex-start; /* Align items to the top */
+  align-items: flex-start;
   text-align: center;
   flex-direction: column;
   ${mediaRules.lg} {
@@ -52,11 +52,11 @@ export const InnerContainerLeft = styled.div`
   font-size: 1.5rem;
   color: var(--text-light-color);
   text-align: left;
-  border-left: 5px solid #25567a;
+  border-left: 5px solid var(--innotech-color);
 
   ${mediaRules.lg} {
     font-size: 1.75rem;
-    margin-top: 0; /* Remove negative margin */
+    margin-top: 0;
   }
 `;
 
@@ -75,7 +75,7 @@ export const InnerContainerRight = styled.div`
 
   ${mediaRules.lg} {
     font-size: 1.25rem;
-    margin-top: 0; /* Remove negative margin */
+    margin-top: 0;
   }
 `;
 

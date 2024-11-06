@@ -32,16 +32,16 @@ export const PopupContainer = styled.div<{ hasThumbnail: boolean }>`
 
   // Custom scrollbar
   &::-webkit-scrollbar {
-    width: 3px; /* Adjust width for vertical scrollbar */
+    width: 3px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.3); /* Scroll thumb color */
-    border-radius: 10px; /* Rounded edges for scrollbar */
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
   }
 
   &::-webkit-scrollbar-track {
-    background-color: transparent; /* Background of the scrollbar track */
+    background-color: transparent;
   }
 
   // Media rules for max-width when thumbnail exists
@@ -115,7 +115,7 @@ export const Input = styled.input`
   width: 90%;
   padding: 1rem;
   border-radius: 4px;
-  background-color: #f5f5f5;
+  background-color: var(--light-gray);
   border: 1px solid transparent;
   color: var(--text-gray-color);
   font-size: 16px;

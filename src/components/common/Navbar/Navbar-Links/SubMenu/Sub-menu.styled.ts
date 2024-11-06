@@ -63,7 +63,7 @@ export const Element = styled.div<SubMenuProps>`
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
     border-top: 0;
     background-color: white;
-    max-height: 600px; /* Set a maximum height, adjust as needed */
+    max-height: 600px;
     overflow-y: auto;
     height: auto;
   }

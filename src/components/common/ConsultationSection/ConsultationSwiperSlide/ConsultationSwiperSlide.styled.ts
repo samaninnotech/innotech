@@ -13,7 +13,7 @@ export const Slide = styled.div`
   border-radius: 5px;
   margin: 12px 0;
   &:hover {
-    background-color: #25567a;
+    background-color: var(--innotech-color);
     color: white;
     transform: translateY(-5px);
   }

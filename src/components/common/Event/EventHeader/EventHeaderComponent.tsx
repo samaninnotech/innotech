@@ -1,5 +1,3 @@
-// src/components/EventHeaderComponent.tsx
-
 "use client";
 import useTranslation from "@/i18n/useTranslation";
 import { formatDate } from "@/lib/middlewares/eventDateParser";

@@ -12,9 +12,9 @@ export const LoadMoreButton = styled.button`
   font-size: 0.8rem;
   font-weight: 500;
   border: 1px solid gray;
-  color: #25567a;
+  color: var(--innotech-color);
   &:hover {
-    background-color: #177aa9;
+    background-color: var(--input-border-color);
     color: white;
   }
 `;
@@ -96,7 +96,7 @@ export const PostTileStyled = styled(Link)`
   flex-direction: column;
   align-items: center;
   text-align: center;
-  background-color: #fff;
+  background-color: var(--white-color);
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -120,7 +120,6 @@ export const LearnMoreLink = styled.div`
   border-top: 1px solid gray;
   overflow: hidden;
 
-  /* Pseudo-element for the inner cover */
   &::before {
     content: "";
     position: absolute;
@@ -128,32 +127,30 @@ export const LearnMoreLink = styled.div`
     left: 0;
     width: 100%;
     height: 0%;
-    background-color: #25567a; /* Darker blue cover color */
-    transition: height 0.3s ease; /* Smooth transition for the cover */
-    z-index: -1; /* Ensure the cover is beneath the text and arrow */
+    background-color: var(--innotech-color);
+    transition: height 0.3s ease;
+    z-index: -1;
   }
 
   &:hover::before {
-    height: 100%; /* Cover rises from the bottom to the top on hover */
+    height: 100%;
   }
 
-  /* Ensure text and arrow are above the cover */
   position: relative;
   z-index: 3;
 
-  /* Change text and arrow color on hover */
   &:hover {
-    color: white; /* Change text to white */
+    color: white;
   }
 
   .arrow-icon {
     margin-left: 5px;
     transition: transform 0.3s ease;
-    color: inherit; /* Inherit color from the parent */
+    color: inherit;
   }
 
   &:hover .arrow-icon {
-    transform: translateX(5px); /* Slide arrow on hover */
+    transform: translateX(5px);
   }
 `;
 
@@ -161,7 +158,7 @@ export const SectionWrapper = styled.div`
   position: relative;
   box-sizing: border-box;
   width: 100%;
-  background-color: #f8f8f8;
+  background-color: var(--background-gray-color);
   margin: 0 auto;
   top: 20px;
   padding-bottom: 80px;

@@ -179,13 +179,13 @@ export const SocialLinks = styled.div`
     color: #495057;
     margin: 0 10px;
     font-size: 1.2em;
-    width: 50px; /* Ensures a square container */
-    height: 50px; /* Ensures a square container */
-    border: 2px solid var(--light-gray); /* Add border around the icons */
-    border-radius: 50%; /* Make the border fully circular */
+    width: 50px;
+    height: 50px;
+    border: 2px solid var(--light-gray);
+    border-radius: 50%;
     display: flex;
-    align-items: center; /* Vertically centers the icon */
-    justify-content: center; /* Horizontally centers the icon */
+    align-items: center;
+    justify-content: center;
     transition:
       border-color 0.2s ease,
       color 0.2s ease;

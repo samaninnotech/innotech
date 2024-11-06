@@ -224,7 +224,7 @@ export const PlayButton = styled.div`
   transform: translate(-50%, -50%);
   width: 60px;
   height: 60px;
-  background-color: #25567a;
+  background-color: var(--innotech-color);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -234,7 +234,7 @@ export const PlayButton = styled.div`
 
   .play-icon {
     font-size: 24px;
-    color: #fff;
+    color: var(--white-color);
     z-index: 3;
     position: relative;
   }
@@ -243,7 +243,7 @@ export const PlayButton = styled.div`
     position: absolute;
     width: 100%;
     height: 100%;
-    border: 0.5px solid #25567a;
+    border: 0.5px solid var(--innotech-color);
     border-radius: 50%;
     animation: pulseEffect 3s infinite;
     z-index: 1;
@@ -283,7 +283,7 @@ export const VideoContainer = styled.div`
   height: 80%;
   max-width: 800px;
   max-height: 450px;
-  background: #000;
+  background: var(--black-color);
 
   ${mediaRules.sm} {
     width: 90%;

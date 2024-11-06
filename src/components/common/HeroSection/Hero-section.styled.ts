@@ -31,7 +31,7 @@ export const InnerContainer1 = styled.div<{ $bgImg?: string }>`
   background-image: url(${({ $bgImg }) => $bgImg});
   background-size: auto;
   background-position: center right;
-  background-repeat: no-repeat; /* Prevents the image from repeating */
+  background-repeat: no-repeat;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -129,7 +129,7 @@ export const VideoContainer = styled.div`
   height: 80%;
   max-width: 800px;
   max-height: 450px;
-  background: #000;
+  background: var(--black-color);
 
   ${mediaRules.sm} {
     width: 90%;

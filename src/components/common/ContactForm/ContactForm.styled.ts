@@ -2,11 +2,11 @@ import { mediaRules } from "@/themes/media-breakpoints";
 import styled from "styled-components";
 
 export const ContactFormContainer = styled.div`
-  background-color: #fff;
+  background-color: var(--white-color);
   position: relative;
   width: 100%;
-  padding-top: 110px; /* Align with the background image's top padding */
-  padding-bottom: 120px; /* Align with the background image's bottom padding */
+  padding-top: 110px;
+  padding-bottom: 120px;
   border: none;
 `;
 
@@ -67,16 +67,14 @@ export const TextArea = styled.textarea`
   padding: 15px;
   border-radius: 4px;
   font-size: 16px;
-  background-color: #f5f5f5;
-  border: 1px solid transparent; /* Add a default border */
-  color: var(
-    --text-gray-color
-  ); /* Set default text color to gray when not focused */
+  background-color: var(--light-gray);
+  border: 1px solid transparent;
+  color: var(--text-gray-color);
 
   &:focus {
-    border: 0.2px solid #177aa9; /* Change to a thinner border */
-    outline: none; /* Remove the default outline */
-    color: #1b7caa; /* Change text color back to original when focused */
+    border: 0.2px solid var(--input-border-color);
+    outline: none;
+    color: #1b7caa;
   }
 `;
 
@@ -92,16 +90,14 @@ export const Input = styled.input`
   width: 100%;
   padding: 0.5rem;
   border-radius: 4px;
-  background-color: #f5f5f5;
-  border: 1px solid transparent; /* Add a default border */
-  color: var(
-    --text-gray-color
-  ); /* Set default text color to gray when not focused */
+  background-color: var(--light-gray);
+  border: 1px solid transparent;
+  color: var(--text-gray-color);
   padding: 15px;
   &:focus {
-    border-color: #177aa9; /* Change border color to blue when focused */
-    outline: none; /* Remove the default outline */
-    color: #1b7caa; /* Change text color back to original when focused */
+    border-color: var(--input-border-color);
+    outline: none;
+    color: #1b7caa;
   }
 `;
 
@@ -112,29 +108,26 @@ export const CheckboxLabel = styled.label`
   text-align: left;
 
   input {
-    /* Hide the default checkbox */
     appearance: none;
-    -webkit-appearance: none; /* For Safari */
-    width: 20px; /* Adjust width of the checkbox */
-    height: 20px; /* Adjust height of the checkbox */
-    border: 1px solid black; /* Border for the checkbox */
-    margin-right: 10px; /* Space between checkbox and text */
-    cursor: pointer; /* Change cursor to pointer for better UX */
-    outline: none; /* Remove default focus outline */
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+    margin-right: 10px;
+    cursor: pointer;
+    outline: none;
 
     &:checked {
-      background-color: transparent; /* Keep background transparent for the checked state */
+      background-color: transparent;
     }
 
     &:checked::before {
-      content: ""; /* Create a custom square */
+      content: "";
       display: block;
-      width: 10px; /* Adjust width of the inner square */
-      height: 10px; /* Adjust height of the inner square */
-      background-color: var(
-        --text-black-color
-      ); /* Color of the square when checked */
-      margin: 4px; /* Add space between the inner square and border */
+      width: 10px;
+      height: 10px;
+      background-color: var(--text-black-color);
+      margin: 4px;
     }
   }
 `;

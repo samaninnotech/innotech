@@ -16,8 +16,8 @@ export const Section = styled.section`
 `;
 
 export const BackgroundImage = styled(Image)`
-  border-radius: 5px; /* 5px corner radius */
-  width: 80vw; /* Optional: Adjust image width */
+  border-radius: 5px;
+  width: 80vw;
   height: auto;
   z-index: -1;
 `;

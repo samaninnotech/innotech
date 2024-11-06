@@ -5,7 +5,7 @@ type GridProps = {
   numberOfColumns: number;
 };
 export const VideoGridContainer = styled.section`
-  background-color: #fff; /* Optional: Light background for the entire section */
+  background-color: var(--white-color);
   margin: 0 5rem;
 `;
 
@@ -66,7 +66,7 @@ export const GridWrapper = styled.div<GridProps>`
 export const VideoContainer = styled.div`
   width: 100%;
   height: 100%;
-  background: #000;
+  background: var(--black-color);
 
   ${mediaRules.sm} {
     width: 100%;

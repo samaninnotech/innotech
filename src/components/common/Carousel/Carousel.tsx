@@ -8,7 +8,6 @@ import "@splidejs/react-splide/css/skyblue";
 
 import Image from "next/image";
 import { ComponentPropsWithoutRef } from "react";
-import styled from "styled-components";
 import { GenericSectionProps } from "../GenericSection";
 import {
   CarouselContent,
@@ -17,10 +16,6 @@ import {
   InnerContainer1,
   InnerContainer2,
 } from "./Carousel.styled";
-
-export const CustomSplideSlide = styled.div`
-  // Your custom styles for each slide
-`;
 
 type CarouselProps = GenericSectionProps &
   ComponentPropsWithoutRef<"div"> & {

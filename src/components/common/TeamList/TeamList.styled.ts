@@ -47,7 +47,7 @@ export const Paragraph = styled.div`
   flex: 0 0 55%;
   text-align: left;
   margin-bottom: 20px;
-  color: #696969;
+  color: var(--text-gray-color);
 `;
 
 export const RightBox = styled.div`

@@ -7,7 +7,7 @@ export const InnerContainer1 = styled.div`
   width: 65%;
   line-height: 1.8;
   text-align: justify;
-  color: var(--event-text-color); /* Adjust the color for the event */
+  color: var(--event-text-color);
   display: flex;
   justify-content: center;
   max-width: 640px;
@@ -52,7 +52,7 @@ export const ShareButton = styled.button`
   justify-content: center;
   align-items: center;
   border: none;
-  background-color: #25567a;
+  background-color: var(--innotech-color);
   cursor: pointer;
   font-size: 1.5rem;
   color: white;
@@ -136,7 +136,7 @@ export const IconsInner = styled.div`
     transition: color 0.3s ease;
 
     &:hover {
-      color: #25567a;
+      color: var(--innotech-color);
     }
   }
 `;

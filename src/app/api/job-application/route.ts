@@ -4,12 +4,12 @@ export async function POST(req: Request) {
   // Get the FormData from the request
   const formData = await req.formData();
 
-  const cv = formData.get("cv") as File; 
+  const cv = formData.get("cv") as File;
   const email = formData.get("email") as string;
   const firstName = formData.get("firstName") as string;
   const senderEmail = formData.get("senderEmail") as string;
   const senderPassword = formData.get("senderPassword") as string;
-  const receiverEmail = formData.get("receiverEmail") as string; 
+  const receiverEmail = formData.get("receiverEmail") as string;
 
   // Validate required fields
   if (
@@ -47,7 +47,7 @@ export async function POST(req: Request) {
   // Set up the email options for the receiver
   const mailOptionsToReceiver = {
     from: senderEmail,
-    to: receiverEmail, 
+    to: receiverEmail,
     subject: "New Job Application Received",
     text: `A new job application has been submitted by ${firstName}.`,
     attachments: [

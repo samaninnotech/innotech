@@ -89,7 +89,7 @@ export const EventTitle = styled.h3`
   font-size: 1.5rem;
 
   &:hover {
-    color: #25567a;
+    color: var(--innotech-color);
   }
 `;
 

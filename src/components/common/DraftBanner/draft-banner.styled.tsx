@@ -35,7 +35,7 @@ export const DraftText = styled.p`
   margin: 0;
   margin-bottom: 0.5rem;
   line-height: 2rem;
-  color: var(--white-color) fff;
+  color: var(--white-color);
   text-align: center;
 
   ${mediaRules.lg} {
@@ -51,7 +51,7 @@ export const DisableButton = styled.button`
   padding-left: 1rem;
   padding-right: 1rem;
   border-radius: 0.25rem;
-  color: var(--white-color) fff;
+  color: var(--white-color);
   text-transform: uppercase;
   background-color: #991b1b;
 

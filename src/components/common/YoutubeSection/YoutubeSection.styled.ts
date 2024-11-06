@@ -8,7 +8,7 @@ export const SectionContainer = styled.section`
   flex-direction: column;
   align-items: center;
   padding: 2rem;
-  background-color: #f9f9f9;
+  background-color: var(--background-gray-color);
 `;
 
 export const SmallHeader = styled.h3`

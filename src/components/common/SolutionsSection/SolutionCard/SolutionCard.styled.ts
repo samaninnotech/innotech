@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 export const Card = styled(Link)`
   width: 80%;
-  background-color: #fff;
+  background-color: var(--white-color);
   border-radius: 3px;
   box-shadow: none;
   text-align: center;

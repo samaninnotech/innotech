@@ -29,7 +29,7 @@ export const PopupContainer = styled.div`
   overflow-y: auto;
   margin: 5rem 0;
   &::-webkit-scrollbar {
-    width: 3px; /* Adjust width for vertical scrollbar */
+    width: 3px;
   }
   // Media rules for max-width when thumbnail exists
   ${mediaRules.sm} {
@@ -97,11 +97,11 @@ export const Input = styled.input`
   width: 100%;
   padding: 1rem;
   border-radius: 4px;
-  background-color: #f5f5f5;
+  background-color: var(--light-gray);
   border: 1px solid transparent;
   color: var(--text-gray-color);
   &:focus {
-    border-color: #177aa9;
+    border-color: var(--input-border-color);
     outline: none;
     color: #1b7caa;
   }
@@ -222,15 +222,13 @@ export const TextArea = styled.textarea`
   padding: 15px;
   border-radius: 4px;
   font-size: 16px;
-  background-color: #f5f5f5;
-  border: 1px solid transparent; /* Add a default border */
-  color: var(
-    --text-gray-color
-  ); /* Set default text color to gray when not focused */
+  background-color: var(--light-gray);
+  border: 1px solid transparent;
+  color: var(--text-gray-color);
 
   &:focus {
-    border: 0.2px solid #177aa9; /* Change to a thinner border */
-    outline: none; /* Remove the default outline */
-    color: #1b7caa; /* Change text color back to original when focused */
+    border: 0.2px solid var(--input-border-color);
+    outline: none;
+    color: #1b7caa;
   }
 `;

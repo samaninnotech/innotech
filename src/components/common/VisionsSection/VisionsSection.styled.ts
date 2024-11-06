@@ -5,7 +5,7 @@ export const SectionWrapper = styled.div`
   position: relative;
   box-sizing: border-box;
   width: 100%;
-  background-color: #f8f8f8;
+  background-color: var(--background-gray-color);
   margin: 0 auto;
 `;
 

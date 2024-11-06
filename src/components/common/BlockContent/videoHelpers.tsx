@@ -1,9 +1,3 @@
-// YouTube
-// - https://youtu.be/Iqe2sFm15Ac
-// - https://www.youtube.com/watch?v=Iqe2sFm15Ac
-// Vimeo
-// - https://vimeo.com/101939684
-
 import { IframeBlock } from "./styles";
 
 export enum Platform {
