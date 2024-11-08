@@ -27,7 +27,7 @@ const VideoGridSection: React.FC<VideoGridSectionProps> = ({
       </HeaderContainer>
       <GridWrapper numberOfColumns={numberOfColumns}>
         {videoItems.map((video) => (
-          <VideoContainer>
+          <VideoContainer key={video.label}>
             <iframe
               width="100%"
               height="100%"
