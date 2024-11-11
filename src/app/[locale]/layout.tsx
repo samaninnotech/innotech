@@ -2,6 +2,7 @@ import { DraftBanner, Footer } from "@/components/common";
 import { isSupportedLocale } from "@/i18n/settings";
 import { iubendaSiteId } from "@/iubenda/settings";
 import { getIubendaConfig } from "@/iubenda/utils";
+import StyledComponentsRegistry from "@/lib/registry";
 import {
   getFooterConfig,
   getHomepageId,
@@ -70,6 +71,7 @@ const RootLayout: FC<
         </Script>
       </head>
       <body className={"flex flex-col " + inter.className}>
+        <StyledComponentsRegistry>
         <Providers
           locale={locale}
           messages={dictionary}
@@ -97,6 +99,7 @@ const RootLayout: FC<
 
           {draftEnabled && <DraftBanner></DraftBanner>}
         </Providers>
+        </StyledComponentsRegistry>
       </body>
     </html>
   );
