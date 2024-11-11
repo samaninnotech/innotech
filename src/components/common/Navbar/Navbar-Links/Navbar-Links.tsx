@@ -241,12 +241,20 @@ const ComplexNavbarLink: FC<ComplexNavbarLinkProperties> = ({
 
   const getSubMenuPosition = (event: React.MouseEvent) => {
     const { currentTarget } = event;
-    const { left, width } = currentTarget.getBoundingClientRect();
-    const submenuWidth = 200;
+  
+    const targetElement = currentTarget as HTMLElement;
+    const { left, width } = targetElement.getBoundingClientRect();
+  
+    const submenuWidth = 200; 
+    const parentLeft = targetElement.offsetParent
+      ? (targetElement.offsetParent as HTMLElement).getBoundingClientRect().left
+      : 0;
+  
     return {
-      left: left + (width - submenuWidth) - 30,
+      left: left - parentLeft + (width - submenuWidth) / 2, 
     };
   };
+  
 
   return (
     <>
