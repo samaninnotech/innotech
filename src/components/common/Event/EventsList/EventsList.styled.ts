@@ -25,8 +25,11 @@ export const EventDescription = styled.p`
   font-weight: 300;
   margin-bottom: 1rem;
   color: var(--text-light-color);
-  padding: 0 1rem;
+  padding: 0;
   text-align: left;
+  ${mediaRules.md} {
+    padding: 0 1rem;
+  }
 `;
 export const EventDateWrapper = styled.div`
   display: flex;
@@ -140,7 +143,7 @@ export const ContentContainer = styled.div`
   align-items: flex-start;
   width: 100%;
   padding: 1rem;
-
+  flex-direction: column;
   ${ImageContainer} {
     flex: 0 0 auto;
     margin-right: 1rem;
@@ -149,6 +152,9 @@ export const ContentContainer = styled.div`
   ${EventDescription} {
     flex: 1;
     overflow: hidden;
+  }
+  ${mediaRules.md} {
+    flex-direction: row;
   }
 `;
 

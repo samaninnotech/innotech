@@ -77,10 +77,10 @@ export const ManagersRow = styled.div`
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   grid-column-gap: 30px;
-  grid-row-gap: 5px;
+  grid-row-gap: 25px;
   max-width: 1200px;
   width: 60%;
-
+  margin-bottom: 25px;
   ${mediaRules.sm} {
     grid-template-columns: repeat(3, 1fr);
     width: 100%;
@@ -99,7 +99,7 @@ export const EmployeesRow = styled.div`
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   grid-column-gap: 30px;
-  grid-row-gap: 5px;
+  grid-row-gap: 25px;
   width: 60%;
 
   ${mediaRules.sm} {

@@ -1,4 +1,5 @@
 import Link from "@/i18n/Link";
+import { mediaRules } from "@/themes/media-breakpoints";
 import styled from "styled-components";
 
 type JobOfferContainerProps = {
@@ -7,17 +8,26 @@ type JobOfferContainerProps = {
 
 export const JobOfferContainer = styled.div<JobOfferContainerProps>`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   padding: 20px;
   margin-bottom: 20px;
   background-color: ${({ isEven }) => (isEven ? "#e3e3e3" : "transparent")};
   box-shadow: var(--wp--preset--shadow--natural);
+  flex-direction: column;
+  ${mediaRules.sm} {
+    flex-direction: row;
+    align-items: center;
+  }
 `;
 
 export const JobInfo = styled.div`
   flex: 1;
   padding: 2rem;
+  padding-left: 0;
+  ${mediaRules.sm} {
+    padding: 2rem;
+  }
 `;
 
 export const JobTitle = styled.h4`
@@ -37,6 +47,10 @@ export const JobDescription = styled.div`
   color: var(--text-gray-color);
   line-height: 1.74;
   padding: 1rem;
+  padding-left: 0;
+  ${mediaRules.sm} {
+    padding: 1rem;
+  }
 `;
 
 export const JobButton = styled.div`

@@ -13,7 +13,6 @@ export const TeamMemberContainer = styled.div`
   transition: transform 0.3s ease;
   width: 100%;
   text-align: center;
-  margin: 1rem 1rem;
 `;
 
 export const PhotoContainer = styled.div`

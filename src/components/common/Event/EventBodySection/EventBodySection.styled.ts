@@ -14,15 +14,7 @@ export const InnerContainer1 = styled.div`
     max-width: 520px;
   }
   ${mediaRules.sm} {
-    max-width: 720px;
-  }
-  ${mediaRules.md} {
-    max-width: 940px;
-  }
-
-  ${mediaRules.lg} {
-    max-width: 1170px;
-  }
+    max-width: 800px;
 `;
 
 export const Section = styled.div`
