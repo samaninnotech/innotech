@@ -6,6 +6,7 @@ import {
   BackgroundImage,
   CalendarIcon,
   EventDate,
+  InnerContainer,
   MultipleEventDate,
   Section,
   Date as StyledDate,
@@ -118,14 +119,14 @@ const EventHeaderComponent: FC<EventHeaderProps> = ({
         {renderEventDate() && <EventDate>{renderEventDate()}</EventDate>}
       </TextContainer>
       <Section>
+        <InnerContainer>
         <BackgroundImage
           src={imgSrc}
-          fill
           alt="event-background"
-          style={{
-            objectFit: "cover",
-          }}
+          width={1000}
+          height={1000}
         />
+        </InnerContainer>
       </Section>
     </>
   );

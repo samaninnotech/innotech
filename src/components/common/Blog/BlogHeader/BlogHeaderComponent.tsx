@@ -5,6 +5,7 @@ import {
   BackgroundImage,
   CalendarIcon,
   Date,
+  InnerContainer,
   PublishedDate,
   Section,
   TextContainer,
@@ -26,14 +27,14 @@ const BlogHeaderComponent: FC<BlogHeaderProps> = ({
 }) => (
   <>
     <Section>
+      <InnerContainer>
       <BackgroundImage
         src={imgSrc}
-        fill
         alt="blog-background"
-        style={{
-          objectFit: "cover",
-        }}
+        width={1000}
+        height={1000}
       />
+      </InnerContainer>
     </Section>
     <TextContainer className="container">
       <Title>{title}</Title>

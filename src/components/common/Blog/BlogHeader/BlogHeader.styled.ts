@@ -5,22 +5,38 @@ import { FaCalendarAlt } from "react-icons/fa";
 import styled from "styled-components";
 
 export const Section = styled.section`
-  width: 85%;
+  width: 100%;
   position: relative;
-  top: 120px;
-  padding-top: 120px;
   display: flex;
+`;
+
+export const InnerContainer = styled.div`
+  display: flex;
+  align-items: center;
   justify-content: center;
+  width: 100%;
+
   flex-direction: column;
-  margin: auto;
-  height: 95vh;
+  margin: 0 auto;
+  ${mediaRules.xsm} {
+    max-width: 520px;
+  }
+  ${mediaRules.sm} {
+    max-width: 720px;
+  }
+  ${mediaRules.md} {
+    max-width: 940px;
+  }
+  ${mediaRules.lg} {
+    max-width: 1170px;
+  }
 `;
 
 export const BackgroundImage = styled(Image)`
   border-radius: 5px;
-  width: 80vw;
+  width: inherit;
   height: auto;
-  z-index: -1;
+  z-index: 2;
 `;
 
 export const TextContainer = styled.div`
