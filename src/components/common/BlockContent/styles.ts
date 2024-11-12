@@ -167,10 +167,10 @@ export const ImageTextContainer = styled.div<{
     imagePosition === "left" ? "column" : "column-reverse"};
   width: 100%;
   margin: 3rem 0;
-  
+
   ${mediaRules.md} {
     flex-direction: ${({ imagePosition }) =>
-    imagePosition === "left" ? "row" : "row-reverse"};
+      imagePosition === "left" ? "row" : "row-reverse"};
   }
 `;
 
@@ -199,6 +199,6 @@ export const TextColumn = styled.div<ImageTextProps>`
 
   ${mediaRules.md} {
     margin: ${({ imagePosition }) =>
-    imagePosition === "left" ? "0  0  0 1.5rem" : "0 1.5rem 0 0 "};
+      imagePosition === "left" ? "0  0  0 1.5rem" : "0 1.5rem 0 0 "};
   }
 `;

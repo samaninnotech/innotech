@@ -8,6 +8,7 @@ export const Section = styled.section`
   width: 100%;
   position: relative;
   display: flex;
+  top: 50px;
 `;
 
 export const InnerContainer = styled.div`
@@ -37,6 +38,7 @@ export const BackgroundImage = styled(Image)`
   width: inherit;
   height: auto;
   z-index: 2;
+  margin-bottom: 2rem;
 `;
 
 export const TextContainer = styled.div`
@@ -45,17 +47,19 @@ export const TextContainer = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
-  color: var(--white-color);
-  margin-top: 7rem;
-  padding: 1rem;
+  color: var(--black-color);
+  margin-top: 1rem;
 `;
 
 export const Title = styled.h2`
   margin-bottom: 0.5rem;
-  font-size: 2.5rem;
-  text-align: center;
-  color: var(--white-color);
-
+  font-size: 1.5rem;
+  text-align: left;
+  color: var(--text-black-color);
+  ${mediaRules.sm} {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
   ${mediaRules.lg} {
     font-size: 2.25rem;
     line-height: 1.2;

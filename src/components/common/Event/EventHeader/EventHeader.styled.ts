@@ -1,7 +1,6 @@
 import Link from "@/i18n/Link";
 import { mediaRules } from "@/themes/media-breakpoints";
 import Image from "next/image";
-import { FaCalendarAlt } from "react-icons/fa";
 import styled from "styled-components";
 
 export const Section = styled.section`
@@ -43,19 +42,23 @@ export const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  color: var(--white-color);
+  color: var(--text-black-color);
   padding: 1rem;
   width: 85%;
   margin: auto;
   flex-wrap: wrap;
+  max-width: 1150px;
 `;
 
 export const Title = styled.h2`
   margin-bottom: 0.5rem;
-  font-size: 2.5rem;
+  font-size: 1.5rem;
   text-align: left;
-  color: var(--white-color);
-
+  color: var(--text-gray-color);
+  ${mediaRules.sm} {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
   ${mediaRules.lg} {
     font-size: 2.25rem;
     line-height: 1.2;
@@ -79,12 +82,6 @@ export const EventDate = styled.div`
 export const DateWrapper = styled.div`
   display: flex;
   align-items: center;
-`;
-
-export const CalendarIcon = styled(FaCalendarAlt)`
-  margin-right: 0.5rem;
-  color: var(--event-text-color);
-  font-size: 1.25rem;
 `;
 
 export const Date = styled.span`

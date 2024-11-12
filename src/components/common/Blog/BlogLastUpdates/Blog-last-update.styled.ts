@@ -134,16 +134,21 @@ export const SmallPostsContainer = styled.div`
   justify-content: space-between;
   border-left: 1px solid var(--light-gray);
 
-  & > :not(:last-child) {
-    border-bottom: 1px solid var(--light-gray);
-  }
-
-  & > :first-child {
-    padding-top: 0px;
-  }
-
   & > * {
-    padding: 20px 25px;
+    padding: 15px 0px;
+  }
+  ${mediaRules.md} {
+    & > :not(:last-child) {
+      border-bottom: 1px solid var(--light-gray);
+    }
+
+    & > :first-child {
+      padding-top: 0px;
+    }
+
+    & > * {
+      padding: 20px 25px;
+    }
   }
 `;
 
@@ -167,8 +172,12 @@ export const SmallPostInfo = styled.div`
 `;
 
 export const SmallPostTitle = styled.h3`
-  font-size: 1.3em;
+  font-size: 0.9em;
   margin: 0;
+
+  ${mediaRules.sm} {
+    font-size: 1.3em;
+  }
 `;
 
 export const SmallPostDate = styled.p`

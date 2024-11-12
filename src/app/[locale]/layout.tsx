@@ -72,33 +72,33 @@ const RootLayout: FC<
       </head>
       <body className={"flex flex-col " + inter.className}>
         <StyledComponentsRegistry>
-        <Providers
-          locale={locale}
-          messages={dictionary}
-          navbarItems={{
-            mainConfig: navbar_config || [],
-            sideConfig: side_navbar_config || [],
-          }}
-        >
-          {children}
+          <Providers
+            locale={locale}
+            messages={dictionary}
+            navbarItems={{
+              mainConfig: navbar_config || [],
+              sideConfig: side_navbar_config || [],
+            }}
+          >
+            {children}
 
-          {/* Check if footerData is available before rendering Footer */}
-          {footerData && (
-            <Footer
-              logoSrc={footerData.logo}
-              address={footerData.address}
-              phone={footerData.phone}
-              email={footerData.email}
-              services={footerData.services}
-              quickLinks={footerData.quickLinks}
-              aboutLinks={footerData.aboutLinks}
-              socialLinks={footerData.socialLinks}
-              copyrightText={footerData.copyrightText}
-            />
-          )}
+            {/* Check if footerData is available before rendering Footer */}
+            {footerData && (
+              <Footer
+                logoSrc={footerData.logo}
+                address={footerData.address}
+                phone={footerData.phone}
+                email={footerData.email}
+                services={footerData.services}
+                quickLinks={footerData.quickLinks}
+                aboutLinks={footerData.aboutLinks}
+                socialLinks={footerData.socialLinks}
+                copyrightText={footerData.copyrightText}
+              />
+            )}
 
-          {draftEnabled && <DraftBanner></DraftBanner>}
-        </Providers>
+            {draftEnabled && <DraftBanner></DraftBanner>}
+          </Providers>
         </StyledComponentsRegistry>
       </body>
     </html>

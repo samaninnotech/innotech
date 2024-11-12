@@ -1,4 +1,5 @@
 import Link from "@/i18n/Link";
+import { mediaRules } from "@/themes/media-breakpoints";
 import styled from "styled-components";
 
 type EventContainerProps = {
@@ -79,8 +80,14 @@ export const EventContent = styled.div`
 `;
 
 export const EventTitle = styled.h2`
-  font-size: 1.2em;
+  font-size: 0.8em;
   margin: 0;
+  ${mediaRules.xsm} {
+    font-size: 1em;
+  }
+  ${mediaRules.sm} {
+    font-size: 1.2em;
+  }
 `;
 
 export const EventDescription = styled.p`
@@ -110,7 +117,15 @@ export const EventClockIcon = styled.div`
 
 export const DateWrapper = styled.div`
   margin-top: 1rem;
+  font-size: 0.6em;
+
   svg {
     margin-right: 5px;
+  }
+  ${mediaRules.xsm} {
+    font-size: 0.8em;
+  }
+  ${mediaRules.sm} {
+    font-size: 1em;
   }
 `;

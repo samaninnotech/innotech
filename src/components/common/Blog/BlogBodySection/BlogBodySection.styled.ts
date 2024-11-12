@@ -4,28 +4,24 @@ import styled from "styled-components";
 
 export const InnerContainer1 = styled.div`
   margin: 1.25rem auto 0 auto;
-  width: 65%;
+  width: 100%;
   line-height: 1.8;
   text-align: justify;
   color: var(--blog-text-color);
   display: flex;
   justify-content: center;
-  max-width: 640px;
-
+  ${mediaRules.xsm} {
+    max-width: 520px;
+  }
+  ${mediaRules.sm} {
+    max-width: 720px;
+  }
   ${mediaRules.md} {
-    max-width: 768px;
+    max-width: 940px;
   }
 
   ${mediaRules.lg} {
-    max-width: 1024px;
-  }
-
-  ${mediaRules.xl} {
-    max-width: 1280px;
-  }
-
-  ${mediaRules.xl2} {
-    max-width: 1536px;
+    max-width: 1170px;
   }
 `;
 

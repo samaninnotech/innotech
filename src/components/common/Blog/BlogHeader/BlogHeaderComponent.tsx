@@ -28,12 +28,12 @@ const BlogHeaderComponent: FC<BlogHeaderProps> = ({
   <>
     <Section>
       <InnerContainer>
-      <BackgroundImage
-        src={imgSrc}
-        alt="blog-background"
-        width={1000}
-        height={1000}
-      />
+        <BackgroundImage
+          src={imgSrc}
+          alt="blog-background"
+          width={1000}
+          height={1000}
+        />
       </InnerContainer>
     </Section>
     <TextContainer className="container">

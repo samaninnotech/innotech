@@ -4,7 +4,6 @@ import { formatDate } from "@/lib/middlewares/eventDateParser";
 import { FC } from "react";
 import {
   BackgroundImage,
-  CalendarIcon,
   EventDate,
   InnerContainer,
   MultipleEventDate,
@@ -55,7 +54,6 @@ const EventHeaderComponent: FC<EventHeaderProps> = ({
       const { date, start_time, end_time } = eventDate.single_date;
       return (
         <>
-          <CalendarIcon className="calendar-icon" />
           <StyledDate>
             {formatDate(date, start_time, end_time, currentLocale)}
           </StyledDate>
@@ -70,7 +68,6 @@ const EventHeaderComponent: FC<EventHeaderProps> = ({
     ) {
       return (
         <>
-          <CalendarIcon className="calendar-icon" />
           <StyledDate>
             {formatDate(
               eventDate.start_date,
@@ -96,7 +93,6 @@ const EventHeaderComponent: FC<EventHeaderProps> = ({
     if (eventDate.dates) {
       return (
         <>
-          <CalendarIcon className="calendar-icon" />
           <MultipleEventDate>
             {eventDate.dates.map(({ date, start_time, end_time }) => (
               <div key={date} style={{ marginTop: "5px" }}>
@@ -120,12 +116,12 @@ const EventHeaderComponent: FC<EventHeaderProps> = ({
       </TextContainer>
       <Section>
         <InnerContainer>
-        <BackgroundImage
-          src={imgSrc}
-          alt="event-background"
-          width={1000}
-          height={1000}
-        />
+          <BackgroundImage
+            src={imgSrc}
+            alt="event-background"
+            width={1000}
+            height={1000}
+          />
         </InnerContainer>
       </Section>
     </>
