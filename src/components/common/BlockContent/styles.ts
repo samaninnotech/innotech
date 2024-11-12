@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "@/i18n/Link";
+import { mediaRules } from "@/themes/media-breakpoints";
 import styled, { css } from "styled-components";
 import { ImageAlignment, ImageSize } from "./ImageBlock";
 
@@ -163,9 +164,14 @@ export const ImageTextContainer = styled.div<{
 }>`
   display: flex;
   flex-direction: ${({ imagePosition }) =>
-    imagePosition === "left" ? "row" : "row-reverse"};
+    imagePosition === "left" ? "column" : "column-reverse"};
   width: 100%;
-  margin: 2rem 0;
+  margin: 3rem 0;
+  
+  ${mediaRules.md} {
+    flex-direction: ${({ imagePosition }) =>
+    imagePosition === "left" ? "row" : "row-reverse"};
+  }
 `;
 
 export const ImageColumn = styled.div`
