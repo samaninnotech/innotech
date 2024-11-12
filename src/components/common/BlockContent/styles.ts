@@ -195,6 +195,10 @@ interface ImageTextProps {
 
 export const TextColumn = styled.div<ImageTextProps>`
   flex: 1;
-  margin: ${({ imagePosition }) =>
+  margin: 0;
+
+  ${mediaRules.md} {
+    margin: ${({ imagePosition }) =>
     imagePosition === "left" ? "0  0  0 1.5rem" : "0 1.5rem 0 0 "};
+  }
 `;
