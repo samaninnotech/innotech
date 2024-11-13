@@ -98,6 +98,18 @@ const GlobalStyles = createGlobalStyle`
   transform: translateX(-400px); /* Adjust based on sidebar width */
   transition: transform 0.3s ease;
 }
+  body.sidebar-open {
+  overflow: hidden;
+  padding-right: 1px;
+}
+  body.sidebar-open {
+  transform: translateX(-400px); 
+  transition: transform 0.3s ease, padding-right 0.3s ease; 
+}
+
+.sidebar-open .main-content {
+  transition: transform 0.3s ease; 
+}
 `;
 
 export default GlobalStyles;
