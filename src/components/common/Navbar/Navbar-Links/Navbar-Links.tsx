@@ -110,8 +110,8 @@ const NavbarLinks: FC<NavbarLinksProps> = ({
             <Image
               src="/site-logo-blue.png"
               alt="Logo"
-              height={50}
-              width={250}
+              height={60}
+              width={275}
             />
             <MdClose onClick={handleSidebarToggle} />
           </SideBarLogoButtonContainer>

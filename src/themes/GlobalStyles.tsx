@@ -94,22 +94,17 @@ const GlobalStyles = createGlobalStyle`
     line-height: 1.6;
     margin: 0.25em 0 0.5em;
   }
-  .sidebar-open {
-  transform: translateX(-400px); /* Adjust based on sidebar width */
-  transition: transform 0.3s ease;
-}
+
   body.sidebar-open {
-  overflow: hidden;
-  padding-right: 1px;
-}
-  body.sidebar-open {
-  transform: translateX(-400px); 
-  transition: transform 0.3s ease, padding-right 0.3s ease; 
+  overflow: hidden; /* Prevent scroll */
+  padding-right: 1px; /* Optional: accounts for any scrollbar width */
+  transform: translateX(-360px); /* Adjust based on sidebar width */
+  transition: transform 0.3s ease, padding-right 0.3s ease; /* Added transition for padding-right */
 }
 
-.sidebar-open .main-content {
-  transition: transform 0.3s ease; 
-}
+// .sidebar-open .main-content {
+//   transition: transform 0.3s ease; /* Added to make sure content also moves smoothly */
+// }
 `;
 
 export default GlobalStyles;

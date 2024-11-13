@@ -59,8 +59,8 @@ export const SidebarStyled = styled.div<{ $showMenu: boolean }>`
   display: none;
   position: fixed;
   top: 0;
-  right: -400px;
-  width: 400px;
+  right: -360px;
+  width: 360px;
   height: 100vh;
   background-color: #2d5c7f;
   color: white;

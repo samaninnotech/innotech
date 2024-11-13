@@ -12,9 +12,20 @@ export const Header = styled.div`
   font-size: 2rem;
   font-weight: 600;
   color: var(--black-color);
-
-  ${mediaRules.lg} {
+  h2 {
+    text-align: center;
+    font-size: 20px;
+  }
+  ${mediaRules.sm} {
+    h2 {
+      font-size: 25px;
+    }
+  }
+  ${mediaRules.md} {
     max-width: 768px;
+    h2 {
+      font-size: 30px;
+    }
   }
 `;
 
@@ -27,6 +38,19 @@ export const InnerContainer1 = styled.div<{ $bgImg?: string }>`
   height: 100%;
   display: flex;
   justify-content: center;
+  margin: 0 auto;
+  ${mediaRules.xsm} {
+    max-width: 520px;
+  }
+  ${mediaRules.sm} {
+    max-width: 720px;
+  }
+  ${mediaRules.md} {
+    max-width: 940px;
+  }
+  ${mediaRules.lg} {
+    max-width: 1170px;
+  }
 `;
 
 export const InnerContainer2 = styled.div`
@@ -36,7 +60,7 @@ export const InnerContainer2 = styled.div`
   align-items: flex-start;
   text-align: center;
   flex-direction: column;
-  ${mediaRules.lg} {
+  ${mediaRules.md} {
     text-align: left;
     display: flex;
     align-items: flex-start;
@@ -45,6 +69,10 @@ export const InnerContainer2 = styled.div`
 `;
 
 export const InnerContainerLeft = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
   flex: 1 !important;
   padding-left: 2rem;
   margin-bottom: 2.5rem;
@@ -54,9 +82,32 @@ export const InnerContainerLeft = styled.div`
   text-align: left;
   border-left: 5px solid var(--innotech-color);
 
-  ${mediaRules.lg} {
-    font-size: 1.75rem;
-    margin-top: 0;
+  h3 {
+    font-size: 15px;
+    margin: 0;
+  }
+  margin-bottom: 2rem;
+  ${mediaRules.xsm} {
+    width: 100%;
+    h3 {
+      font-size: 25px;
+      margin: 0;
+    }
+  }
+  height: fit-content;
+  ${mediaRules.sm} {
+    width: 100%;
+    h3 {
+      font-size: 25px;
+      margin: 0;
+    }
+  }
+
+  ${mediaRules.md} {
+    h3 {
+      font-size: 20px;
+      margin: 0;
+    }
   }
 `;
 
@@ -83,5 +134,5 @@ export const Element = styled(GenericSection)`
   padding: 0rem 1rem;
   background: ${({ $background }) => $background || ""};
   height: auto;
-  margin: 5rem 4rem 0rem 4rem;
+  margin: 5rem 0 0rem 0;
 `;

@@ -40,12 +40,11 @@ export const SubMenuLink = styled(Link)`
   font-size: 1em;
   font-weight: bold;
   width: fit-content;
-  margin: 1rem 0px;
   margin-right: 5rem;
-  padding: 3rem 0;
   ${mediaRules.lg} {
     color: gray;
     padding: 0 1rem;
+    margin-bottom: 1rem;
   }
 `;
 
