@@ -5,8 +5,7 @@ export const ContactFormContainer = styled.div`
   background-color: var(--white-color);
   position: relative;
   width: 100%;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding: 20px 10px;
   border: none;
 `;
 

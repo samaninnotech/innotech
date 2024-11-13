@@ -2,6 +2,7 @@ import Link from "@/i18n/Link";
 import { mediaRules } from "@/themes/media-breakpoints";
 import Image from "next/image";
 import styled from "styled-components";
+import GenericSection from "../../GenericSection";
 
 export const LoadMoreButton = styled.button`
   background: var(--accent-gradient-background);
@@ -154,7 +155,7 @@ export const LearnMoreLink = styled.div`
   }
 `;
 
-export const SectionWrapper = styled.div`
+export const SectionWrapper = styled(GenericSection)`
   position: relative;
   box-sizing: border-box;
   width: 100%;
@@ -167,6 +168,15 @@ export const SectionWrapper = styled.div`
   align-content: center;
 `;
 
+export const Header = styled.h3`
+  font-size: 28px;
+  text-align: center;
+  margin: 6rem 0;
+  color: var(--innotech-color);
+  ${mediaRules.sm} {
+    font-size: 64px;
+  }
+`;
 export const TilesContainer = styled.div`
   display: flex;
   flex-direction: column;

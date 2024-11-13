@@ -1,12 +1,10 @@
 "use client";
-
-"use client";
-
 import useTranslation from "@/i18n/useTranslation";
 import { FC, useEffect, useState } from "react";
 import Spinner from "../../Spinner";
 import { CalendarIcon } from "../BlogHeader/BlogHeader.styled";
 import {
+  Header,
   ImageContainer,
   LearnMoreLink,
   LoadMoreButton,
@@ -49,6 +47,7 @@ const PostsListComponent: FC<PostsListProps> = ({ posts, postsCount }) => {
   return (
     <SectionWrapper>
       <Spinner show={isLoading} />
+      <Header>Innotech Blog</Header>
       <TilesContainer>
         {!!loadedPosts?.length &&
           loadedPosts.map((p) => <PostTile key={p.slug} post={p}></PostTile>)}

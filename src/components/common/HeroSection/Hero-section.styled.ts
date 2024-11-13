@@ -88,7 +88,7 @@ export const InnerContainerLeft = styled.div<{
   font-size: 1.15rem;
   line-height: 1.75rem;
   color: ${({ $textColor }) => $textColor || "var(--text-light-color)"};
-  text-align: ${({ $textAlign }) => $textAlign || "left"};
+  text-align: "center";
   text-wrap: pretty;
   overflow-wrap: break-word;
   word-break: break-word;
@@ -97,16 +97,34 @@ export const InnerContainerLeft = styled.div<{
     font-size: 25px;
   }
   ${mediaRules.sm} {
+    text-align: ${({ $textAlign }) => $textAlign || "center"};
     h2 {
       font-size: 40px;
     }
   }
 `;
-export const InnerContainerRight = styled(GenericSection)`
+export const InnerContainerRight = styled(GenericSection)<{
+  $textColor?: string;
+  $textAlign?: string;
+}>`
     padding-left: 0.5rem;
     padding-right: 0.5rem;
     background: ${({ $background }) => $background || ""};
-
+    color: ${({ $textColor }) => $textColor || "var(--text-light-color)"};
+    text-align: "center";
+    text-wrap: pretty;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    margin: 0 !important;
+    h2 {
+      font-size: 25px;
+    }
+    ${mediaRules.sm} {
+      text-align: ${({ $textAlign }) => $textAlign || "center"};
+      h2 {
+        font-size: 40px;
+      }
+    }
     img {
       margin: auto;
     }

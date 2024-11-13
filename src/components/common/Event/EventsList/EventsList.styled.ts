@@ -90,11 +90,12 @@ export const LearnMoreLink = styled.p`
 export const SectionWrapper = styled.div`
   position: relative;
   box-sizing: border-box;
-  width: 100%;
+  width: 90%;
   margin: 0 auto;
   top: 20px;
-  padding: 0 5rem;
+  padding: 0 10px;
   padding-bottom: 80px;
+  max-width: 1120px;
 `;
 
 export const TilesContainer = styled.div`
@@ -128,7 +129,7 @@ export const MonthHeading = styled.h2`
   font-size: 1.5rem;
   text-align: center;
   font-weight: bold;
-  color: var(--accent-color);
+  color: var(--black-color);
 
   &::before,
   &::after {
