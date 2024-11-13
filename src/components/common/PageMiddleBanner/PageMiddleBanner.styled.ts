@@ -57,7 +57,26 @@ export const Description = styled.div`
 `;
 
 export const LargeHeader = styled.div`
-  font-size: 28px;
-  text-align: center;
   margin-top: 0rem;
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--black-color);
+  h2,
+  h3 {
+    text-align: left;
+    font-size: 20px;
+  }
+  ${mediaRules.sm} {
+    h2,
+    h3 {
+      font-size: 25px;
+    }
+  }
+  ${mediaRules.md} {
+    max-width: 768px;
+    h2,
+    h3 {
+      font-size: 30px;
+    }
+  }
 `;

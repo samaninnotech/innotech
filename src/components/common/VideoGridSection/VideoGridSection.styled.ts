@@ -20,10 +20,18 @@ export const SectionHeader = styled.h3`
   text-align: center;
   margin: auto;
   margin-bottom: 4rem;
-  font-size: 2rem;
+  font-size: 15px;
   font-weight: 600;
   color: var(--black-color);
-  ${mediaRules.lg} {
+  ${mediaRules.xsm} {
+    font-size: 25px;
+  }
+  ${mediaRules.sm} {
+    font-size: 30px;
+  }
+
+  ${mediaRules.md} {
+    font-size: 36px;
     max-width: 768px;
   }
 `;

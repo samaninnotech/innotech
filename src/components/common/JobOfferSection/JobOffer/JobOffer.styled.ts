@@ -10,11 +10,13 @@ export const JobOfferContainer = styled.div<JobOfferContainerProps>`
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  padding: 20px;
-  margin-bottom: 20px;
+  padding: 40px 40px;
   background-color: ${({ isEven }) => (isEven ? "#e3e3e3" : "transparent")};
   box-shadow: var(--wp--preset--shadow--natural);
   flex-direction: column;
+  ${mediaRules.xsm} {
+    padding: 20px;
+  }
   ${mediaRules.sm} {
     flex-direction: row;
     align-items: center;
@@ -23,8 +25,7 @@ export const JobOfferContainer = styled.div<JobOfferContainerProps>`
 
 export const JobInfo = styled.div`
   flex: 1;
-  padding: 2rem;
-  padding-left: 0;
+  padding: 0 2rem 2rem 0;
   ${mediaRules.sm} {
     padding: 2rem;
   }

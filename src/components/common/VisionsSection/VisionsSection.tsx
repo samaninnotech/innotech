@@ -5,6 +5,7 @@ import VisionCard from "./VisionCard";
 import {
   GridWrapper,
   Heading,
+  SectionTitle,
   SectionWrapper,
   Spacer,
 } from "./VisionsSection.styled";
@@ -25,7 +26,7 @@ const VisionsSection: React.FC<VisionsSectionProps> = ({
   return (
     <SectionWrapper>
       <Spacer />
-      {sectionTitle && <Heading>{sectionTitle}</Heading>}
+      {sectionTitle && <SectionTitle>{sectionTitle}</SectionTitle>}
       <Spacer />
       <Heading large>{topHeading}</Heading>
       <Spacer />

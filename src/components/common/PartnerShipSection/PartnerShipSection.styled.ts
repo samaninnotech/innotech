@@ -34,6 +34,7 @@ export const Header = styled.div`
   color: var(--text-black-color);
   h2 {
     font-size: 22px !important;
+    text-align: center;
   }
   ${mediaRules.xsm} {
     h2 {

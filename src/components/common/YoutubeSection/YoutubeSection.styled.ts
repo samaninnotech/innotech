@@ -21,6 +21,9 @@ export const LargeHeader = styled.div`
   font-size: 18px;
   text-align: center;
   margin-top: 0rem;
+  h2 {
+    text-align: center;
+  }
   ${mediaRules.sm} {
     font-size: 28px;
   }

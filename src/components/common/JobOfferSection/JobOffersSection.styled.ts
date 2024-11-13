@@ -2,9 +2,22 @@ import { mediaRules } from "@/themes/media-breakpoints";
 import styled from "styled-components";
 
 export const JobOffersContainer = styled.div`
-  width: 90%;
-  padding: 20px;
-  margin: 0 auto;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  ${mediaRules.xsm} {
+    max-width: 520px;
+    margin: 0 auto;
+  }
+  ${mediaRules.sm} {
+    max-width: 720px;
+  }
+  ${mediaRules.md} {
+    max-width: 940px;
+  }
+  ${mediaRules.lg} {
+    max-width: 1170px;
+  }
 `;
 
 export const Header = styled.h2`

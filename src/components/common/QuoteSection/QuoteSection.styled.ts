@@ -12,18 +12,21 @@ export const Header = styled.div`
   font-size: 2rem;
   font-weight: 600;
   color: var(--black-color);
-  h2 {
+  h2,
+  h3 {
     text-align: center;
     font-size: 20px;
   }
   ${mediaRules.sm} {
-    h2 {
+    h2,
+    h3 {
       font-size: 25px;
     }
   }
   ${mediaRules.md} {
     max-width: 768px;
-    h2 {
+    h2,
+    h3 {
       font-size: 30px;
     }
   }
@@ -82,6 +85,7 @@ export const InnerContainerLeft = styled.div`
   text-align: left;
   border-left: 5px solid var(--innotech-color);
 
+  h2,
   h3 {
     font-size: 15px;
     margin: 0;
@@ -89,6 +93,7 @@ export const InnerContainerLeft = styled.div`
   margin-bottom: 2rem;
   ${mediaRules.xsm} {
     width: 100%;
+    h2,
     h3 {
       font-size: 25px;
       margin: 0;
@@ -97,6 +102,7 @@ export const InnerContainerLeft = styled.div`
   height: fit-content;
   ${mediaRules.sm} {
     width: 100%;
+    h2,
     h3 {
       font-size: 25px;
       margin: 0;
@@ -104,6 +110,7 @@ export const InnerContainerLeft = styled.div`
   }
 
   ${mediaRules.md} {
+    h2,
     h3 {
       font-size: 20px;
       margin: 0;

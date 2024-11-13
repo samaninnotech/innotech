@@ -34,15 +34,48 @@ export const InnerContainer2 = styled.div`
 export const InnerContainer3 = styled.div``;
 
 export const Header = styled.h3`
-  font-size: 2.5rem;
   color: var(--text-black-color);
   margin-bottom: 3rem;
   line-height: 1.5;
   width: 60%;
   text-align: center;
   width: 100%;
+  font-size: 15px;
+  font-weight: 600;
+
+  ${mediaRules.xsm} {
+    font-size: 25px;
+  }
+  ${mediaRules.sm} {
+    font-size: 30px;
+  }
+
+  ${mediaRules.md} {
+    font-size: 36px;
+  }
 `;
 
+export const SectionHeader = styled.h3`
+  padding-left: 1rem;
+  padding-right: 1rem;
+  text-align: center;
+  margin: auto;
+  margin-bottom: 4rem;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--black-color);
+  ${mediaRules.xsm} {
+    font-size: 25px;
+  }
+  ${mediaRules.sm} {
+    font-size: 30px;
+  }
+
+  ${mediaRules.md} {
+    font-size: 36px;
+    max-width: 768px;
+  }
+`;
 export const Paragraph = styled.div`
   flex: 0 0 55%;
   text-align: left;

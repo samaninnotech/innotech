@@ -19,13 +19,37 @@ export const HeadingSmall = styled.h6`
 `;
 
 export const HeadingLarge = styled.div`
-  font-size: 2.5rem;
   color: var(--black-color);
   margin: 0 auto;
   line-height: 1.5;
   width: 60%;
   text-align: center;
   max-width: 1170px;
+  h2 {
+    font-size: 20px;
+    margin: 0;
+    text-align: center;
+  }
+  margin-bottom: 2rem;
+  ${mediaRules.xsm} {
+    h2 {
+      font-size: 25px;
+      margin: 0;
+    }
+  }
+  ${mediaRules.sm} {
+    h2 {
+      font-size: 30px;
+      margin: 0;
+    }
+  }
+
+  ${mediaRules.md} {
+    h2 {
+      font-size: 45px;
+      margin: 0;
+    }
+  }
 `;
 export const LeftColumn = styled.h3`
   color: var(--black-color);
@@ -149,6 +173,9 @@ export const AccordionContent = styled.div<{ active: boolean }>`
 
 export const MarkedNumber = styled.mark`
   font-weight: bold;
-  font-size: 175px;
+  font-size: 155px;
   background-color: white;
+  ${mediaRules.md} {
+    font-size: 175px;
+  }
 `;

@@ -4,9 +4,26 @@ import styled from "styled-components";
 export const TickItemsSectionContainer = styled.section`
   padding: 20px;
   background-color: var(--white-color);
-  margin: 0 5rem;
+  width: 100%;
 `;
 
+export const InnerContainer1 = styled.div<{ $bgImg?: string }>`
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  ${mediaRules.xsm} {
+    max-width: 576px;
+  }
+  ${mediaRules.sm} {
+    max-width: 720px;
+  }
+  ${mediaRules.md} {
+    max-width: 940px;
+  }
+  ${mediaRules.lg} {
+    max-width: 1170px;
+  }
+`;
 export const HeaderContainer = styled.header`
   text-align: center;
   margin-bottom: 20px;
@@ -32,6 +49,7 @@ export const ItemsContainer = styled.div`
   gap: 20px;
   ${mediaRules.sm} {
     grid-template-columns: repeat(2, 1fr);
+    justify-content: space-between; /* Adds spacing between two items */
   }
   ${mediaRules.md} {
     grid-template-columns: repeat(2, 1fr);

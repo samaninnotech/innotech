@@ -5,9 +5,8 @@ import styled from "styled-components";
 export const Wrapper = styled.div`
   position: relative;
   width: 100%;
-  height: 700px;
+  height: 300px;
   background: transparent;
-  margin-bottom: 4rem;
 
   ${mediaRules.xsm} {
     height: 300px;
@@ -17,6 +16,7 @@ export const Wrapper = styled.div`
   }
   ${mediaRules.md} {
     height: 500px;
+    margin-bottom: 2rem;
   }
   ${mediaRules.lg} {
     height: 700px;

@@ -35,6 +35,19 @@ export const InnerContainer1 = styled.div<{ $bgImg?: string }>`
   height: 100%;
   display: flex;
   justify-content: center;
+  margin: 0 auto;
+  ${mediaRules.xsm} {
+    max-width: 576px;
+  }
+  ${mediaRules.sm} {
+    max-width: 720px;
+  }
+  ${mediaRules.md} {
+    max-width: 940px;
+  }
+  ${mediaRules.lg} {
+    max-width: 1170px;
+  }
 `;
 
 export const OnlyTextContainer = styled.div`
@@ -117,9 +130,8 @@ export const HeroLinksContainer = styled.div<{ $textAlign?: string }>`
 type ElementProps = { $height?: string };
 
 export const Element = styled(GenericSection)<ElementProps>`
-  padding: 0rem 3rem;
   background: ${({ $background }) => $background || ""};
-  margin: 2rem auto;
+  margin: 2rem 0;
   width: 100%;
   height: ${({ $height }) => $height || "auto"} !important;
 `;

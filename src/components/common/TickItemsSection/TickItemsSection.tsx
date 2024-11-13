@@ -4,6 +4,7 @@ import React from "react";
 import TickItem from "./TickItem";
 import {
   HeaderContainer,
+  InnerContainer1,
   ItemsContainer,
   SectionHeader,
   TickItemsSectionContainer,
@@ -25,17 +26,19 @@ const TickItemsSection: React.FC<TickItemsSectionProps> = ({
       <HeaderContainer>
         <SectionHeader>{header}</SectionHeader>
       </HeaderContainer>
-      <ItemsContainer>
-        {tickItems.map((item, index) => (
-          <TickItem
-            key={index}
-            title={item.title}
-            description={item.description}
-            listStyle={listStyle}
-            index={index} // Pass the index here
-          />
-        ))}
-      </ItemsContainer>
+      <InnerContainer1>
+        <ItemsContainer>
+          {tickItems.map((item, index) => (
+            <TickItem
+              key={index}
+              title={item.title}
+              description={item.description}
+              listStyle={listStyle}
+              index={index} // Pass the index here
+            />
+          ))}
+        </ItemsContainer>
+      </InnerContainer1>
     </TickItemsSectionContainer>
   );
 };

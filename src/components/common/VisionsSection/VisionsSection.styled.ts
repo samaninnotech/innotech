@@ -9,14 +9,32 @@ export const SectionWrapper = styled.div`
   margin: 0 auto;
 `;
 
-export const Heading = styled.h3<{ large?: boolean }>`
+export const SectionTitle = styled.h3<{ large?: boolean }>`
   text-align: center;
-  font-size: ${(props) => (props.large ? "36px" : "20px")};
+  font-size: 20px;
   line-height: 1.2;
-  color: ${(props) =>
-    props.large ? "var(--text-black-color)" : "var(--text-light-color)"};
+  color: var(--text-light-color);
   margin: 0;
   padding: 0;
+`;
+export const Heading = styled.h3<{ large?: boolean }>`
+  text-align: center;
+  font-size: 20px;
+  line-height: 1.2;
+  color: var(--text-black-color);
+  margin: 0;
+  padding: 0;
+  ${mediaRules.xsm} {
+    font-size: 25px;
+  }
+  height: fit-content;
+  ${mediaRules.sm} {
+    font-size: 30px;
+  }
+
+  ${mediaRules.md} {
+    font-size: 36px;
+  }
 `;
 
 export const Spacer = styled.div`
