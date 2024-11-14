@@ -1,6 +1,5 @@
 "use client";
 
-import { sanityUrlFor } from "@/sanity/sanity-client";
 import React, { useState } from "react";
 import SpinnerComponent from "../Spinner";
 import {
@@ -10,9 +9,6 @@ import {
   Column,
   FormField,
   FormWrapper,
-  Header,
-  ImageColumn,
-  ImageWrap,
   Input,
   InputLabel,
   Notification,
@@ -20,18 +16,10 @@ import {
   PopupContent,
   Row,
   SubmitButton,
-  Thumbnail,
-} from "./PopupForm.styled";
+  TextColumn,
+} from "./EventPopupForm.styled";
 
-type Brochure = {
-  title?: string | null;
-  description?: string | null;
-  file?: {
-    url: string;
-  } | null;
-};
-
-type PopupFormProps = {
+type EventPopupFormProps = {
   header: string;
   firstNameLabel: string;
   lastNameLabel: string;
@@ -43,10 +31,9 @@ type PopupFormProps = {
   agreementLabel: string;
   submitText: string;
   notificationText: string;
-  thumbnail?: string;
-  brochure?: Brochure;
   senderEmail: string;
   senderPassword: string;
+  receiverEmail: string;
   onClose: () => void;
 };
 
@@ -61,7 +48,7 @@ type FormValues = {
   agreement: boolean;
 };
 
-const PopupForm: React.FC<PopupFormProps> = ({
+const EventPopupForm: React.FC<EventPopupFormProps> = ({
   header,
   firstNameLabel,
   lastNameLabel,
@@ -73,13 +60,12 @@ const PopupForm: React.FC<PopupFormProps> = ({
   agreementLabel,
   submitText,
   notificationText,
-  thumbnail,
   senderEmail,
   senderPassword,
-  brochure,
+  receiverEmail,
   onClose,
 }) => {
-  const brochureUrl = brochure?.file?.url || null;
+  console.log(receiverEmail, "inja");
 
   const [formValues, setFormValues] = useState<FormValues>({
     firstName: "",
@@ -165,18 +151,19 @@ const PopupForm: React.FC<PopupFormProps> = ({
     if (!validateForm()) return;
 
     setIsSubmitting(true);
-
     try {
-      const response = await fetch("/api/send-brochure/", {
+      const response = await fetch("/api/register-event/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           email: formValues.email,
-          brochureUrl,
+          firstName: formValues.firstName,
+          lastName: formValues.lastName,
           senderEmail,
           senderPassword,
+          receiverEmail,
         }),
       });
 
@@ -187,7 +174,7 @@ const PopupForm: React.FC<PopupFormProps> = ({
           onClose();
         }, 3000);
       } else {
-        setNotification("Failed to send the brochure. Please try again.");
+        setNotification("Failed to register. Please try again.");
       }
     } catch (error) {
       console.error("Error sending email:", error);
@@ -211,10 +198,10 @@ const PopupForm: React.FC<PopupFormProps> = ({
       <PopupContainer>
         <CloseButton onClick={onClose}>✖</CloseButton>
         <PopupContent tabIndex={0}>
-          <Header>
-            <p>{header}</p>
-          </Header>
           <Row>
+            <TextColumn>
+              <p>{header}</p>
+            </TextColumn>
             <Column>
               <FormWrapper>
                 <form noValidate onSubmit={handleSubmit}>
@@ -324,18 +311,6 @@ const PopupForm: React.FC<PopupFormProps> = ({
                 </form>
               </FormWrapper>
             </Column>
-            {thumbnail && (
-              <ImageColumn>
-                <ImageWrap>
-                  <Thumbnail
-                    src={sanityUrlFor(thumbnail).url()}
-                    alt="Thumbnail"
-                    width={200}
-                    height={200}
-                  />
-                </ImageWrap>
-              </ImageColumn>
-            )}
           </Row>
         </PopupContent>
       </PopupContainer>
@@ -343,4 +318,4 @@ const PopupForm: React.FC<PopupFormProps> = ({
   );
 };
 
-export default PopupForm;
+export default EventPopupForm;

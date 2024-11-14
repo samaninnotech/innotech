@@ -1,7 +1,7 @@
 import { sanityUrlFor } from "@/sanity/sanity-client";
 import { CustomLink, customLinkToHref } from "@/sanity/types";
 import React, { useEffect, useState } from "react";
-import PopupForm from "../../PopupForm";
+import EventPopupForm from "../../EventPopupForm";
 import {
   ButtonLink,
   ButtonText,
@@ -76,7 +76,7 @@ const EventRegistrationCard: React.FC<EventRegistrationCardProps> = ({
         <ButtonsWrapper isCertification={isCertificationEvent}>
           {buttonLink && buttonLink.label && (
             <>
-              {buttonLink.linkType === "POPUP_FORM" ? (
+              {buttonLink.linkType === "EVENT_POPUP_FORM" ? (
                 <ButtonWrapper isCertification={isCertificationEvent}>
                   <ButtonLink onClick={togglePopup} href="#">
                     <ButtonText>{buttonLink.label}</ButtonText>
@@ -92,25 +92,24 @@ const EventRegistrationCard: React.FC<EventRegistrationCardProps> = ({
             </>
           )}
         </ButtonsWrapper>
-        {/* Render Popup if the link type is POPUP_FORM */}
-        {isPopupOpen && buttonLink?.linkType === "POPUP_FORM" && (
-          <PopupForm
+        {/* Render Popup if the link type is EVENT_POPUP_FORM */}
+        {isPopupOpen && buttonLink?.linkType === "EVENT_POPUP_FORM" && (
+          <EventPopupForm
             onClose={togglePopup}
-            header={buttonLink.popupForm.header}
-            firstNameLabel={buttonLink.popupForm.firstNameLabel}
-            lastNameLabel={buttonLink.popupForm.lastNameLabel}
-            companyLabel={buttonLink.popupForm.companyLabel}
-            roleLabel={buttonLink.popupForm.roleLabel}
-            invitedByLabel={buttonLink.popupForm.invitedByLabel}
-            phoneLabel={buttonLink.popupForm.phoneLabel}
-            emailLabel={buttonLink.popupForm.emailLabel}
-            agreementLabel={buttonLink.popupForm.agreementLabel}
-            submitText={buttonLink.popupForm.submitText}
-            thumbnail={buttonLink.popupForm.thumbnail}
-            brochure={buttonLink.popupForm.brochure}
-            senderEmail={buttonLink.popupForm.senderEmail}
-            senderPassword={buttonLink.popupForm.senderPassword}
-            notificationText={""}
+            header={buttonLink.eventPopupForm.header}
+            firstNameLabel={buttonLink.eventPopupForm.firstNameLabel}
+            lastNameLabel={buttonLink.eventPopupForm.lastNameLabel}
+            companyLabel={buttonLink.eventPopupForm.companyLabel}
+            roleLabel={buttonLink.eventPopupForm.roleLabel}
+            invitedByLabel={buttonLink.eventPopupForm.invitedByLabel}
+            phoneLabel={buttonLink.eventPopupForm.phoneLabel}
+            emailLabel={buttonLink.eventPopupForm.emailLabel}
+            agreementLabel={buttonLink.eventPopupForm.agreementLabel}
+            submitText={buttonLink.eventPopupForm.submitText}
+            senderEmail={buttonLink.eventPopupForm.senderEmail}
+            senderPassword={buttonLink.eventPopupForm.senderPassword}
+            notificationText={buttonLink.eventPopupForm.notificationText}
+            receiverEmail={buttonLink.eventPopupForm.receiverEmail}
           />
         )}
       </InnerContainer>

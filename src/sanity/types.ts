@@ -23,6 +23,7 @@ export enum CustomLinkType {
   External = "EXTERNAL",
   PopupForm = "POPUP_FORM",
   JobPopupForm = "JOB_POPUP_FORM",
+  EventPopupForm = "EVENT_POPUP_FORM",
 }
 
 export interface CustomLink extends SanityElement {
@@ -30,6 +31,7 @@ export interface CustomLink extends SanityElement {
   linkType: CustomLinkType;
   popupForm: PopupForm;
   jobPopupForm: JobPopupForm;
+  eventPopupForm: EventPopupForm;
 }
 
 export enum DecoratedLinkType {
@@ -261,6 +263,23 @@ export function isEventRegistrationSection(
   section: Section,
 ): section is EventRegistrationSection {
   return sectionMatchType(section, "event_registration_section");
+}
+
+export interface EventPopupForm extends Section {
+  header: string;
+  firstNameLabel: string;
+  lastNameLabel: string;
+  companyLabel: string;
+  invitedByLabel?: string;
+  roleLabel?: string;
+  phoneLabel: string;
+  emailLabel: string;
+  agreementLabel: string;
+  submitText: string;
+  notificationText: string;
+  senderEmail: string;
+  senderPassword: string;
+  receiverEmail: string;
 }
 
 /* Consultation Section*/
@@ -780,8 +799,6 @@ export interface PopupForm extends Section {
   firstNameLabel: string;
   lastNameLabel: string;
   companyLabel: string;
-  invitedByLabel?: string;
-  roleLabel?: string;
   phoneLabel: string;
   emailLabel: string;
   agreementLabel: string;

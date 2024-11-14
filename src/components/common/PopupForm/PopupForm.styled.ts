@@ -13,9 +13,9 @@ export const Backdrop = styled.div`
   overflow: hidden;
 `;
 
-export const PopupContainer = styled.div<{ hasThumbnail: boolean }>`
-  width: 90%;
-  max-width: ${({ hasThumbnail }) => (hasThumbnail ? "600px" : "80%")};
+export const PopupContainer = styled.div`
+  width: 95%;
+  max-width: 600px;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -46,50 +46,51 @@ export const PopupContainer = styled.div<{ hasThumbnail: boolean }>`
 
   // Media rules for max-width when thumbnail exists
   ${mediaRules.sm} {
-    max-width: ${({ hasThumbnail }) => (hasThumbnail ? "576px" : "80%")};
+    max-width: 676px;
   }
   ${mediaRules.md} {
-    max-width: ${({ hasThumbnail }) => (hasThumbnail ? "620px" : "60%")};
+    max-width: 720px;
   }
   ${mediaRules.lg} {
-    max-width: ${({ hasThumbnail }) => (hasThumbnail ? "840px" : "60%")};
+    max-width: 840px;
   }
 `;
 
 export const PopupContent = styled.div`
   color: black;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   width: 100%;
 `;
 
-export const Row = styled.div<{ fullWidth: boolean }>`
+export const Row = styled.div`
   display: flex;
-  flex-wrap: ${({ fullWidth }) => (fullWidth ? "wrap" : "nowrap")};
-  flex-direction: ${({ fullWidth }) => (fullWidth ? "row" : "column")};
+  flex-wrap: wrap;
+  flex-direction: column;
   margin: 0 -15px;
-  // padding: 0 30px;
   width: inherit;
+  ${mediaRules.sm} {
+    flex-direction: row;
+  }
 `;
 
-export const Column = styled.div<{ hasThumbnail: boolean }>`
+export const Column = styled.div`
   flex: 1;
   padding: 1rem 15px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-shadow: ${({ hasThumbnail }) =>
-    hasThumbnail ? "0 4px 20px rgba(0, 0, 0, 0.2)" : "none"};
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
+  margin: 0 1rem;
   margin-top: 1rem;
   margin-bottom: 5rem;
   width: inherit;
-
 `;
 
-export const TextColumn = styled.div`
-  animation: move-up 0.3s;
+export const Header = styled.div`
   text-align: left;
 `;
 
@@ -130,16 +131,16 @@ export const Input = styled.input`
   }
 `;
 
-export const CheckboxLabel = styled.label<{ hasThumbnail: boolean }>`
+export const CheckboxLabel = styled.label`
   display: flex;
   align-items: center;
   color: black;
-  text-align: center;
+  text-align: left;
   font-size: 14px;
   input {
     appearance: none;
     -webkit-appearance: none;
-    width: ${({ hasThumbnail }) => (hasThumbnail ? "25px" : "20px")};
+    width: 25px;
     height: 20px;
     border: 1px solid black;
     margin-right: 10px;
@@ -166,10 +167,13 @@ export const SubmitButton = styled.input`
   background-color: var(--innotech-color);
   color: white;
   border: none;
+  font-size: 14px;
   cursor: pointer;
   border-radius: 4px;
   margin-bottom: 10rem;
-
+  ${mediaRules.sm} {
+    font-size: 18px;
+  }
   &:disabled {
     background-color: var(--innotech-color);
     opacity: 0.5;

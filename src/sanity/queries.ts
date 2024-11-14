@@ -199,8 +199,6 @@ const buildCustomLinkQuery = (locale: string) =>
       'firstNameLabel': coalesce(popupForm.firstNameLabel.${locale}, popupForm.firstNameLabel.${fallbackLocale}),
       'lastNameLabel': coalesce(popupForm.lastNameLabel.${locale}, popupForm.lastNameLabel.${fallbackLocale}),
       'companyLabel': coalesce(popupForm.companyLabel.${locale}, popupForm.companyLabel.${fallbackLocale}),
-      'roleLabel': coalesce(popupForm.roleLabel.${locale}, popupForm.roleLabel.${fallbackLocale}),
-      'invitedByLabel': coalesce(popupForm.invitedByLabel.${locale}, popupForm.invitedByLabel.${fallbackLocale}),
       'phoneLabel': coalesce(popupForm.phoneLabel.${locale}, popupForm.phoneLabel.${fallbackLocale}),
       'emailLabel': coalesce(popupForm.emailLabel.${locale}, popupForm.emailLabel.${fallbackLocale}),
       'agreementLabel': coalesce(popupForm.agreementLabel.${locale}, popupForm.agreementLabel.${fallbackLocale}),
@@ -235,7 +233,25 @@ const buildCustomLinkQuery = (locale: string) =>
       'senderEmail': jobPopupForm.senderEmail,
       'senderPassword': jobPopupForm.senderPassword,
     }
-  }
+  },
+    linkType == 'EVENT_POPUP_FORM' => {
+    'eventPopupForm': {
+      'header': coalesce(eventPopupForm.header.${locale}, eventPopupForm.header.${fallbackLocale}),
+      'firstNameLabel': coalesce(eventPopupForm.firstNameLabel.${locale}, eventPopupForm.firstNameLabel.${fallbackLocale}),
+      'lastNameLabel': coalesce(eventPopupForm.lastNameLabel.${locale}, eventPopupForm.lastNameLabel.${fallbackLocale}),
+      'companyLabel': coalesce(eventPopupForm.companyLabel.${locale}, eventPopupForm.companyLabel.${fallbackLocale}),
+      'roleLabel': coalesce(eventPopupForm.roleLabel.${locale}, eventPopupForm.roleLabel.${fallbackLocale}),
+      'invitedByLabel': coalesce(eventPopupForm.invitedByLabel.${locale}, eventPopupForm.invitedByLabel.${fallbackLocale}),
+      'phoneLabel': coalesce(eventPopupForm.phoneLabel.${locale}, eventPopupForm.phoneLabel.${fallbackLocale}),
+      'emailLabel': coalesce(eventPopupForm.emailLabel.${locale}, eventPopupForm.emailLabel.${fallbackLocale}),
+      'agreementLabel': coalesce(eventPopupForm.agreementLabel.${locale}, eventPopupForm.agreementLabel.${fallbackLocale}),
+      'submitText': coalesce(eventPopupForm.submitText.${locale}, eventPopupForm.submitText.${fallbackLocale}),
+      'notificationText': coalesce(eventPopupForm.notificationText.${locale}, eventPopupForm.notificationText.${fallbackLocale}),
+      'receiverEmail': eventPopupForm.receiverEmail,
+      'senderEmail': eventPopupForm.senderEmail, 
+      'senderPassword': eventPopupForm.senderPassword, 
+    }
+  },
 }`;
 
 const buildTextLinksSectionQuery = (locale: string) => `

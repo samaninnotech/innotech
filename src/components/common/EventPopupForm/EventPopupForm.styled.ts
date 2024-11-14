@@ -15,6 +15,7 @@ export const Backdrop = styled.div`
 
 export const PopupContainer = styled.div`
   width: 95%;
+  max-width: 95%;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -28,17 +29,30 @@ export const PopupContainer = styled.div`
   max-height: calc(100% - 5rem);
   overflow-y: auto;
   margin: 5rem 0;
+
+  // Custom scrollbar
   &::-webkit-scrollbar {
     width: 3px;
   }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  // Media rules for max-width when thumbnail exists
   ${mediaRules.sm} {
-    max-width: 576px;
+    max-width: 80%;
   }
   ${mediaRules.md} {
-    max-width: 620px;
+    max-width: 40%;
   }
   ${mediaRules.lg} {
-    max-width: 840px;
+    max-width: 50%;
   }
 `;
 
@@ -51,53 +65,49 @@ export const PopupContent = styled.div`
 
 export const Row = styled.div`
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  flex-direction: column;
   margin: 0 -15px;
-  width: 100%;
-  padding: 0 10px;
+  width: inherit;
+`;
+
+export const Column = styled.div`
+  flex: 1;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: none;
+  border-radius: 5px;
+  margin-top: 1rem;
+  margin-bottom: 5rem;
+  width: inherit;
 `;
 
 export const TextColumn = styled.div`
   animation: move-up 0.3s;
   text-align: left;
-  margin-bottom: 1rem;
 `;
 
-export const Header = styled.h2`
-  color: var(--innotech-color);
-  font-weight: 300;
-  font-size: 1em;
-  margin: 0;
-  ${mediaRules.md} {
-    font-size: 1.5em;
-  }
-`;
-
-export const Subtitle = styled.div`
-  color: var(--text-gray-color);
-  font-weight: 300;
-  margin-top: 10px;
-  font-size: 1em;
-  ${mediaRules.md} {
-    font-size: 1.5em;
-  }
-`;
 export const FormWrapper = styled.div`
   animation: move-up 0.3s;
   width: 100%;
+  form {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 export const FormField = styled.p`
-  margin-top: 0;
   margin-bottom: 1rem;
-  text-align: left;
-  font-size: 14px;
+  text-align: center;
 `;
 
 export const InputLabel = styled.label`
   display: block;
-  margin-bottom: 0.5rem;
-  color: black;
+  color: var(--text-gray-color);
+  font-size: 14px;
 `;
 
 export const Input = styled.input`
@@ -107,10 +117,13 @@ export const Input = styled.input`
   background-color: var(--light-gray);
   border: 1px solid transparent;
   color: var(--text-gray-color);
+  font-size: 16px;
+
   &:focus {
-    border-color: var(--input-border-color);
     outline: none;
-    color: #1b7caa;
+    color: var(--text-gray-color);
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   }
 `;
 
@@ -119,7 +132,7 @@ export const CheckboxLabel = styled.label`
   align-items: center;
   color: black;
   text-align: center;
-  margin-bottom: 20px;
+  font-size: 14px;
   input {
     appearance: none;
     -webkit-appearance: none;
@@ -146,7 +159,7 @@ export const CheckboxLabel = styled.label`
 `;
 
 export const SubmitButton = styled.input`
-  padding: 1rem 2.5rem;
+  padding: 0.5rem 1rem;
   background-color: var(--innotech-color);
   color: white;
   border: none;
@@ -161,7 +174,7 @@ export const SubmitButton = styled.input`
 `;
 
 export const ImageColumn = styled.div`
-  flex: 1;
+  flex: 0.8;
   animation: move-up 0.3s;
 `;
 
@@ -201,7 +214,7 @@ export const Notification = styled.div`
   top: -120px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 16px;
+  font-size: 14px;
   background-color: #ffb900;
   color: white;
   padding: 15px 25px;
@@ -219,23 +232,8 @@ export const Notification = styled.div`
     transform: translateX(-50%) translateY(-20px);
   }
 
-  @media (max-width: 600px) {
+  ${mediaRules.md} {
     width: 90%;
     padding: 12px 15px;
-  }
-`;
-export const TextArea = styled.textarea`
-  width: 100%;
-  padding: 15px;
-  border-radius: 4px;
-  font-size: 16px;
-  background-color: var(--light-gray);
-  border: 1px solid transparent;
-  color: var(--text-gray-color);
-
-  &:focus {
-    border: 0.2px solid var(--input-border-color);
-    outline: none;
-    color: #1b7caa;
   }
 `;
