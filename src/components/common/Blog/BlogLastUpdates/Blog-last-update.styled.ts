@@ -181,10 +181,13 @@ export const SmallPostTitle = styled.h3`
 `;
 
 export const SmallPostDate = styled.p`
-  font-size: 0.9em;
+  font-size: 0.7em;
   margin: 0;
   display: flex;
   align-items: center;
+  ${mediaRules.md} {
+    font-size: 0.9em;
+  }
 `;
 
 export const SmallPostUser = styled.div`

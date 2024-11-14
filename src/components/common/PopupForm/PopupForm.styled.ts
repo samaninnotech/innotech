@@ -14,7 +14,7 @@ export const Backdrop = styled.div`
 `;
 
 export const PopupContainer = styled.div<{ hasThumbnail: boolean }>`
-  width: 100%;
+  width: 90%;
   max-width: ${({ hasThumbnail }) => (hasThumbnail ? "600px" : "80%")};
   position: fixed;
   top: 50%;
@@ -69,7 +69,7 @@ export const Row = styled.div<{ fullWidth: boolean }>`
   flex-direction: ${({ fullWidth }) => (fullWidth ? "row" : "column")};
   margin: 0 -15px;
   // padding: 0 30px;
-  width: 100%;
+  width: inherit;
 `;
 
 export const Column = styled.div<{ hasThumbnail: boolean }>`
@@ -84,11 +84,13 @@ export const Column = styled.div<{ hasThumbnail: boolean }>`
   border-radius: 5px;
   margin-top: 1rem;
   margin-bottom: 5rem;
+  width: inherit;
+
 `;
 
 export const TextColumn = styled.div`
   animation: move-up 0.3s;
-  text-align: center;
+  text-align: left;
 `;
 
 export const FormWrapper = styled.div`

@@ -14,7 +14,7 @@ export const Backdrop = styled.div`
 `;
 
 export const PopupContainer = styled.div`
-  width: 80%;
+  width: 95%;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -31,7 +31,6 @@ export const PopupContainer = styled.div`
   &::-webkit-scrollbar {
     width: 3px;
   }
-  // Media rules for max-width when thumbnail exists
   ${mediaRules.sm} {
     max-width: 576px;
   }
@@ -67,13 +66,21 @@ export const TextColumn = styled.div`
 export const Header = styled.h2`
   color: var(--innotech-color);
   font-weight: 300;
+  font-size: 1em;
   margin: 0;
+  ${mediaRules.md}{
+    font-size: 1.5em;
+  }
 `;
 
 export const Subtitle = styled.div`
   color: var(--text-gray-color);
   font-weight: 300;
   margin-top: 10px;
+  font-size: 1em;
+  ${mediaRules.md}{
+    font-size: 1.5em;
+  }
 `;
 export const FormWrapper = styled.div`
   animation: move-up 0.3s;
