@@ -1,4 +1,5 @@
 import ContactSection from "@/components/common/ContactSection";
+import EventSummary from "@/components/common/Event/EventSummary";
 import { HomePageTopPost } from "@/components/common/HomePageTopPost/HomePageTopPost";
 import PageTopBar from "@/components/common/PageTopBar";
 import PartnerShipSection from "@/components/common/PartnerShipSection/PartnerShipSection";
@@ -41,6 +42,7 @@ export {
   DraftBanner,
   EventRegistrationSection,
   EventsLastUpdatesSection,
+  EventSummary,
   FAQSection,
   Footer,
   GenericLink,

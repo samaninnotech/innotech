@@ -990,6 +990,34 @@ const buildEventRegistrationSectionQuery = (locale: string) => {
   }`;
 };
 
+const buildEventSummaryQuery = (locale: string, slug: string) => {
+  return `*[_type == "event" && slug.${locale}.current == '${slug}'][0] {
+    _id,
+    'location': location,
+    'organizer': organizer,
+    'event_date': {
+      'date_type': event_date.date_type,
+      'single_date': event_date.single_date,
+      'dates': event_date.dates[] {
+        date,
+        start_time,
+        end_time
+      },
+      'start_date': event_date.start_date,
+      'start_time': event_date.start_time,
+      'end_date': event_date.end_date,
+      'end_time': event_date.end_time
+    },
+    ...pageBuilder[_type == "event_summary"][0] {
+      'detailsLabel': coalesce(detailsLabel.${locale}, detailsLabel.${fallbackLocale}),
+      'locationLabel': coalesce(locationLabel.${locale}, locationLabel.${fallbackLocale}),
+      'organizatorLabel': coalesce(organizatorLabel.${locale}, organizatorLabel.${fallbackLocale}),
+      'startLabel': coalesce(startLabel.${locale}, startLabel.${fallbackLocale}),
+      'endLabel': coalesce(endLabel.${locale}, endLabel.${fallbackLocale})
+    }
+  }`;
+};
+
 const eventsQuery = (
   locale: string,
   setLength: number,
@@ -1075,6 +1103,7 @@ const eventBySlugQuery = (locale: string, slug: string) => {
     _type == 'team_list' => ${buildTeamListQuery(locale, fallbackLocale)},
     _type == 'carousel' => ${buildCarouselQuery(locale)},
     _type == 'event_registration_section' => ${buildEventRegistrationSectionQuery(locale)},
+    _type == 'event_summary' => ${buildEventSummaryQuery(locale, slug)},
     }
   }`;
 };

@@ -65,8 +65,6 @@ const EventPopupForm: React.FC<EventPopupFormProps> = ({
   receiverEmail,
   onClose,
 }) => {
-  console.log(receiverEmail, "inja");
-
   const [formValues, setFormValues] = useState<FormValues>({
     firstName: "",
     lastName: "",

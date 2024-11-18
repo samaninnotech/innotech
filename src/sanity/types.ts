@@ -210,6 +210,8 @@ export interface Event extends SanityElement {
   description: string;
   author: string;
   carousel: Carousel;
+  location: string;
+  organizer: string;
   pageBuilder: Section[];
 }
 export interface EventDate {
@@ -265,6 +267,20 @@ export function isEventRegistrationSection(
   return sectionMatchType(section, "event_registration_section");
 }
 
+export interface EventSummary extends Section {
+  detailsLabel: string;
+  locationLabel: string;
+  organizatorLabel: string;
+  startLabel: string;
+  endLabel: string;
+  location: string;
+  organizer: string;
+  event_date: EventDate;
+}
+
+export function isEventSummary(section: Section): section is EventSummary {
+  return sectionMatchType(section, "event_summary");
+}
 export interface EventPopupForm extends Section {
   header: string;
   firstNameLabel: string;

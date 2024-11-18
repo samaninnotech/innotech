@@ -19,6 +19,7 @@ import {
   EventRegistrationSection,
   EventsLastUpdatesSection,
   EventsListSection,
+  EventSummary,
   FAQSection,
   GetInTouchSection,
   HeroSection,
@@ -35,6 +36,7 @@ import {
   isEventRegistrationSection,
   isEventsLastUpdatesSection,
   isEventsListSection,
+  isEventSummary,
   isFAQSection,
   isGetInTouchSection,
   isHeroSection,
@@ -85,6 +87,7 @@ import {
   ContactSection as ContactSectionComponent,
   EventRegistrationSection as EventRegistrationSectionComponent,
   EventsLastUpdatesSection as EventsLastUpdatesSectionComponent,
+  EventSummary as EventSummaryComponent,
   FAQSection as FAQSectionComponent,
   GetInTouchSection as GetInTouchSectionComponent,
   HeroSectionComponent,
@@ -198,6 +201,8 @@ const PageBuilder: FC<PageBuilderProps> = async ({ sections, locale }) => {
       renderedSections.push(buildJobApplication(s));
     } else if (isVideoGridSection(s)) {
       renderedSections.push(buildVideoGridSection(s));
+    } else if (isEventSummary(s)) {
+      renderedSections.push(buildEventSummary(s));
     }
   }
 
@@ -548,6 +553,28 @@ const buildEventRegistrationSection = (s: EventRegistrationSection) => {
     <EventRegistrationSectionComponent
       header={header}
       eventRegistrationCards={eventRegistrationCards}
+    />
+  );
+};
+
+const buildEventSummary = (s: EventSummary) => {
+  const eventDate = buildEventDate(s.event_date);
+  const validEventDate = eventDate ?? {
+    date: "",
+    start_time: "",
+    end_time: "",
+  };
+
+  return (
+    <EventSummaryComponent
+      detailsLabel={s.detailsLabel}
+      locationLabel={s.locationLabel}
+      organizatorLabel={s.organizatorLabel}
+      startLabel={s.startLabel}
+      endLabel={s.endLabel}
+      location={s.location}
+      organizer={s.organizer}
+      eventDate={validEventDate}
     />
   );
 };
