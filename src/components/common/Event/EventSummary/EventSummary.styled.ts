@@ -7,6 +7,28 @@ export const SectionWrapper = styled.section`
   width: 100%;
 `;
 
+export const InnerContainer = styled.section`
+  text-align: center;
+  width: 100%;
+  margin: 0 auto;
+  ${mediaRules.xsm} {
+    max-width: 576px;
+  }
+
+  ${mediaRules.sm} {
+    max-width: 720px;
+    flex-direction: row;
+  }
+
+  ${mediaRules.md} {
+    max-width: 940px;
+  }
+
+  ${mediaRules.lg} {
+    max-width: 1170px;
+  }
+`;
+
 export const EventSummaryContainer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -61,4 +83,21 @@ export const ColumnContent = styled.div`
   font-size: 0.8rem;
   color: black;
   font-weight: 300;
+`;
+
+export const ButtonWrapper = styled.div`
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+`;
+
+export const CalendarButton = styled.button`
+  padding: 0.5rem 1rem;
+  background-color: #21759b;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.7rem;
+  transition: background-color 0.3s;
 `;

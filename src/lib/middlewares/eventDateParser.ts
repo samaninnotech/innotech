@@ -14,35 +14,32 @@ export interface EventDateType {
   end_date?: string;
 }
 
-export const buildEventDate = (eventDate: EventDate): EventDateType | null => {
+export const buildEventDate = (eventDate: EventDate): EventDateType => {
   switch (eventDate.date_type) {
     case "single":
-      return eventDate.single_date
-        ? {
-            date: eventDate.single_date.date || "Invalid date",
-            start_time: eventDate.single_date.start_time,
-            end_time: eventDate.single_date.end_time,
-          }
-        : null;
+      return {
+        date: eventDate.single_date?.date || "Invalid date",
+        start_time: eventDate.single_date?.start_time || "",
+        end_time: eventDate.single_date?.end_time || "",
+      };
     case "multiple":
-      return eventDate.dates
-        ? {
-            dates: eventDate.dates.map((dateItem) => ({
-              date: dateItem.date,
-              start_time: dateItem.start_time,
-              end_time: dateItem.end_time,
-            })),
-          }
-        : null;
+      return {
+        dates:
+          eventDate.dates?.map((dateItem) => ({
+            date: dateItem.date,
+            start_time: dateItem.start_time || "",
+            end_time: dateItem.end_time || "",
+          })) || [],
+      };
     case "range":
       return {
         date: eventDate.start_date || "Invalid start date",
-        start_time: eventDate.start_time || "No start time",
-        end_time: eventDate.end_time || "No end time",
+        start_time: eventDate.start_time || "",
+        end_time: eventDate.end_time || "",
         end_date: eventDate.end_date || "Invalid end date",
       };
     default:
-      return null;
+      return { date: "Invalid date", start_time: "", end_time: "" };
   }
 };
 

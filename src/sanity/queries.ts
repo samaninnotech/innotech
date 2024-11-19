@@ -993,6 +993,8 @@ const buildEventRegistrationSectionQuery = (locale: string) => {
 const buildEventSummaryQuery = (locale: string, slug: string) => {
   return `*[_type == "event" && slug.${locale}.current == '${slug}'][0] {
     _id,
+    'title': coalesce(title.${locale}, title.${fallbackLocale}),
+    'description': coalesce(description.${locale}, description.${fallbackLocale}),
     'location': location,
     'organizer': organizer,
     'event_date': {

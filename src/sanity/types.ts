@@ -216,13 +216,13 @@ export interface Event extends SanityElement {
 }
 export interface EventDate {
   date_type: "single" | "multiple" | "range";
-  single_date?: {
+  single_date: {
     date: string;
     start_time: string;
     end_time: string;
     _type: "dateTime";
   };
-  dates?: Array<{
+  dates: Array<{
     date: string;
     start_time?: string;
     end_time?: string;
@@ -273,6 +273,8 @@ export interface EventSummary extends Section {
   organizatorLabel: string;
   startLabel: string;
   endLabel: string;
+  title: string;
+  description: string;
   location: string;
   organizer: string;
   event_date: EventDate;

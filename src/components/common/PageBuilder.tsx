@@ -558,9 +558,8 @@ const buildEventRegistrationSection = (s: EventRegistrationSection) => {
 };
 
 const buildEventSummary = (s: EventSummary) => {
-  const eventDate = buildEventDate(s.event_date);
-  const validEventDate = eventDate ?? {
-    date: "",
+  const eventDate = buildEventDate(s.event_date) || {
+    date: "Invalid date",
     start_time: "",
     end_time: "",
   };
@@ -572,9 +571,11 @@ const buildEventSummary = (s: EventSummary) => {
       organizatorLabel={s.organizatorLabel}
       startLabel={s.startLabel}
       endLabel={s.endLabel}
+      title={s.title}
+      description={s.description}
       location={s.location}
       organizer={s.organizer}
-      eventDate={validEventDate}
+      eventDate={eventDate}
     />
   );
 };
