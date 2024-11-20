@@ -14,7 +14,7 @@ export const Subtitle = styled.h3`
   font-weight: 600;
 `;
 export const Normal = styled.p`
-  margin: 0 !important;
+  margin: 1rem 0 !important;
 `;
 export const BlockQuoteContainer = styled.div`
   padding-left: 1rem;

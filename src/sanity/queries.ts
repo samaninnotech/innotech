@@ -65,7 +65,6 @@ const buildPageDeconstructionQUery = (locale: string) => `{
     _type == 'blog_header_section' => ${buildBlogHeaderSectionQuery(locale)},
     _type == 'blog_last_updates_section' => ${buildBlogLastUpdatesSectionQuery(locale)},
     _type == 'carousel' => ${buildCarouselQuery(locale)},
-    _type == 'event_header_section' => ${buildEventHeaderSectionQuery(locale)},
     _type == 'contact_section' => ${buildContactSectionQuery(locale, fallbackLocale)},
     _type == 'events_last_updates_section' => ${buildEventsLastUpdatesSectionQuery(locale)},
     _type == 'youtube_section' => ${buildYouTubeSectionQuery(locale, fallbackLocale)},
@@ -83,12 +82,6 @@ const buildBlogHeaderSectionQuery = (locale: string) => `
 }`;
 const buildBlogLastUpdatesSectionQuery = (locale: string) => `{
   'header': coalesce(header.${locale}, header.${fallbackLocale}),
-}`;
-const buildEventHeaderSectionQuery = (locale: string) => `
-{
-  'title': coalesce(title.${locale}, title.${fallbackLocale}),
-  'subtitle': coalesce(subtitle.${locale}, subtitle.${fallbackLocale}),
-  background_image,
 }`;
 const buildEventsLastUpdatesSectionQuery = (locale: string) => `{
   'header': coalesce(header.${locale}, header.${fallbackLocale}),
@@ -1076,6 +1069,7 @@ const eventBySlugQuery = (locale: string, slug: string) => {
 
   return `*[_type == "event" && slug.${locale}.current == '${slug}'][0] {
     _id,
+    'all_events_label': all_events_label${buildCustomLinkQuery(locale)},
     'title': coalesce(title.${locale}, title.${fallbackLocale}),
     'description': coalesce(description.${locale}, description.${fallbackLocale}),
     'location': location,

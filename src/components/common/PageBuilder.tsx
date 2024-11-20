@@ -15,7 +15,6 @@ import {
   ContactForm,
   ContactSection,
   Event,
-  EventHeaderSection,
   EventRegistrationSection,
   EventsLastUpdatesSection,
   EventsListSection,
@@ -32,7 +31,6 @@ import {
   isConsultationSection,
   isContactForm,
   isContactSection,
-  isEventHeaderSection,
   isEventRegistrationSection,
   isEventsLastUpdatesSection,
   isEventsListSection,
@@ -114,7 +112,6 @@ import {
 import BlogHeaderComponent from "./Blog/BlogHeader";
 import BlogLastUpdate from "./Blog/BlogLastUpdates";
 import PostsList from "./Blog/PostsList";
-import EventHeaderComponent from "./Event/EventHeader";
 import EventsList from "./Event/EventsList";
 
 type PageBuilderProps = {
@@ -178,8 +175,6 @@ const PageBuilder: FC<PageBuilderProps> = async ({ sections, locale }) => {
       renderedSections.push(buildBlogLastUpdatesSection(s, posts));
     } else if (isCarousel(s)) {
       renderedSections.push(buildCarousel(s));
-    } else if (isEventHeaderSection(s)) {
-      renderedSections.push(buildEventHeaderSection(s));
     } else if (isEventsListSection(s)) {
       const events = await getEvents(locale, 12, undefined);
       const postsCount = await getEventsCount(locale);
@@ -487,19 +482,19 @@ const buildBlogLastUpdatesSection = (
   return <BlogLastUpdate posts={posts} header={header} />;
 };
 
-const buildEventHeaderSection = (section: EventHeaderSection) => {
-  const { title, subtitle, background_image, event_date } = section;
-  return (
-    <>
-      <EventHeaderComponent
-        title={title}
-        subtitle={subtitle}
-        imgSrc={sanityUrlFor(background_image).url()}
-        eventDate={event_date}
-      />
-    </>
-  );
-};
+// const buildEventHeaderSection = (section: EventHeaderSection) => {
+//   const { title, subtitle, background_image, event_date } = section;
+//   return (
+//     <>
+//       <EventHeaderComponent
+//         title={title}
+//         subtitle={subtitle}
+//         imgSrc={sanityUrlFor(background_image).url()}
+//         eventDate={event_date}
+//       />
+//     </>
+//   );
+// };
 
 const buildEventsListSection = (
   section: EventsListSection,

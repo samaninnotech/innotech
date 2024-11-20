@@ -11,10 +11,20 @@ export const InnerContainer1 = styled.div`
   display: flex;
   justify-content: center;
   ${mediaRules.xsm} {
-    max-width: 520px;
+    max-width: 576px;
   }
+
   ${mediaRules.sm} {
-    max-width: 800px;
+    max-width: 720px;
+  }
+
+  ${mediaRules.md} {
+    max-width: 940px;
+  }
+
+  ${mediaRules.lg} {
+    max-width: 1170px;
+  }
 `;
 
 export const Section = styled.div`

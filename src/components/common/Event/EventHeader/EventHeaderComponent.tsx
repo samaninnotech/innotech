@@ -1,6 +1,8 @@
 "use client";
+import Link from "@/i18n/Link";
 import useTranslation from "@/i18n/useTranslation";
 import { formatDate } from "@/lib/middlewares/eventDateParser";
+import { CustomLink, customLinkToHref } from "@/sanity/types";
 import { FC } from "react";
 import {
   BackgroundImage,
@@ -33,6 +35,7 @@ type EventDateType = {
 };
 
 type EventHeaderProps = {
+  all_events_label: CustomLink;
   title: string;
   subtitle?: string;
   imgSrc: string;
@@ -40,6 +43,7 @@ type EventHeaderProps = {
 };
 
 const EventHeaderComponent: FC<EventHeaderProps> = ({
+  all_events_label,
   title,
   subtitle,
   imgSrc,
@@ -110,6 +114,10 @@ const EventHeaderComponent: FC<EventHeaderProps> = ({
   return (
     <>
       <TextContainer className="container">
+        <Link href={customLinkToHref(all_events_label)}>
+          {"« "}
+          {all_events_label.label}
+        </Link>
         <Title>{title}</Title>
         {subtitle && <p>{subtitle}</p>}
         {renderEventDate() && <EventDate>{renderEventDate()}</EventDate>}

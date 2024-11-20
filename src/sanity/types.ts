@@ -200,6 +200,7 @@ export function isEventsListSection(
 }
 
 export interface Event extends SanityElement {
+  all_events_label: CustomLink;
   title: string;
   slug: string;
   publish_date: string;

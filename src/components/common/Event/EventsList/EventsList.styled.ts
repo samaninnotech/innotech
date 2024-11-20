@@ -121,6 +121,9 @@ export const CalendarIcon = styled(FaCalendarAlt)`
   font-size: 1.25rem;
 `;
 
+export const NoEventsHeading = styled.h2`
+  text-align: center;
+`;
 export const MonthHeading = styled.h2`
   display: flex;
   align-items: center;
@@ -159,7 +162,7 @@ export const ContentContainer = styled.div`
   }
 `;
 
-export const ToggleButton = styled.button`
+export const ToggleButton = styled.button<{ alignRight?: boolean }>`
   margin: 1rem 0;
   padding: 0.5rem 1rem;
   font-size: 1rem;
@@ -167,4 +170,10 @@ export const ToggleButton = styled.button`
   color: black;
   border: none;
   background-color: transparent;
+  ${({ alignRight }) =>
+    alignRight &&
+    `
+    position: absolute;
+    right: 0;
+  `}
 `;

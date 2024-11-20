@@ -37,8 +37,7 @@ export const EventSummaryContainer = styled.div`
   width: 100%;
   flex-direction: column;
   align-items: flex-start;
-  padding: 1.5rem 3rem;
-  padding-right: 10rem;
+  padding: 1.5rem 1rem;
   text-align: left;
   ${mediaRules.xsm} {
     max-width: 576px;
@@ -51,6 +50,8 @@ export const EventSummaryContainer = styled.div`
 
   ${mediaRules.md} {
     max-width: 940px;
+    padding: 1.5rem 3rem;
+    padding-right: 10rem;
   }
 
   ${mediaRules.lg} {
@@ -89,6 +90,10 @@ export const ButtonWrapper = styled.div`
   display: flex;
   gap: 1rem;
   margin-bottom: 2rem;
+  padding: 1rem;
+  ${mediaRules.sm} {
+    padding: 0;
+  }
 `;
 
 export const CalendarButton = styled.button`

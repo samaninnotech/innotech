@@ -36,6 +36,9 @@ export const BackgroundImage = styled(Image)`
   width: inherit;
   height: auto;
   z-index: 2;
+  object-fit: cover;
+  object-position: top;
+  bottom: 200px;
 `;
 
 export const TextContainer = styled.div`
@@ -48,19 +51,25 @@ export const TextContainer = styled.div`
   margin: auto;
   flex-wrap: wrap;
   max-width: 1150px;
+  a {
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: none; /* Prevents underline on hover */
+  }
 `;
 
 export const Title = styled.h2`
   margin-bottom: 0.5rem;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   text-align: left;
   color: var(--text-gray-color);
   ${mediaRules.sm} {
-    font-size: 2rem;
+    font-size: 1.5rem;
     line-height: 1.2;
   }
   ${mediaRules.lg} {
-    font-size: 2.25rem;
+    font-size: 1.7rem;
     line-height: 1.2;
   }
 `;
@@ -77,6 +86,9 @@ export const EventDate = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--text-gray-color);
 `;
 
 export const DateWrapper = styled.div`
@@ -95,8 +107,5 @@ export const MultipleEventDate = styled.div`
   justify-content: flex-start;
   flex-direction: column;
   align-items: left;
-  margin: 1rem 1.2rem;
-  svg {
-    width: 15px;
-  }
+  margin: 1rem 0;
 `;

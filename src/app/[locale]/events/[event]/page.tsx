@@ -47,6 +47,7 @@ const Event: FC<{ params: { locale: string; event: string } }> = async ({
   return (
     <PageBaseLayout slugMapping={slugMapping}>
       <EventHeaderComponent
+        all_events_label={detail.all_events_label}
         title={detail.title}
         subtitle={detail.subtitle}
         imgSrc={sanityUrlFor(detail.cover).url()}

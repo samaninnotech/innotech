@@ -2,21 +2,7 @@
 import { Event } from "@/sanity/types";
 import { PortableText } from "@portabletext/react";
 import { FC, useCallback, useEffect, useState } from "react";
-import { BiLogoFacebook } from "react-icons/bi";
-import { FaLinkedinIn } from "react-icons/fa6";
-import { GoShareAndroid } from "react-icons/go";
-import { IoLogoTwitter } from "react-icons/io";
-import {
-  BubbleContainer,
-  ButtonWrapper,
-  IconsInner,
-  InnerContainer1,
-  Section,
-  ShareBubble,
-  ShareButton,
-  ShareText,
-  Text,
-} from "./EventBodySection.styled";
+import { InnerContainer1, Section, Text } from "./EventBodySection.styled";
 
 import { fallbackLocale } from "@/i18n/settings";
 import useTranslation from "@/i18n/useTranslation";
@@ -62,52 +48,6 @@ const EventBodySectionComponent: FC<EventBodySectionProps> = ({ event }) => {
           <PortableText value={event.body} components={components} />
         </Text>
       </InnerContainer1>
-      <BubbleContainer>
-        <ButtonWrapper>
-          <ShareText>Share this event</ShareText>
-          <ShareButton
-            onClick={toggleBubble}
-            className="share-button-container"
-          >
-            <GoShareAndroid />
-          </ShareButton>
-        </ButtonWrapper>
-        <ShareBubble className={showBubble ? "show" : ""}>
-          <IconsInner>
-            <button
-              onClick={() =>
-                openInNewTab(
-                  `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`,
-                )
-              }
-            >
-              <BiLogoFacebook />
-            </button>
-          </IconsInner>
-          <IconsInner>
-            <button
-              onClick={() =>
-                openInNewTab(
-                  `https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(event.title)}`,
-                )
-              }
-            >
-              <IoLogoTwitter />
-            </button>
-          </IconsInner>
-          <IconsInner>
-            <button
-              onClick={() =>
-                openInNewTab(
-                  `https://www.linkedin.com/shareArticle?url=${encodeURIComponent(shareUrl)}&title=${encodeURIComponent(event.title)}`,
-                )
-              }
-            >
-              <FaLinkedinIn />
-            </button>
-          </IconsInner>
-        </ShareBubble>
-      </BubbleContainer>
     </Section>
   );
 };

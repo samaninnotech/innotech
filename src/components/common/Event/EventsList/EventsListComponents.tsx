@@ -16,6 +16,7 @@ import {
   LearnMoreLink,
   LoadMoreButton,
   MonthHeading,
+  NoEventsHeading,
   SectionWrapper,
   TilesContainer,
   ToggleButton,
@@ -118,11 +119,28 @@ const EventsListComponent: FC<EventsListProps> = ({ events, eventsCount }) => {
 
       {/* Button to toggle showing past events, only shown if past events exist */}
       {pastEventsExist && (
-        <ToggleButton onClick={() => setShowPastEvents(!showPastEvents)}>
-          {showPastEvents ? "Show Upcoming Events >>" : "<< Show Past Events"}
+        <ToggleButton
+          onClick={() => setShowPastEvents(!showPastEvents)}
+          alignRight={showPastEvents}
+        >
+          {showPastEvents
+            ? currentLocale === "it"
+              ? "Eventi successivo »"
+              : "Upcoming Events »"
+            : currentLocale === "it"
+              ? "« Eventi precedenti"
+              : "« Past Events"}
         </ToggleButton>
       )}
 
+      {/* Show a message if there are no events */}
+      {upcomingEvents.length === 0 && !showPastEvents && (
+        <NoEventsHeading>
+          {currentLocale === "it"
+            ? "Non ci sono eventi imminenti"
+            : "There are no upcoming events"}
+        </NoEventsHeading>
+      )}
       <TilesContainer>
         {Object.entries(groupedEvents).map(([month, monthEvents]) => (
           <div key={month}>
@@ -139,8 +157,17 @@ const EventsListComponent: FC<EventsListProps> = ({ events, eventsCount }) => {
       )}
       {/* Button to toggle showing past events, only shown if past events exist */}
       {pastEventsExist && (
-        <ToggleButton onClick={() => setShowPastEvents(!showPastEvents)}>
-          {showPastEvents ? "Show Upcoming Events >>" : "<< Show Past Events"}
+        <ToggleButton
+          onClick={() => setShowPastEvents(!showPastEvents)}
+          alignRight={showPastEvents}
+        >
+          {showPastEvents
+            ? currentLocale === "it"
+              ? "Eventi successivo »"
+              : "Upcoming Events »"
+            : currentLocale === "it"
+              ? "« Eventi precedenti"
+              : "« Past Events"}
         </ToggleButton>
       )}
     </SectionWrapper>
