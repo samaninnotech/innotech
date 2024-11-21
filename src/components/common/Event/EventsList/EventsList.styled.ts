@@ -163,7 +163,6 @@ export const ContentContainer = styled.div`
 `;
 
 export const ToggleButton = styled.button<{ alignRight?: boolean }>`
-  margin: 1rem 0;
   padding: 0.5rem 1rem;
   font-size: 1rem;
   cursor: pointer;

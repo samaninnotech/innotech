@@ -38,13 +38,44 @@ type SubMenuProps = {
 export const SubMenuLink = styled(Link)`
   color: white;
   font-size: 1em;
-  font-weight: bold;
+  font-weight: 300;
   width: fit-content;
   margin-right: 5rem;
+  display: inline-block; /* Ensure the element wraps around the text */
+  position: relative; /* Required for the pseudo-element to position correctly */
+
   ${mediaRules.lg} {
     color: gray;
     padding: 0 1rem;
     margin-bottom: 1rem;
+  }
+
+  &:hover {
+    text-decoration: none;
+    color: var(--input-border-color);
+  }
+
+  &:before {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    width: 0;
+    height: 1px;
+    background-color: var(--input-border-color);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition:
+      transform 0.5s ease-in-out,
+      width 0.5s ease-in-out;
+
+    ${mediaRules.lg} {
+      transition: transform 0.5s ease-in-out;
+    }
+  }
+
+  &:hover:before {
+    transform: scaleX(0.8);
+    width: 90%;
   }
 `;
 

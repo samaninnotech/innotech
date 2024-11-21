@@ -48,8 +48,8 @@ const LanguageElement: FC<LanguageElementProps> = ({ language }) => {
     href += `/${slug}`;
   }
 
-  // Choose the correct flag image based on the locale
-  const flagSrc = locale === "it" ? "/italy.png" : "/england.svg"; // Assuming the flag images are in the public/flags directory
+  // Choose the correct flag image based on the locale TODO
+  const flagSrc = locale === "it" ? "/italy.png" : "/england.svg";
 
   return (
     <LanguageElementStyled

@@ -156,7 +156,8 @@ export const GenericLinksContainerStyled = styled.div`
 
 export const PageLinksContainerStyled = styled(GenericLinksContainerStyled)`
   padding-bottom: 0.75rem;
-
+  width: 100%;
+  justify-content: space-around;
   ${mediaRules.lg} {
     padding-bottom: 0;
   }
@@ -171,7 +172,6 @@ export const ComplexNavbarLinkContainer = styled.div`
     display: inline-flex;
     align-items: center;
     white-space: nowrap;
-    padding-left: 1rem;
   }
 `;
 
@@ -191,7 +191,6 @@ export const NavbarElementStyled = styled(Link)<{ $selected?: boolean }>`
   }
 
   ${mediaRules.lg} {
-    margin-left: 2rem;
     margin-top: 0;
     width: fit-content;
     border-top: none;
@@ -246,7 +245,6 @@ export const NavbarMenuStyled = styled.span<{ $selected?: boolean }>`
   border-top: 1px solid gray;
 
   ${mediaRules.lg} {
-    margin-left: 2rem;
     margin-top: 0;
     width: auto;
     border: none;
@@ -298,11 +296,13 @@ export const SVGContainer = styled.div`
   border-radius: 0.25rem; 
   padding: 0.5rem 1rem; 
   svg {
-    width: 10px;
-    height: 20px;
+    width: 8px;
+    height: 15px;
   }
   ${mediaRules.lg} {
     background-color: transparent; 
+    padding: 0.5rem; 
+
 `;
 export const NavbarLinkButtonStyled = styled(Link)`
   padding: 0.5rem 1.5rem;
@@ -333,23 +333,5 @@ export const SideLinkStyled = styled(Link)<{ $selected?: boolean }>`
 
   ${mediaRules.lg} {
     border-bottom: none;
-  }
-`;
-export const SearchIconContainer = styled.div`
-  display: flex;
-  align-items: right;
-  cursor: pointer;
-  font-size: 1.5rem;
-
-  ${mediaRules.lg} {
-    margin-left: 1rem;
-  }
-
-  svg {
-    color: inherit;
-  }
-
-  &:hover svg {
-    color: #555;
   }
 `;
