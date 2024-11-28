@@ -46,7 +46,6 @@ import {
   isOurCompanySection,
   isPageMiddleBanner,
   isPageTopBanner,
-  isPageTopBar,
   isPartnerShipSection,
   isQuoteSection,
   isSolutionsSection,
@@ -63,7 +62,6 @@ import {
   OurCompanySection,
   PageMiddleBanner,
   PageTopBanner,
-  PageTopBar,
   PartnerShipSection,
   Post,
   QuoteSection,
@@ -97,7 +95,6 @@ import {
   OurCompanySection as OurCompanySectionComponent,
   PageMiddleBanner as PageMiddleBannerComponent,
   PageTopBanner as PageTopBannerComponent,
-  PageTopBar as PageTopBarComponent,
   PartnerShipSection as PartnerShipSectionComponent,
   QuoteSection as QuoteSectionComponent,
   SolutionsSection as SolutionsSectionComponent,
@@ -126,9 +123,7 @@ const PageBuilder: FC<PageBuilderProps> = async ({ sections, locale }) => {
 
   const renderedSections: ReactNode[] = [];
   for (const s of sections) {
-    if (isPageTopBar(s)) {
-      renderedSections.push(buildPageTopBar(s));
-    } else if (isHomePageTopPost(s)) {
+    if (isHomePageTopPost(s)) {
       renderedSections.push(buildHomePageTopPost(s));
     } else if (isConsultationSection(s)) {
       renderedSections.push(buildConsultationSection(s));
@@ -203,17 +198,7 @@ const PageBuilder: FC<PageBuilderProps> = async ({ sections, locale }) => {
 
   return <>{renderedSections}</>;
 };
-const buildPageTopBar = (s: PageTopBar) => {
-  const { contactLink, contactText, phoneContact, phoneContactLink } = s;
-  return (
-    <PageTopBarComponent
-      contactLink={contactLink}
-      contactText={contactText}
-      phoneContact={phoneContact}
-      phoneContactLink={phoneContactLink}
-    />
-  );
-};
+
 const buildHomePageTopPost = (s: HomePageTopPost) => {
   const { backgroundImage, heading } = s;
   return (

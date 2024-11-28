@@ -1,9 +1,9 @@
 import { mediaRules } from "@/themes/media-breakpoints";
 import styled from "styled-components";
 
-export const PageTopBarContainer = styled.div`
+export const PageTopBarContainer = styled.div<{ $isHomePage?: boolean }>`
   background-color: transparent;
-  color: white;
+  color: ${({ $isHomePage }) => ($isHomePage ? "white" : "black")};
   top: 0;
   left: 0;
   right: 0;

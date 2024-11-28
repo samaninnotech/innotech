@@ -1,4 +1,4 @@
-import { DraftBanner, Footer } from "@/components/common";
+import { DraftBanner, Footer, PageTopBar } from "@/components/common";
 import { isSupportedLocale } from "@/i18n/settings";
 import { iubendaSiteId } from "@/iubenda/settings";
 import { getIubendaConfig } from "@/iubenda/utils";
@@ -7,6 +7,7 @@ import {
   getFooterConfig,
   getHomepageId,
   getNavbarConfig,
+  getpageTopBarConfig,
 } from "@/sanity/queries";
 import { Inter } from "next/font/google";
 import { draftMode } from "next/headers";
@@ -22,6 +23,7 @@ const RootLayout: FC<
   PropsWithChildren<{ params: { locale: string } }>
 > = async ({ params: { locale }, children }) => {
   const { navbar_config, side_navbar_config } = await getNavbarConfig(locale);
+  const pageTopBarData = await getpageTopBarConfig(locale);
   const footerData = await getFooterConfig(locale);
   const { homepage } = await getHomepageId();
   // Generating JSON-LD
@@ -80,6 +82,14 @@ const RootLayout: FC<
               sideConfig: side_navbar_config || [],
             }}
           >
+            {pageTopBarData && (
+              <PageTopBar
+                contactLink={pageTopBarData.contactLink}
+                contactText={pageTopBarData.contactText}
+                phoneContact={pageTopBarData.phoneContact}
+                phoneContactLink={pageTopBarData.phoneContactLink}
+              />
+            )}
             {children}
 
             {/* Check if footerData is available before rendering Footer */}

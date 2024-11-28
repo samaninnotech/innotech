@@ -3,7 +3,6 @@ import CustomPageIds from "./custom-page-ids";
 import getSanityClient from "./get-sanity-client";
 import sanityClient from "./sanity-client";
 import {
-  AssistanceInfoResult,
   ChildPagesConfigResult,
   Event,
   FooterConfigResult,
@@ -11,6 +10,7 @@ import {
   NavbarConfigResult,
   Page,
   PagesConfigResult,
+  PageTopBarConfigResult,
   Post,
 } from "./types";
 
@@ -43,7 +43,6 @@ const buildPageDeconstructionQUery = (locale: string) => `{
     _type == 'block_section' => ${buildBlockSectionQuery(locale)},
     _type == 'newsletter_form_section' => ${buildNewsletterSectionQuery(locale)},
     _type == 'large_background_section' => ${buildLargeBackgroundSectionQuery(locale)},
-    _type == 'page_top_bar' => ${buildPageTopBarQuery(locale, fallbackLocale)},
     _type == 'home_page_top_post' => ${buildHomePageTopPostQuery(locale)},
     _type == 'consultation_section' => ${buildConsultationSectionQuery(locale, fallbackLocale)},
     _type == 'solutions_section' => ${buildSolutionsSectionQuery(locale, fallbackLocale)},
@@ -299,13 +298,6 @@ const buildLargeBackgroundSectionQuery = (locale: string) => `
   }
 }`;
 
-const buildPageTopBarQuery = (locale: string, fallbackLocale: string) => `{
-  'contactLink': contactLink${buildCustomLinkQuery(locale)},
-  'contactText': coalesce(contactText.${locale}, contactText.${fallbackLocale}),
-  'phoneContact': phoneContact,
-  'phoneContactLink': phoneContactLink
-}`;
-
 const buildHomePageTopPostQuery = (locale: string) => `{
   'backgroundImage': backgroundImage.asset->url,
   'heading': coalesce(heading.${locale}, heading.${fallbackLocale}),
@@ -558,33 +550,6 @@ const buildCarouselQuery = (locale: string) => {
   }`;
 };
 
-const footerQuery = (locale: string) => `
-*[ _type == "website_settings" && _id == "websiteSettings"][0]{
-  
-    'logo': footer.logo.asset->url,
-    'address': footer.address,
-    'phone': footer.phone,
-    'email': footer.email,
-    'services': footer.services,
-    'quickLinks': footer.quickLinks[]${buildCustomLinkQuery(locale)},
-    'aboutLinks': footer.aboutLinks[]${buildCustomLinkQuery(locale)},
-    'socialLinks': footer.socialLinks[]${buildCustomLinkQuery(locale)},
-    'copyrightText': footer.copyrightText
-  
-}
-`;
-
-export const getFooterConfig = async (locale: string) => {
-  const query = footerQuery(locale);
-  const sanityClient = getSanityClient();
-  const result = await sanityClient.fetch<FooterConfigResult>(query);
-  if (!result) {
-    return null;
-  }
-
-  return result;
-};
-
 /******************************/
 /*   Page By Id and By Slug   */
 /******************************/
@@ -729,52 +694,56 @@ export const getGlobalAccountInfo = async (locale: string) => {
   return result;
 };
 
-const footerInfoQuery = () => `
-*[ _type == "website_settings"][0] {
-  'email': emails[type == 'Main'][0].email,
-  'address': account_references[is_main == true][0].address,
-  'phone': account_references[is_main == true][0].phone
-}`;
-
 /**
- * Recupera le info necessarie per il footer (Indirizzo, Telefono, Email)
+ * Recupera le info necessarie per il page top bar (Indirizzo, Telefono, Email)
  * @returns
  */
-interface FooterInfo {
-  email: string;
-  address: string;
-  phone: string;
+const pageTopBarQuery = (locale: string) => `
+*[ _type == "website_settings" && _id == "websiteSettings"][0]{
+  
+    'contactLink': page_top_bar.contactLink${buildCustomLinkQuery(locale)},
+    'contactText': coalesce(page_top_bar.contactText.${locale}, page_top_bar.contactText.${fallbackLocale}),
+    'phoneContact': page_top_bar.phoneContact,
+    'phoneContactLink': page_top_bar.phoneContactLink,
 }
-export const getFooterInfo = async () => {
-  const query = footerInfoQuery();
-  const sanityClient = getSanityClient();
-  const result = await sanityClient.fetch<FooterInfo>(query);
+`;
 
+export const getpageTopBarConfig = async (locale: string) => {
+  const query = pageTopBarQuery(locale);
+  const sanityClient = getSanityClient();
+  const result = await sanityClient.fetch<PageTopBarConfigResult>(query);
   if (!result) {
-    return { email: "", address: "", phone: "" } as FooterInfo;
+    return null;
   }
 
   return result;
 };
 
-const assistanceInfoQuery = () => `
-*[ _type == "website_settings"][0] {
-  'email': emails[type == 'Support'][0].email,
-  'address': account_references[is_main == true][0].address,
-  'phone': account_references[is_main == true][0].phone
-}`;
-
 /**
- * Recupera le info necessarie per la pagina Assistenza (Indirizzo, Telefono, Email di Support)
+ * Recupera le info necessarie per il footer (Indirizzo, Telefono, Email)
  * @returns
  */
-export const getAssistanceInfo = async () => {
-  const query = assistanceInfoQuery();
-  const sanityClient = getSanityClient();
-  const result = await sanityClient.fetch<AssistanceInfoResult>(query);
+const footerQuery = (locale: string) => `
+*[ _type == "website_settings" && _id == "websiteSettings"][0]{
+  
+    'logo': footer.logo.asset->url,
+    'address': footer.address,
+    'phone': footer.phone,
+    'email': footer.email,
+    'services': footer.services,
+    'quickLinks': footer.quickLinks[]${buildCustomLinkQuery(locale)},
+    'aboutLinks': footer.aboutLinks[]${buildCustomLinkQuery(locale)},
+    'socialLinks': footer.socialLinks[]${buildCustomLinkQuery(locale)},
+    'copyrightText': footer.copyrightText
+}
+`;
 
+export const getFooterConfig = async (locale: string) => {
+  const query = footerQuery(locale);
+  const sanityClient = getSanityClient();
+  const result = await sanityClient.fetch<FooterConfigResult>(query);
   if (!result) {
-    return { email: "", address: "", phone: "" } as AssistanceInfoResult;
+    return null;
   }
 
   return result;
@@ -1069,7 +1038,7 @@ const eventBySlugQuery = (locale: string, slug: string) => {
 
   return `*[_type == "event" && slug.${locale}.current == '${slug}'][0] {
     _id,
-    'all_events_label': all_events_label${buildCustomLinkQuery(locale)},
+    'all_events_label': coalesce(all_events_label${buildCustomLinkQuery(locale)}, "Default Label"),
     'title': coalesce(title.${locale}, title.${fallbackLocale}),
     'description': coalesce(description.${locale}, description.${fallbackLocale}),
     'location': location,

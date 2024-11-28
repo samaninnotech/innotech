@@ -379,18 +379,6 @@ export interface EventType extends SanityElement {
   url: string;
 }
 
-/* Page Top Bar */
-export interface PageTopBar extends Section {
-  contactLink: CustomLink;
-  contactText: string;
-  phoneContact: string;
-  phoneContactLink: string;
-}
-
-export function isPageTopBar(section: Section): section is PageTopBar {
-  return sectionMatchType(section, "page_top_bar");
-}
-
 /* Home Page Top Post */
 export interface HomePageTopPost extends Section {
   backgroundImage: string;
@@ -979,6 +967,14 @@ export function isLargeBackgroundSection(
   section: Section,
 ): section is LargeBackgroundSection {
   return sectionMatchType(section, "large_background_section");
+}
+
+/* Page Top Bar */
+export interface PageTopBarConfigResult {
+  contactLink: CustomLink;
+  contactText: string;
+  phoneContact: string;
+  phoneContactLink: string;
 }
 
 /* Footer section */

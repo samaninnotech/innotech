@@ -1,6 +1,7 @@
 "use client";
 import Link from "@/i18n/Link";
 import { CustomLink, customLinkToHref } from "@/sanity/types";
+import { usePathname } from "next/navigation";
 import { FC } from "react";
 import { FaPhone } from "react-icons/fa6";
 import {
@@ -20,6 +21,7 @@ type TopBarProps = {
   contactText: any;
   phoneContact: string;
   phoneContactLink: string;
+  isHomePage?: boolean;
 };
 
 const PageTopBar: FC<TopBarProps> = ({
@@ -27,10 +29,14 @@ const PageTopBar: FC<TopBarProps> = ({
   contactText,
   phoneContact,
   phoneContactLink,
+  isHomePage,
 }) => {
   const href = customLinkToHref(contactLink);
+  const path = usePathname();
+  const isHomePageCurrent = path === "/" || path === "/en";
+
   return (
-    <PageTopBarContainer>
+    <PageTopBarContainer $isHomePage={isHomePageCurrent}>
       <Container>
         <Row>
           <TopBarWrap>
