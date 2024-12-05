@@ -170,7 +170,7 @@ export const SubmitButton = styled.input`
   font-size: 14px;
   cursor: pointer;
   border-radius: 4px;
-  margin-bottom: 10rem;
+  margin-bottom: 8rem;
   ${mediaRules.sm} {
     font-size: 18px;
   }

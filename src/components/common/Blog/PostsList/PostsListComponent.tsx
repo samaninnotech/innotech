@@ -1,7 +1,7 @@
 "use client";
 import useTranslation from "@/i18n/useTranslation";
 import { FC, useEffect, useState } from "react";
-import Spinner from "../../Spinner";
+import Loading from "../../Loading";
 import { CalendarIcon } from "../BlogHeader/BlogHeader.styled";
 import {
   Header,
@@ -46,7 +46,7 @@ const PostsListComponent: FC<PostsListProps> = ({ posts, postsCount }) => {
 
   return (
     <SectionWrapper>
-      <Spinner show={isLoading} />
+      <Loading show={isLoading} />
       <Header>Innotech Blog</Header>
       <TilesContainer>
         {!!loadedPosts?.length &&

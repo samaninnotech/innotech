@@ -1,4 +1,5 @@
 import { DraftBanner, Footer, PageTopBar } from "@/components/common";
+import ScrollToTop from "@/components/common/ScrollToTop";
 import { isSupportedLocale } from "@/i18n/settings";
 import { iubendaSiteId } from "@/iubenda/settings";
 import { getIubendaConfig } from "@/iubenda/utils";
@@ -106,7 +107,7 @@ const RootLayout: FC<
                 copyrightText={footerData.copyrightText}
               />
             )}
-
+            <ScrollToTop />
             {draftEnabled && <DraftBanner></DraftBanner>}
           </Providers>
         </StyledComponentsRegistry>

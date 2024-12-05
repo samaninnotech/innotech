@@ -19,6 +19,7 @@ import HeroSectionComponent from "./HeroSection";
 import InfoSection from "./InfoSection";
 import JobApplication from "./JobApplication";
 import JobOfferSection from "./JobOfferSection";
+import Loading from "./Loading";
 import OnlyTextSection from "./OnlyTextSection";
 import OurCompanySection from "./OurCompanySection/OurCompanySection";
 import PageMiddleBanner from "./PageMiddleBanner";
@@ -52,6 +53,7 @@ export {
   InfoSection,
   JobApplication,
   JobOfferSection,
+  Loading,
   OnlyTextSection,
   OurCompanySection,
   PageMiddleBanner,

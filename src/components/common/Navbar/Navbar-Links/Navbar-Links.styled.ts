@@ -253,14 +253,6 @@ export const NavbarMenuStyled = styled.span<{ $selected?: boolean }>`
 
   border-bottom: none;
 
-  ${mediaRules.lg} {
-    ${({ $selected }) =>
-      $selected &&
-      css`
-        color: var(--innotech-color);
-      `}
-  }
-
   &:hover {
     text-decoration: none;
   }

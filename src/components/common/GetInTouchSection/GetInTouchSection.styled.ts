@@ -185,12 +185,13 @@ export const ButtonContainer = styled.div`
   width: 100%;
 `;
 export const SubmitButton = styled.input`
-  padding: 0.5rem 1rem;
+  padding: 1rem 2.5rem;
   background-color: var(--innotech-color);
   color: white;
   border: none;
   cursor: pointer;
   border-radius: 4px;
+  margin-bottom: 3rem;
 
   &:disabled {
     background-color: var(--innotech-color);
@@ -250,7 +251,7 @@ export const CheckboxLabel = styled.label`
 `;
 
 export const Notification = styled.div`
-  margin-top: 20px;
+  // margin-top: 20px;
   font-size: 14px;
   background-color: #ffb900;
   color: white;

@@ -1,39 +1,46 @@
 import styled, { keyframes } from "styled-components";
 
-const spin = keyframes`
-  0% {
-    transform: rotate(0deg);
+// Keyframes for the square animation (changing height and margin)
+const grow = keyframes`
+  0%, 25%, 75%, 100% {
+    height: 8px; /* Default small height */
+    margin-top: 6px; /* Center the smaller height */
+    margin-bottom: 6px;
   }
-  100% {
-    transform: rotate(360deg);
+  50% {
+    height: 20px; /* Growing height */
+    margin-top: 0px; /* No margin when fully grown */
+    margin-bottom: 0px;
   }
 `;
 
 export const SpinnerContainer = styled.div`
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
+  position: relative;
+  // top: -100px; /* Adjust vertical position */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Adjust for exact centering */
+  width: 100px;
+  height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 100000;
+  z-index: 1000; /* Ensure it appears above other content */
 `;
 
-export const SpinnerStyled = styled.div`
-  width: 80px;
-  height: 80px;
-  border: 8px solid transparent;
-  border-top-color: #3498db;
-  border-radius: 50%;
-  animation: ${spin} 1s linear infinite;
+export const SquaresContainer = styled.div`
+  display: flex;
+  gap: 2px; /* Minimal space between squares */
 `;
 
+export const Square = styled.div<{ delay: number }>`
+  width: 8px; /* Fixed width */
+  height: 8px; /* Initial height */
+  background-color: black; /* Always black */
+  animation: ${grow} 1.5s linear infinite;
+  animation-delay: ${(props) => props.delay}s;
+`;
+
+// Container used if spinner is inside another container
 export const SpinnerContainedContainer = styled(SpinnerContainer)`
-  width: 100%;
-  height: 100%;
-  position: initial;
-  background: none;
+  background: none; /* Remove background if not needed */
 `;

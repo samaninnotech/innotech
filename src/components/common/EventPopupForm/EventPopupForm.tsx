@@ -191,7 +191,6 @@ const EventPopupForm: React.FC<EventPopupFormProps> = ({
 
   return (
     <>
-      {isSubmitting && <SpinnerComponent show={true} />}
       <Backdrop onClick={onClose} />
       <PopupContainer>
         <CloseButton onClick={onClose}>✖</CloseButton>
@@ -305,6 +304,7 @@ const EventPopupForm: React.FC<EventPopupFormProps> = ({
                     disabled={isSubmitting || !isFormValid}
                     value={submitText}
                   ></SubmitButton>
+                  {isSubmitting && <SpinnerComponent show={true} />}
                   {notification && <Notification>{notification}</Notification>}
                 </form>
               </FormWrapper>

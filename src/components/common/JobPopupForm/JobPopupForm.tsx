@@ -217,7 +217,6 @@ const JobPopupForm: React.FC<JobPopupFormProps> = ({
 
   return (
     <>
-      {isSubmitting && <SpinnerComponent show={true} />}
       <Backdrop onClick={onClose} />
       <PopupContainer>
         <CloseButton onClick={onClose}>✖</CloseButton>
@@ -307,6 +306,7 @@ const JobPopupForm: React.FC<JobPopupFormProps> = ({
                   disabled={!isFormValid}
                   value={submitText}
                 ></SubmitButton>
+                {isSubmitting && <SpinnerComponent show={true} />}
                 {notification && <Notification>{notification}</Notification>}
               </form>
             </FormWrapper>

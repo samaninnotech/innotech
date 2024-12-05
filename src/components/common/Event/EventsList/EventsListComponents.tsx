@@ -3,7 +3,7 @@
 import useTranslation from "@/i18n/useTranslation";
 import { formatDate } from "@/lib/middlewares/eventDateParser";
 import { FC, useState } from "react";
-import Spinner from "../../Spinner";
+import Loading from "../../Loading";
 import {
   ContentContainer,
   EventDate,
@@ -115,7 +115,7 @@ const EventsListComponent: FC<EventsListProps> = ({ events, eventsCount }) => {
 
   return (
     <SectionWrapper>
-      <Spinner show={isLoading} />
+      <Loading show={isLoading} />
 
       {/* Button to toggle showing past events, only shown if past events exist */}
       {pastEventsExist && (

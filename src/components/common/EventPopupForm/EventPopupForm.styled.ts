@@ -165,7 +165,7 @@ export const SubmitButton = styled.input`
   border: none;
   cursor: pointer;
   border-radius: 4px;
-  margin-bottom: 10rem;
+  margin-bottom: 8rem;
 
   &:disabled {
     background-color: var(--innotech-color);

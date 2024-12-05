@@ -102,9 +102,6 @@ const GlobalStyles = createGlobalStyle`
   transition: transform 0.3s ease, padding-right 0.3s ease; /* Added transition for padding-right */
 }
 
-// .sidebar-open .main-content {
-//   transition: transform 0.3s ease; /* Added to make sure content also moves smoothly */
-// }
 `;
 
 export default GlobalStyles;

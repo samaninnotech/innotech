@@ -190,7 +190,6 @@ const GetInTouchSection: React.FC<GetInTouchSectionProps> = ({
 
   return (
     <>
-      {isSubmitting && <SpinnerComponent show={true} />}
       <SectionWrapper backgroundImage={backgroundImage}>
         <Container>
           <Row>
@@ -281,6 +280,7 @@ const GetInTouchSection: React.FC<GetInTouchSectionProps> = ({
                       value={submitText}
                     />
                   </ButtonContainer>
+                  {isSubmitting && <SpinnerComponent show={true} />}
                   {notification && (
                     <FormItem>
                       <Notification>{notification}</Notification>
