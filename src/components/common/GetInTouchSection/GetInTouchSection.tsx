@@ -170,6 +170,14 @@ const GetInTouchSection: React.FC<GetInTouchSectionProps> = ({
         setNotification(notificationText);
         setTimeout(() => {
           setNotification(null);
+          setFormValues({
+            firstName: "",
+            lastName: "",
+            email: "",
+            selectedOption: "",
+            presentation: "",
+            agreement: false,
+          });
         }, 3000);
       } else {
         setNotification("Failed to send the email. Please try again.");

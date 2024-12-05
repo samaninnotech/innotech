@@ -167,7 +167,6 @@ const ContactSection: React.FC<ContactSectionProps> = ({
         setNotification(notificationText);
         setTimeout(() => {
           setNotification(null);
-          // Optionally, reset form values here
           setFormValues({
             firstName: "",
             lastName: "",
@@ -196,7 +195,6 @@ const ContactSection: React.FC<ContactSectionProps> = ({
 
   return (
     <>
-      {isSubmitting && <SpinnerComponent show={true} />}
       <SectionWrapper>
         {notification && <div>{notification}</div>}
         <Container>
@@ -277,6 +275,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({
                       value={submitText}
                     ></SubmitButton>
                   </ButtonContainer>
+                  {isSubmitting && <SpinnerComponent show={true} />}
                   {notification && (
                     <FormItem>
                       <Notification>{notification}</Notification>
