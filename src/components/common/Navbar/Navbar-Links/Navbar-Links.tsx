@@ -247,7 +247,7 @@ const ComplexNavbarLink: FC<ComplexNavbarLinkProperties> = ({
       : 0;
 
     return {
-      left: left - parentLeft + (width - submenuWidth) / 2,
+      left: left - parentLeft + (width - submenuWidth) / 2 + 40,
     };
   };
 

@@ -42,6 +42,7 @@ export const Button = styled.button`
   font-size: 30px;
   font-weight: 200;
   opacity: 0;
+  z-index: 10;
   transform: translateY(20px);
   transition:
     opacity 0.3s ease,
